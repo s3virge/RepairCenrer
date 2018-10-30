@@ -56,10 +56,10 @@ public class Device {
     }
 
     public void print() {
-        System.out.println("brand = " + brand);
-        System.out.println("type = " + type);
-        System.out.println("model = " + model);
-        System.out.println("serialNumber = " + serialNumber);
-        System.out.println("problem = " + problem);
+        System.out.printf("%-15s - %s\n", "brand", brand);
+        System.out.printf("%-15s - %s\n", "type", type);
+        System.out.printf("%-15s - %s\n", "model", model);
+        System.out.printf("%-15s - %s\n", "serialNumber", serialNumber);
+        System.out.printf("%-15s - %s\n", "problem", problem);
     }
 }
