@@ -54,4 +54,12 @@ public class Device {
         this.serialNumber = serialNumber;
         this.problem = problem;
     }
+
+    public void print() {
+        System.out.println("brand = " + brand);
+        System.out.println("type = " + type);
+        System.out.println("model = " + model);
+        System.out.println("serialNumber = " + serialNumber);
+        System.out.println("problem = " + problem);
+    }
 }
