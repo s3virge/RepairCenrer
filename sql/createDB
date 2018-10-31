@@ -1,0 +1,3 @@
+﻿--create DATABASE repair_center_db;
+
+drop database repair_center_db;
