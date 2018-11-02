@@ -1,5 +1,6 @@
 package config;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
@@ -20,10 +21,16 @@ public class Config {
             * Java Runtime Environment, що динамічно завантажує Java-класи в Java Virtual Machine.
             *
             * getResourceAsStream - Returns an input stream for reading the specified resource.*/
-            InputStream inStream = Config.class.getClassLoader()
-                    .getResourceAsStream("bd.properties");
+            try (InputStream inStream = Config.class.getClassLoader()
+                    .getResourceAsStream("db.properties")) {
 
-            Config.class
+                properties.load(inStream);
+            }
+            catch (IOException ie) {
+                ie.printStackTrace();
+                throw new RuntimeException();
+            }
+
         }
         return properties.getProperty(name);
     }
