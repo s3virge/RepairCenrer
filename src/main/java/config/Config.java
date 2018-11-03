@@ -21,16 +21,29 @@ public class Config {
             * Java Runtime Environment, що динамічно завантажує Java-класи в Java Virtual Machine.
             *
             * getResourceAsStream - Returns an input stream for reading the specified resource.*/
-            try (InputStream inStream = Config.class.getClassLoader()
-                    .getResourceAsStream("db.properties")) {
+//            try (InputStream inStream = Config.class.getClassLoader()
+//                    .getResourceAsStream("db.properties")) {
+//
+//                properties.load(inStream);
+//            }
+//            catch (IOException ie) {
+//                ie.printStackTrace();
+//                System.out.println("Облом с чтением db.properties");
+//                throw new RuntimeException();
+//            }
+
+            try {
+                InputStream inStream = Config.class.getClassLoader()
+                        .getResourceAsStream("db.properties");
 
                 properties.load(inStream);
             }
-            catch (IOException ie) {
-                ie.printStackTrace();
-                throw new RuntimeException();
+            catch (NullPointerException nullEx) {
+                throw new NullPointerException("Облом с properties.load(inStream);");
             }
-
+            catch (IOException ioEx) {
+                throw new RuntimeException("Облом с properties.load(inStream);");
+            }
         }
         return properties.getProperty(name);
     }
