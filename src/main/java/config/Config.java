@@ -3,35 +3,22 @@ package config;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
+import java.util.ResourceBundle;
 
 public class Config {
     public static final String DB_URL = "db.url";
     public static final String DB_LOGIN = "db.login";
     public static final String DB_PASSWORD = "db.password";
 
-    private static Properties properties;
+    private static Properties properties = new Properties();
 
     public static String getProperty(String name) {
-        if (properties == null) {
-
-            //ResourceBundle properties = ResourceBundle.getBundle("dataBase");
-
+        if (properties.isEmpty()) {
             /*
             * Java Classloader(завантажувач класів) є частиною
             * Java Runtime Environment, що динамічно завантажує Java-класи в Java Virtual Machine.
             *
             * getResourceAsStream - Returns an input stream for reading the specified resource.*/
-//            try (InputStream inStream = Config.class.getClassLoader()
-//                    .getResourceAsStream("db.properties")) {
-//
-//                properties.load(inStream);
-//            }
-//            catch (IOException ie) {
-//                ie.printStackTrace();
-//                System.out.println("Облом с чтением db.properties");
-//                throw new RuntimeException();
-//            }
-
             try {
                 InputStream inStream = Config.class.getClassLoader()
                         .getResourceAsStream("db.properties");
@@ -39,12 +26,15 @@ public class Config {
                 properties.load(inStream);
             }
             catch (NullPointerException nullEx) {
-                throw new NullPointerException("Облом с properties.load(inStream);");
+                System.out.println("------------------------------\n" +
+                        "Облом с properties.load(inStream);" + "" +
+                        "\n----------------------------------");
             }
             catch (IOException ioEx) {
-                throw new RuntimeException("Облом с properties.load(inStream);");
+                throw new RuntimeException("Облом с properties.load(stream);");
             }
         }
+
         return properties.getProperty(name);
     }
 }
