@@ -1,3 +1,4 @@
+import core.Device;
 import database.DataBase;
 
 import java.sql.Connection;
@@ -10,13 +11,22 @@ public class RepairCenter {
         Device device = new Device("Asus", "Ноутбук", "F3j", "123456", "device issue");
 
         device.print();
-        try (Connection con = DataBase.getConnection()) {
+//        try (Connection con = DataBase.getConnection()) {
+//
+//        }
+//        catch (SQLException ex) {
+//            ex.printStackTrace();
+//            System.out.println("Облом с получением Connection");
+////            throw new RuntimeException();
+//        }
 
+       try {
+            int value = 12 / 0;
         }
-        catch (SQLException ex) {
-            ex.printStackTrace();
-            System.out.println("Облом с получением Connection");
-            throw new RuntimeException();
+        catch (Exception e) {
+//            e.printStackTrace();
+            System.err.println(e.getClass().getName()+": "+e.getMessage());
+            System.exit(0);
         }
     }
 }

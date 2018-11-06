@@ -1,3 +1,5 @@
+package core;
+
 public class Device {
 
     //    private Integer id;
@@ -6,6 +8,14 @@ public class Device {
     private String model;
     private String serialNumber;
     private String problem;
+
+    public Device(String brand, String type, String model, String serialNumber, String problem) {
+        this.brand = brand;
+        this.type = type;
+        this.model = model;
+        this.serialNumber = serialNumber;
+        this.problem = problem;
+    }
 
     public String getBrand() {
         return brand;
@@ -44,14 +54,6 @@ public class Device {
     }
 
     public void setProblem(String problem) {
-        this.problem = problem;
-    }
-
-    public Device(String brand, String type, String model, String serialNumber, String problem) {
-        this.brand = brand;
-        this.type = type;
-        this.model = model;
-        this.serialNumber = serialNumber;
         this.problem = problem;
     }
 
