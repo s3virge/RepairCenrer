@@ -11,6 +11,7 @@ public class RepairCenter {
         Device device = new Device("Asus", "Ноутбук", "F3j", "123456", "device issue");
 
         device.print();
+
 //        try (Connection con = DataBase.getConnection()) {
 //
 //        }
@@ -19,14 +20,5 @@ public class RepairCenter {
 //            System.out.println("Облом с получением Connection");
 ////            throw new RuntimeException();
 //        }
-
-       try {
-            int value = 12 / 0;
-        }
-        catch (Exception e) {
-//            e.printStackTrace();
-            System.err.println(e.getClass().getName()+": "+e.getMessage());
-            System.exit(0);
-        }
     }
 }
