@@ -8,10 +8,11 @@
     <artifactId>RapairCenter</artifactId>
     <version>1.0-SNAPSHOT</version>
 
-    <!--<properties>-->
-            <!--<maven.compiler.source>1.9</maven.compiler.source>-->
-            <!--<maven.compiler.target>1.9</maven.compiler.target>-->
-    <!--</properties>-->
+    <properties>
+        <!--Simple Logging Facade for Java (SLF4J)-->
+        <slf4j.version>1.7.25</slf4j.version>
+        <log4j.version>2.11.1</log4j.version>
+    </properties>
 
     <!--настраиваем maven-jar-plugin-->
     <!--плагин создаст manifest файл в jar файле с указанием главного класса-->
@@ -50,6 +51,22 @@
             <artifactId>postgresql</artifactId>
             <version>9.1-901-1.jdbc4</version>
         </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-api -->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>${slf4j.version}</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-simple -->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-simple</artifactId>
+            <version>${slf4j.version}</version>
+            <scope>test</scope>
+        </dependency>
+
     </dependencies>
 
 

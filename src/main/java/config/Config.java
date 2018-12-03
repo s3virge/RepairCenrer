@@ -3,7 +3,6 @@ package config;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
-import java.util.ResourceBundle;
 
 public class Config {
     public static final String DB_URL = "db.url";

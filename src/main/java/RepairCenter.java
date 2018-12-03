@@ -1,24 +1,26 @@
 import core.Device;
-import database.DataBase;
+import javafx.application.Application;
+import javafx.stage.Stage;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import utils.MsgBox;
 
-import java.sql.Connection;
-import java.sql.SQLException;
+public class RepairCenter extends Application {
 
-public class RepairCenter {
+    private static final Logger logger = LoggerFactory.getLogger(RepairCenter.class);
+
+    private Stage primaryStage;
 
     public static void main(String[] args) {
-       //take a new device for repair
-        Device device = new Device("Asus", "Ноутбук", "F3j", "123456", "device issue");
+        launch();
+    }
 
-        device.print();
+    @Override
+    public void start(Stage primaryStage) {
+        this.primaryStage = primaryStage;
 
-//        try (Connection con = DataBase.getConnection()) {
-//
-//        }
-//        catch (SQLException ex) {
-//            ex.printStackTrace();
-//            System.out.println("Облом с получением Connection");
-////            throw new RuntimeException();
-//        }
+        logger.info("logger info is here.");
+
+        MsgBox.show();
     }
 }
