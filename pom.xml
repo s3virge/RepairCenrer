@@ -60,35 +60,28 @@
             <version>${slf4j.version}</version>
         </dependency>
 
-        <!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-simple -->
+        <!--&lt;!&ndash; https://mvnrepository.com/artifact/org.slf4j/slf4j-simple &ndash;&gt;-->
+        <!--<dependency>-->
+            <!--<groupId>org.slf4j</groupId>-->
+            <!--<artifactId>slf4j-simple</artifactId>-->
+            <!--<version>${slf4j.version}</version>-->
+            <!--&lt;!&ndash;<scope>test</scope>&ndash;&gt;-->
+        <!--</dependency>-->
+
+        <!-- https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-core -->
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-core</artifactId>
+            <version>${log4j.version}</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-log4j12 -->
         <dependency>
             <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-simple</artifactId>
+            <artifactId>slf4j-log4j12</artifactId>
             <version>${slf4j.version}</version>
             <!--<scope>test</scope>-->
         </dependency>
-
-        <!--&lt;!&ndash; https://mvnrepository.com/artifact/org.openjfx/javafx-base &ndash;&gt;-->
-        <!--<dependency>-->
-            <!--<groupId>org.openjfx</groupId>-->
-            <!--<artifactId>javafx-base</artifactId>-->
-            <!--<version>11</version>-->
-        <!--</dependency>-->
-
-        <!--&lt;!&ndash; https://mvnrepository.com/artifact/org.openjfx/javafx-graphics &ndash;&gt;-->
-        <!--<dependency>-->
-            <!--<groupId>org.openjfx</groupId>-->
-            <!--<artifactId>javafx-graphics</artifactId>-->
-            <!--<version>11</version>-->
-        <!--</dependency>-->
-
-        <!--&lt;!&ndash; https://mvnrepository.com/artifact/org.openjfx/javafx-controls &ndash;&gt;-->
-        <!--<dependency>-->
-            <!--<groupId>org.openjfx</groupId>-->
-            <!--<artifactId>javafx-controls</artifactId>-->
-            <!--<version>11</version>-->
-        <!--</dependency>-->
-
 
     </dependencies>
 
