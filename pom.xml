@@ -12,6 +12,7 @@
         <!--Simple Logging Facade for Java (SLF4J)-->
         <slf4j.version>1.7.25</slf4j.version>
         <log4j.version>2.11.1</log4j.version>
+        <jdk.version>8</jdk.version>
     </properties>
 
     <!--настраиваем maven-jar-plugin-->
@@ -37,8 +38,8 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <configuration>
-                    <source>11</source>
-                    <target>11</target>
+                    <source>${jdk.version}</source>
+                    <target>${jdk.version}</target>
                 </configuration>
             </plugin>
         </plugins>
@@ -81,12 +82,12 @@
             <!--<version>11</version>-->
         <!--</dependency>-->
 
-        <!-- https://mvnrepository.com/artifact/org.openjfx/javafx-controls -->
-        <dependency>
-            <groupId>org.openjfx</groupId>
-            <artifactId>javafx-controls</artifactId>
-            <version>11</version>
-        </dependency>
+        <!--&lt;!&ndash; https://mvnrepository.com/artifact/org.openjfx/javafx-controls &ndash;&gt;-->
+        <!--<dependency>-->
+            <!--<groupId>org.openjfx</groupId>-->
+            <!--<artifactId>javafx-controls</artifactId>-->
+            <!--<version>11</version>-->
+        <!--</dependency>-->
 
 
     </dependencies>
