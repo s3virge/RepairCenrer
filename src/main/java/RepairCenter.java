@@ -19,6 +19,7 @@ public class RepairCenter extends Application {
         this.primaryStage = primaryStage;
 
         logger.info("logger info is here.");
+        logger.debug("primaryStage object {}", primaryStage);
 
         MsgBox.show();
     }
