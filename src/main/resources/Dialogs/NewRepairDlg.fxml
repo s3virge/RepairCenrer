@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+
+<?import core.utils.AutoSuggestTextField?>
+<AnchorPane prefHeight="604.0" prefWidth="556.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="core.controllers.NewRepairDialogController">
+    <children>
+
+      <HBox alignment="CENTER" layoutX="20.0" layoutY="15.0" prefHeight="46.0" prefWidth="522.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0">
+         <children>
+            <GridPane id="gridPaneDeviceNumber" prefHeight="25.0" prefWidth="461.0">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="218.0" minWidth="10.0" prefWidth="165.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="289.0" minWidth="10.0" prefWidth="284.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                      <Label alignment="CENTER" prefHeight="20.0" prefWidth="168.0" text="Номер устройства" GridPane.halignment="CENTER" />
+                      <Label fx:id="lDeviceID" text="deviceID" GridPane.columnIndex="1" GridPane.halignment="CENTER" />
+               </children>
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin>
+               <padding>
+                  <Insets bottom="10.0" top="10.0" />
+               </padding>
+            </GridPane>
+         </children>
+      </HBox>
+        <HBox layoutX="281.0" layoutY="323.0" prefWidth="185.0" spacing="5.0" AnchorPane.bottomAnchor="22.0" AnchorPane.rightAnchor="14.0">
+            <children>
+                <Button fx:id="btnOk" defaultButton="false" layoutX="197.1875" layoutY="241.0" mnemonicParsing="false" onAction="#onBtnOk" prefWidth="90.0" text="OK" />
+                <Button cancelButton="true" layoutX="249.375" layoutY="241.0" mnemonicParsing="false" onAction="#closeDlg" prefWidth="90.0" text="Cancel" />
+            </children>
+        </HBox>
+      <HBox alignment="CENTER" layoutX="20.0" layoutY="70.0" prefHeight="308.0" prefWidth="516.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0">
+         <children>
+              <GridPane alignment="CENTER" prefHeight="390.0" prefWidth="477.0" vgap="10.0">
+                  <columnConstraints>
+                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="276.0" minWidth="10.0" prefWidth="141.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="476.0" minWidth="175.0" prefWidth="310.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="430.0" minWidth="20.0" prefWidth="50.0" />
+                  </columnConstraints>
+                  <rowConstraints>
+                      <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  </rowConstraints>
+                  <children>
+                      <Label fx:id="lDeviType" text="Тип устройства" GridPane.halignment="RIGHT">
+                     <GridPane.margin>
+                        <Insets right="10.0" />
+                     </GridPane.margin>
+                  </Label>
+                      <Label fx:id="lBrand" text="Брэнд" GridPane.halignment="RIGHT" GridPane.rowIndex="1">
+                     <GridPane.margin>
+                        <Insets right="10.0" />
+                     </GridPane.margin>
+                  </Label>
+                      <Label fx:id="lModel" text="Модель" GridPane.halignment="RIGHT" GridPane.rowIndex="2">
+                     <GridPane.margin>
+                        <Insets right="10.0" />
+                     </GridPane.margin>
+                  </Label>
+                      <Label fx:id="lSerialNumber" text="Сериный номер" GridPane.halignment="RIGHT" GridPane.rowIndex="3">
+                     <GridPane.margin>
+                        <Insets right="10.0" />
+                     </GridPane.margin>
+                  </Label>
+                      <Label fx:id="lCompleteness" text="Комплектность" GridPane.halignment="RIGHT" GridPane.rowIndex="4">
+                     <GridPane.margin>
+                        <Insets right="10.0" />
+                     </GridPane.margin>
+                  </Label>
+                      <Label fx:id="lAppearance" text="Внешний вид" GridPane.halignment="RIGHT" GridPane.rowIndex="5">
+                     <GridPane.margin>
+                        <Insets right="10.0" />
+                     </GridPane.margin>
+                  </Label>
+                      <Label fx:id="lDefect" text="Неисправность" GridPane.halignment="RIGHT" GridPane.rowIndex="6">
+                     <GridPane.margin>
+                        <Insets right="10.0" />
+                     </GridPane.margin>
+                  </Label>
+                      <Label fx:id="lNote" text="Примечание" GridPane.halignment="RIGHT" GridPane.rowIndex="7">
+                     <GridPane.margin>
+                        <Insets right="10.0" />
+                     </GridPane.margin>
+                  </Label>
+
+                      <AutoSuggestTextField fx:id="tfDeviceType" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+                      <AutoSuggestTextField fx:id="tfBrand" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                      <AutoSuggestTextField fx:id="tfModel" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                      <AutoSuggestTextField fx:id="tfSerialNumber" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                      <AutoSuggestTextField fx:id="tfCompleteness" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                      <AutoSuggestTextField fx:id="tfAppearance" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                      <AutoSuggestTextField fx:id="tfDefect" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                      <AutoSuggestTextField fx:id="tfNote" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+
+                      <Button fx:id="btnAddDeviceType" mnemonicParsing="false" onAction="#onBtnAdd" prefHeight="26.0" prefWidth="21.0" text="+" GridPane.columnIndex="2">
+                     <GridPane.margin>
+                        <Insets left="10.0" />
+                     </GridPane.margin>
+                  </Button>
+                  <Button fx:id="btnAddBrand" mnemonicParsing="false" onAction="#onBtnAdd" prefHeight="26.0" prefWidth="21.0" text="+" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                     <GridPane.margin>
+                        <Insets left="10.0" />
+                     </GridPane.margin>
+                  </Button>
+                  <Button fx:id="btnAddModel" mnemonicParsing="false" onAction="#onBtnAdd" prefHeight="26.0" prefWidth="21.0" text="+" GridPane.columnIndex="2" GridPane.rowIndex="2">
+                     <GridPane.margin>
+                        <Insets left="10.0" />
+                     </GridPane.margin>
+                  </Button>
+                  <Button fx:id="btnAddCompleteness" mnemonicParsing="false" onAction="#onBtnAdd" prefHeight="26.0" prefWidth="21.0" text="+" GridPane.columnIndex="2" GridPane.rowIndex="4">
+                     <GridPane.margin>
+                        <Insets left="10.0" />
+                     </GridPane.margin>
+                  </Button>
+                  <Button fx:id="btnAddAppearance" mnemonicParsing="false" onAction="#onBtnAdd" prefHeight="26.0" prefWidth="21.0" text="+" GridPane.columnIndex="2" GridPane.rowIndex="5">
+                     <GridPane.margin>
+                        <Insets left="10.0" />
+                     </GridPane.margin>
+                  </Button>
+                  <Button fx:id="btnAddDefect" mnemonicParsing="false" onAction="#onBtnAdd" prefHeight="26.0" prefWidth="21.0" text="+" GridPane.columnIndex="2" GridPane.rowIndex="6">
+                     <GridPane.margin>
+                        <Insets left="10.0" />
+                     </GridPane.margin>
+                  </Button>
+                  </children>
+              </GridPane>
+         </children>
+         <padding>
+            <Insets bottom="20.0" top="20.0" />
+         </padding>
+      </HBox>
+      <HBox alignment="CENTER" layoutX="20.0" layoutY="370.0" prefHeight="176.0" prefWidth="516.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0">
+         <children>
+            <GridPane prefHeight="140.0" prefWidth="396.0" vgap="10.0">
+              <columnConstraints>
+                <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="210.0" minWidth="10.0" prefWidth="95.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="326.0" minWidth="10.0" prefWidth="303.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <Label fx:id="lSurname" text="Фамилия">
+                      <font>
+                          <Font size="14.0" />
+                      </font>
+                      <GridPane.margin>
+                          <Insets right="10.0" />
+                      </GridPane.margin>
+                  </Label>
+                   <Label fx:id="lName" text="Имя" GridPane.rowIndex="1">
+                       <font>
+                           <Font size="14.0" />
+                       </font>
+                       <GridPane.margin>
+                           <Insets right="10.0" />
+                       </GridPane.margin>
+                   </Label>
+                   <Label fx:id="lPatronymic" text="Отчество" GridPane.rowIndex="2">
+                       <font>
+                           <Font size="14.0" />
+                       </font>
+                       <GridPane.margin>
+                           <Insets right="10.0" />
+                       </GridPane.margin>
+                   </Label>
+                   <Label fx:id="lPhone" text="Телефон" GridPane.rowIndex="3">
+                       <GridPane.margin>
+                           <Insets right="10.0" />
+                       </GridPane.margin>
+                       <font>
+                           <Font size="14.0" />
+                       </font>
+                   </Label>
+
+                   <AutoSuggestTextField fx:id="tfSurname" GridPane.columnIndex="1" />
+                   <AutoSuggestTextField fx:id="tfName" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                   <AutoSuggestTextField fx:id="tfPatronymic" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                   <AutoSuggestTextField fx:id="tfPhone" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+
+               </children>
+            </GridPane>
+         </children>
+          <padding>
+              <Insets bottom="20.0" top="20.0" />
+          </padding>
+      </HBox>
+
+    </children>
+
+    <stylesheets>
+        <URL value="@NewRepairDlg.css" />
+    </stylesheets>
+</AnchorPane>
