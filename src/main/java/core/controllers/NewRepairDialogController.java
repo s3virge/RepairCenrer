@@ -11,7 +11,8 @@ import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -22,7 +23,7 @@ import java.util.*;
 
 public class NewRepairDialogController {
 
-    private static final Logger logger = Logger.getLogger(NewRepairDialogController.class);
+    private static final Logger logger = LogManager.getLogger(NewRepairDialogController.class);
 
     @FXML private Label lDeviceID;
 

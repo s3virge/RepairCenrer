@@ -13,10 +13,11 @@ import javafx.scene.Scene;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class LoginWndController {
-    private static final Logger logger = Logger.getLogger(LoginWndController.class);
+    private static final Logger logger = LogManager.getLogger(LoginWndController.class);
 
     @FXML private Text errorLabel;
     @FXML private TextField loginField;

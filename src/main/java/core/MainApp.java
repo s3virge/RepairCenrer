@@ -12,12 +12,15 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import org.apache.log4j.Logger;
+
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 
 public class MainApp extends Application {
 
-    private static final Logger logger = Logger.getLogger(MainApp.class);
+//    private static final Logger logger = Logger.getLogger(MainApp.class);
 
+    private static final Logger logger = LogManager.getLogger(MainApp.class);
     private Stage mainStage;
 
     public static void main(String[] args) {

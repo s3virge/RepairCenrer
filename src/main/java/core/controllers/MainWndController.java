@@ -8,12 +8,13 @@ import javafx.scene.control.MenuBar;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.io.IOException;
 
 public class MainWndController {
-    private static final Logger logger = Logger.getLogger(LoginWndController.class);
+    private static final Logger logger = LogManager.getLogger(LoginWndController.class);
 
     @FXML
     private MenuBar MainMenuBar; //fx:id главного меню
