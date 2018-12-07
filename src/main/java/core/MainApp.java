@@ -30,7 +30,7 @@ public class MainApp extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        logger.debug("start(Stage mainStage) is executed!");
+        logger.trace("start(Stage mainStage) is executed!");
 
         //сохраняем главные подмостки для возможности загружать в них новые сцены
         mainStage = primaryStage;
@@ -43,7 +43,7 @@ public class MainApp extends Application {
     }
 
     private void showLoginWindow(Stage loginWindow) {
-        logger.debug("execute showLoginWindow()");
+        logger.trace("execute showLoginWindow()");
 
         //если приложение запускается впервые, то базы данных нет
         DataBase db = new DataBase();
