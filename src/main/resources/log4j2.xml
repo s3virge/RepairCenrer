@@ -15,11 +15,9 @@
     </Appenders>
 
     <Loggers>
-        <Logger name="Console" level="error" additivity="false">
-            <AppenderRef ref="ConsoleError"/>
-        </Logger>
 
-        <Logger name="File" level="all" additivity="false">
+        <Logger name="RepairCenter" additivity="false" level="trace">
+            <AppenderRef ref="ConsoleError" />
             <AppenderRef ref="logFile"/>
         </Logger>
 
