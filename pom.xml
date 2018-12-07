@@ -13,6 +13,7 @@
         <slf4j.version>1.7.25</slf4j.version>
         <log4j.version>2.11.1</log4j.version>
         <jdk.version>8</jdk.version>
+        <mysql_connector.version>5.1.39</mysql_connector.version>
     </properties>
 
     <!--настраиваем maven-jar-plugin-->
@@ -46,12 +47,27 @@
     </build>
 
     <dependencies>
-        <!-- https://mvnrepository.com/artifact/postgresql/postgresql -->
+
+        <!--&lt;!&ndash; https://mvnrepository.com/artifact/org.postgresql/postgresql &ndash;&gt;-->
+        <!--<dependency>-->
+            <!--<groupId>org.postgresql</groupId>-->
+            <!--<artifactId>postgresql</artifactId>-->
+            <!--<version>42.2.5</version>-->
+        <!--</dependency>-->
+
+        <!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
         <dependency>
-            <groupId>postgresql</groupId>
-            <artifactId>postgresql</artifactId>
-            <version>9.1-901-1.jdbc4</version>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>${mysql_connector.version}</version>
         </dependency>
+
+        <!--&lt;!&ndash; https://mvnrepository.com/artifact/postgresql/postgresql &ndash;&gt;-->
+        <!--<dependency>-->
+            <!--<groupId>postgresql</groupId>-->
+            <!--<artifactId>postgresql</artifactId>-->
+            <!--<version>9.1-901-1.jdbc4</version>-->
+        <!--</dependency>-->
 
         <!--&lt;!&ndash; https://mvnrepository.com/artifact/org.slf4j/slf4j-api &ndash;&gt;-->
         <!--<dependency>-->
@@ -84,6 +100,5 @@
         </dependency>
 
     </dependencies>
-
 
 </project>

@@ -27,7 +27,7 @@ public class DataBase {
 
     //init static variables
     static {
-        ResourceBundle properties = ResourceBundle.getBundle("dataBase");
+        ResourceBundle properties = ResourceBundle.getBundle("MySQL");
         //String dbHost = properties.getString("dataBase.dbHost");
         dbHost = properties.getString("dataBase.host");
         dbPort = properties.getString("dataBase.port");
