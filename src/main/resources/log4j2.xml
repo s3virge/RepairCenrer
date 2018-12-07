@@ -4,9 +4,11 @@
         <Console name="ConsoleError" target="SYSTEM_ERR">
             <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
         </Console>
+
         <Console name="Console" target="SYSTEM_OUT">
             <PatternLayout pattern="%-5level %logger{36} - %msg%n"/>
         </Console>
+
         <File name="logFile" fileName="target/app.log">
             <PatternLayout pattern="%d %p %c{1.} [%t] %m%n"/>
         </File>
