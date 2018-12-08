@@ -9,20 +9,25 @@
             <PatternLayout pattern="%-5level %logger{36} - %msg%n"/>
         </Console>
 
-        <File name="logFile" fileName="target/app.log">
+        <File name="logFile" fileName="target/root.log">
+            <PatternLayout pattern="%d %p %c{1.} [%t] %m%n"/>
+        </File>
+
+        <File name="logFile2" fileName="target/packege.core.log">
             <PatternLayout pattern="%d %p %c{1.} [%t] %m%n"/>
         </File>
     </Appenders>
 
     <Loggers>
 
-        <Logger name="RepairCenter" additivity="false" level="trace">
+        <Logger name="core" additivity="false" level="trace">
             <AppenderRef ref="ConsoleError" />
-            <AppenderRef ref="logFile"/>
+            <AppenderRef ref="logFile2" />
         </Logger>
 
         <Root level="trace">
             <AppenderRef ref="ConsoleError"/>
+            <AppenderRef ref="logFile" />
         </Root>
     </Loggers>
 </Configuration>
