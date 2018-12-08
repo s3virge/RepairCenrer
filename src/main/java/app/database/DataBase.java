@@ -1,7 +1,7 @@
-package core.database;
+package app.database;
 
-import core.models.User;
-import core.utils.ScriptRunner;
+import app.models.User;
+import app.utils.ScriptRunner;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 

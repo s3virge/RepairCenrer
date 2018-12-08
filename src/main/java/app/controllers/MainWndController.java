@@ -1,6 +1,6 @@
-package core.controllers;
+package app.controllers;
 
-import core.MainApp;
+import app.RepairCenter;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -18,18 +18,9 @@ public class MainWndController {
 
     @FXML
     private MenuBar MainMenuBar; //fx:id главного меню
-    // Reference to the main application
-    private MainApp mainApp;
-
-    /**
-     * Получить доступ к главному классу приложения
-     */
-    public void setMainApp(MainApp mainApp) {
-        this.mainApp = mainApp;
-    }
 
     public MainWndController() {
-        logger.debug("execute core.MainWndController constructor");
+        logger.trace("execute app.core.MainWndController constructor");
     }
 
     /*
@@ -45,7 +36,7 @@ public class MainWndController {
             // Загружаем fxml-файл и создаём новую сцену
             // для всплывающего диалогового окна.
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(MainApp.class.getResource("/Dialogs/NewRepairDlg.fxml"));
+            loader.setLocation(RepairCenter.class.getResource("/Dialogs/NewRepairDlg.fxml"));
             AnchorPane repairDlgLayout = loader.load();
 
            /* NewRepairDialogController newRepairDialogController = loader.getController();

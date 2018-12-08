@@ -1,4 +1,4 @@
-package core.utils;
+package app.utils;
 
 import javafx.geometry.Side;
 import javafx.scene.control.ContextMenu;

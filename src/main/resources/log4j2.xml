@@ -13,14 +13,14 @@
             <PatternLayout pattern="%d %p %c{1.} [%t] %m%n"/>
         </File>
 
-        <File name="logFile2" fileName="target/packege.core.log">
+        <File name="logFile2" fileName="target/packege.app.core.log">
             <PatternLayout pattern="%d %p %c{1.} [%t] %m%n"/>
         </File>
     </Appenders>
 
     <Loggers>
 
-        <Logger name="core" additivity="false" level="trace">
+        <Logger name="app.core" additivity="false" level="trace">
             <AppenderRef ref="ConsoleError" />
             <AppenderRef ref="logFile2" />
         </Logger>

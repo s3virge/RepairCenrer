@@ -1,4 +1,4 @@
-package core.utils;
+package app.utils;
 /*
 https://github.com/BenoitDuffez/ScriptRunner
 

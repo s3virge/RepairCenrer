@@ -1,10 +1,10 @@
-package core.controllers;
+package app.controllers;
 
-import core.MainApp;
-import core.database.DataBase;
-import core.models.User;
-import core.utils.MD5Hash;
-import core.utils.MsgBox;
+import app.RepairCenter;
+import app.database.DataBase;
+import app.models.User;
+import app.utils.MD5Hash;
+import app.utils.MsgBox;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -16,22 +16,14 @@ import javafx.stage.Stage;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import static app.utils.MsgBox.Type.MB_ERROR;
+
 public class LoginWndController {
     private static final Logger logger = LogManager.getLogger(LoginWndController.class);
 
     @FXML private Text errorLabel;
     @FXML private TextField loginField;
     @FXML private TextField passwordField;
-
-    // Reference to the main application
-    private MainApp mainApp;
-
-    /**
-     * Получить доступ к главному классу приложения
-     */
-    public void setMainApp(MainApp mainApp) {
-        this.mainApp = mainApp;
-    }
 
     /**
      * Инициализирует класс-контроллер. Этот метод вызывается автоматически
@@ -59,7 +51,7 @@ public class LoginWndController {
                 paswd = MD5Hash.get(passwordField.getText());
             }
             catch (Exception e){
-                MsgBox.show(e.getMessage(), MsgBox.Type.MB_ERROR);
+                MsgBox.show(e.getMessage(), MB_ERROR);
             }
 
             User user = DataBase.getUser(login);
@@ -114,9 +106,9 @@ public class LoginWndController {
     }
 
     private void showMainWnd() {
-        logger.debug("execute showMainWnd()");
+        logger.trace("execute showMainWnd()");
 
-        Stage stage = mainApp.getPrimaryStage();
+        Stage stage = new RepairCenter().getPrimaryStage(); //mainApp.getPrimaryStage();
 
         Parent mainWndLayout = null;
         //Поскольку имя начинается с символа '/' – оно считается абсолютным. Без / - считается относительным
@@ -126,13 +118,12 @@ public class LoginWndController {
             mainWndLayout = fxmlLoader.load();
         }
         catch ( Exception ex ) {
-            System.out.println( "Exception on FXMLLoader.load()" );
-            System.out.println( "error - " + ex.getMessage() );   //-- Doesn't show in stack dump
+            logger.error(ex.getMessage());
         }
 
-        //передаем контроллеру дальше ссылку на главный класс
-        MainWndController mainWndController = fxmlLoader.getController();
-        mainWndController.setMainApp(mainApp);
+//        //передаем контроллеру дальше ссылку на главный класс
+//        MainWndController mainWndController = fxmlLoader.getController();
+//        mainWndController.setMainApp(mainApp);
 
         stage.setTitle("A simple database of the service center");
         stage.setScene(new Scene(mainWndLayout));
@@ -142,7 +133,7 @@ public class LoginWndController {
     }
 
     private void showLoginError(){
-        MsgBox.show("Такой комбинации логина и пароля не существует.", MsgBox.Type.MB_ERROR);
+        MsgBox.show("Такой комбинации логина и пароля не существует.");
         loginField.requestFocus();
         passwordField.setText("");
     }

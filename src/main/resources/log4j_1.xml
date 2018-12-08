@@ -24,13 +24,13 @@
         </layout>
     </appender>
 
-    <category name="RepairCenter">
+    <category name="app.RepairCenter">
         <!--all, trace, debug, info, warn, error, fatal-->
         <priority value="info"/>
         <appender-ref ref="fileAppender"/>
     </category>
 
-    <category name="core" additivity="false">
+    <category name="app.core" additivity="false">
         <!--all, trace, debug, info, warn, error, fatal-->
         <priority value="all"/>
         <appender-ref ref="fileAppender2"/>

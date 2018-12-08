@@ -1,8 +1,8 @@
-package dao;
+package app.dao;
 
-import config.Config;
-import core.Device;
-import exceptions.DaoException;
+import app.config.Config;
+import app.models.Device;
+import app.exceptions.DaoException;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

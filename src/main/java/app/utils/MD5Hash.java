@@ -1,4 +1,4 @@
-package core.utils;
+package app.utils;
 
 import java.io.UnsupportedEncodingException;
 import java.math.BigInteger;

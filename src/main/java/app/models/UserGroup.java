@@ -1,4 +1,4 @@
-package core.models;
+package app.models;
 
 /*public enum UserGroup {
 

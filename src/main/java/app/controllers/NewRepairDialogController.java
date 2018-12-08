@@ -1,10 +1,10 @@
-package core.controllers;
+package app.controllers;
 
-import core.models.User;
-import core.utils.AutoSuggestTextField;
-import core.database.DataBase;
-import core.utils.HashtableValues;
-import core.utils.MsgBox;
+import app.models.User;
+import app.utils.AutoSuggestTextField;
+import app.database.DataBase;
+import app.utils.HashtableValues;
+import app.utils.MsgBox;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -19,6 +19,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.*;
+
+import static app.utils.MsgBox.Type.MB_ERROR;
 
 
 public class NewRepairDialogController {
@@ -153,7 +155,7 @@ public class NewRepairDialogController {
             suggestTextField = itr.next();
 
             if (suggestTextField.getText().isEmpty()) {
-                MsgBox.show("Не введены данные в поле " + htFields.get(suggestTextField).getTaxtFieldLabal(), MsgBox.Type.MB_ERROR);
+                MsgBox.show("Не введены данные в поле " + htFields.get(suggestTextField).getTaxtFieldLabal(), MB_ERROR);
                 suggestTextField.requestFocus();
                 return false;
             }
@@ -340,7 +342,7 @@ public class NewRepairDialogController {
         int id = DataBase.insert(strTableName, columns, values);
 
         if (id == 0){
-            MsgBox.showError("Облом с dbPutRepair() " +  DataBase.getLastError());
+            MsgBox.show("Облом с dbPutRepair() " +  DataBase.getLastError(), MB_ERROR);
         }
 
         return id;
@@ -354,7 +356,7 @@ public class NewRepairDialogController {
                 typeId, brandId, modelId, strSerialNum, defectId, ownerId, repairId, completenessId, appearanceId);
 
         if (DataBase.insert("device", columns, values) == 0) {
-            MsgBox.showError(DataBase.getLastError());
+            MsgBox.show(DataBase.getLastError(), MB_ERROR);
         }
     }
 
@@ -368,7 +370,7 @@ public class NewRepairDialogController {
         int lastInsertId = DataBase.insert(sTable, columns, values);
 
         if (lastInsertId == 0) {
-            MsgBox.showError("Облом с dbPutOwner() " + DataBase.getLastError());
+            MsgBox.show("Облом с dbPutOwner() " + DataBase.getLastError(), MB_ERROR);
         }
         return lastInsertId;
     }
