@@ -2,7 +2,7 @@ package app.controllers;
 
 import app.models.User;
 import app.utils.AutoSuggestTextField;
-import app.database.DataBase;
+import app.dao.DataBase;
 import app.utils.HashtableValues;
 import app.utils.MsgBox;
 import javafx.event.ActionEvent;

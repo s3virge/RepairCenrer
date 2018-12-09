@@ -1,7 +1,7 @@
 package app.controllers;
 
 import app.RepairCenter;
-import app.database.DataBase;
+import app.dao.DataBase;
 import app.models.User;
 import app.utils.MD5Hash;
 import app.utils.MsgBox;

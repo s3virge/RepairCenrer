@@ -1,4 +1,4 @@
-package app.database;
+package app.dao;
 
 import app.models.User;
 import app.utils.ScriptRunner;
@@ -117,7 +117,7 @@ public class DataBase {
      * возвращает пустого User если в базе нет пользователя с логином strLogin
      */
     public static User getUser(String strLogin) {
-        logger.debug("DataBase.getUser() is executed.\n     Try to connect to DB server");
+        logger.trace("DataBase.getUser() is executed.\n     Try to connect to DB server");
 
         User user = new User();
 

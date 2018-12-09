@@ -1,29 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Configuration status="WARN">
+    <Properties>
+        <Property name="filename">target/repaircenter.log</Property>
+    </Properties>
+
     <Appenders>
+
         <Console name="ConsoleError" target="SYSTEM_ERR">
-            <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
+            <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] (%-5level) line:%L %logger{36} - %msg%n"/>
         </Console>
 
         <Console name="Console" target="SYSTEM_OUT">
-            <PatternLayout pattern="%-5level %logger{36} - %msg%n"/>
+            <!--<PatternLayout pattern="%-5level %logger{36} - %msg%n"/>-->
+            <!--<PatternLayout pattern="%C{1}.%M %m %ex%n"/>&lt;!&ndash; class and line number &ndash;&gt;-->
+            <PatternLayout pattern="%d{ABSOLUTE} [%5p] line:%L %c{1} -> %m%n"/>
         </Console>
 
-        <File name="logFile" fileName="target/root.log">
-            <PatternLayout pattern="%d %p %c{1.} [%t] %m%n"/>
+        <File name="logFile" fileName="${filename}">
+            <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] (%-5level) line:%L %logger{36} - %msg%n"/>
         </File>
 
-        <File name="logFile2" fileName="target/packege.app.core.log">
-            <PatternLayout pattern="%d %p %c{1.} [%t] %m%n"/>
-        </File>
+        <!--<File name="logFile2" fileName="target/packege.app.core.log">-->
+            <!--<PatternLayout pattern="%d %p %c{1.} [%t] %m%n"/>-->
+        <!--</File>-->
     </Appenders>
 
     <Loggers>
 
-        <Logger name="app.core" additivity="false" level="trace">
-            <AppenderRef ref="ConsoleError" />
-            <AppenderRef ref="logFile2" />
-        </Logger>
+        <!--<Logger name="app.core" additivity="false" level="trace">-->
+            <!--<AppenderRef ref="ConsoleError" />-->
+            <!--<AppenderRef ref="logFile2" />-->
+        <!--</Logger>-->
 
         <Root level="trace">
             <AppenderRef ref="ConsoleError"/>

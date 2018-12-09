@@ -1,10 +1,16 @@
 package app.config;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
 public class Config {
+
+    private static final Logger logger = LogManager.getLogger(Config.class);
+
     public static final String DB_URL = "db.url";
     public static final String DB_LOGIN = "db.login";
     public static final String DB_PASSWORD = "db.password";
@@ -25,11 +31,10 @@ public class Config {
                 properties.load(inStream);
             }
             catch (NullPointerException nullEx) {
-                System.out.println("------------------------------\n" +
-                        "Облом с properties.load(inStream);" + "" +
-                        "\n----------------------------------");
+                logger.error(nullEx);
             }
             catch (IOException ioEx) {
+                logger.error(ioEx);
                 throw new RuntimeException("Облом с properties.load(stream);");
             }
         }
