@@ -1,0 +1,3 @@
+git log
+git reset --hard HEAD~ удаляет последний коммит
+git reset --hard HEAD~2 удаляет два последних коммита
