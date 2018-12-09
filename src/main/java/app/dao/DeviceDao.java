@@ -33,11 +33,7 @@ public class DeviceDao {
                     " ?, ?, ?);";
 
     private Connection getConnection() throws SQLException {
-        Connection conn = DriverManager.getConnection(
-                Config.getProperty(Config.DB_URL),
-                Config.getProperty(Config.DB_LOGIN),
-                Config.getProperty(Config.DB_PASSWORD));
-        return conn;
+        return ConnectionBuilder.getConnection();
     }
 
     private Device getById(int id) throws DaoException {
