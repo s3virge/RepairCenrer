@@ -16,6 +16,9 @@ import javafx.stage.Stage;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.io.UnsupportedEncodingException;
+import java.security.NoSuchAlgorithmException;
+
 import static app.utils.MsgBox.Type.MB_ERROR;
 
 public class LoginWndController {
@@ -50,7 +53,7 @@ public class LoginWndController {
             try {
                 paswd = MD5Hash.get(passwordField.getText());
             }
-            catch (Exception e){
+            catch (NoSuchAlgorithmException | UnsupportedEncodingException e){
                 MsgBox.show(e.getMessage(), MB_ERROR);
             }
 
