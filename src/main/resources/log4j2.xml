@@ -16,7 +16,7 @@
             <PatternLayout pattern="%d{ABSOLUTE} [%5p] line:%L %c{1} -> %m%n"/>
         </Console>
 
-        <File name="logFile" fileName="${filename}">
+        <File name="logFile" fileName="${filename}" append="false">
             <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] (%-5level) line:%L %logger{36} - %msg%n"/>
         </File>
 
@@ -32,7 +32,7 @@
             <!--<AppenderRef ref="logFile2" />-->
         <!--</Logger>-->
 
-        <Root level="trace">
+        <Root level="ALL">
             <AppenderRef ref="ConsoleError"/>
             <AppenderRef ref="logFile" />
         </Root>
