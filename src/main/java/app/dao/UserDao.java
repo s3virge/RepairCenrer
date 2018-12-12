@@ -18,4 +18,5 @@ public class UserDao {
     private Connection getConnection() throws SQLException {
         return ConnectionBuilder.getConnection();
     }
+
 }
