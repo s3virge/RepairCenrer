@@ -11,9 +11,8 @@
         </Console>
 
         <Console name="Console" target="SYSTEM_OUT">
-            <!--<PatternLayout pattern="%-5level %logger{36} - %msg%n"/>-->
-            <!--<PatternLayout pattern="%C{1}.%M %m %ex%n"/>&lt;!&ndash; class and line number &ndash;&gt;-->
-            <PatternLayout pattern="%d{ABSOLUTE} [%5p] line:%L %c{1} -> %m%n"/>
+            <PatternLayout pattern="%style{%d{ABSOLUTE}}{black} %highlight{[%5p] line:%L %c{1} -> %m%n}"/>
+            <!--<PatternLayout pattern="%highlight{%d [%t] %-5level: %msg%n%throwable}"/>-->
         </Console>
 
         <File name="logFile" fileName="${filename}" append="false">
@@ -33,7 +32,8 @@
         <!--</Logger>-->
 
         <Root level="ALL">
-            <AppenderRef ref="ConsoleError"/>
+            <!--<AppenderRef ref="ConsoleError"/>-->
+            <AppenderRef ref="Console"/>
             <AppenderRef ref="logFile" />
         </Root>
     </Loggers>
