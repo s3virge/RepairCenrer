@@ -14,10 +14,6 @@ public class UserDao {
 
     private static final String INSERT_USER = "";
 
-    //todo rewrite SELECT_USER for preparedStatement use
-    private static final String SELECT_USER = "SELECT user.id, user.login, user.password, user_group.value " +
-            "FROM user INNER JOIN user_group ON user.user_group = user_group.id " +
-            "where user.login='" + strLogin + "';";
 
     private Connection getConnection() throws SQLException {
         return ConnectionBuilder.getConnection();
@@ -30,11 +26,14 @@ public class UserDao {
     public User getUserByLogin(String strLogin) {
         logger.trace("execute UserDao.getUserByLogin()");
 
+        final String SELECT_USER = "SELECT user.id, user.login, user.password, user_group.value " +
+                "FROM user INNER JOIN user_group ON user.user_group = user_group.id " +
+                "where user.login='" + strLogin + "';";
+
         User user = new User();
 
         try (Connection conn = getConnection();
-             Statement stmt = conn.createStatement())
-        {
+             Statement stmt = conn.createStatement()) {
             /*
             выбрать id, login. password, value
             из user внутренне соединенной с user_group через user.user_group с user_group.id
@@ -48,8 +47,6 @@ public class UserDao {
                 user.setPassword(rs.getString("password"));
                 //получить значение столбца value из связанной таблицы
                 user.setGroup(rs.getString("value"));
-
-                //System.out.printf("id: %d; login: %s; dbPassword: %s;\n", id, login, password);
             }
         }
         catch (SQLException exception) {
