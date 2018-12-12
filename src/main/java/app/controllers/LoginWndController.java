@@ -1,7 +1,7 @@
 package app.controllers;
 
 import app.RepairCenter;
-import app.dao.DataBase;
+import app.dao.UserDao;
 import app.models.User;
 import app.utils.MD5Hash;
 import app.utils.MsgBox;
@@ -57,7 +57,8 @@ public class LoginWndController {
                 MsgBox.show(e.getMessage(), MB_ERROR);
             }
 
-            User user = DataBase.getUser(login);
+            UserDao userDao = new UserDao();
+            User user = userDao.getUserByLogin(login);
 
             //если юзера нет
             if (user.isEmpty()) {
