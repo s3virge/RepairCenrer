@@ -1,8 +1,8 @@
 package app.controllers;
 
+import app.dao.DataBaseMySQL;
 import app.models.User;
 import app.utils.AutoSuggestTextField;
-import app.dao.DataBase;
 import app.utils.HashtableValues;
 import app.utils.MsgBox;
 import javafx.event.ActionEvent;
@@ -73,7 +73,7 @@ public class NewRepairDialogController {
     }
 
     private void showNextDeviceNumber() {
-        lDeviceID.setText(String.valueOf(DataBase.getMaxId("device") + 1));
+        lDeviceID.setText(String.valueOf(DataBaseMySQL.getMaxId("device") + 1));
     }
 
     private  void fillHashTable() {
@@ -174,7 +174,7 @@ public class NewRepairDialogController {
    //получить из базы данных подсказки
     private void dbGetEntries (AutoSuggestTextField asTextField) {
         //установить соединение с бд
-        DataBase db = new DataBase();
+        DataBaseMySQL db = new DataBaseMySQL();
         String sTable = htFields.get(asTextField).getDbTable();
         String column = htFields.get(asTextField).getsDbColumn();
         String strSql = "SELECT * FROM " + sTable;
@@ -235,7 +235,7 @@ public class NewRepairDialogController {
 ////        //Сказать что запись есть и дубликатов быть не может
 ////
 ////        //сделать запись в таблицу базы данных
-////        DataBase.insert(strDbTable, strDbValue);
+////        DataBaseMySQL.insert(strDbTable, strDbValue);
 ////
 ////        //если в базу все записалось
 ////        //то вставить в поле ввода новую строку с большой первой буквой
@@ -339,10 +339,10 @@ public class NewRepairDialogController {
         String columns = "acceptor_id, master_id, status_id, date_of_accept";
         String values = acceptorId + ", " + 1 + ", " + 1 + ", '" + new Timestamp(System.currentTimeMillis()) + "'";
 
-        int id = DataBase.insert(strTableName, columns, values);
+        int id = DataBaseMySQL.insert(strTableName, columns, values);
 
         if (id == 0){
-            MsgBox.show("Облом с dbPutRepair() " +  DataBase.getLastError(), MB_ERROR);
+            MsgBox.show("Облом с dbPutRepair() " +  DataBaseMySQL.getLastError(), MB_ERROR);
         }
 
         return id;
@@ -355,8 +355,8 @@ public class NewRepairDialogController {
         String values = String.format("%1$d, %2$d, %3$d, '%4$s', %5$d, %6$d, %7$d, %8$d , %9$d",
                 typeId, brandId, modelId, strSerialNum, defectId, ownerId, repairId, completenessId, appearanceId);
 
-        if (DataBase.insert("device", columns, values) == 0) {
-            MsgBox.show(DataBase.getLastError(), MB_ERROR);
+        if (DataBaseMySQL.insert("device", columns, values) == 0) {
+            MsgBox.show(DataBaseMySQL.getLastError(), MB_ERROR);
         }
     }
 
@@ -367,10 +367,10 @@ public class NewRepairDialogController {
         String columns = "surname_id, name_id, patronymic_id, telephone_number";
         String values =  String.format("%d, %d, %d, '%s'", surnameId, nameId, patronymicId, strPhoneNumber);
 
-        int lastInsertId = DataBase.insert(sTable, columns, values);
+        int lastInsertId = DataBaseMySQL.insert(sTable, columns, values);
 
         if (lastInsertId == 0) {
-            MsgBox.show("Облом с dbPutOwner() " + DataBase.getLastError(), MB_ERROR);
+            MsgBox.show("Облом с dbPutOwner() " + DataBaseMySQL.getLastError(), MB_ERROR);
         }
         return lastInsertId;
     }
@@ -384,11 +384,11 @@ public class NewRepairDialogController {
         String strColumn = htFields.get(textF).getsDbColumn();
         String strText = makeFirstLetterBig(textF.getText());
 
-        int id = DataBase.getId(strTable, strColumn, strText);
+        int id = DataBaseMySQL.getId(strTable, strColumn, strText);
 
         if (id == 0) {
-            DataBase.insert(strTable, strColumn, strText);
-            id = DataBase.getId(strTable, strColumn, strText);
+            DataBaseMySQL.insert(strTable, strColumn, strText);
+            id = DataBaseMySQL.getId(strTable, strColumn, strText);
         }
         return id;
     }

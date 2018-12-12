@@ -15,6 +15,8 @@ public class Config {
     public static final String DB_LOGIN = "db.login";
     public static final String DB_PASSWORD = "db.password";
 
+    private static final String DB_PROPERTIES = "pg.properties";
+
     private static Properties properties = new Properties();
 
     public static String getProperty(String name) {
@@ -26,7 +28,7 @@ public class Config {
             * getResourceAsStream - Returns an input stream for reading the specified resource.*/
             try {
                 InputStream inStream = Config.class.getClassLoader()
-                        .getResourceAsStream("db.properties");
+                        .getResourceAsStream(DB_PROPERTIES);
 
                 properties.load(inStream);
             }

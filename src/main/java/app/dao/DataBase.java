@@ -1,242 +1,37 @@
 package app.dao;
 
-import app.models.User;
-import app.utils.ScriptRunner;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
-import java.sql.*;
-import java.util.Properties;
-import java.util.ResourceBundle;
-
 public class DataBase {
-    private static final Logger logger = LogManager.getLogger(DataBase.class);
+    /**
+     * создать базу данных
+     */
+    public void createDb() {
+        //open sql script
+        //execute sql script
 
-    // JDBC URL, username and dbPassword of MySQL server
-    private static final String dbUrl;
-    private static final String dbUser;
-    private static final String dbPassword;
-    private static final String dbHost;
-    private static final String dbPort;
-    private static final String dbName;
-
-    private static String lastError;
-
-    //init static variables
-    static {
-        ResourceBundle properties = ResourceBundle.getBundle("MySQL");
-        //String dbHost = properties.getString("dataBase.dbHost");
-        dbHost = properties.getString("dataBase.host");
-        dbPort = properties.getString("dataBase.port");
-        //String dbName = properties.getString("dataBase.name");
-        dbName = properties.getString("dataBase.name");
-
-        dbUrl = "jdbc:mysql://" + dbHost + ":" + dbPort + "/" + dbName + "?useSSL=false&characterEncoding=UTF-8";
-
-        dbUser = properties.getString("dataBase.login");
-        dbPassword = properties.getString("dataBase.password");
-
-        lastError = "no errors";
-    }
-
-    // init connection object
-    private Connection connection;
-    // init properties object
-    private Properties properties;
-
-    // create properties
-    private Properties getProperties() {
-        if (properties == null) {
-            properties = new Properties();
-            properties.setProperty("user", dbUser);
-            properties.setProperty("password", dbPassword);
-
-//            properties.put("useUnicode", "true");
-//            properties.put("characterEncoding","Cp1251");
-            properties.put("characterEncoding","UTF-8");
-
-            properties.setProperty("useSSL", "false");
-        }
-        return properties;
+//        URL url1 = DictionaryDaoImplTest.class.getClassLoader()
+//                .getResource("student_project.sql");
+//        URL url2 = DictionaryDaoImplTest.class.getClassLoader()
+//                .getResource("student_data.sql");
+//
+//        List<String> str1 = Files.readAllLines(Paths.get(url1.toURI()));
+//        String sql1 = str1.stream().collect(Collectors.joining());
+//
+//        List<String> str2 = Files.readAllLines(Paths.get(url2.toURI()));
+//        String sql2 = str2.stream().collect(Collectors.joining());
+//
+//        try (Connection con = ConnectionBuilder.getConnection();
+//             Statement stmt = con.createStatement();
+//        ) {
+//            stmt.executeUpdate(sql1);
+//            stmt.executeUpdate(sql2);
+//        }
     }
 
     /**
-     * @return
-     * возвращает connection
+     * проверить существование базы данных
+     * @return true if data base is exist
      */
-    // connect database
-    public Connection connect() {
-        if (connection == null) {
-            try {
-                connection = DriverManager.getConnection(dbUrl, getProperties());
-            }
-            catch (SQLException e) {
-                e.printStackTrace();
-            }
-        }
-        return connection;
-    }
-
-    // disconnect database
-    public void disconnect() {
-        if (connection != null) {
-            try {
-                connection.close();
-                connection = null;
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        }
-    }
-
-    /** @return
-     * возвращает true если база данных уже создана, иначе false
-     * */
     public boolean isExist() {
-        boolean result = true; //база существует
-        String serverUrl = "jdbc:mysql://" + dbHost + ":" + dbPort ;
-
-        //когда базы нет вываливается исключение
-        try (Connection con = DriverManager.getConnection(serverUrl, getProperties());
-             Statement st = con.createStatement()) {
-            st.execute("USE  " + dbName);
-        }
-        catch (Exception ex) {
-            logger.error(ex);
-            result = false;
-        }
-
-        return result;
+        return false;
     }
-
-    /**
-     * создать базу и все таблицы которые будем использовать
-     */
-    public void create() {
-        logger.trace("execute DataBase.create()");
-
-        String serverUrl = "jdbc:mysql://" + dbHost + ":" + dbPort;
-
-        try (Connection con = DriverManager.getConnection(serverUrl, getProperties());
-             /*Statement statement = con.createStatement()*/) {
-
-            ScriptRunner runner = new ScriptRunner(con, false, false);
-            String file = "src/Resources/sql/createbd.sql";
-            try {
-                runner.runScript(new BufferedReader(new FileReader(file)));
-            }
-            catch (IOException fileException) {
-                fileException.getMessage();
-            }
-        }
-        catch (SQLException sqlExcep) {
-            lastError = sqlExcep.getMessage();
-            logger.error(lastError);
-            //что-то пошло не так...
-            remove();
-
-            System.exit(0);
-            //throw new RuntimeException("Облом с созданием базы данных в create()");
-        }
-
-        logger.debug("create() successfully completed");
-    }
-
-    /**
-     * удалить буза
-     */
-    private void remove() {
-        String servUrl = "jdbc:mysql://" + dbHost + ":" + dbPort;
-
-        try (Connection con = DriverManager.getConnection(servUrl, dbUser, dbPassword);
-             Statement st = con.createStatement()) {
-            st.execute("drop schema `" + dbName + "`;");
-        }
-        catch (Exception ex) {
-            logger.error(ex);
-        }
-    }
-
-    //возвращает id значения strValue в таблице strTable
-    public static int getId(String strTable, String strColumn, String strValue) {
-
-        String sql = "select id FROM " + strTable + " WHERE " + strColumn + "='" + strValue + "'";
-
-        int valueId = 0;
-
-        try (Connection conn = DriverManager.getConnection(dbUrl, dbUser, dbPassword);
-             Statement stmt = conn.createStatement()) {
-
-            ResultSet rs = stmt.executeQuery(sql);
-
-            rs.next();
-
-            valueId = rs.getInt("id");
-        }
-        catch (SQLException e) {
-            lastError = e.getMessage();
-            logger.debug("DataBase.java: Облом c getId() -> " + lastError);
-        }
-
-        return valueId;
-    }
-
-    public static int getMaxId(String strTable) {
-        String sql = "Select max(id) as id from " + strTable;
-        int valueId = 0;
-
-        try (Connection conn = DriverManager.getConnection(dbUrl, dbUser, dbPassword);
-             Statement stmt = conn.createStatement()) {
-
-            ResultSet rs = stmt.executeQuery(sql);
-
-            rs.next();
-
-            valueId = rs.getInt("id");
-        }
-        catch (SQLException e) {
-            lastError = e.getMessage();
-            System.out.println( "DataBase.java: Облом c getMaxId() -> " + lastError);
-        }
-
-        return valueId;
-    }
-
-    public static int insert(String strTable, String strColumn, String strValue) {
-
-        String sql = "INSERT INTO " + strTable + " (" + strColumn + ") VALUES (" + strValue + ")";
-
-        int iLastId = 0;
-
-        try (Connection conn = DriverManager.getConnection(dbUrl, dbUser, dbPassword);
-             Statement stmt = conn.createStatement()) {
-            stmt.execute(sql);
-
-            //
-            // Use the MySQL LAST_INSERT_ID()
-            // function to do the same thing as getGeneratedKeys()
-            //
-            ResultSet rs;
-
-            rs = stmt.executeQuery("SELECT LAST_INSERT_ID()");
-
-            if (rs.next()) {
-                iLastId = rs.getInt(1);
-            }
-        }
-        catch (SQLException e) {
-            lastError = e.getMessage();
-            logger.error("Облом с insert() -> " + lastError);
-        }
-
-        return iLastId;
-    }
-
-    public static String getLastError() {
-        return lastError;
-    }
-
 }
