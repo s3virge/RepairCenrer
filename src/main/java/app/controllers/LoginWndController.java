@@ -1,6 +1,7 @@
 package app.controllers;
 
 import app.RepairCenter;
+import app.dao.DataBase;
 import app.dao.UserDao;
 import app.models.User;
 import app.utils.MD5Hash;
@@ -16,6 +17,7 @@ import javafx.stage.Stage;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
 
@@ -44,6 +46,7 @@ public class LoginWndController {
 
     @FXML
     protected void handleSubmitButtonAction(ActionEvent event) {
+        logger.trace("");
 
         if(isInputValid()) {
 
@@ -55,6 +58,19 @@ public class LoginWndController {
             }
             catch (NoSuchAlgorithmException | UnsupportedEncodingException e){
                 MsgBox.show(e.getMessage(), MB_ERROR);
+            }
+
+            //todo check if data base is exist
+            //if data base does not exist
+            //then create data base
+            //do this check in another thread
+
+            DataBase db = new DataBase();
+            try {
+                db.consolePrintFile("/sql/repair_center.sql");
+            }
+            catch (IOException ioe) {
+                MsgBox.show(ioe.getMessage(), ioe);
             }
 
             UserDao userDao = new UserDao();
@@ -110,7 +126,7 @@ public class LoginWndController {
     }
 
     private void showMainWnd() {
-        logger.trace("execute showMainWnd()");
+        logger.trace("");
 
         Stage stage = new RepairCenter().getPrimaryStage(); //mainApp.getPrimaryStage();
 

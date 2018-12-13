@@ -33,7 +33,7 @@ public class RepairCenter extends Application {
     }
 
     private void showLoginWindow(Stage loginWindow) {
-        logger.trace("execute showLoginWindow()");
+        logger.trace("");
 
         Parent layout = null;
         String sceneFile = "/LoginWindow/LoginWnd.fxml";
@@ -50,7 +50,7 @@ public class RepairCenter extends Application {
         //показываем окно ввода логина и пароля
         Scene scene = new Scene(layout, 360, 220);
         loginWindow.setTitle("A simple database of the service center");
-//        loginWindow.setResizable(false);
+        loginWindow.setResizable(false);
         loginWindow.setScene(scene);
         loginWindow.show();
     }

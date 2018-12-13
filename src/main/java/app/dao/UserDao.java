@@ -24,7 +24,7 @@ public class UserDao {
      * возвращает пустого User если в базе нет пользователя с логином strLogin
      */
     public User getUserByLogin(String strLogin) {
-        logger.trace("execute UserDao.getUserByLogin()");
+        logger.trace("");
         logger.debug("strLogin = {}", strLogin);
 
         final String SELECT_USER = "SELECT user.id, user.login, user.password, user_group.value " +
