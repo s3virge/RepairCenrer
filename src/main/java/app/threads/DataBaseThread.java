@@ -1,9 +1,14 @@
 package app.threads;
 
 import app.dao.DataBase;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 
 public class DataBaseThread implements Runnable {
+
+    public static final Logger logger = LogManager.getLogger(DataBaseThread.class);
+
     private Thread thread;
 
     /**
@@ -20,6 +25,18 @@ public class DataBaseThread implements Runnable {
     @Override
     public void run() {
         DataBase db = new DataBase();
-        db.isExists();
+
+//        db.drop();
+
+        if (!db.isExists()) {
+            db.create();
+
+            try {
+                db.initalize();
+            }
+            catch (Exception e) {
+                logger.error(e.getMessage());
+            }
+        }
     }
 }

@@ -1,7 +1,10 @@
 package app.dao;
 
+import app.config.Config;
+import app.utils.MsgBox;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.postgresql.util.PSQLException;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -22,13 +25,12 @@ import java.util.stream.Collectors;
 public class DataBase {
     public static final Logger logger = LogManager.getLogger(DataBase.class);
     /**
-     * создать базу данных
+     * write to the database Config.DB_NAME the necessary initial data
      */
-    public void create() throws URISyntaxException, SQLException, IOException {
-        //open sql script
-        //execute sql script
+    public void initalize() throws URISyntaxException, SQLException, IOException {
+        logger.trace("");
 
-//        URL uniformResourceLocator = DataBase.class.getClassLoader().getResource("repair_center.sql");
+        //        URL uniformResourceLocator = DataBase.class.getClassLoader().getResource("repair_center.sql");
         URL uniformResourceLocator = getClass().getResource("/sql/repair_center.sql");
 
         Path path = Paths.get(uniformResourceLocator.toURI());
@@ -39,6 +41,9 @@ public class DataBase {
              Statement stmt = con.createStatement();
              ) {
             stmt.executeUpdate(sql);
+        }
+        catch (Exception e) {
+            logger.error(e.getMessage());
         }
     }
 
@@ -60,36 +65,58 @@ public class DataBase {
     }
 
     /**
-     * проверить существование базы данных
+     * check if database exists
      * @return true if data base is exist
      */
     public boolean isExists() {
         logger.trace("");
 
-//        Connection connection = null;
-//        Statement statement = null;
-//        try {
-//            Class.forName("com.mysql.jdbc.Driver");
-//            connection = DriverManager.getConnection("jdbc:mysql://localhost/",
-//                    "root", "admin");
-//            statement = connection.createStatement();
-//            String sql = "CREATE DATABASE DBNAME";
-//            //To delete database: sql = "DROP DATABASE DBNAME";
-//            statement.executeUpdate(sql);
-//            System.out.println("Database created!");
-//        } catch (SQLException sqlException) {
-//            if (sqlException.getErrorCode() == 1007) {
-//                // Database already exists error
-//                System.out.println(sqlException.getMessage());
-//            } else {
-//                // Some other problems, e.g. Server down, no permission, etc
-//                sqlException.printStackTrace();
-//            }
-//        } catch (ClassNotFoundException e) {
-//            // No driver class found!
-//        }
-        // close statement & connection
+        boolean result = false;
 
-        return false;
+        //тут пытаемся подключиться к базе данных Config.DB_NAME
+        try (Connection conn = ConnectionBuilder.getConnection();
+             Statement stmt = conn.createStatement())
+        {
+            logger.info("successfully connected to database {}", Config.getProperty(Config.DB_NAME));
+            result = true;
+        }
+        catch (SQLException sqlException) {
+            logger.error(sqlException.getMessage());
+            result = false;
+        }
+
+        return result;
+    }
+
+    /**
+     * create database Config.DB_NAME
+     */
+    public void create() {
+        logger.trace("");
+        //Config.DB_NAME базы данных нет пытаемся её создать
+        try (Connection con = ConnectionBuilder.getConnectionToPostgres();
+             Statement statement = con.createStatement())
+        {
+            String sql = "CREATE DATABASE " + Config.getProperty(Config.DB_NAME);
+            statement.execute(sql);
+        }
+        catch (SQLException sqlEx) {
+            logger.error(sqlEx.getMessage());
+        }
+    }
+
+    public void drop() {
+        logger.trace("");
+        try (Connection con = ConnectionBuilder.getConnectionToPostgres();
+             Statement statement = con.createStatement())
+        {
+            String sql = "drop DATABASE " + Config.getProperty(Config.DB_NAME);
+            statement.execute(sql);
+        }
+        catch (SQLException sqlEx) {
+            logger.error(sqlEx.getMessage());
+        }
+
+       logger.info("drop database was successful");
     }
 }
