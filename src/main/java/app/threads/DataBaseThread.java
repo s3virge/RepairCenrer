@@ -26,7 +26,7 @@ public class DataBaseThread implements Runnable {
     public void run() {
         DataBase db = new DataBase();
 
-//        db.drop();
+        db.drop();
 
         if (!db.isExists()) {
             db.create();

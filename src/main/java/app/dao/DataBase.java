@@ -110,7 +110,7 @@ public class DataBase {
         try (Connection con = ConnectionBuilder.getConnectionToPostgres();
              Statement statement = con.createStatement())
         {
-            String sql = "drop DATABASE " + Config.getProperty(Config.DB_NAME);
+            String sql = "DROP DATABASE IF EXISTS " + Config.getProperty(Config.DB_NAME);
             statement.execute(sql);
         }
         catch (SQLException sqlEx) {
