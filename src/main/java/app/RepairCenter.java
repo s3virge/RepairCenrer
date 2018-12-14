@@ -1,5 +1,6 @@
 package app;
 
+import app.threads.DataBaseThread;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -27,6 +28,9 @@ public class RepairCenter extends Application {
     @Override
     public void start(Stage primaryStage) {
         this.primaryStage = primaryStage;
+
+        //check if data base is exist
+        new DataBaseThread("DB exist");
 
         //показываем окно ввода логина и пароля.
         showLoginWindow(primaryStage);

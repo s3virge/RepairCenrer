@@ -1,5 +1,8 @@
 package app.dao;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -13,17 +16,11 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.List;
+
 import java.util.stream.Collectors;
 
-public class DataBase implements Runnable {
-
-    //todo implements Runnuble interface
-
-    @Override
-    public void run() {
-
-    }
-
+public class DataBase {
+    public static final Logger logger = LogManager.getLogger(DataBase.class);
     /**
      * создать базу данных
      */
@@ -67,6 +64,7 @@ public class DataBase implements Runnable {
      * @return true if data base is exist
      */
     public boolean isExist() {
+        logger.trace("");
         return false;
     }
 }

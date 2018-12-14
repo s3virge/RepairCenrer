@@ -11,11 +11,11 @@
         </Console>
 
         <Console name="Console" target="SYSTEM_OUT">
-            <PatternLayout pattern="%style{%d{ABSOLUTE}}{black} %highlight{[%level] %c{1} %M():%L - %msg} %n"/>
+            <PatternLayout pattern="%style{%d{ABSOLUTE}}{black} %highlight{[%level] (%t) %c{1} %M():%L - %msg} %n"/>
         </Console>
 
         <File name="logFile" fileName="${filename}" append="false">
-            <PatternLayout pattern="%d{ABSOLUTE} [%level] %c{1} %M():%L - %msg %n"/>
+            <PatternLayout pattern="%d{ABSOLUTE} [%level] (%t) %c{1} %M():%L - %msg %n"/>
         </File>
     </Appenders>
 
