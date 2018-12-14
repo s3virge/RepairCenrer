@@ -27,10 +27,11 @@ public class RepairCenter extends Application {
 
     @Override
     public void start(Stage primaryStage) {
+        logger.trace("");
         this.primaryStage = primaryStage;
 
         //check if data base is exist
-        new DataBaseThread("DB exist");
+        new DataBaseThread("DB exist Thread");
 
         //показываем окно ввода логина и пароля.
         showLoginWindow(primaryStage);
