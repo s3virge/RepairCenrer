@@ -20,6 +20,6 @@ public class DataBaseThread implements Runnable {
     @Override
     public void run() {
         DataBase db = new DataBase();
-        db.isExist();
+        db.isExists();
     }
 }

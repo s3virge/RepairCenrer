@@ -94,14 +94,14 @@ public class DataBaseMySQL {
     /** @return
      * возвращает true если база данных уже создана, иначе false
      * */
-    public boolean isExist() {
+    public boolean isExists() {
         boolean result = true; //база существует
         String serverUrl = "jdbc:mysql://" + dbHost + ":" + dbPort ;
 
         //когда базы нет вываливается исключение
         try (Connection con = DriverManager.getConnection(serverUrl, getProperties());
              Statement st = con.createStatement()) {
-            st.execute("USE  " + dbName);
+            st.execute("sql  " + dbName);
         }
         catch (Exception ex) {
             logger.error(ex);
