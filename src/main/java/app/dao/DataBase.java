@@ -45,6 +45,8 @@ public class DataBase {
         catch (Exception e) {
             logger.error(e.getMessage());
         }
+
+        logger.info("database '{}' was succesfuly initalized", Config.getProperty(Config.DB_NAME));
     }
 
     /**
@@ -103,6 +105,7 @@ public class DataBase {
         catch (SQLException sqlEx) {
             logger.error(sqlEx.getMessage());
         }
+        logger.info("database '{}' was created successfuly", Config.getProperty(Config.DB_NAME));
     }
 
     public void drop() {
@@ -117,6 +120,6 @@ public class DataBase {
             logger.error(sqlEx.getMessage());
         }
 
-       logger.info("drop database was successful");
+       logger.info("Database '{}' was successfuly droped", Config.getProperty(Config.DB_NAME));
     }
 }

@@ -4,7 +4,6 @@ import app.dao.DataBase;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-
 public class DataBaseThread implements Runnable {
 
     public static final Logger logger = LogManager.getLogger(DataBaseThread.class);
