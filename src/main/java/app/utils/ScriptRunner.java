@@ -63,8 +63,8 @@ public class ScriptRunner {
         this.connection = connection;
         this.autoCommit = autoCommit;
         this.stopOnError = stopOnError;
-        File logFile = new File("create_db.log");
-        File errorLogFile = new File("create_db_error.log");
+        File logFile = new File("target/create_db.log");
+        File errorLogFile = new File("target/create_db_error.log");
         try {
             if (logFile.exists()) {
                 logWriter = new PrintWriter(new FileWriter(logFile, true));

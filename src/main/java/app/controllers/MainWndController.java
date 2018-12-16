@@ -14,14 +14,10 @@ import org.apache.logging.log4j.Logger;
 import java.io.IOException;
 
 public class MainWndController {
-    private static final Logger logger = LogManager.getLogger(LoginWndController.class);
+    private static final Logger logger = LogManager.getLogger(MainWndController.class);
 
     @FXML
     private MenuBar MainMenuBar; //fx:id главного меню
-
-    public MainWndController() {
-        logger.trace("execute app.core.MainWndController constructor");
-    }
 
     /*
     FXMLLoader f = new FXMLLoader();
@@ -32,11 +28,13 @@ public class MainWndController {
 
     @FXML
     private void menuItemNewRepair(){
+        logger.trace("");
         try {
             // Загружаем fxml-файл и создаём новую сцену
             // для всплывающего диалогового окна.
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(RepairCenter.class.getResource("/Dialogs/NewRepairDlg.fxml"));
+            //todo do not load fxml file
+            loader.setLocation(RepairCenter.class.getResource("/dialogs/NewRepairDlg.fxml"));
             AnchorPane repairDlgLayout = loader.load();
 
            /* NewRepairDialogController newRepairDialogController = loader.getController();
@@ -65,7 +63,7 @@ public class MainWndController {
             dialogStage.showAndWait();
         }
         catch (IOException e) {
-            System.out.println("Облом с menuItemNewRepair() -> " + e.getMessage());
+            logger.error(e);
         }
     }
 }
