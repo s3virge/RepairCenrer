@@ -11,7 +11,7 @@ public class DataBaseThread implements Runnable {
     private Thread thread;
 
     /**
-     * check is database exist
+     * check if database exist
      * if database does not exist
      * then create here
      * @param name
@@ -25,17 +25,8 @@ public class DataBaseThread implements Runnable {
     public void run() {
         DataBase db = new DataBase();
 
-        db.drop();
-
         if (!db.isExists()) {
             db.create();
-
-            try {
-                db.initalize();
-            }
-            catch (Exception e) {
-                logger.error(e.getMessage());
-            }
         }
     }
 }

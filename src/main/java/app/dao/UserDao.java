@@ -25,7 +25,6 @@ public class UserDao {
      */
     public User getUserByLogin(String strLogin) {
         logger.trace("");
-        logger.debug("strLogin = {}", strLogin);
 
         final String SELECT_USER = "SELECT user.id, user.login, user.password, user_group.value " +
                 "FROM user INNER JOIN user_group ON user.user_group = user_group.id " +

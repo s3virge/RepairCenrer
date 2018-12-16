@@ -338,6 +338,4 @@ INSERT INTO `repaircenter`.`status` (`id`, `value`) VALUES (2, 'Диагност
 INSERT INTO `repaircenter`.`status` (`id`, `value`) VALUES (3, 'Ожидание комплектующих');
 INSERT INTO `repaircenter`.`status` (`id`, `value`) VALUES (4, 'Ремонт');
 INSERT INTO `repaircenter`.`status` (`id`, `value`) VALUES (5, 'Выдано');
-
 COMMIT;
-

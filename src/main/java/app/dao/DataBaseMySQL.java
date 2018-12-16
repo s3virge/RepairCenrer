@@ -55,9 +55,9 @@ public class DataBaseMySQL {
 
 //            properties.put("useUnicode", "true");
 //            properties.put("characterEncoding","Cp1251");
-            properties.put("characterEncoding","UTF-8");
-
-            properties.setProperty("useSSL", "false");
+//            properties.put("characterEncoding","UTF-8");
+//
+//            properties.setProperty("useSSL", "false");
         }
         return properties;
     }
@@ -123,7 +123,7 @@ public class DataBaseMySQL {
              /*Statement statement = con.createStatement()*/) {
 
             ScriptRunner runner = new ScriptRunner(con, false, false);
-            String file = "src/Resources/sql/createbd.sql";
+            String file = "src/Resources/sql/createdb.sql";
             try {
                 runner.runScript(new BufferedReader(new FileReader(file)));
             }

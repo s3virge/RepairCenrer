@@ -16,7 +16,7 @@ public class Config {
     public static final String DB_PASSWORD = "db.password";
     public static final String DB_NAME = "db.name";
 
-    private static final String DB_PROPERTIES = "pg.properties";
+    private static final String DB_PROPERTIES = "mysql.properties";
 
     private static Properties properties = new Properties();
 
@@ -40,6 +40,12 @@ public class Config {
                 logger.error(ioEx);
                 throw new RuntimeException("Облом с properties.load(stream);");
             }
+
+            //enable using unicode, but in my case this is do not help
+//            properties.put("useUnicode", "true");
+//            properties.put("characterEncoding","Cp1251");
+//            properties.put("characterEncoding","UTF-8");
+//            properties.setProperty("useSSL", "false");
         }
 
         return properties.getProperty(name);

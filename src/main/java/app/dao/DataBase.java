@@ -1,15 +1,11 @@
 package app.dao;
 
 import app.config.Config;
-import app.utils.MsgBox;
+import app.utils.ScriptRunner;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.postgresql.util.PSQLException;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.file.Files;
@@ -26,28 +22,31 @@ public class DataBase {
     public static final Logger logger = LogManager.getLogger(DataBase.class);
     /**
      * write to the database Config.DB_NAME the necessary initial data
+     * do not work for mysql.
+     * work fine for postgres
      */
-    public void initalize() throws URISyntaxException, SQLException, IOException {
-        logger.trace("");
-
-        //        URL uniformResourceLocator = DataBase.class.getClassLoader().getResource("repair_center.sql");
-        URL uniformResourceLocator = getClass().getResource("/sql/repair_center.sql");
-
-        Path path = Paths.get(uniformResourceLocator.toURI());
-        List<String> str = Files.readAllLines(path);
-        String sql = str.stream().collect(Collectors.joining());
-
-        try (Connection con = ConnectionBuilder.getConnection();
-             Statement stmt = con.createStatement();
-             ) {
-            stmt.executeUpdate(sql);
-        }
-        catch (Exception e) {
-            logger.error(e.getMessage());
-        }
-
-        logger.info("database '{}' was succesfuly initalized", Config.getProperty(Config.DB_NAME));
-    }
+//    public void initalize() throws URISyntaxException, SQLException, IOException {
+//        logger.trace("");
+//
+//        //        URL uniformResourceLocator = DataBase.class.getClassLoader().getResource("repair_center.sql");
+//        URL uniformResourceLocator = getClass().getResource("/sql/createdb.sql");
+//
+//        Path path = Paths.get(uniformResourceLocator.toURI());
+//        List<String> str = Files.readAllLines(path);
+//        String sql = str.stream().collect(Collectors.joining());
+//
+//        try (Connection con = ConnectionBuilder.getConnection();
+//             Statement stmt = con.createStatement();
+//             ) {
+//            stmt.executeUpdate(sql);
+//        }
+//        catch (Exception e) {
+//            logger.error(e.getMessage());
+//            throw new RuntimeException();
+//        }
+//
+//        logger.info("database '{}' was succesfuly initalized", Config.getProperty(Config.DB_NAME));
+//    }
 
     /**
      * print to console resourceFile
@@ -95,25 +94,32 @@ public class DataBase {
      */
     public void create() {
         logger.trace("");
-        //Config.DB_NAME базы данных нет пытаемся её создать
-        try (Connection con = ConnectionBuilder.getConnectionToPostgres();
-             Statement statement = con.createStatement())
-        {
-            String sql = "CREATE DATABASE " + Config.getProperty(Config.DB_NAME);
-            statement.execute(sql);
+
+        try (Connection con = ConnectionBuilder.getConnectionToServer()) {
+            ScriptRunner runner = new ScriptRunner(con, false, true);
+
+            URL uniformResourceLocator = getClass().getResource("/sql/createdb.sql");
+            Path path = Paths.get(uniformResourceLocator.toURI());
+
+            BufferedReader reader = Files.newBufferedReader(path);
+            runner.runScript(reader);
         }
-        catch (SQLException sqlEx) {
-            logger.error(sqlEx.getMessage());
+        catch (SQLException | IOException | URISyntaxException ex) {
+            logger.error(ex.getMessage());
+            throw new RuntimeException();
+
+            //todo stop main process when error
         }
+
         logger.info("database '{}' was created successfuly", Config.getProperty(Config.DB_NAME));
     }
 
     public void drop() {
         logger.trace("");
-        try (Connection con = ConnectionBuilder.getConnectionToPostgres();
+        try (Connection con = ConnectionBuilder.getConnectionToServer();
              Statement statement = con.createStatement())
         {
-            String sql = "DROP DATABASE IF EXISTS " + Config.getProperty(Config.DB_NAME);
+            String sql = "drop database `" + Config.getProperty(Config.DB_NAME) + "`;" ;
             statement.execute(sql);
         }
         catch (SQLException sqlEx) {
