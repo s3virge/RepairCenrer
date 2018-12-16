@@ -107,7 +107,6 @@ public class DataBase {
         catch (SQLException | IOException | URISyntaxException ex) {
             logger.error(ex.getMessage());
             throw new RuntimeException();
-
             //todo stop main process when error
         }
 
