@@ -53,17 +53,17 @@ public class DataBase {
      * @param resourceFile path to file in resource project folder
      * @throws IOException
      */
-    public void consolePrintFile(String resourceFile) throws IOException {
-        InputStream in = DataBase.class.getResourceAsStream(resourceFile);
-        BufferedReader reader = new BufferedReader(new InputStreamReader(in));
-
-        String line = "";
-
-        while( line !=  null) {
-            line = reader.readLine();
-            System.out.println(line);
-        }
-    }
+//    public void consolePrintFile(String resourceFile) throws IOException {
+//        InputStream in = DataBase.class.getResourceAsStream(resourceFile);
+//        BufferedReader reader = new BufferedReader(new InputStreamReader(in));
+//
+//        String line = "";
+//
+//        while( line !=  null) {
+//            line = reader.readLine();
+//            System.out.println(line);
+//        }
+//    }
 
     /**
      * check if database exists

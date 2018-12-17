@@ -1,6 +1,5 @@
 package app.controllers;
 
-import app.dao.DataBaseMySQL;
 import app.models.User;
 import app.utils.AutoSuggestTextField;
 import app.utils.HashtableValues;
