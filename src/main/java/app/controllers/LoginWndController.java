@@ -126,10 +126,6 @@ public class LoginWndController {
             logger.error(ex.getMessage());
         }
 
-//        //передаем контроллеру дальше ссылку на главный класс
-//        MainWndController mainWndController = fxmlLoader.getController();
-//        mainWndController.setMainApp(mainApp);
-
         stage.setTitle("A simple database of the service center");
         stage.setScene(new Scene(mainWndLayout));
         stage.centerOnScreen();
