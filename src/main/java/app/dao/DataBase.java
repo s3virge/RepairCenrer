@@ -20,11 +20,11 @@ import java.util.stream.Collectors;
 
 public class DataBase {
     public static final Logger logger = LogManager.getLogger(DataBase.class);
-    /**
-     * write to the database Config.DB_NAME the necessary initial data
-     * do not work for mysql.
-     * work fine for postgres
-     */
+//    /**
+//     * write to the database Config.DB_NAME the necessary initial data
+//     * do not work for mysql.
+//     * work fine for postgres
+//     */
 //    public void initalize() throws URISyntaxException, SQLException, IOException {
 //        logger.trace("");
 //
@@ -48,11 +48,11 @@ public class DataBase {
 //        logger.info("database '{}' was succesfuly initalized", Config.getProperty(Config.DB_NAME));
 //    }
 
-    /**
-     * print to console resourceFile
-     * @param resourceFile path to file in resource project folder
-     * @throws IOException
-     */
+//    /**
+//     * print to console resourceFile
+//     * @param resourceFile path to file in resource project folder
+//     * @throws IOException
+//     */
 //    public void consolePrintFile(String resourceFile) throws IOException {
 //        InputStream in = DataBase.class.getResourceAsStream(resourceFile);
 //        BufferedReader reader = new BufferedReader(new InputStreamReader(in));
@@ -106,8 +106,9 @@ public class DataBase {
         }
         catch (SQLException | IOException | URISyntaxException ex) {
             logger.error(ex.getMessage());
-            throw new RuntimeException();
+//            throw new RuntimeException();
             //todo stop main process when error
+            System.exit(0);
         }
 
         logger.info("database '{}' was created successfuly", Config.getProperty(Config.DB_NAME));

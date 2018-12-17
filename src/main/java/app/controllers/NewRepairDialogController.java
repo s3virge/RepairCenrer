@@ -1,6 +1,5 @@
 package app.controllers;
 
-import app.models.User;
 import app.utils.AutoSuggestTextField;
 import app.utils.HashtableValues;
 import app.utils.MsgBox;
@@ -13,10 +12,6 @@ import javafx.stage.Stage;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Timestamp;
 import java.util.*;
 
 import static app.utils.MsgBox.Type.MB_ERROR;
@@ -54,9 +49,11 @@ public class NewRepairDialogController {
     @FXML private AutoSuggestTextField tfPatronymic;
     @FXML private AutoSuggestTextField tfPhone;
 
+    /**
+     * for store all linked values in one place
+     */
     private Hashtable<AutoSuggestTextField, HashtableValues> htFields = new Hashtable<>();
 
-    /**
     //еще в таблицу device нужно добавить поле device_id в которое будет записываться
     //номер устройства*/
 
@@ -153,7 +150,7 @@ public class NewRepairDialogController {
             suggestTextField = itr.next();
 
             if (suggestTextField.getText().isEmpty()) {
-                MsgBox.show("Не введены данные в поле " + htFields.get(suggestTextField).getTaxtFieldLabal(), MB_ERROR);
+                MsgBox.show("Не введены данные в поле " + htFields.get(suggestTextField).getTextFieldLabel(), MB_ERROR);
                 suggestTextField.requestFocus();
                 return false;
             }

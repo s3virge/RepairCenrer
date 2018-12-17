@@ -13,13 +13,13 @@ public class HashtableValues {
         return sDbTable;
     }
 
-    public String getTaxtFieldLabal() {
+    public String getTextFieldLabel() {
         return sTaxtFieldLabal;
     }
 
-    public HashtableValues(String sDbTable, String sDbColumn, String sTaxtFieldLabal) {
+    public HashtableValues(String sDbTable, String sDbColumn, String sTextFieldLabal) {
         this.sDbTable = sDbTable;
         this.sDbColumn = sDbColumn;
-        this.sTaxtFieldLabal = sTaxtFieldLabal;
+        this.sTaxtFieldLabal = sTextFieldLabal;
     }
 }
