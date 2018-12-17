@@ -12,6 +12,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.io.IOException;
+import java.net.URL;
 
 public class MainWndController {
     private static final Logger logger = LogManager.getLogger(MainWndController.class);
@@ -33,16 +34,17 @@ public class MainWndController {
         // Загружаем fxml-файл и создаём новую сцену
         // для всплывающего диалогового окна.
         FXMLLoader loader = new FXMLLoader();
-
-        //todo do not load fxml file
-        loader.setLocation(getClass().getResource("/dialogs/NewRepairDlg.fxml"));
-//      loader.setLocation(RepairCenter.class.getResource("/dialogs/NewRepairDlg.fxml"));
+        //Sets the location used to resolve relative path attribute values.
+        //getResource - Finds a resource with a given name.
+        URL resource = getClass().getResource("/dialogs/NewRepairDlg.fxml");
+        loader.setLocation(resource);
 
         AnchorPane repairDlgLayout = null;
 
         try {
             repairDlgLayout = loader.load();
         } catch (IOException e) {
+            e.printStackTrace();
             logger.error(e);
         }
 

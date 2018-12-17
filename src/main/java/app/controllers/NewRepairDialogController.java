@@ -64,12 +64,12 @@ public class NewRepairDialogController {
 
     @FXML
     private void initialize() {
-
-        setTestData();
-
-        showNextDeviceNumber();
-        fillHashTable();
-        getEntries();
+     //todo an exception is thrown here.
+//        setTestData();
+//
+//        showNextDeviceNumber();
+//        fillHashTable();
+//        getEntries();
     }
 
     private void showNextDeviceNumber() {
