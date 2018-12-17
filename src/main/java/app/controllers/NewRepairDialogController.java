@@ -65,11 +65,27 @@ public class NewRepairDialogController {
     @FXML
     private void initialize() {
      //todo an exception is thrown here.
-//        setTestData();
+        setTestData();
 //
 //        showNextDeviceNumber();
 //        fillHashTable();
 //        getEntries();
+    }
+
+    private void setTestData() {
+        tfSurname.setText("Кобзарь");
+        tfName.setText("Виталий");
+        tfPatronymic.setText("Владимирович");
+        tfPhone.setText("050-683-12-26");
+
+        lDeviceID.setText("000001");
+        tfDeviceType.setText("Ноутбук");
+        tfBrand.setText("Asus");
+        tfModel.setText("X550");
+        tfCompleteness.setText("Ноутбук, блок питания");
+        tfAppearance.setText("Бывший в упротреблении");
+        tfDefect.setText("Не включается");
+        tfSerialNumber.setText("123abc#456");
     }
 
     private void showNextDeviceNumber() {
@@ -89,22 +105,6 @@ public class NewRepairDialogController {
         htFields.put(tfPhone,        new HashtableValues("owner",       "telephone_number", lPhone.getText()));
         htFields.put(tfSerialNumber, new HashtableValues("device",      "serial_number", lSerialNumber.getText()));
 
-    }
-
-    private void setTestData() {
-        tfSurname.setText("Кобзарь");
-        tfName.setText("Виталий");
-        tfPatronymic.setText("Владимирович");
-        tfPhone.setText("050-683-12-26");
-
-        lDeviceID.setText("000000");
-        tfDeviceType.setText("Ноутбук");
-        tfBrand.setText("Asus");
-        tfModel.setText("X550");
-        tfCompleteness.setText("Ноутбук, блок питания");
-        tfAppearance.setText("Бывший в упротреблении");
-        tfDefect.setText("Не включается");
-        tfSerialNumber.setText("123abc#456");
     }
 
     //  получаем из базы подсказки Используем итератор для перебора елементов
@@ -294,35 +294,35 @@ public class NewRepairDialogController {
         //Получить id первой таблицы (SELECT id FROM tbl_1 WHERE string='$string')
         //Зная родительский id вставить данные во вторую таблицу.
 
-        int typeId = dbGetIdPutIfAbsent(tfDeviceType);
-        int brandId = dbGetIdPutIfAbsent(tfBrand);
-        int modelId = dbGetIdPutIfAbsent(tfModel);
-
-        int completenessId = dbGetIdPutIfAbsent(tfCompleteness);
-        int appearanceId = dbGetIdPutIfAbsent(tfAppearance);
-        int defectId = dbGetIdPutIfAbsent(tfDefect);
-
-        //нужно добавить в какую то таблицу колонку для заметок
-        //int noteId = dbGetIdPutIfAbsent(tfNote);
-        int surnameId = dbGetIdPutIfAbsent(tfSurname);
-        int nameId = dbGetIdPutIfAbsent(tfName);
-        int patronymicId = dbGetIdPutIfAbsent(tfPatronymic);
-
-        //в таблице owner 4 колонки. Нужно все колонки заполнить данными
-        //и записать в неё телефонный номер
-        //int phoneId = dbGetIdPutIfAbsent(tfPhone);
-        int ownerId = dbPutOwner(surnameId, nameId, patronymicId, tfPhone.getText());
-
-        if (ownerId == 0)
-            return;
-
-        //нужно создать новый ремонт
-        int repairId = dbPutRepair();
-
-        if (repairId == 0)
-            return;
-
-        dbPutDevice( typeId, brandId, modelId, tfSerialNumber.getText(), completenessId, appearanceId, defectId, ownerId, repairId);
+//        int typeId = dbGetIdPutIfAbsent(tfDeviceType);
+//        int brandId = dbGetIdPutIfAbsent(tfBrand);
+//        int modelId = dbGetIdPutIfAbsent(tfModel);
+//
+//        int completenessId = dbGetIdPutIfAbsent(tfCompleteness);
+//        int appearanceId = dbGetIdPutIfAbsent(tfAppearance);
+//        int defectId = dbGetIdPutIfAbsent(tfDefect);
+//
+//        //нужно добавить в какую то таблицу колонку для заметок
+//        //int noteId = dbGetIdPutIfAbsent(tfNote);
+//        int surnameId = dbGetIdPutIfAbsent(tfSurname);
+//        int nameId = dbGetIdPutIfAbsent(tfName);
+//        int patronymicId = dbGetIdPutIfAbsent(tfPatronymic);
+//
+//        //в таблице owner 4 колонки. Нужно все колонки заполнить данными
+//        //и записать в неё телефонный номер
+//        //int phoneId = dbGetIdPutIfAbsent(tfPhone);
+//        int ownerId = dbPutOwner(surnameId, nameId, patronymicId, tfPhone.getText());
+//
+//        if (ownerId == 0)
+//            return;
+//
+//        //нужно создать новый ремонт
+//        int repairId = dbPutRepair();
+//
+//        if (repairId == 0)
+//            return;
+//
+//        dbPutDevice( typeId, brandId, modelId, tfSerialNumber.getText(), completenessId, appearanceId, defectId, ownerId, repairId);
 
         closeDlg(actionEvent);
     }
