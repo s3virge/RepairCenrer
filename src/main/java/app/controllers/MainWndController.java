@@ -27,43 +27,48 @@ public class MainWndController {
       */
 
     @FXML
-    private void menuItemNewRepair(){
+    private void menuItemNewRepair() {
         logger.trace("");
+
+        // Загружаем fxml-файл и создаём новую сцену
+        // для всплывающего диалогового окна.
+        FXMLLoader loader = new FXMLLoader();
+
+        //todo do not load fxml file
+        loader.setLocation(getClass().getResource("/dialogs/NewRepairDlg.fxml"));
+//      loader.setLocation(RepairCenter.class.getResource("/dialogs/NewRepairDlg.fxml"));
+
+        AnchorPane repairDlgLayout = null;
+
         try {
-            // Загружаем fxml-файл и создаём новую сцену
-            // для всплывающего диалогового окна.
-            FXMLLoader loader = new FXMLLoader();
-            //todo do not load fxml file
-            loader.setLocation(RepairCenter.class.getResource("/dialogs/NewRepairDlg.fxml"));
-            AnchorPane repairDlgLayout = loader.load();
+            repairDlgLayout = loader.load();
+        } catch (IOException e) {
+            logger.error(e);
+        }
 
            /* NewRepairDialogController newRepairDialogController = loader.getController();
             newRepairDialogController.setMainStage(mainApp.getPrimaryStage());*/
 
-            // Создаём подмостки для диалогового окна.
-            Stage dialogStage = new Stage();
-            //подготавливаем их
-            dialogStage.setTitle("Edit Person");
-            dialogStage.initModality(Modality.WINDOW_MODAL);
+        // Создаём подмостки для диалогового окна.
+        Stage dialogStage = new Stage();
+        //подготавливаем их
+        dialogStage.setTitle("Edit Person");
+        dialogStage.initModality(Modality.WINDOW_MODAL);
 
-            /***********************************************
-            получить родителя можно так
-             dialogStage.initOwner(((Node)actionEvent.getSource()).getScene().getWindow());
-             ***********************************************/
-            dialogStage.initOwner(MainMenuBar.getScene().getWindow());
-            //dialogStage.initOwner(mainApp.getPrimaryStage());
+        /***********************************************
+         получить родителя можно так
+         dialogStage.initOwner(((Node)actionEvent.getSource()).getScene().getWindow());
+         ***********************************************/
+        dialogStage.initOwner(MainMenuBar.getScene().getWindow());
+        //dialogStage.initOwner(mainApp.getPrimaryStage());
 
-            //расставляем декорации на сцене согласно плану
-            Scene scene = new Scene(repairDlgLayout);
-            dialogStage.setScene(scene);
+        //расставляем декорации на сцене согласно плану
+        Scene scene = new Scene(repairDlgLayout);
+        dialogStage.setScene(scene);
 
-            dialogStage.setResizable(false);
-            // Отображаем диалоговое окно и ждём, пока пользователь его не закроет
+        dialogStage.setResizable(false);
 
-            dialogStage.showAndWait();
-        }
-        catch (IOException e) {
-            logger.error(e);
-        }
+        // Отображаем диалоговое окно и ждём, пока пользователь его не закроет
+        dialogStage.showAndWait();
     }
 }
