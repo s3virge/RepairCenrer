@@ -1,0 +1,47 @@
+https://stackoverflow.com/questions/46860679/self-contained-applications/46860978
+
+Yes, this is possible with jlink, but all of your code and your dependencies need to be modular JARs (i.e. ones with module-info.class). It works like this:
+
+jlink
+    --module-path $JAVA_HOME/jmods:mods
+    --add-modules your.app
+    --launcher launch-app=your.app
+    --output your-app-image
+In detail:
+
+--module-path lists the folders that contain modules - this needs to include the platform modules shipped with the JDK you want to use (in $JAVA_HOME/jmods) and your application modules (mods)
+--add-modules names the module(s) that you want your runtime image to contain - all of its (their) transitive dependencies are included
+--launcher is optional, but very handy; it creates an OS-specific launcher (e.g. a .bat on Windows) with the given name (launch-app) that launches the specified module (your.app; in this case assuming the main class is defined for it)
+--output specifies where to create the runtime image
+
+============================================================================
+Alternatively, you can use javapackager tool.
+
+The Java packaging tools provide built-in support for several formats of self-contained application packages.
+
+The basic package is a single folder on your hard drive that includes all application resources and the JRE. The package can be redistributed as is, or you can build an installable package (for example, EXE or DMG format.)
+
+Though there are certain restrictions associated with building these applications with javapackager which includes -
+
+Self-contained application packages must be explicitly requested by passing the native argument to the Ant task or javapackager -deploy command.
+
+Self-contained application packages must be built on the operating system on which it is intended to run. Prerequisite tools must be available to build a package in a specific format.
+
+Self-contained application packages can only be built using JDK 7 Update 6 or later. The Java Packager for JDK 9 packages applications with a JDK 9 runtime image. To package a JDK 8 or JDK 7 JRE with your application, use the JDK 8 Java Packager.
+
+One way to create a basic self-contained application is to modify the deploy ant task:-
+
+<fx:deploy width="${javafx.run.width}" height="${javafx.run.height}"
+           nativeBundles="all"
+           outdir="${basedir}/${dist.dir}" outfile="${application.title}">
+    <fx:application name="${application.title}" mainClass="${javafx.main.class}"/>
+    <fx:resources>
+        <fx:fileset dir="${basedir}/${dist.dir}" includes="*.jar"/>
+    </fx:resources>
+    <fx:info title="${application.title}" vendor="${application.vendor}"/>
+</fx:deploy>
+Native packages can be built using the javapackager command tool. Java Packager Command to Generate Self-Contained Application Packages would be something like -
+
+javapackager -deploy -native -outdir OUTPUT_DIR -outfile APPLICATION_NAME 
+    -srcdir PACKAGE_SRC_DIR -srcfiles APPLICATION.jar -appclass MAIN_CLASS
+    -name "YourApplication" -title "SelfContained"
