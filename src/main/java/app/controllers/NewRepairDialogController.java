@@ -59,7 +59,6 @@ public class NewRepairDialogController {
 
     @FXML
     private void initialize() {
-     //todo an exception is thrown here.
         setTestData();
 //
 //        showNextDeviceNumber();
@@ -282,6 +281,9 @@ public class NewRepairDialogController {
         //если данные вводятся неправильно
         if (!isEnteredCorrectly())
             return;
+
+        //todo gets all values from textFields and save their to database
+        //use for this OwnerDao and DeviceDao
 
         // Пока что алгоритм таков:
         //Вставить данные в первую таблицу
