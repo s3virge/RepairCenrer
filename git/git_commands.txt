@@ -19,3 +19,5 @@ git stash pop # вынуть состояние ветки
 git push --set-upstream origin <name> # толкнуть ветку name на удалённый сервер.
 git fetch
 git pull
+---------------------------------------------------------------
+git config credential.helper store #save passwords in store. Do not ask password in console.
