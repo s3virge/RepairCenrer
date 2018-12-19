@@ -1,7 +1,6 @@
 package app.dao.owner;
 
 import app.dao.ConnectionBuilder;
-import app.exceptions.DaoException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -14,8 +13,8 @@ public class SurnameDao {
 
     private static final Logger logger = LogManager.getLogger(SurnameDao.class);
 
-    private static final String INSERT_SURNAME = "insert into surname(value) value (?)";
-    private static final String SELECT_SURNAME = "select id from surname where value = ?";
+    private static final String INSERT_SURNAME = "insert into surnames(value) value (?)";
+    private static final String SELECT_SURNAME = "select id from surnames where value = ?";
 
     /**
      * return id for surname in database or 0 if surname does not exist
