@@ -9,44 +9,36 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.LinkedList;
-import java.util.List;
 
 public class SurnameDao {
 
     private static final Logger logger = LogManager.getLogger(SurnameDao.class);
 
-    private int id;
-    private String surname;
-
-    //todo сформировать запросы к базе данных
     private static final String INSERT_SURNAME = "insert into surname(value) value (?)";
-    private static final String SELECT_SURNAME = "select * from surname";
+    private static final String SELECT_SURNAME = "select id from surname where value = ?";
 
     /**
-     * return id for surname in database
+     * return id for surname in database or 0 if surname does not exist
      * @param surname
-     * @return id
+     * @return surname id. If surname does not exist return 0
      */
     public int getId(String surname) {
-//        List<Street> result = new LinkedList<>();
-//
-//        try (Connection con = getConnection();
-//             PreparedStatement stmt = con.prepareStatement(GET_STREET)) {
-//
-//            stmt.setString(1, "%" + pattern + "%");
-//            ResultSet rs = stmt.executeQuery();
+        logger.trace("");
 
-//            while (rs.next()) {
-//                Street str = new Street(rs.getLong("street_code"),
-//                        rs.getString("street_name"));
-//                result.add(str);
-//            }
-//        }
-//        catch (SQLException ex) {
-//            logger.error(ex.getMessage(), ex);
-//            throw new DaoException(ex);
-//        }
+        int id = 0;
+
+        try (Connection conn = ConnectionBuilder.getConnection();
+        PreparedStatement stmt = conn.prepareStatement(SELECT_SURNAME)){
+           stmt.setString(1, surname);
+           ResultSet rs = stmt.executeQuery();
+
+           while (rs.next()) {
+               id = rs.getInt("id");
+           }
+        }
+        catch (SQLException ex) {
+            logger.error(ex.getMessage());
+        }
 
         return id;
     }
@@ -56,6 +48,7 @@ public class SurnameDao {
      * @param surname
      */
     public Long saveSurname(String surname) {
+        logger.trace("");
 
         Long result = -1L;
 
@@ -82,8 +75,16 @@ public class SurnameDao {
     }
 
 //    public static void main(String[] args) {
+//
+//        String val = "DUpl";
 //        SurnameDao sn = new SurnameDao();
-//        Long result = sn.saveSurname("Putya");
+//
+//        Long result = sn.saveSurname(val);
 //        System.out.println(result);
+//
+//        System.out.println(val + " id = " + sn.getId(val));
+//
+//        val = "Petia";
+//        System.out.println(val + " id = " + sn.getId(val));
 //    }
 }
