@@ -1,7 +1,7 @@
 package app.exceptions;
 
 public class DaoException extends Exception {
-    DaoException(String msg){
+    public DaoException(String msg){
         super(msg);
     }
 }
