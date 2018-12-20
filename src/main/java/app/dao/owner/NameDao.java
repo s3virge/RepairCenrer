@@ -20,7 +20,7 @@ public class NameDao {
      * @param name
      * @return name id. If name does not exist return 0
      */
-    public int getId(String name) {
+    public static int getId(String name) {
         logger.trace("");
 
         int id = 0;
@@ -45,7 +45,7 @@ public class NameDao {
      * save name to database
      * @param name
      */
-    public Long saveSurname(String name) {
+    public static Long saveSurname(String name) {
         logger.trace("");
 
         Long result = -1L;

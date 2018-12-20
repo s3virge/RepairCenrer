@@ -20,7 +20,7 @@ public class PatronymicDao {
      * @param patronymic
      * @return surname id. If surname does not exist return 0
      */
-    public int getId(String patronymic) {
+    public static int getId(String patronymic) {
         logger.trace("");
 
         int id = 0;
@@ -45,7 +45,7 @@ public class PatronymicDao {
      * save patronymic to database
      * @param patronymic
      */
-    public Long saveSurname(String patronymic) {
+    public static Long saveSurname(String patronymic) {
         logger.trace("");
 
         Long result = -1L;
