@@ -45,11 +45,12 @@ public class SurnameDao {
     /**
      * save surname to database
      * @param surname
+     * @return id of the surname
      */
-    public static Long saveSurname(String surname) {
+    public static int save(String surname) {
         logger.trace("");
 
-        Long result = -1L;
+        int result;
 
         try (Connection con = ConnectionBuilder.getConnection();
              PreparedStatement stmt = con.prepareStatement(INSERT_SURNAME)) {
@@ -70,7 +71,7 @@ public class SurnameDao {
             logger.error(ex.getMessage());
         }
 
-        return result;
+        return result = getId(surname);
     }
 
 //    public static void main(String[] args) {
@@ -78,7 +79,7 @@ public class SurnameDao {
 //        String val = "DUpl";
 //        SurnameDao sn = new SurnameDao();
 //
-//        Long result = sn.saveSurname(val);
+//        Long result = sn.save(val);
 //        System.out.println(result);
 //
 //        System.out.println(val + " id = " + sn.getId(val));

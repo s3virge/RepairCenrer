@@ -1,5 +1,6 @@
 package app.controllers;
 
+import app.dao.owner.OwnerDao;
 import app.utils.AutoSuggestTextField;
 import app.utils.HashtableValues;
 import app.utils.MsgBox;
@@ -279,8 +280,15 @@ public class NewRepairDialogController {
     private void onBtnOk(ActionEvent actionEvent) {
 
         //если данные вводятся неправильно
-        if (!isEnteredCorrectly())
-            return;
+//        if (!isEnteredCorrectly())
+//            return;
+
+        OwnerDao owner = new OwnerDao();
+        owner.setPatronymic(tfPatronymic.getText());
+        owner.setName(tfName.getText());
+        owner.setSurname(tfSurname.getText());
+        owner.setPhoneNumber(tfPhone.getText());
+        owner.save();
 
         //todo gets all values from textFields and save their to database
         //use for this OwnerDao and DeviceDao

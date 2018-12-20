@@ -10,7 +10,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class PatronymicDao {
-    private static final Logger logger = LogManager.getLogger(SurnameDao.class);
+    private static final Logger logger = LogManager.getLogger(PatronymicDao.class);
 
     private static final String INSERT_PATRONIMIC = "insert into patronymics(value) value (?)";
     private static final String SELECT_PATRONIMIC = "select id from patronymics where value = ?";
@@ -45,10 +45,10 @@ public class PatronymicDao {
      * save patronymic to database
      * @param patronymic
      */
-    public static Long saveSurname(String patronymic) {
+    public static int save(String patronymic) {
         logger.trace("");
 
-        Long result = -1L;
+        int result;
 
         try (Connection con = ConnectionBuilder.getConnection();
              PreparedStatement stmt = con.prepareStatement(INSERT_PATRONIMIC)) {
@@ -69,7 +69,7 @@ public class PatronymicDao {
             logger.error(ex.getMessage());
         }
 
-        return result;
+        return result = getId(patronymic);
     }
 
 //    public static void main(String[] args) {
@@ -77,7 +77,7 @@ public class PatronymicDao {
 //        String val = "DUpl";
 //        SurnameDao sn = new SurnameDao();
 //
-//        Long result = sn.saveSurname(val);
+//        Long result = sn.save(val);
 //        System.out.println(result);
 //
 //        System.out.println(val + " id = " + sn.getId(val));
