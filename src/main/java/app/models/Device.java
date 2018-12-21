@@ -2,7 +2,7 @@ package app.models;
 
 public class Device {
 
-    //    private Integer id;
+    private int id;
     private String brand;
     private String type;
     private String model;

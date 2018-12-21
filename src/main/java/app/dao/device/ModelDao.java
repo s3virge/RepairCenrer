@@ -1,4 +1,4 @@
-package app.dao.owner;
+package app.dao.device;
 
 import app.dao.ConnectionBuilder;
 import org.apache.logging.log4j.LogManager;
@@ -9,25 +9,26 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class NameDao {
-    private static final Logger logger = LogManager.getLogger(NameDao.class);
+public class ModelDao {
+    private static final Logger logger = LogManager.getLogger(ModelDao.class);
 
-    private static final String INSERT_NAME = "insert into names (value) value (?)";
-    private static final String SELECT_NAME = "select id from names where value = ?";
+    private static final String table = "model";
+    private static final String INSERT = "insert into " + table + " (value) value (?)";
+    private static final String SELECT = "select id from " + table + " where value = ?";
 
     /**
-     * return id for name in database or 0 if name does not exist
-     * @param name
-     * @return name id. If name does not exist return 0
+     * return id for model in database or 0 if model does not exist
+     * @param model
+     * @return model id. If model does not exist return 0
      */
-    public static int getId(String name) {
+    public static int getId(String model) {
         logger.trace("");
 
         int id = 0;
 
         try (Connection conn = ConnectionBuilder.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(SELECT_NAME)){
-            stmt.setString(1, name);
+             PreparedStatement stmt = conn.prepareStatement(SELECT)){
+            stmt.setString(1, model);
             ResultSet rs = stmt.executeQuery();
 
             while (rs.next()) {
@@ -42,21 +43,21 @@ public class NameDao {
     }
 
     /**
-     * save name to database
-     * @param name
+     * save model to database
+     * @param model
      */
-    public static int save(String name) {
+    public static int save(String model) {
         logger.trace("");
 
         int result;
 
         try (Connection con = ConnectionBuilder.getConnection();
-             PreparedStatement stmt = con.prepareStatement(INSERT_NAME)) {
+             PreparedStatement stmt = con.prepareStatement(INSERT)) {
 
             con.setAutoCommit(false);
 
             try {
-                stmt.setString(1, name);
+                stmt.setString(1, model);
                 stmt.executeUpdate();
                 con.commit();
             }
@@ -69,6 +70,6 @@ public class NameDao {
             logger.error(ex.getMessage());
         }
 
-        return result = getId(name);
+        return result = getId(model);
     }
 }

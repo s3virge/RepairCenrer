@@ -2,12 +2,12 @@ package app.models;
 
 public class User {
 
-    private static int id;
+    private int id;
     private String login;
     private String password;
     private String group;
 
-    public static int getId() {
+    public int getId() {
         return id;
     }
 

@@ -137,7 +137,7 @@ CREATE TABLE IF NOT EXISTS `repaircenter`.`brand` (
 -- -----------------------------------------------------
 -- Table `repaircenter`.`devicetype`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `repaircenter`.`devicetype` (
+CREATE TABLE IF NOT EXISTS `repaircenter`.`type` (
                                                          `id` INT NOT NULL AUTO_INCREMENT,
                                                          `value` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`id`),
@@ -150,7 +150,7 @@ CREATE TABLE IF NOT EXISTS `repaircenter`.`devicetype` (
 -- -----------------------------------------------------
 -- Table `repaircenter`.`devicemodel`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `repaircenter`.`devicemodel` (
+CREATE TABLE IF NOT EXISTS `repaircenter`.`model` (
                                                           `id` INT NOT NULL AUTO_INCREMENT,
                                                           `value` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`id`),
@@ -284,12 +284,12 @@ CREATE TABLE IF NOT EXISTS `repaircenter`.`device` (
   ON UPDATE NO ACTION,
   CONSTRAINT `device_type`
   FOREIGN KEY (`type_id`)
-  REFERENCES `repaircenter`.`devicetype` (`id`)
+  REFERENCES `repaircenter`.`type` (`id`)
   ON DELETE NO ACTION
   ON UPDATE NO ACTION,
   CONSTRAINT `device_model`
   FOREIGN KEY (`model_id`)
-  REFERENCES `repaircenter`.`devicemodel` (`id`)
+  REFERENCES `repaircenter`.`model` (`id`)
   ON DELETE NO ACTION
   ON UPDATE NO ACTION,
   CONSTRAINT `device_defect`

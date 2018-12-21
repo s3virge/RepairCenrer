@@ -4,10 +4,12 @@ package app.models;
  * Owner - device owner information
  */
 public class Owner {
+
+    private int id;
     private String surname;
     private String name;
     private String patronymic;
-    private String telephone_number;
+    private String phoneNumber;
 
     public String getSurname() {
         return surname;
@@ -33,18 +35,18 @@ public class Owner {
         this.patronymic = patronymic;
     }
 
-    public String getTelephone_number() {
-        return telephone_number;
+    public String getPhoneNumber() {
+        return phoneNumber;
     }
 
-    public void setTelephone_number(String telephone_number) {
-        this.telephone_number = telephone_number;
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 
     public void print() {
         System.out.printf("%-15s - %s\n", "surname", surname);
         System.out.printf("%-15s - %s\n", "name", name);
         System.out.printf("%-15s - %s\n", "patronymic", patronymic);
-        System.out.printf("%-15s - %s\n", "telephone_number", telephone_number);
+        System.out.printf("%-15s - %s\n", "phoneNumber", phoneNumber);
     }
 }

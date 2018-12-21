@@ -1,6 +1,7 @@
-package app.dao.owner;
+package app.dao.device;
 
 import app.dao.ConnectionBuilder;
+import app.dao.owner.NameDao;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -9,25 +10,26 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class NameDao {
-    private static final Logger logger = LogManager.getLogger(NameDao.class);
+public class TypeDao {
+    private static final Logger logger = LogManager.getLogger(TypeDao.class);
 
-    private static final String INSERT_NAME = "insert into names (value) value (?)";
-    private static final String SELECT_NAME = "select id from names where value = ?";
+    private static final String table = "type";
+    private static final String INSERT_TYPE = "insert into " + table + " (value) value (?)";
+    private static final String SELECT_TYPE = "select id from " + table + " where value = ?";
 
     /**
-     * return id for name in database or 0 if name does not exist
-     * @param name
-     * @return name id. If name does not exist return 0
+     * return id for deviceType in database or 0 if device type does not exist
+     * @param deviceType
+     * @return deviceType id. If deviceType does not exist return 0
      */
-    public static int getId(String name) {
+    public static int getId(String deviceType) {
         logger.trace("");
 
         int id = 0;
 
         try (Connection conn = ConnectionBuilder.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(SELECT_NAME)){
-            stmt.setString(1, name);
+             PreparedStatement stmt = conn.prepareStatement(SELECT_TYPE)){
+            stmt.setString(1, deviceType);
             ResultSet rs = stmt.executeQuery();
 
             while (rs.next()) {
@@ -42,21 +44,21 @@ public class NameDao {
     }
 
     /**
-     * save name to database
-     * @param name
+     * save device type to database
+     * @param deviceType
      */
-    public static int save(String name) {
+    public static int save(String deviceType) {
         logger.trace("");
 
         int result;
 
         try (Connection con = ConnectionBuilder.getConnection();
-             PreparedStatement stmt = con.prepareStatement(INSERT_NAME)) {
+             PreparedStatement stmt = con.prepareStatement(INSERT_TYPE)) {
 
             con.setAutoCommit(false);
 
             try {
-                stmt.setString(1, name);
+                stmt.setString(1, deviceType);
                 stmt.executeUpdate();
                 con.commit();
             }
@@ -69,6 +71,6 @@ public class NameDao {
             logger.error(ex.getMessage());
         }
 
-        return result = getId(name);
+        return result = getId(deviceType);
     }
 }

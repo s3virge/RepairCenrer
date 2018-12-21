@@ -2,6 +2,7 @@ package app.dao.owner;
 
 
 import app.dao.ConnectionBuilder;
+import app.models.Owner;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -16,43 +17,10 @@ public class OwnerDao {
 
     private static final Logger log = LogManager.getLogger(OwnerDao.class);
 
-    private String surname;
-    private String name;
-    private String patronymic;
-    private String phoneNumber;
+    private Owner owner;
 
-    public OwnerDao(String surname, String name, String patronymic, String phoneNumber) {
-        this.surname = surname;
-        this.name = name;
-        this.patronymic = patronymic;
-        this.phoneNumber = phoneNumber;
-    }
-
-    public OwnerDao() {
-        this.surname = "";
-        this.name = "";
-        this.patronymic = "";
-        this.phoneNumber = "";
-    }
-
-    public void setSurname(String surname) {
-        this.surname = surname;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setPatronymic(String patronymic) {
-        this.patronymic = patronymic;
-    }
-
-    public String getPhoneNumber() {
-        return phoneNumber;
-    }
-
-    public void setPhoneNumber(String phone_number) {
-        this.phoneNumber = phone_number;
+    public OwnerDao(Owner owner) {
+        this.owner = owner;
     }
 
     /**
@@ -60,24 +28,31 @@ public class OwnerDao {
      */
     public void save() {
         log.trace("");
+
+        String surname = owner.getSurname();
         int surname_id  = SurnameDao.getId(surname);
 
         if (surname_id == 0) {
             surname_id = SurnameDao.save(surname);
         }
 
+        String name = owner.getName();
         int name_id     = NameDao.getId(name);
 
         if (name_id == 0) {
             name_id = NameDao.save(name);
         }
 
+        String patronymic = owner.getPatronymic();
         int patronymic_id = PatronymicDao.getId(patronymic);
 
         if (patronymic_id == 0) {
             patronymic_id = PatronymicDao.save(patronymic);
         }
 
+        String phoneNumber = owner.getPhoneNumber();
+
+        //todo записывать в базу остальные параметры
         String sql = "insert into owner(surname_id, name_id, patronymic_id, phone_number) values(?,?,?,?)";
 
         try (Connection co = ConnectionBuilder.getConnection();

@@ -1,5 +1,6 @@
 package app.controllers;
 
+import app.dao.device.DeviceDao;
 import app.dao.owner.OwnerDao;
 import app.utils.AutoSuggestTextField;
 import app.utils.HashtableValues;
@@ -291,6 +292,12 @@ public class NewRepairDialogController {
         owner.save();
 
         //todo gets all values from textFields and save their to database
+        DeviceDao device = new DeviceDao();
+        device.setType(tfDeviceType.getText());
+        device.setBrand(tfBrand.getText());
+        device.setModel(tfModel.getText());
+        device.setSerialNumber(tfSerialNumber.getText());
+        device.save();
         //use for this OwnerDao and DeviceDao
 
         // Пока что алгоритм таков:
