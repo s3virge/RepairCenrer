@@ -97,7 +97,7 @@ CREATE TABLE IF NOT EXISTS `repaircenter`.`owner` (
                                                     `surname_id` INT NOT NULL,
                                                     `name_id` INT NOT NULL,
                                                     `patronymic_id` INT NOT NULL,
-                                                    `telephone_number` VARCHAR(15) NOT NULL,
+                                                    `phone_number` VARCHAR(15) NOT NULL,
   PRIMARY KEY (`id`),
   INDEX `owner_name_idx` (`name_id` ASC),
   INDEX `owner_patronymic_idx` (`patronymic_id` ASC),
