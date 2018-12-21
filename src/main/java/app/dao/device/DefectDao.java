@@ -9,26 +9,25 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class BrandDao {
+public class DefectDao {
     private static final Logger logger = LogManager.getLogger(BrandDao.class);
 
-    private static final String table = "brand";
+    private static final String table = "defect";
     private static final String INSERT = "insert into " + table + " (value) value (?)";
     private static final String SELECT = "select id from " + table + " where value = ?";
 
     /**
-     * return id for brand in database or 0 if brand does not exist
-     * @param brand
-     * @return brand id. If brand does not exist return 0
+     * @param defect
+     * @return defect id. If defect does not exist return 0
      */
-    public static int getId(String brand) {
+    public static int getId(String defect) {
         logger.trace("");
 
         int id = 0;
 
         try (Connection conn = ConnectionBuilder.getConnection();
              PreparedStatement stmt = conn.prepareStatement(SELECT)){
-            stmt.setString(1, brand);
+            stmt.setString(1, defect);
             ResultSet rs = stmt.executeQuery();
 
             while (rs.next()) {
@@ -43,10 +42,10 @@ public class BrandDao {
     }
 
     /**
-     * save brand to database
-     * @param brand
+     * save defect to database
+     * @param defect
      */
-    public static int save(String brand) {
+    public static int save(String defect) {
         logger.trace("");
 
         try (Connection con = ConnectionBuilder.getConnection();
@@ -55,7 +54,7 @@ public class BrandDao {
             con.setAutoCommit(false);
 
             try {
-                stmt.setString(1, brand);
+                stmt.setString(1, defect);
                 stmt.executeUpdate();
                 con.commit();
             }
@@ -68,6 +67,6 @@ public class BrandDao {
             logger.error(ex.getMessage());
         }
 
-        return getId(brand);
+        return getId(defect);
     }
 }

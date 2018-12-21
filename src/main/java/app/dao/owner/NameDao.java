@@ -12,8 +12,9 @@ import java.sql.SQLException;
 public class NameDao {
     private static final Logger logger = LogManager.getLogger(NameDao.class);
 
-    private static final String INSERT_NAME = "insert into names (value) value (?)";
-    private static final String SELECT_NAME = "select id from names where value = ?";
+    private static final String tableName = "names";
+    private static final String INSERT_NAME = "insert into " + tableName + " (value) value (?)";
+    private static final String SELECT_NAME = "select id from " + tableName + " where value = ?";
 
     /**
      * return id for name in database or 0 if name does not exist
@@ -48,8 +49,6 @@ public class NameDao {
     public static int save(String name) {
         logger.trace("");
 
-        int result;
-
         try (Connection con = ConnectionBuilder.getConnection();
              PreparedStatement stmt = con.prepareStatement(INSERT_NAME)) {
 
@@ -69,6 +68,6 @@ public class NameDao {
             logger.error(ex.getMessage());
         }
 
-        return result = getId(name);
+        return getId(name);
     }
 }

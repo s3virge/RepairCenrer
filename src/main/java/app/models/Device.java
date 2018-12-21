@@ -7,22 +7,18 @@ public class Device {
     private String type;
     private String model;
     private String serialNumber;
-    private String problem;
+    private String defect;
+    private int ownerId;
+    private int repairId;
+    private String completeness;
+    private String appearance;
 
-    public Device(String brand, String type, String model, String serialNumber, String problem) {
-        this.brand = brand;
-        this.type = type;
-        this.model = model;
-        this.serialNumber = serialNumber;
-        this.problem = problem;
+    public int getId() {
+        return id;
     }
 
-    public Device() {
-        this.brand = "";
-        this.type = "";
-        this.model = "";
-        this.serialNumber = "";
-        this.problem = "";
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getBrand() {
@@ -57,12 +53,44 @@ public class Device {
         this.serialNumber = serialNumber;
     }
 
-    public String getProblem() {
-        return problem;
+    public String getDefect() {
+        return defect;
     }
 
-    public void setProblem(String problem) {
-        this.problem = problem;
+    public void setDefect(String defect) {
+        this.defect = defect;
+    }
+
+    public int getOwnerId() {
+        return ownerId;
+    }
+
+    public void setOwnerId(int ownerId) {
+        this.ownerId = ownerId;
+    }
+
+    public int getRepairId() {
+        return repairId;
+    }
+
+    public void setRepairId(int repairId) {
+        this.repairId = repairId;
+    }
+
+    public String getCompleteness() {
+        return completeness;
+    }
+
+    public void setCompleteness(String completeness) {
+        this.completeness = completeness;
+    }
+
+    public String getAppearance() {
+        return appearance;
+    }
+
+    public void setAppearance(String appearance) {
+        this.appearance = appearance;
     }
 
     public void print() {
@@ -70,6 +98,6 @@ public class Device {
         System.out.printf("%-15s - %s\n", "type", type);
         System.out.printf("%-15s - %s\n", "model", model);
         System.out.printf("%-15s - %s\n", "serialNumber", serialNumber);
-        System.out.printf("%-15s - %s\n", "problem", problem);
+        System.out.printf("%-15s - %s\n", "defect", defect);
     }
 }

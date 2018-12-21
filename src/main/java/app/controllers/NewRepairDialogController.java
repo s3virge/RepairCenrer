@@ -286,6 +286,7 @@ public class NewRepairDialogController {
 //        if (!isEnteredCorrectly())
 //            return;
 
+        //get from dialog information about device owner
         Owner owner = new Owner();
         owner.setSurname(tfSurname.getText());
         owner.setPatronymic(tfPatronymic.getText());
@@ -295,51 +296,19 @@ public class NewRepairDialogController {
         OwnerDao ownerDao = new OwnerDao(owner);
         ownerDao.save();
 
+        //get from dialog fields information about device
         Device device = new Device();
         device.setType(tfDeviceType.getText());
         device.setBrand(tfBrand.getText());
         device.setModel(tfModel.getText());
         device.setSerialNumber(tfSerialNumber.getText());
-
+        device.setOwnerId(owner.getId());
+        device.setDefect(tfDefect.getText());
+//        device.setRepairId(RepairDao.getId());
+        device.setCompleteness(tfCompleteness.getText());
+        device.setAppearance(tfAppearance.getText());
         DeviceDao deviceDao = new DeviceDao(device);
         deviceDao.save();
-        //use for this OwnerDao and DeviceDao
-
-        // Пока что алгоритм таков:
-        //Вставить данные в первую таблицу
-        //String sqlInsert = "INSERT INTO " + strTable + " (value) VALUE ('" + strValue + "')";
-        //Получить id первой таблицы (SELECT id FROM tbl_1 WHERE string='$string')
-        //Зная родительский id вставить данные во вторую таблицу.
-
-//        int typeId = dbGetIdPutIfAbsent(tfDeviceType);
-//        int brandId = dbGetIdPutIfAbsent(tfBrand);
-//        int modelId = dbGetIdPutIfAbsent(tfModel);
-//
-//        int completenessId = dbGetIdPutIfAbsent(tfCompleteness);
-//        int appearanceId = dbGetIdPutIfAbsent(tfAppearance);
-//        int defectId = dbGetIdPutIfAbsent(tfDefect);
-//
-//        //нужно добавить в какую то таблицу колонку для заметок
-//        //int noteId = dbGetIdPutIfAbsent(tfNote);
-//        int surnameId = dbGetIdPutIfAbsent(tfSurname);
-//        int nameId = dbGetIdPutIfAbsent(tfName);
-//        int patronymicId = dbGetIdPutIfAbsent(tfPatronymic);
-//
-//        //в таблице owner 4 колонки. Нужно все колонки заполнить данными
-//        //и записать в неё телефонный номер
-//        //int phoneId = dbGetIdPutIfAbsent(tfPhone);
-//        int ownerId = dbPutOwner(surnameId, nameId, patronymicId, tfPhone.getText());
-//
-//        if (ownerId == 0)
-//            return;
-//
-//        //нужно создать новый ремонт
-//        int repairId = dbPutRepair();
-//
-//        if (repairId == 0)
-//            return;
-//
-//        dbPutDevice( typeId, brandId, modelId, tfSerialNumber.getText(), completenessId, appearanceId, defectId, ownerId, repairId);
 
         closeDlg(actionEvent);
     }

@@ -43,7 +43,7 @@ public class MainWndController {
         // Создаём подмостки для диалогового окна.
         Stage dialogStage = new Stage();
         //подготавливаем их
-        dialogStage.setTitle("Edit Person");
+        dialogStage.setTitle("Новый ремон");
         dialogStage.initModality(Modality.WINDOW_MODAL);
         dialogStage.initOwner(new RepairCenter().getPrimaryStage());
 

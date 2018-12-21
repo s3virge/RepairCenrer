@@ -6,9 +6,9 @@ import app.models.Owner;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
+
+import static app.dao.DataBase.logger;
 
 /**
  *
@@ -31,14 +31,14 @@ public class OwnerDao {
         log.trace("");
 
         String surname = owner.getSurname();
-        int surname_id  = SurnameDao.getId(surname);
+        int surname_id = SurnameDao.getId(surname);
 
         if (surname_id == 0) {
             surname_id = SurnameDao.save(surname);
         }
 
         String name = owner.getName();
-        int name_id     = NameDao.getId(name);
+        int name_id = NameDao.getId(name);
 
         if (name_id == 0) {
             name_id = NameDao.save(name);
@@ -56,7 +56,7 @@ public class OwnerDao {
         String sql = "insert into " + tableName + "(surname_id, name_id, patronymic_id, phone_number) values(?,?,?,?)";
 
         try (Connection co = ConnectionBuilder.getConnection();
-            PreparedStatement stmt = co.prepareStatement(sql)) {
+             PreparedStatement stmt = co.prepareStatement(sql)) {
             stmt.setInt(1, surname_id);
             stmt.setInt(2, name_id);
             stmt.setInt(3, patronymic_id);
@@ -66,5 +66,36 @@ public class OwnerDao {
         catch (SQLException ex) {
             log.error(ex.getMessage(), ex);
         }
+
+        owner.setId(getId());
+    }
+
+    /**
+     * @return owner id. If owner does not exist return 0
+     * id of the owner in database by phone number or 0 if owner does not exist
+     */
+    public int getId() {
+        logger.trace("");
+
+        //todo get id of owner by more parameters. Use prepare statement
+        String sql = "select id from " + tableName + " where phone_number = " + owner.getPhoneNumber();
+//        String sql = "insert into " + tableName + " (type_id, brand_id, model_id, serial_number) values(?,?,?,?)";
+
+        int id = 0;
+
+        try (Connection conn = ConnectionBuilder.getConnection();
+             Statement stmt = conn.createStatement()) {
+
+            ResultSet rs = stmt.executeQuery(sql);
+
+            while (rs.next()) {
+                id = rs.getInt("id");
+            }
+        }
+        catch (SQLException ex) {
+            logger.error(ex.getMessage());
+        }
+
+        return id;
     }
 }

@@ -49,6 +49,7 @@ public class DeviceDao {
 
         String serialNumber = device.getSerialNumber();
 
+        //todo add остальые values
         String sql = "insert into " + tableName + " (type_id, brand_id, model_id, serial_number) values(?,?,?,?)";
 
         try (Connection co = ConnectionBuilder.getConnection();
@@ -64,6 +65,5 @@ public class DeviceDao {
             ex.printStackTrace();
         }
     }
-
 
 }

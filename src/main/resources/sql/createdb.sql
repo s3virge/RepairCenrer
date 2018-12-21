@@ -190,10 +190,10 @@ CREATE TABLE IF NOT EXISTS `repaircenter`.`status` (
 -- Table `repaircenter`.`repair`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `repaircenter`.`repair` (
-                                                     `id` INT NOT NULL AUTO_INCREMENT,
-                                                     `acceptor_id` INT NOT NULL,
-                                                     `master_id` INT NOT NULL,
-                                                     `master_comments` VARCHAR(1024) NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `acceptor_id` INT NOT NULL,
+  `master_id` INT NOT NULL,
+  `master_comments` VARCHAR(1024) NULL,
   `diagnostic_result` VARCHAR(1024) NULL,
   `repair_result` VARCHAR(450) NULL,
   `status_id` INT NOT NULL,
