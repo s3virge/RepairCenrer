@@ -17,6 +17,7 @@ public class OwnerDao {
 
     private static final Logger log = LogManager.getLogger(OwnerDao.class);
 
+    private static final String tableName = "owner";
     private Owner owner;
 
     public OwnerDao(Owner owner) {
@@ -52,8 +53,7 @@ public class OwnerDao {
 
         String phoneNumber = owner.getPhoneNumber();
 
-        //todo записывать в базу остальные параметры
-        String sql = "insert into owner(surname_id, name_id, patronymic_id, phone_number) values(?,?,?,?)";
+        String sql = "insert into " + tableName + "(surname_id, name_id, patronymic_id, phone_number) values(?,?,?,?)";
 
         try (Connection co = ConnectionBuilder.getConnection();
             PreparedStatement stmt = co.prepareStatement(sql)) {

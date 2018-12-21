@@ -17,6 +17,14 @@ public class Device {
         this.problem = problem;
     }
 
+    public Device() {
+        this.brand = "";
+        this.type = "";
+        this.model = "";
+        this.serialNumber = "";
+        this.problem = "";
+    }
+
     public String getBrand() {
         return brand;
     }
