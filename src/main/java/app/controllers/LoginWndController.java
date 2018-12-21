@@ -2,6 +2,7 @@ package app.controllers;
 
 import app.RepairCenter;
 import app.dao.UserDao;
+import app.models.LoggedInUser;
 import app.models.User;
 import app.utils.MD5Hash;
 import app.utils.MsgBox;
@@ -66,6 +67,8 @@ public class LoginWndController {
                 showLoginError();
                 return;
             }
+
+            LoggedInUser.setLoggedInUser(user);
 
             if (user.getPassword().equals(paswd)) {
                 //главное окно для разных групп пользователь буде отображаться по разному.

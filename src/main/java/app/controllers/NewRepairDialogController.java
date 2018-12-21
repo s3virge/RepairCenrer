@@ -3,6 +3,7 @@ package app.controllers;
 import app.dao.device.DeviceDao;
 import app.dao.owner.OwnerDao;
 import app.models.Device;
+import app.models.LoggedInUser;
 import app.models.Owner;
 import app.utils.AutoSuggestTextField;
 import app.utils.HashtableValues;
@@ -285,6 +286,8 @@ public class NewRepairDialogController {
         //если данные вводятся неправильно
 //        if (!isEnteredCorrectly())
 //            return;
+
+        logger.debug("Logged in user: {}", LoggedInUser.gerLoggedInUser().getLogin());
 
         //get from dialog information about device owner
         Owner owner = new Owner();
