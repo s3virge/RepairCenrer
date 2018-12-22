@@ -13,8 +13,8 @@ public abstract class CommonDao {
     private static final Logger logger = LogManager.getLogger(CommonDao.class);
 
     private String tableName;
-    private String INSERT = "insert into " + tableName + " (value) value (?)";
-    private String SELECT = "select id from " + tableName + " where value = ?";
+    private String INSERT = "insert into ?(value) value(?)";
+    private String SELECT = "select id from ? where value = ?";
 
     public CommonDao(String tableName) {
         this.tableName = tableName;
@@ -22,17 +22,20 @@ public abstract class CommonDao {
 
     /**
      * return id for name in database or 0 if name does not exist
-     * @param name
-     * @return name id. If name does not exist return 0
+     * @param selectValue
+     * @return selectValue id. If name does not exist return 0
      */
-    public int getId(String name) {
+    public int getId(String selectValue) {
         logger.trace("");
 
         int id = 0;
 
         try (Connection conn = ConnectionBuilder.getConnection();
              PreparedStatement stmt = conn.prepareStatement(SELECT)){
-            stmt.setString(1, name);
+
+            stmt.setString(1, tableName);
+            stmt.setString(2, selectValue);
+
             ResultSet rs = stmt.executeQuery();
 
             while (rs.next()) {
@@ -48,9 +51,9 @@ public abstract class CommonDao {
 
     /**
      * save name to database
-     * @param name
+     * @param insertValue
      */
-    public int save(String name) {
+    public int save(String insertValue) {
         logger.trace("");
 
         try (Connection con = ConnectionBuilder.getConnection();
@@ -59,7 +62,8 @@ public abstract class CommonDao {
             con.setAutoCommit(false);
 
             try {
-                stmt.setString(1, name);
+                stmt.setString(1, tableName);
+                stmt.setString(2, insertValue);
                 stmt.executeUpdate();
                 con.commit();
             }
@@ -72,6 +76,6 @@ public abstract class CommonDao {
             logger.error(ex.getMessage());
         }
 
-        return getId(name);
+        return getId(insertValue);
     }
 }

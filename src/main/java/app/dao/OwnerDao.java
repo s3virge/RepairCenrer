@@ -32,6 +32,7 @@ public class OwnerDao {
         String surname = owner.getSurname();
         SurnameDao surnameDao = new SurnameDao();
 
+        //todo тут вываливается исключение
         int surname_id = surnameDao.getId(surname);
 
         if (surname_id == 0) {
