@@ -2,6 +2,7 @@ package app.controllers;
 
 import app.dao.DeviceDao;
 import app.dao.OwnerDao;
+import app.dao.handbooks.repair.RepairDao;
 import app.models.Device;
 import app.models.LoggedInUser;
 import app.models.Owner;
@@ -296,8 +297,13 @@ public class NewRepairDialogController {
         owner.setName(tfName.getText());
         owner.setPhoneNumber(tfPhone.getText());
 
-        OwnerDao ownerDao = new OwnerDao(owner);
-        ownerDao.save();
+        new OwnerDao(owner).save();
+
+        //когда принимается в ремонт устройство,
+        //то создавать для него новую запись в таблице repair
+        //так будет видно сколько раз ремонтировалось устройство и что с ним делали
+        //todo create new record in repair table
+//        RepairDao
 
         //get from dialog fields information about device
         Device device = new Device();
@@ -308,10 +314,6 @@ public class NewRepairDialogController {
         device.setOwnerId(owner.getId());
         device.setDefect(tfDefect.getText());
 
-        //когда принимается в ремонт устройство,
-        //то создавать для него новую запись в таблице repair
-        //так будет видно сколько раз ремонтировалось устройство и что с ним делали
-        //todo create new record in repair table
 
 //        device.setRepairId(RepairDao.getId());
         device.setRepairId(123);
@@ -319,8 +321,7 @@ public class NewRepairDialogController {
         device.setCompleteness(tfCompleteness.getText());
         device.setAppearance(tfAppearance.getText());
 
-        DeviceDao deviceDao = new DeviceDao(device);
-        deviceDao.save();
+        new DeviceDao(device).save();
 
         closeDlg(actionEvent);
     }
