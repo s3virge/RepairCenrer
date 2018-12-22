@@ -307,8 +307,15 @@ public class NewRepairDialogController {
         device.setSerialNumber(tfSerialNumber.getText());
         device.setOwnerId(owner.getId());
         device.setDefect(tfDefect.getText());
+
+        //когда принимается в ремонт устройство,
+        //то создавать для него новую запись в таблице repair
+        //так будет видно сколько раз ремонтировалось устройство и что с ним делали
+        //todo create new record in repair table
+
 //        device.setRepairId(RepairDao.getId());
         device.setRepairId(123);
+
         device.setCompleteness(tfCompleteness.getText());
         device.setAppearance(tfAppearance.getText());
 
