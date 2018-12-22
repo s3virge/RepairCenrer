@@ -308,6 +308,7 @@ public class NewRepairDialogController {
         device.setOwnerId(owner.getId());
         device.setDefect(tfDefect.getText());
 //        device.setRepairId(RepairDao.getId());
+        device.setRepairId(123);
         device.setCompleteness(tfCompleteness.getText());
         device.setAppearance(tfAppearance.getText());
         DeviceDao deviceDao = new DeviceDao(device);
