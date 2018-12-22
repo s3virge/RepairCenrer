@@ -32,7 +32,6 @@ public class OwnerDao {
         String surname = owner.getSurname();
         SurnameDao surnameDao = new SurnameDao();
 
-        //todo тут вываливается исключение
         int surname_id = surnameDao.getId(surname);
 
         if (surname_id == 0) {
@@ -45,7 +44,7 @@ public class OwnerDao {
         int name_id = nameDao.getId(name);
 
         if (name_id == 0) {
-            name_id = nameDao.getId(name);
+            name_id = nameDao.save(name);
         }
 
         String patronymic = owner.getPatronymic();
@@ -54,7 +53,7 @@ public class OwnerDao {
         int patronymic_id = patronymicDao.getId(patronymic);
 
         if (patronymic_id == 0) {
-            patronymic_id = patronymicDao.getId(patronymic);
+            patronymic_id = patronymicDao.save(patronymic);
         }
 
         String phoneNumber = owner.getPhoneNumber();
@@ -70,7 +69,7 @@ public class OwnerDao {
             stmt.execute();
         }
         catch (SQLException ex) {
-            log.error(ex.getMessage(), ex);
+            log.error(ex.getMessage());
         }
 
         owner.setId(getId());
@@ -83,16 +82,27 @@ public class OwnerDao {
     public int getId() {
         logger.trace("");
 
-        //todo get id of owner by more parameters. Use prepare statement
-        String sql = "select id from " + tableName + " where phone_number = " + owner.getPhoneNumber();
-//        String sql = "insert into " + tableName + " (type_id, brand_id, model_id, serial_number) values(?,?,?,?)";
+        int surname_id = new SurnameDao().getId(owner.getSurname());
+        int name_id     = new NameDao().getId(owner.getName());
+        int patronymic_id = new PatronymicDao().getId(owner.getPatronymic());
+        String phone_number = owner.getPhoneNumber();
+
+        String sql = "select id from " + tableName + " where surname_id = ? " +
+                "and name_id = ? " +
+                "and patronymic_id = ? " +
+                "and phone_number = ?";
 
         int id = 0;
 
         try (Connection conn = ConnectionBuilder.getConnection();
-             Statement stmt = conn.createStatement()) {
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
 
-            ResultSet rs = stmt.executeQuery(sql);
+            stmt.setInt(1, surname_id);
+            stmt.setInt(2, name_id);
+            stmt.setInt(3, patronymic_id);
+            stmt.setString(4, phone_number);
+
+            ResultSet rs = stmt.executeQuery();
 
             while (rs.next()) {
                 id = rs.getInt("id");

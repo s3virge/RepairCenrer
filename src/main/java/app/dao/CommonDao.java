@@ -3,21 +3,20 @@ package app.dao;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 
 public abstract class CommonDao {
 
     private static final Logger logger = LogManager.getLogger(CommonDao.class);
 
     private String tableName;
-    private String INSERT = "insert into ?(value) value(?)";
-    private String SELECT = "select id from ? where value = ?";
+    private String INSERT;
+    private String SELECT;
 
     public CommonDao(String tableName) {
         this.tableName = tableName;
+        INSERT = "insert into " + tableName + "(value) value(?)";
+        SELECT = "select id from " + tableName + " where value = ?";
     }
 
     /**
@@ -33,8 +32,7 @@ public abstract class CommonDao {
         try (Connection conn = ConnectionBuilder.getConnection();
              PreparedStatement stmt = conn.prepareStatement(SELECT)){
 
-            stmt.setString(1, tableName);
-            stmt.setString(2, selectValue);
+            stmt.setString(1, selectValue);
 
             ResultSet rs = stmt.executeQuery();
 
@@ -62,14 +60,13 @@ public abstract class CommonDao {
             con.setAutoCommit(false);
 
             try {
-                stmt.setString(1, tableName);
-                stmt.setString(2, insertValue);
+                stmt.setString(1, insertValue);
                 stmt.executeUpdate();
                 con.commit();
             }
             catch (SQLException ex) {
                 con.rollback();
-                throw ex;
+//                throw ex;
             }
         }
         catch (SQLException ex) {
