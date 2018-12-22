@@ -51,7 +51,7 @@ public class DeviceDao {
 
         //todo add остальые values
         String sql = "insert into " + tableName + " (type_id, brand_id, model_id, serial_number) values(?,?,?,?)";
-it
+
         try (Connection co = ConnectionBuilder.getConnection();
              PreparedStatement stmt = co.prepareStatement(sql)) {
             stmt.setInt(1, type_id);
