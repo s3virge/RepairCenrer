@@ -1,7 +1,9 @@
-package app.dao.owner;
+package app.dao;
 
 
-import app.dao.ConnectionBuilder;
+import app.dao.handbooks.owner.NameDao;
+import app.dao.handbooks.owner.PatronymicDao;
+import app.dao.handbooks.owner.SurnameDao;
 import app.models.Owner;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -10,9 +12,6 @@ import java.sql.*;
 
 import static app.dao.DataBase.logger;
 
-/**
- *
- */
 public class OwnerDao {
 
     private static final Logger log = LogManager.getLogger(OwnerDao.class);
@@ -31,24 +30,30 @@ public class OwnerDao {
         log.trace("");
 
         String surname = owner.getSurname();
-        int surname_id = SurnameDao.getId(surname);
+        SurnameDao surnameDao = new SurnameDao();
+
+        int surname_id = surnameDao.getId(surname);
 
         if (surname_id == 0) {
-            surname_id = SurnameDao.save(surname);
+            surname_id = surnameDao.save(surname);
         }
 
         String name = owner.getName();
-        int name_id = NameDao.getId(name);
+        NameDao nameDao = new NameDao();
+
+        int name_id = nameDao.getId(name);
 
         if (name_id == 0) {
-            name_id = NameDao.save(name);
+            name_id = nameDao.getId(name);
         }
 
         String patronymic = owner.getPatronymic();
-        int patronymic_id = PatronymicDao.getId(patronymic);
+        PatronymicDao patronymicDao = new PatronymicDao();
+
+        int patronymic_id = patronymicDao.getId(patronymic);
 
         if (patronymic_id == 0) {
-            patronymic_id = PatronymicDao.save(patronymic);
+            patronymic_id = patronymicDao.getId(patronymic);
         }
 
         String phoneNumber = owner.getPhoneNumber();

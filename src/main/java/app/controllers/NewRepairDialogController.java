@@ -1,7 +1,7 @@
 package app.controllers;
 
-import app.dao.device.DeviceDao;
-import app.dao.owner.OwnerDao;
+import app.dao.DeviceDao;
+import app.dao.OwnerDao;
 import app.models.Device;
 import app.models.LoggedInUser;
 import app.models.Owner;

@@ -1,6 +1,8 @@
-package app.dao.device;
+package app.dao;
 
-import app.dao.ConnectionBuilder;
+import app.dao.handbooks.device.BrandDao;
+import app.dao.handbooks.device.ModelDao;
+import app.dao.handbooks.device.TypeDao;
 import app.models.Device;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -27,24 +29,28 @@ public class DeviceDao {
         log.trace("");
 
         String devType = device.getType();
-        int type_id  = TypeDao.getId(devType);
+        TypeDao typeDao = new TypeDao();
+
+        int type_id  = typeDao.getId(devType);
 
         if (type_id == 0) {
-            type_id = TypeDao.save(devType);
+            type_id = typeDao.getId(devType);
         }
 
         String devBrand = device.getBrand();
-        int brand_id     = BrandDao.getId(devBrand);
+        BrandDao brandDao = new BrandDao();
+        int brand_id     = brandDao.getId(devBrand);
 
         if (brand_id == 0) {
-            brand_id = BrandDao.save(devBrand);
+            brand_id = brandDao.save(devBrand);
         }
 
         String devModel = device.getModel();
-        int model_id = ModelDao.getId(devModel);
+        ModelDao modelDao = new ModelDao();
+        int model_id = modelDao.getId(devModel);
 
         if (model_id == 0) {
-            model_id = ModelDao.save(devModel);
+            model_id = modelDao.save(devModel);
         }
 
         String serialNumber = device.getSerialNumber();
