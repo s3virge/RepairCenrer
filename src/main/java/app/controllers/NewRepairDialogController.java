@@ -29,18 +29,18 @@ public class NewRepairDialogController {
 
     @FXML private Label lDeviceID;
 
-    @FXML private Label lDeviType;
-    @FXML private Label lBrand;
-    @FXML private Label lModel;
-    @FXML private Label lSerialNumber;
-    @FXML private Label lCompleteness;
-    @FXML private Label lAppearance;
-    @FXML private Label lDefect;
-    @FXML private Label lNote;
-    @FXML private Label lSurname;
-    @FXML private Label lName;
-    @FXML private Label lPatronymic;
-    @FXML private Label lPhone;
+//    @FXML private Label lDeviType;
+//    @FXML private Label lBrand;
+//    @FXML private Label lModel;
+//    @FXML private Label lSerialNumber;
+//    @FXML private Label lCompleteness;
+//    @FXML private Label lAppearance;
+//    @FXML private Label lDefect;
+//    @FXML private Label lNote;
+//    @FXML private Label lSurname;
+//    @FXML private Label lName;
+//    @FXML private Label lPatronymic;
+//    @FXML private Label lPhone;
 
     @FXML private AutoSuggestTextField tfDeviceType;
     @FXML private AutoSuggestTextField tfBrand;
@@ -291,12 +291,7 @@ public class NewRepairDialogController {
         logger.debug("Logged in user: {}", LoggedInUser.gerLoggedInUser().getLogin());
 
         //get from dialog information about device owner
-        Owner owner = new Owner();
-        owner.setSurname(tfSurname.getText());
-        owner.setPatronymic(tfPatronymic.getText());
-        owner.setName(tfName.getText());
-        owner.setPhoneNumber(tfPhone.getText());
-
+        Owner owner = gerOwner();
         new OwnerDao(owner).save();
 
         //когда принимается в ремонт устройство,
@@ -304,26 +299,37 @@ public class NewRepairDialogController {
         //так будет видно сколько раз ремонтировалось устройство и что с ним делали
         //todo create new record in repair table
 //        RepairDao
+        Device device = getDevice(owner.getId());
+        new DeviceDao(device).save();
 
+        closeDlg(actionEvent);
+    }
+
+    //todo method must ger repair id in second parameter
+    private Device getDevice(int ownerId) {
         //get from dialog fields information about device
         Device device = new Device();
         device.setType(tfDeviceType.getText());
         device.setBrand(tfBrand.getText());
         device.setModel(tfModel.getText());
         device.setSerialNumber(tfSerialNumber.getText());
-        device.setOwnerId(owner.getId());
+        device.setOwnerId(ownerId);
         device.setDefect(tfDefect.getText());
 
-
-//        device.setRepairId(RepairDao.getId());
-        device.setRepairId(123);
+        device.setRepairId(1);
 
         device.setCompleteness(tfCompleteness.getText());
         device.setAppearance(tfAppearance.getText());
+        return device;
+    }
 
-        new DeviceDao(device).save();
-
-        closeDlg(actionEvent);
+    private Owner gerOwner() {
+        Owner owner = new Owner();
+        owner.setSurname(tfSurname.getText());
+        owner.setPatronymic(tfPatronymic.getText());
+        owner.setName(tfName.getText());
+        owner.setPhoneNumber(tfPhone.getText());
+        return owner;
     }
 
 //    private int dbPutRepair() {
