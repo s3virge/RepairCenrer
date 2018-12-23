@@ -2,10 +2,11 @@ package app.controllers;
 
 import app.dao.DeviceDao;
 import app.dao.OwnerDao;
-import app.dao.handbooks.repair.RepairDao;
+import app.dao.handbooks.repair.StatusDao;
 import app.models.Device;
 import app.models.LoggedInUser;
 import app.models.Owner;
+import app.models.Repair;
 import app.utils.AutoSuggestTextField;
 import app.utils.HashtableValues;
 import app.utils.MsgBox;
@@ -18,6 +19,7 @@ import javafx.stage.Stage;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.time.LocalDateTime;
 import java.util.*;
 
 import static app.utils.MsgBox.Type.MB_ERROR;
@@ -288,11 +290,13 @@ public class NewRepairDialogController {
 //        if (!isEnteredCorrectly())
 //            return;
 
-        logger.debug("Logged in user: {}", LoggedInUser.gerLoggedInUser().getLogin());
+        logger.debug("Logged in user: {}", LoggedInUser.getLoggedInUser().getLogin());
 
         //get from dialog information about device owner
-        Owner owner = gerOwner();
+        Owner owner = getOwner();
         new OwnerDao(owner).save();
+
+        Repair repair = getRepair();
 
         //когда принимается в ремонт устройство,
         //то создавать для него новую запись в таблице repair
@@ -305,7 +309,18 @@ public class NewRepairDialogController {
         closeDlg(actionEvent);
     }
 
-    //todo method must ger repair id in second parameter
+    private Repair getRepair() {
+        Repair repair = new Repair();
+        int loggedInUserId = LoggedInUser.getLoggedInUser().getId();
+        repair.setAcceptorId(loggedInUserId);
+        repair.setMasterId(loggedInUserId);
+        repair.setStatusId(new StatusDao().getId("Оформлен"));
+        repair.setDateOfAccept(LocalDateTime.now().toString());
+
+        return repair;
+    }
+
+    //todo method must get repair id in second parameter
     private Device getDevice(int ownerId) {
         //get from dialog fields information about device
         Device device = new Device();
@@ -323,7 +338,7 @@ public class NewRepairDialogController {
         return device;
     }
 
-    private Owner gerOwner() {
+    private Owner getOwner() {
         Owner owner = new Owner();
         owner.setSurname(tfSurname.getText());
         owner.setPatronymic(tfPatronymic.getText());

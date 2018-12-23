@@ -26,15 +26,15 @@ public class DeviceDao {
     public void save() {
         log.trace("");
 
-        int type_id = getTypeId();
-        int brand_id = getBrandId();
-        int model_id = getModelId();
+        int type_id     = getTypeId();
+        int brand_id    = getBrandId();
+        int model_id    = getModelId();
         String serialNumber = device.getSerialNumber();
-        int defect_id = getDefectId();
-        int owner_id = device.getOwnerId();
-        int repair_id = device.getRepairId();
+        int defect_id   = getDefectId();
+        int owner_id    = device.getOwnerId();
+        int repair_id   = device.getRepairId();
         int completeness_id = getComgletenessId();
-        int appearance_id = getAppearanceId();
+        int appearance_id   = getAppearanceId();
 
         //todo add остальые values
         String sql = "insert into " + tableName +

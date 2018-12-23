@@ -10,7 +10,7 @@ public class LoggedInUser {
         LoggedInUser.loggedInUser = loggedInUser;
     }
 
-    public static User gerLoggedInUser() {
+    public static User getLoggedInUser() {
         return loggedInUser;
     }
 }
