@@ -2,6 +2,7 @@ package app.controllers;
 
 import app.dao.DeviceDao;
 import app.dao.OwnerDao;
+import app.dao.handbooks.repair.RepairDao;
 import app.dao.handbooks.repair.StatusDao;
 import app.models.Device;
 import app.models.LoggedInUser;
@@ -293,17 +294,13 @@ public class NewRepairDialogController {
         logger.debug("Logged in user: {}", LoggedInUser.getLoggedInUser().getLogin());
 
         //get from dialog information about device owner
-        Owner owner = getOwner();
-        new OwnerDao(owner).save();
+        new OwnerDao(getOwner()).save();
+        new RepairDao(getRepair()).save();
 
-        Repair repair = getRepair();
+        int ownerID = getOwner().getId();
+        int repairID = getRepair().getId();
 
-        //когда принимается в ремонт устройство,
-        //то создавать для него новую запись в таблице repair
-        //так будет видно сколько раз ремонтировалось устройство и что с ним делали
-        //todo create new record in repair table
-//        RepairDao
-        Device device = getDevice(owner.getId());
+        Device device = getDevice(ownerID, repairID);
         new DeviceDao(device).save();
 
         closeDlg(actionEvent);
@@ -313,15 +310,14 @@ public class NewRepairDialogController {
         Repair repair = new Repair();
         int loggedInUserId = LoggedInUser.getLoggedInUser().getId();
         repair.setAcceptorId(loggedInUserId);
+        //todo нужно гдето выбирать мастера для этого ремонта
         repair.setMasterId(loggedInUserId);
         repair.setStatusId(new StatusDao().getId("Оформлен"));
         repair.setDateOfAccept(LocalDateTime.now().toString());
-
         return repair;
     }
 
-    //todo method must get repair id in second parameter
-    private Device getDevice(int ownerId) {
+    private Device getDevice(int ownerId, int repairId) {
         //get from dialog fields information about device
         Device device = new Device();
         device.setType(tfDeviceType.getText());
@@ -330,9 +326,7 @@ public class NewRepairDialogController {
         device.setSerialNumber(tfSerialNumber.getText());
         device.setOwnerId(ownerId);
         device.setDefect(tfDefect.getText());
-
-        device.setRepairId(1);
-
+        device.setRepairId(repairId);
         device.setCompleteness(tfCompleteness.getText());
         device.setAppearance(tfAppearance.getText());
         return device;
