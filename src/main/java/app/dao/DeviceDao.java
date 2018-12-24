@@ -4,9 +4,8 @@ import app.dao.handbooks.device.*;
 import app.models.Device;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+
+import java.sql.*;
 
 //Data Access Object for device
 public class DeviceDao {
@@ -23,9 +22,10 @@ public class DeviceDao {
     /**
      * save to database information about owner
      */
-    public void save() {
+    public int save() {
         log.trace("");
 
+        int id = 0;
         int type_id     = getTypeId();
         int brand_id    = getBrandId();
         int model_id    = getModelId();
@@ -36,14 +36,13 @@ public class DeviceDao {
         int completeness_id = getComgletenessId();
         int appearance_id   = getAppearanceId();
 
-        //todo add остальые values
         String sql = "insert into " + tableName +
                 "(type_id, brand_id, model_id, serial_number, defect_id," +
                 " owner_id, repair_id, completeness_id, appearance_id) " +
                 "values(?,?,?,?,?,?,?,?,?)";
 
         try (Connection co = ConnectionBuilder.getConnection();
-             PreparedStatement stmt = co.prepareStatement(sql)) {
+             PreparedStatement stmt = co.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
             stmt.setInt(1, type_id);
             stmt.setInt(2, brand_id);
             stmt.setInt(3, model_id);
@@ -55,10 +54,20 @@ public class DeviceDao {
             stmt.setInt(9, appearance_id);
 
             stmt.execute();
+
+            //Retrieves any auto-generated keys created as a result of executing this Statement object.
+            ResultSet rs = stmt.getGeneratedKeys();
+
+            if(rs.next()){
+                id = rs.getInt(1);
+            }
+
         }
         catch (SQLException ex) {
             log.error(ex.getMessage());
         }
+
+        return id;
     }
 
     private int getModelId() {

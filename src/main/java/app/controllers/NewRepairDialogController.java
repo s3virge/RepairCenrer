@@ -291,22 +291,33 @@ public class NewRepairDialogController {
 //        if (!isEnteredCorrectly())
 //            return;
 
-        logger.debug("Logged in user: {}", LoggedInUser.getLoggedInUser().getLogin());
+//        logger.debug("Logged in user: {}", LoggedInUser.getLoggedInUser().getLogin());
 
         //get from dialog information about device owner
-        new OwnerDao(getOwner()).save();
-        new RepairDao(getRepair()).save();
+        Owner owner = createOwner();
 
-        int ownerID = getOwner().getId();
-        int repairID = getRepair().getId();
+        // check if owner exist
+        OwnerDao ownerDao = new OwnerDao(owner);
+        int ownerID = ownerDao.getId();
 
-        Device device = getDevice(ownerID, repairID);
+        if (ownerID == 0) {
+            ownerID = ownerDao.save();
+        }
+
+        owner.setId(ownerID);
+
+        Repair repair = createRepair();
+        int repairID = new RepairDao(repair).save();
+
+//        logger.debug("owner id: {}, repair id: {}", ownerID, repairID);
+
+        Device device = createDevice(ownerID, repairID);
         new DeviceDao(device).save();
 
         closeDlg(actionEvent);
     }
 
-    private Repair getRepair() {
+    private Repair createRepair() {
         Repair repair = new Repair();
         int loggedInUserId = LoggedInUser.getLoggedInUser().getId();
         repair.setAcceptorId(loggedInUserId);
@@ -317,7 +328,7 @@ public class NewRepairDialogController {
         return repair;
     }
 
-    private Device getDevice(int ownerId, int repairId) {
+    private Device createDevice(int ownerId, int repairId) {
         //get from dialog fields information about device
         Device device = new Device();
         device.setType(tfDeviceType.getText());
@@ -332,7 +343,7 @@ public class NewRepairDialogController {
         return device;
     }
 
-    private Owner getOwner() {
+    private Owner createOwner() {
         Owner owner = new Owner();
         owner.setSurname(tfSurname.getText());
         owner.setPatronymic(tfPatronymic.getText());

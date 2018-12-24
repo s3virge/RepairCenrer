@@ -25,9 +25,12 @@ public class OwnerDao {
 
     /**
      * save to database information about owner
+     * @return id of created owner
      */
-    public void save() {
+    public int save() {
         log.trace("");
+
+        int id = 0;
 
         String surname = owner.getSurname();
         SurnameDao surnameDao = new SurnameDao();
@@ -61,18 +64,25 @@ public class OwnerDao {
         String sql = "insert into " + tableName + "(surname_id, name_id, patronymic_id, phone_number) values(?,?,?,?)";
 
         try (Connection co = ConnectionBuilder.getConnection();
-             PreparedStatement stmt = co.prepareStatement(sql)) {
+             PreparedStatement stmt = co.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
             stmt.setInt(1, surname_id);
             stmt.setInt(2, name_id);
             stmt.setInt(3, patronymic_id);
             stmt.setString(4, phoneNumber);
             stmt.execute();
+
+            //Retrieves any auto-generated keys created as a result of executing this Statement object.
+            ResultSet rs = stmt.getGeneratedKeys();
+
+            if(rs.next()){
+                id = rs.getInt(1);
+            }
         }
         catch (SQLException ex) {
             log.error(ex.getMessage());
         }
 
-        owner.setId(getId());
+        return id;
     }
 
     /**
