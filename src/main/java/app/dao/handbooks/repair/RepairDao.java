@@ -40,26 +40,32 @@ public class RepairDao {
         String repair_result;
         int status_id = repair.getStatusId();
 
-        //todo лучше создать два отдельных столбца для даты и времени
-        //тогда можно будет выполнять поиск по дате
         //Get current date time
         LocalDateTime now = LocalDateTime.now();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
-        String formatDateTime = now.format(formatter);
 
-        String date_of_accept = formatDateTime;
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        String formatDate = now.format(formatter);
 
-        String date_of_give_out ;
+        formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
+        String formatTime = now.format(formatter);
 
-        String sql = "insert into " + tableName + "(acceptor_id, master_id, status_id, date_of_accept)" +
-                " values(?,?,?,?)";
+        String date_of_receipt = formatDate;
+        String time_of_receipt = formatTime;
+
+//        log.debug("date of receipt: {} time of receipt: {}", date_of_receipt, time_of_receipt);
+
+        String sql = "insert into " + tableName + "(acceptor_id, master_id, status_id, " +
+                "date_of_receipt, time_of_receipt)" +
+                " values(?,?,?," +
+                "?,?)";
 
         try (Connection co = ConnectionBuilder.getConnection();
              PreparedStatement stmt = co.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
             stmt.setInt(1, acceptor_id);
             stmt.setInt(2, master_id);
             stmt.setInt(3, status_id);
-            stmt.setString(4, date_of_accept);
+            stmt.setString(4, date_of_receipt);
+            stmt.setString(5, time_of_receipt);
             stmt.execute();
 
             //Retrieves any auto-generated keys created as a result of executing this Statement object.

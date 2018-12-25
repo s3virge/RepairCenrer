@@ -136,4 +136,24 @@ public class DeviceDao {
         return appearance_id;
     }
 
+    public static int getMaxId() {
+        int maxId = 0;
+
+        String sql = "Select max(id) as id from " + tableName;
+
+        try (Connection conn = ConnectionBuilder.getConnection();
+             Statement stmt = conn.createStatement()) {
+
+            ResultSet rs = stmt.executeQuery(sql);
+
+            rs.next();
+
+            maxId = rs.getInt("id");
+        }
+        catch (SQLException e) {
+            log.error(e.getMessage());
+        }
+        return maxId;
+    }
+
 }

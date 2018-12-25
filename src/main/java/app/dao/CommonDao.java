@@ -25,7 +25,7 @@ public abstract class CommonDao {
      * @return selectValue id. If name does not exist return 0
      */
     public int getId(String selectValue) {
-        logger.trace("");
+//        logger.trace("");
 
         int id = 0;
 
@@ -52,7 +52,7 @@ public abstract class CommonDao {
      * @param insertValue
      */
     public int save(String insertValue) {
-        logger.trace("");
+//        logger.trace("");
 
         try (Connection con = ConnectionBuilder.getConnection();
              PreparedStatement stmt = con.prepareStatement(INSERT)) {
