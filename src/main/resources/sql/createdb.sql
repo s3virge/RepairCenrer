@@ -265,6 +265,7 @@ CREATE TABLE IF NOT EXISTS `repaircenter`.`device` (
   `repair_id` INT NOT NULL,
   `completeness_id` INT NOT NULL,
   `appearance_id` INT NOT NULL,
+  `note` VARCHAR(2000) NULL,
   PRIMARY KEY (`id`),
   INDEX `owner_idx` (`owner_id` ASC),
   INDEX `brand_idx` (`brand_id` ASC),
