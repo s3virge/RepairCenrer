@@ -10,6 +10,7 @@ import org.apache.logging.log4j.Logger;
 
 import java.sql.*;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 import static app.dao.DataBase.logger;
 
@@ -38,8 +39,16 @@ public class RepairDao {
         String diagnostic_result;
         String repair_result;
         int status_id = repair.getStatusId();
-        //todo format date and time
-        String date_of_accept = LocalDateTime.now().toString();
+
+        //todo лучше создать два отдельных столбца для даты и времени
+        //тогда можно будет выполнять поиск по дате
+        //Get current date time
+        LocalDateTime now = LocalDateTime.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
+        String formatDateTime = now.format(formatter);
+
+        String date_of_accept = formatDateTime;
+
         String date_of_give_out ;
 
         String sql = "insert into " + tableName + "(acceptor_id, master_id, status_id, date_of_accept)" +
