@@ -1,6 +1,6 @@
 package app.dao;
 
-import app.config.Config;
+import app.dao.config.Config;
 import app.utils.ScriptRunner;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -14,9 +14,6 @@ import java.nio.file.Paths;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.List;
-
-import java.util.stream.Collectors;
 
 public class DataBase {
     public static final Logger logger = LogManager.getLogger(DataBase.class);

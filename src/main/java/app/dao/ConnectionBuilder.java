@@ -1,6 +1,6 @@
 package app.dao;
 
-import app.config.Config;
+import app.dao.config.Config;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
