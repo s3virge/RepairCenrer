@@ -35,11 +35,12 @@ public class DeviceDao {
         int repair_id   = device.getRepairId();
         int completeness_id = getComgletenessId();
         int appearance_id   = getAppearanceId();
+        String note = device.getNote();
 
         String sql = "insert into " + tableName +
                 "(type_id, brand_id, model_id, serial_number, defect_id," +
-                " owner_id, repair_id, completeness_id, appearance_id) " +
-                "values(?,?,?,?,?,?,?,?,?)";
+                " owner_id, repair_id, completeness_id, appearance_id, note) " +
+                "values(?,?,?,?,?,?,?,?,?,?)";
 
         try (Connection co = ConnectionBuilder.getConnection();
              PreparedStatement stmt = co.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
@@ -52,6 +53,7 @@ public class DeviceDao {
             stmt.setInt(7, repair_id);
             stmt.setInt(8, completeness_id);
             stmt.setInt(9, appearance_id);
+            stmt.setString(10, note);
 
             stmt.execute();
 

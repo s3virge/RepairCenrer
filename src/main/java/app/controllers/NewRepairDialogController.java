@@ -186,6 +186,7 @@ public class NewRepairDialogController {
         device.setRepairId(repairId);
         device.setCompleteness(tfCompleteness.getText());
         device.setAppearance(tfAppearance.getText());
+        device.setNote(tfNote.getText());
         return device;
     }
 
