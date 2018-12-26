@@ -2,6 +2,9 @@ package app.controllers;
 
 import app.dao.DeviceDao;
 import app.dao.OwnerDao;
+import app.dao.handbooks.device.BrandDao;
+import app.dao.handbooks.device.ModelDao;
+import app.dao.handbooks.device.TypeDao;
 import app.dao.handbooks.repair.RepairDao;
 import app.dao.handbooks.repair.StatusDao;
 import app.models.Device;
@@ -18,7 +21,11 @@ import javafx.stage.Stage;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 
 
 public class NewRepairDialogController {
@@ -64,22 +71,26 @@ public class NewRepairDialogController {
 
     @FXML
     private void initialize() {
-//        setTestData();
+        setTestData();
 //
        setNewDeviceNumber();
-       //todo get suggestions from database for AutoSuggestTextField
+
 
 //        fillHashTable();
-//        getEntries();
+        getSuggestions();
+    }
+
+    /**
+     * gets suggestions for all text fields
+     */
+    private void getSuggestions() {
+        //todo get suggestions from database for AutoSuggestTextField
+        new TypeDao().getEntries(tfDeviceType);
+        new BrandDao().getEntries(tfBrand);
+        new ModelDao().getEntries(tfModel);
     }
 
     private void setTestData() {
-        tfSurname.setText("Кобзарь");
-        tfName.setText("Виталий");
-        tfPatronymic.setText("Владимирович");
-        tfPhone.setText("050-683-12-26");
-
-//        lDeviceID.setText("000001");
         tfDeviceType.setText("Ноутбук");
         tfBrand.setText("Asus");
         tfModel.setText("X550");
@@ -87,6 +98,11 @@ public class NewRepairDialogController {
         tfAppearance.setText("Бывший в упротреблении");
         tfDefect.setText("Не включается");
         tfSerialNumber.setText("123abc#456");
+
+        tfSurname.setText("Кобзарь");
+        tfName.setText("Виталий");
+        tfPatronymic.setText("Владимирович");
+        tfPhone.setText("050-683-12-26");
     }
 
     private void setNewDeviceNumber() {
@@ -100,43 +116,6 @@ public class NewRepairDialogController {
         Stage stage = (Stage) source.getScene().getWindow();
         stage.close();
     }
-
-//    @FXML
-//    private void onBtnAdd(ActionEvent actionEvent) {
-//        Button clickedBtn = (Button) actionEvent.getSource();
-//
-//        //Object source = actionEvent.getSource();
-//        //
-//        //        if(!(source instanceof Button)){
-//        //            return;
-//        //        }
-//
-//        switch(clickedBtn.getId()){
-//            case "btnAddDeviceType":
-////                makeDataBaseRecord(tfDeviceType, "devicetype");
-//                break;
-//
-//            case "btnAddBrand":
-////                makeDataBaseRecord(tfBrand, "brand");
-//                break;
-//
-//            case "btnAddModel":
-////                makeDataBaseRecord(tfModel, "devicemodel");
-//                break;
-//
-//            case "btnAddCompleteness":
-////                makeDataBaseRecord(tfCompleteness, "completeness");
-//                break;
-//
-//            case "btnAddAppearance":
-////                makeDataBaseRecord(tfAppearance, "appearance");
-//                break;
-//
-//            case "btnAddDefect":
-////                makeDataBaseRecord(tfModel, "defect");
-//                break;
-//        }
-//    }
 
     @FXML
     private void onBtnOk(ActionEvent actionEvent) {
