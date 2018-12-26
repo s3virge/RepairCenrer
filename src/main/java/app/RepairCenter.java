@@ -41,7 +41,7 @@ public class RepairCenter extends Application {
         logger.trace("");
 
         Parent layout = null;
-        String sceneFile = "/loginWindow/LoginWnd.fxml";
+        String sceneFile = "/view/loginWindow/LoginWnd.fxml";
         FXMLLoader fxmlLoader = new FXMLLoader();
 
         try {

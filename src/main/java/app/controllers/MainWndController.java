@@ -28,7 +28,7 @@ public class MainWndController {
         FXMLLoader loader = new FXMLLoader();
         //Sets the location used to resolve relative path attribute values.
         //getResource - Finds a resource with a given name.
-        URL resource = getClass().getResource("/dialogs/NewRepairDlg.fxml");
+        URL resource = getClass().getResource("/view/dialogs/NewRepairDlg.fxml");
         loader.setLocation(resource);
 
         AnchorPane repairDlgLayout = null;
