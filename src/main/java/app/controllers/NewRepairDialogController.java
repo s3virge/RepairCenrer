@@ -48,10 +48,14 @@ public class NewRepairDialogController {
     @FXML private AutoSuggestTextField tfAppearance;
     @FXML private AutoSuggestTextField tfDefect;
     @FXML private AutoSuggestTextField tfNote;
+
+    //todo add opportunity to select master
+
+    @FXML private AutoSuggestTextField tfPhone;
     @FXML private AutoSuggestTextField tfSurname;
     @FXML private AutoSuggestTextField tfName;
     @FXML private AutoSuggestTextField tfPatronymic;
-    @FXML private AutoSuggestTextField tfPhone;
+
 
     /**
      * for store all linked values in one place
@@ -60,9 +64,11 @@ public class NewRepairDialogController {
 
     @FXML
     private void initialize() {
-        setTestData();
+//        setTestData();
 //
        setNewDeviceNumber();
+       //todo get suggestions from database for AutoSuggestTextField
+
 //        fillHashTable();
 //        getEntries();
     }
@@ -95,42 +101,42 @@ public class NewRepairDialogController {
         stage.close();
     }
 
-    @FXML
-    private void onBtnAdd(ActionEvent actionEvent) {
-        Button clickedBtn = (Button) actionEvent.getSource();
-
-        //Object source = actionEvent.getSource();
-        //
-        //        if(!(source instanceof Button)){
-        //            return;
-        //        }
-
-        switch(clickedBtn.getId()){
-            case "btnAddDeviceType":
-//                makeDataBaseRecord(tfDeviceType, "devicetype");
-                break;
-
-            case "btnAddBrand":
-//                makeDataBaseRecord(tfBrand, "brand");
-                break;
-
-            case "btnAddModel":
-//                makeDataBaseRecord(tfModel, "devicemodel");
-                break;
-
-            case "btnAddCompleteness":
-//                makeDataBaseRecord(tfCompleteness, "completeness");
-                break;
-
-            case "btnAddAppearance":
-//                makeDataBaseRecord(tfAppearance, "appearance");
-                break;
-
-            case "btnAddDefect":
-//                makeDataBaseRecord(tfModel, "defect");
-                break;
-        }
-    }
+//    @FXML
+//    private void onBtnAdd(ActionEvent actionEvent) {
+//        Button clickedBtn = (Button) actionEvent.getSource();
+//
+//        //Object source = actionEvent.getSource();
+//        //
+//        //        if(!(source instanceof Button)){
+//        //            return;
+//        //        }
+//
+//        switch(clickedBtn.getId()){
+//            case "btnAddDeviceType":
+////                makeDataBaseRecord(tfDeviceType, "devicetype");
+//                break;
+//
+//            case "btnAddBrand":
+////                makeDataBaseRecord(tfBrand, "brand");
+//                break;
+//
+//            case "btnAddModel":
+////                makeDataBaseRecord(tfModel, "devicemodel");
+//                break;
+//
+//            case "btnAddCompleteness":
+////                makeDataBaseRecord(tfCompleteness, "completeness");
+//                break;
+//
+//            case "btnAddAppearance":
+////                makeDataBaseRecord(tfAppearance, "appearance");
+//                break;
+//
+//            case "btnAddDefect":
+////                makeDataBaseRecord(tfModel, "defect");
+//                break;
+//        }
+//    }
 
     @FXML
     private void onBtnOk(ActionEvent actionEvent) {

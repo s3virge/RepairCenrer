@@ -13,6 +13,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -129,10 +130,13 @@ public class LoginWndController {
             logger.error(ex.getMessage());
         }
 
+        int width = (int) Screen.getPrimary().getBounds().getWidth();
+        int height = (int) Screen.getPrimary().getBounds().getHeight();
+
         stage.setTitle("A simple database of the service center");
-        stage.setScene(new Scene(mainWndLayout));
+        stage.setScene(new Scene(mainWndLayout, width, height));
         stage.centerOnScreen();
-        //mainWindow.setFullScreen(true);
+        stage.setResizable(true);
         stage.show();
     }
 
