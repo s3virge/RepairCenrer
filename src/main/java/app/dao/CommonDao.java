@@ -1,9 +1,11 @@
 package app.dao;
 
+import app.utils.AutoSuggestTextField;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.sql.*;
+import java.util.ArrayList;
 
 public abstract class CommonDao {
 
@@ -74,5 +76,30 @@ public abstract class CommonDao {
         }
 
         return getId(insertValue);
+    }
+
+    /**
+     * get suggestions for auto suggest text fields
+     * @param asTextField - AutoSuggestTextField object
+     */
+    public void getEntries (AutoSuggestTextField asTextField) {
+
+        ArrayList<String> alEntries = new ArrayList<>();
+
+        try (Connection conn = ConnectionBuilder.getConnection();
+            Statement stat = conn.createStatement()) {
+
+            ResultSet resultSet = stat.executeQuery("SELECT * FROM " + tableName);
+
+            while (resultSet.next()) {
+                alEntries.add(resultSet.getString("value"));
+            }
+        }
+        catch (SQLException sqlEx) {
+            logger.error(sqlEx.getMessage());
+        }
+
+        //заполнить выпадающий список подсказок
+        asTextField.getEntries().addAll(alEntries);
     }
 }
