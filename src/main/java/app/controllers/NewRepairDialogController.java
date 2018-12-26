@@ -2,9 +2,10 @@ package app.controllers;
 
 import app.dao.DeviceDao;
 import app.dao.OwnerDao;
-import app.dao.handbooks.device.BrandDao;
-import app.dao.handbooks.device.ModelDao;
-import app.dao.handbooks.device.TypeDao;
+import app.dao.handbooks.device.*;
+import app.dao.handbooks.owner.NameDao;
+import app.dao.handbooks.owner.PatronymicDao;
+import app.dao.handbooks.owner.SurnameDao;
 import app.dao.handbooks.repair.RepairDao;
 import app.dao.handbooks.repair.StatusDao;
 import app.models.Device;
@@ -15,17 +16,11 @@ import app.utils.AutoSuggestTextField;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 
 
 public class NewRepairDialogController {
@@ -33,20 +28,6 @@ public class NewRepairDialogController {
     private static final Logger logger = LogManager.getLogger(NewRepairDialogController.class);
 
     @FXML private Label lDeviceID;
-
-//    @FXML private Label lDeviType;
-//    @FXML private Label lBrand;
-//    @FXML private Label lModel;
-//    @FXML private Label lSerialNumber;
-//    @FXML private Label lCompleteness;
-//    @FXML private Label lAppearance;
-//    @FXML private Label lDefect;
-//    @FXML private Label lNote;
-//    @FXML private Label lSurname;
-//    @FXML private Label lName;
-//    @FXML private Label lPatronymic;
-//    @FXML private Label lPhone;
-
     @FXML private AutoSuggestTextField tfDeviceType;
     @FXML private AutoSuggestTextField tfBrand;
     @FXML private AutoSuggestTextField tfModel;
@@ -63,20 +44,10 @@ public class NewRepairDialogController {
     @FXML private AutoSuggestTextField tfName;
     @FXML private AutoSuggestTextField tfPatronymic;
 
-
-    /**
-     * for store all linked values in one place
-     */
-//    private Hashtable<AutoSuggestTextField, HashtableValues> htFields = new Hashtable<>();
-
     @FXML
     private void initialize() {
         setTestData();
-//
        setNewDeviceNumber();
-
-
-//        fillHashTable();
         getSuggestions();
     }
 
@@ -84,10 +55,16 @@ public class NewRepairDialogController {
      * gets suggestions for all text fields
      */
     private void getSuggestions() {
-        //todo get suggestions from database for AutoSuggestTextField
         new TypeDao().getEntries(tfDeviceType);
         new BrandDao().getEntries(tfBrand);
         new ModelDao().getEntries(tfModel);
+        new CompletenessDao().getEntries(tfCompleteness);
+        new AppearanceDao().getEntries(tfAppearance);
+        new DefectDao().getEntries(tfDefect);
+
+        new SurnameDao().getEntries(tfSurname);
+        new NameDao().getEntries(tfName);
+        new PatronymicDao().getEntries(tfPatronymic);
     }
 
     private void setTestData() {
