@@ -55,4 +55,42 @@ public class MainWndController {
         // Отображаем диалоговое окно и ждём, пока пользователь его не закроет
         dialogStage.showAndWait();
     }
+
+    @FXML
+    private void createUser() {
+        logger.trace("");
+
+
+        // Загружаем fxml-файл и создаём новую сцену
+        // для всплывающего диалогового окна.
+        FXMLLoader loader = new FXMLLoader();
+        //Sets the location used to resolve relative path attribute values.
+        //getResource - Finds a resource with a given name.
+        URL resource = getClass().getResource("/view/dialogs/UserDlg.fxml");
+        loader.setLocation(resource);
+
+        AnchorPane creareUserDlgLayout = null;
+
+        try {
+            creareUserDlgLayout = loader.load();
+        } catch (IOException e) {
+            e.printStackTrace();
+            logger.error(e);
+        }
+
+        // Создаём подмостки для диалогового окна.
+        Stage dialogStage = new Stage();
+        //подготавливаем их
+        dialogStage.setTitle("Добавить пользователя");
+        dialogStage.initModality(Modality.WINDOW_MODAL);
+        dialogStage.initOwner(new RepairCenter().getPrimaryStage());
+
+        //расставляем декорации на сцене согласно плану
+        Scene scene = new Scene(creareUserDlgLayout);
+        dialogStage.setScene(scene);
+        dialogStage.setResizable(false);
+
+        // Отображаем диалоговое окно и ждём, пока пользователь его не закроет
+        dialogStage.showAndWait();
+    }
 }

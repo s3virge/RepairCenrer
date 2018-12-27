@@ -20,7 +20,6 @@ import javafx.stage.Stage;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import java.time.LocalDateTime;
-import java.util.Iterator;
 import java.util.List;
 
 
