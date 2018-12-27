@@ -2,16 +2,14 @@ package app.controllers;
 
 import app.dao.DeviceDao;
 import app.dao.OwnerDao;
+import app.dao.UserDao;
 import app.dao.handbooks.device.*;
 import app.dao.handbooks.owner.NameDao;
 import app.dao.handbooks.owner.PatronymicDao;
 import app.dao.handbooks.owner.SurnameDao;
 import app.dao.handbooks.repair.RepairDao;
 import app.dao.handbooks.repair.StatusDao;
-import app.models.Device;
-import app.models.LoggedInUser;
-import app.models.Owner;
-import app.models.Repair;
+import app.models.*;
 import app.utils.AutoSuggestTextField;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -22,6 +20,8 @@ import javafx.stage.Stage;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import java.time.LocalDateTime;
+import java.util.Iterator;
+import java.util.List;
 
 
 public class NewRepairDialogController {
@@ -55,11 +55,17 @@ public class NewRepairDialogController {
     }
 
     private void getMasters() {
+        logger.trace("");
         //разные мастера ремонтируют разные устройства
         //нужно знать тип устройства которое принимается
+
         //получить из базы всех мастеров который ремонтируют указанные типы устройств
-        //добавить мастеров в ComboBox cbMasters
-        cbMaster.getItems().addAll("A","B","C","D","E");
+        List<User> masters = UserDao.getListOfMasters();
+
+        for (User u : masters) {
+            String fio = String.format("%s %s %s", u.getSurname(), u.getName(), u.getPatronymic());
+            cbMaster.getItems().add(fio);
+        }
     }
 
     /**

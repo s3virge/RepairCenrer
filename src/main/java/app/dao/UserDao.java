@@ -5,6 +5,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.sql.*;
+import java.util.Vector;
 
 /**
  * класс будет отвечать за работу с данными позьзователя
@@ -61,11 +62,13 @@ public class UserDao {
     /**
      * @return list of masters
      */
-    public User getListOfMasters() {
+    public static Vector<User> getListOfMasters() {
         logger.trace("");
 
-        final String SELECT_МASTER = "SELECT * FROM user where user_group.id = 3";
+        final String SELECT_МASTER = "SELECT * FROM user where user_group = 3";
+//        final String SELECT_МASTER = "SELECT * FROM user where user_group = 1";
 
+        Vector<User> listOfMasters = new Vector<>();
         User user = new User();
 
         try (Connection co = ConnectionBuilder.getConnection();
@@ -74,17 +77,19 @@ public class UserDao {
             while (result.next()) {
                 user.setId(result.getInt("id"));
                 user.setLogin(result.getString("login"));
-//                user.setPassword(result.getString("password"));
+                user.setPassword(result.getString("user_group"));
                 user.setSurname(result.getString("surname"));
                 user.setName(result.getString("name"));
                 user.setPatronymic(result.getString("patronymic"));
+
+                listOfMasters.add(user);
             }
         }
         catch (SQLException sex) {
             logger.error(sex.getMessage());
         }
 
-        return user;
+        return listOfMasters;
     }
 
 }
