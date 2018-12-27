@@ -58,7 +58,6 @@ public class NewRepairDialogController {
         logger.trace("");
         //разные мастера ремонтируют разные устройства
         //нужно знать тип устройства которое принимается
-
         //получить из базы всех мастеров который ремонтируют указанные типы устройств
         List<User> masters = UserDao.getListOfMasters();
 
@@ -147,6 +146,14 @@ public class NewRepairDialogController {
         int loggedInUserId = LoggedInUser.getLoggedInUser().getId();
         repair.setAcceptorId(loggedInUserId);
         //todo Получить id мастера для этого ремонта
+        //получить текст из cbMaster
+        //распарсить его на фамилию имя отчество
+        //получить id из справочника
+        //в UserDao есть getByLogin
+        //Нужно знать логин мастера
+
+        //https://stackoverflow.com/questions/41634789/javafx-combobox-display-text-but-return-id-on-selection
+
         repair.setMasterId(loggedInUserId);
         repair.setStatusId(new StatusDao().getId("Оформлен"));
         repair.setDateOfAccept(LocalDateTime.now().toString());
