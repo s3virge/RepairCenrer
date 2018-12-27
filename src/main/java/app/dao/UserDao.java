@@ -13,9 +13,6 @@ import java.util.Vector;
 public class UserDao {
     private static final Logger logger = LogManager.getLogger(UserDao.class);
 
-    private static final String INSERT_USER = "";
-
-
     private Connection getConnection() throws SQLException {
         return ConnectionBuilder.getConnection();
     }
@@ -58,6 +55,30 @@ public class UserDao {
         return user;
     }
 
+    public static int getIdByFullName(String fullName) {
+        logger.trace("");
+
+        String splitFullName[] = fullName.split(" ");
+
+        int id = 0;
+
+        final String select_fullname_id = String.format("select id from user " +
+                        "where surname = '%s' and name = '%s' and patronymic = '%s'",
+                splitFullName[0], splitFullName[1], splitFullName[2]);
+
+        try (Connection dbConn = ConnectionBuilder.getConnection();
+             Statement statement = dbConn.createStatement()) {
+            ResultSet rs = statement.executeQuery(select_fullname_id);
+            while (rs.next()) {
+                id = rs.getInt("id");
+            }
+        }
+        catch (SQLException sEx) {
+            logger.error(sEx.getMessage());
+        }
+
+        return id;
+    }
 
     /**
      * @return list of masters
@@ -91,5 +112,7 @@ public class UserDao {
 
         return listOfMasters;
     }
+
+
 
 }
