@@ -47,7 +47,7 @@ public class NewRepairDialogController {
     @FXML
     private void initialize() {
         setTestData();
-       setNewDeviceNumber();
+        setNewDeviceNumber();
         getSuggestions();
     }
 
