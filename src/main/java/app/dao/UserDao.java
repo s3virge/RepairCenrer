@@ -64,7 +64,7 @@ public class UserDao {
     public User getListOfMasters() {
         logger.trace("");
 
-        final String SELECT_МASTER = "SELECT * FROM user where user_group.id=3";
+        final String SELECT_МASTER = "SELECT * FROM user where user_group.id = 3";
 
         User user = new User();
 
@@ -75,13 +75,16 @@ public class UserDao {
                 user.setId(result.getInt("id"));
                 user.setLogin(result.getString("login"));
 //                user.setPassword(result.getString("password"));
-                //todo fill user fields
-                user.setSurname();
+                user.setSurname(result.getString("surname"));
+                user.setName(result.getString("name"));
+                user.setPatronymic(result.getString("patronymic"));
             }
         }
         catch (SQLException sex) {
             logger.error(sex.getMessage());
         }
+
+        return user;
     }
 
 }
