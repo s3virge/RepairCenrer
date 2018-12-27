@@ -146,7 +146,7 @@ public class NewRepairDialogController {
         Repair repair = new Repair();
         int loggedInUserId = LoggedInUser.getLoggedInUser().getId();
         repair.setAcceptorId(loggedInUserId);
-        //todo нужно гдето выбирать мастера для этого ремонта
+        //todo Получить id мастера для этого ремонта
         repair.setMasterId(loggedInUserId);
         repair.setStatusId(new StatusDao().getId("Оформлен"));
         repair.setDateOfAccept(LocalDateTime.now().toString());
