@@ -118,7 +118,7 @@
                       <AutoSuggestTextField fx:id="tfAppearance" GridPane.columnIndex="1" GridPane.rowIndex="5" />
                       <AutoSuggestTextField fx:id="tfDefect" GridPane.columnIndex="1" GridPane.rowIndex="6" />
                       <AutoSuggestTextField fx:id="tfNote" GridPane.columnIndex="1" GridPane.rowIndex="7" />
-                  <ComboBox prefHeight="26.0" prefWidth="302.0" GridPane.columnIndex="1" GridPane.rowIndex="8" />
+                  <ComboBox fx:id="cbMaster" prefHeight="26.0" prefWidth="302.0" GridPane.columnIndex="1" GridPane.rowIndex="8" />
                   </children>
               </GridPane>
          </children>

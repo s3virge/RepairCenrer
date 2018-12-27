@@ -16,6 +16,7 @@ import app.utils.AutoSuggestTextField;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
 import org.apache.logging.log4j.LogManager;
@@ -37,7 +38,7 @@ public class NewRepairDialogController {
     @FXML private AutoSuggestTextField tfDefect;
     @FXML private AutoSuggestTextField tfNote;
 
-    //todo add opportunity to select master
+    @FXML private ComboBox cbMaster;
 
     @FXML private AutoSuggestTextField tfPhone;
     @FXML private AutoSuggestTextField tfSurname;
@@ -49,6 +50,16 @@ public class NewRepairDialogController {
         setTestData();
         setNewDeviceNumber();
         getSuggestions();
+
+        getMasters();
+    }
+
+    private void getMasters() {
+        //разные мастера ремонтируют разные устройства
+        //нужно знать тип устройства
+        //получить из базы всех мастеров который ремонтируют указанные типы устройств
+        //добавить мастеров в ComboBox cbMasters
+        cbMaster.getItems().addAll("A","B","C","D","E");
     }
 
     /**
