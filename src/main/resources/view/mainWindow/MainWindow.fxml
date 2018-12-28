@@ -33,11 +33,9 @@
                   <MenuItem mnemonicParsing="false" onAction="#menuItemNewRepair" text="Ремонт" />
           </items>
         </Menu>
-            <Menu mnemonicParsing="false" text="Пользователь">
+            <Menu mnemonicParsing="false" text="Пользователи">
                <items>
-                  <MenuItem mnemonicParsing="false" onAction="#createUser" text="Создать" />
-                  <MenuItem mnemonicParsing="false" text="Удалить" />
-                  <MenuItem mnemonicParsing="false" text="Изменить" />
+                  <MenuItem mnemonicParsing="false" onAction="#showUserManagementDlg" text="Управление" />
                </items>
             </Menu>
       </menus>
