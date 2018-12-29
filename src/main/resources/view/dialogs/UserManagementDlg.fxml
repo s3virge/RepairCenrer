@@ -6,10 +6,9 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.controllers.UserManagementDlgController">
+<AnchorPane prefHeight="375.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.controllers.UserManagementDlgController">
    <children>
-      <TableView layoutX="36.0" layoutY="23.0" prefHeight="247.0" prefWidth="533.0">
+      <TableView layoutX="36.0" layoutY="23.0" prefHeight="278.0" prefWidth="533.0">
         <columns>
           <TableColumn prefWidth="91.0" text="Фамилия" />
           <TableColumn prefWidth="93.0" text="Имя" />
@@ -21,13 +20,13 @@
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
          </columnResizePolicy>
       </TableView>
-      <ButtonBar layoutX="146.0" layoutY="320.0" prefHeight="40.0" prefWidth="279.0">
+      <ButtonBar layoutX="36.0" layoutY="325.0" prefHeight="26.0" prefWidth="265.0">
         <buttons>
-          <Button mnemonicParsing="false" text="Добавить" />
+            <Button mnemonicParsing="false" text="Добавить" />
             <Button mnemonicParsing="false" text="Изменить" />
             <Button mnemonicParsing="false" text="Удалить" />
         </buttons>
       </ButtonBar>
-      <Button layoutX="50.0" layoutY="294.0" mnemonicParsing="false" text="Отмена" />
+      <Button cancelButton="true" layoutX="479.0" layoutY="325.0" mnemonicParsing="false" text="Отмена" />
    </children>
 </AnchorPane>
