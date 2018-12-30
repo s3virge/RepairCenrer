@@ -27,6 +27,6 @@
             <Button mnemonicParsing="false" text="Удалить" />
         </buttons>
       </ButtonBar>
-      <Button cancelButton="true" layoutX="479.0" layoutY="325.0" mnemonicParsing="false" text="Отмена" />
+      <Button cancelButton="true" layoutX="479.0" layoutY="325.0" mnemonicParsing="false" text="Отмена" onAction="#closeStage"/>
    </children>
 </AnchorPane>
