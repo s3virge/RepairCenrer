@@ -86,8 +86,9 @@ public class UserDao {
     public static Vector<User> getListOfMasters() {
         logger.trace("");
 
-        final String SELECT_МASTER = "SELECT * FROM user where user_group = 3";
-//        final String SELECT_МASTER = "SELECT * FROM user where user_group = 1";
+        //todo выбирать из справочника id группы мастер
+//        final String SELECT_МASTER = "SELECT * FROM user where user_group = 3";
+        final String SELECT_МASTER = "SELECT * FROM user where user_group = 1";
 
         Vector<User> listOfMasters = new Vector<>();
         User user = new User();
