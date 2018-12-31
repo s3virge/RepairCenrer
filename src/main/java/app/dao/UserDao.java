@@ -86,9 +86,12 @@ public class UserDao {
     public static Vector<User> getListOfMasters() {
         logger.trace("");
 
-        //todo выбирать из справочника id группы мастер
-//        final String SELECT_МASTER = "SELECT * FROM user where user_group = 3";
-        final String SELECT_МASTER = "SELECT * FROM user where user_group = 1";
+        final String SELECT_МASTER = "SELECT user.id, user.login, user.password, " +
+                "user_group.value, " +
+                "user.surname, user.name, user.patronymic " +
+                "FROM user " +
+                "INNER JOIN user_group ON user.user_group = user_group.id " +
+                "WHERE user_group.value = 'master'";
 
         Vector<User> listOfMasters = new Vector<>();
         User user = new User();
@@ -99,7 +102,9 @@ public class UserDao {
             while (result.next()) {
                 user.setId(result.getInt("id"));
                 user.setLogin(result.getString("login"));
-                user.setPassword(result.getString("user_group"));
+                user.setPassword(result.getString("password"));
+//                user.setGroup(result.getString("user_group"));
+                user.setGroup(result.getString("value"));
                 user.setSurname(result.getString("surname"));
                 user.setName(result.getString("name"));
                 user.setPatronymic(result.getString("patronymic"));
@@ -115,5 +120,33 @@ public class UserDao {
     }
 
 
+    public static Vector<User> getList() {
+        Vector<User> listOfUsers = new Vector<>();
 
+        final String select_all = "select * from user";
+
+        try (Connection con = ConnectionBuilder.getConnection();
+            Statement st = con.createStatement()) {
+
+            ResultSet resultSet = st.executeQuery(select_all);
+
+            while (resultSet.next()) {
+                User currentUser = new User();
+                currentUser.setId(resultSet.getInt("id"));
+                currentUser.setLogin(resultSet.getString("login"));
+                currentUser.setPassword(resultSet.getString("password"));
+                currentUser.setGroup(resultSet.getString("user_group"));
+                currentUser.setSurname(resultSet.getString("surname"));
+                currentUser.setName(resultSet.getString("name"));
+                currentUser.setPatronymic(resultSet.getString("patronymic"));
+                currentUser.setEmail(resultSet.getString("email"));
+
+                listOfUsers.add(currentUser);
+            }
+        }
+        catch (SQLException sq) {
+            logger.error(sq.getMessage());
+        }
+        return listOfUsers;
+    }
 }
