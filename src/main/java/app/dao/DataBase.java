@@ -17,50 +17,6 @@ import java.sql.Statement;
 
 public class DataBase {
     public static final Logger logger = LogManager.getLogger(DataBase.class);
-//    /**
-//     * write to the database Config.DB_NAME the necessary initial data
-//     * do not work for mysql.
-//     * work fine for postgres
-//     */
-//    public void initalize() throws URISyntaxException, SQLException, IOException {
-//        logger.trace("");
-//
-//        //        URL uniformResourceLocator = DataBase.class.getClassLoader().getResource("repair_center.sql");
-//        URL uniformResourceLocator = getClass().getResource("/sql/createdb.sql");
-//
-//        Path path = Paths.get(uniformResourceLocator.toURI());
-//        List<String> str = Files.readAllLines(path);
-//        String sql = str.stream().collect(Collectors.joining());
-//
-//        try (Connection con = ConnectionBuilder.getConnection();
-//             Statement stmt = con.createStatement();
-//             ) {
-//            stmt.executeUpdate(sql);
-//        }
-//        catch (Exception e) {
-//            logger.error(e.getMessage());
-//            throw new RuntimeException();
-//        }
-//
-//        logger.info("database '{}' was succesfuly initalized", Config.getProperty(Config.DB_NAME));
-//    }
-
-//    /**
-//     * print to console resourceFile
-//     * @param resourceFile path to file in resource project folder
-//     * @throws IOException
-//     */
-//    public void consolePrintFile(String resourceFile) throws IOException {
-//        InputStream in = DataBase.class.getResourceAsStream(resourceFile);
-//        BufferedReader reader = new BufferedReader(new InputStreamReader(in));
-//
-//        String line = "";
-//
-//        while( line !=  null) {
-//            line = reader.readLine();
-//            System.out.println(line);
-//        }
-//    }
 
     /**
      * check if database exists

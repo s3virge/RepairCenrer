@@ -149,4 +149,12 @@ public class UserDao {
         }
         return listOfUsers;
     }
+
+    /**
+     * save user to column user in database
+     * @param userToSave
+     */
+    public static void save(User userToSave) {
+     //todo save user to database
+    }
 }

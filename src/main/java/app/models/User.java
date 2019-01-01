@@ -13,10 +13,23 @@ public class User {
     private final SimpleStringProperty name;
     private final SimpleStringProperty patronymic;
 
+    private final SimpleStringProperty phoneNumber;
     private final SimpleStringProperty email;
 
+    public String getPhoneNumber() {
+        return phoneNumber.get();
+    }
+
+    public SimpleStringProperty phoneNumberProperty() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber.set(phoneNumber);
+    }
+
     public User(String login, String password, String group,
-                String surname, String name, String patronymic, String email) {
+                String surname, String name, String patronymic, String email, String phoneNumber) {
         this.id = 0;
         this.login = new SimpleStringProperty(login);
         this.password = new SimpleStringProperty(password);
@@ -24,6 +37,7 @@ public class User {
         this.surname = new SimpleStringProperty(surname);
         this.name = new SimpleStringProperty(name);
         this.patronymic = new SimpleStringProperty(patronymic);
+        this.phoneNumber = new SimpleStringProperty(phoneNumber);
         this.email = new SimpleStringProperty(email);
     }
 
@@ -35,6 +49,7 @@ public class User {
         this.surname = new SimpleStringProperty();
         this.name = new SimpleStringProperty();
         this.patronymic = new SimpleStringProperty();
+        this.phoneNumber = new SimpleStringProperty();
         this.email = new SimpleStringProperty();
     }
 
