@@ -4,6 +4,7 @@ import app.RepairCenter;
 import app.dao.UserDao;
 import app.models.LoggedInUser;
 import app.models.User;
+import app.models.UserGroup;
 import app.utils.MD5Hash;
 import app.utils.MsgBox;
 import javafx.event.ActionEvent;
@@ -24,125 +25,123 @@ import java.security.NoSuchAlgorithmException;
 import static app.utils.MsgBox.Type.MB_ERROR;
 
 public class LoginWndController {
-    private static final Logger logger = LogManager.getLogger(LoginWndController.class);
+	private static final Logger logger = LogManager.getLogger(LoginWndController.class);
 
-    @FXML private Text errorLabel;
-    @FXML private TextField loginField;
-    @FXML private TextField passwordField;
+	@FXML
+	private Text errorLabel;
+	@FXML
+	private TextField loginField;
+	@FXML
+	private TextField passwordField;
 
-    /**
-     * Инициализирует класс-контроллер. Этот метод вызывается автоматически
-     * после того, как fxml-файл будет загружен.
-     */
-    @FXML
-    private void initialize() {
-        setDefaultTextFieldValue();
-    }
+	/**
+	 * Инициализирует класс-контроллер. Этот метод вызывается автоматически
+	 * после того, как fxml-файл будет загружен.
+	 */
+	@FXML
+	private void initialize() {
+		setDefaultTextFieldValue();
+	}
 
-    private void setDefaultTextFieldValue() {
-        loginField.setText("admin");
-        passwordField.setText("admin");
-    }
+	private void setDefaultTextFieldValue() {
+		loginField.setText("admin");
+		passwordField.setText("admin");
+	}
 
-    @FXML
-    protected void handleSubmitButtonAction(ActionEvent event) {
-        logger.trace("");
+	@FXML
+	protected void handleSubmitButtonAction(ActionEvent event) {
+		logger.trace("");
 
-        if(isInputValid()) {
+		if (isInputValid()) {
 
-            String login = loginField.getText();
-            String paswd = null;
+			String login = loginField.getText();
+			String paswd = null;
 
-            try {
-                paswd = MD5Hash.get(passwordField.getText());
-            }
-            catch (NoSuchAlgorithmException | UnsupportedEncodingException e){
-                MsgBox.show(e.getMessage(), MB_ERROR);
-            }
+			try {
+				paswd = MD5Hash.get(passwordField.getText());
+			}
+			catch (NoSuchAlgorithmException | UnsupportedEncodingException e) {
+				MsgBox.show(e.getMessage(), MB_ERROR);
+			}
 
-            UserDao userDao = new UserDao();
-            User user = userDao.getUserByLogin(login);
+			UserDao userDao = new UserDao();
+			User user = userDao.getUserByLogin(login);
 
-            //если юзера нет
-            if (user.isEmpty()) {
-                showLoginError();
-                return;
-            }
+			//если юзера нет
+			if (user.isEmpty()) {
+				showLoginError();
+				return;
+			}
 
-            LoggedInUser.setLoggedInUser(user);
+			LoggedInUser.setLoggedInUser(user);
 
-            if (user.getPassword().equals(paswd)) {
-                //главное окно для разных групп пользователь буде отображаться по разному.
-                //нужно знать группу пользователя который залогинился.
+			if (user.getPassword().equals(paswd)) {
+				//главное окно для разных групп пользователь буде отображаться по разному.
+				//нужно знать группу пользователя который залогинился.
 
-                switch (user.getGroup()) {
-                    case "administrator":
-                        showMainWnd();
-                        break;
+				switch (user.getGroup()) {
+					case UserGroup.ADMIN:
+					case UserGroup.ACCEPTOR:
+					case UserGroup.MASTER:
+					case UserGroup.MANAGER:
+						showMainWnd();
+						break;
+				}
+			}
+			else {
+				//показать сообщение с ошибкой
+				showLoginError();
+			}
+		}
+	}
 
-                    case "acceptor":
-                        showMainWnd();
-                        break;
+	private boolean isInputValid() {
 
-                    case "master":
-                        showMainWnd();
-                        break;
-                }
-            }
-            else {
-                //показать сообщение с ошибкой
-                showLoginError();
-            }
-        }
-    }
+		if (loginField.getText() == null || loginField.getText().length() == 0) {
+			errorLabel.setText("Login can not be empty!");
+			loginField.requestFocus();
+			return false;
+		}
 
-    private boolean isInputValid() {
+		if (passwordField.getText() == null || passwordField.getText().length() == 0) {
+			errorLabel.setText("Password can not be empty!");
+			passwordField.requestFocus();
+			return false;
+		}
 
-        if (loginField.getText() == null || loginField.getText().length() == 0) {
-            errorLabel.setText("Login can not be empty!");
-            loginField.requestFocus();
-            return false;
-        }
+		errorLabel.setText("");
+		return true;
+	}
 
-        if (passwordField.getText() == null || passwordField.getText().length() == 0) {
-            errorLabel.setText("Password can not be empty!");
-            passwordField.requestFocus();
-            return false;
-        }
+	private void showMainWnd() {
+		logger.trace("");
 
-        errorLabel.setText("");
-        return true;
-    }
+		Stage stage = new RepairCenter().getPrimaryStage(); //mainApp.getPrimaryStage();
 
-    private void showMainWnd() {
-        logger.trace("");
+		Parent mainWndLayout = null;
+		//Поскольку имя начинается с символа '/' – оно считается абсолютным. Без / - считается относительным
+		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/mainWindow/MainWindow.fxml"));
 
-        Stage stage = new RepairCenter().getPrimaryStage(); //mainApp.getPrimaryStage();
+		try {
+			mainWndLayout = fxmlLoader.load();
+		}
+		catch (Exception ex) {
+			logger.error(ex.getMessage());
+		}
 
-        Parent mainWndLayout = null;
-        //Поскольку имя начинается с символа '/' – оно считается абсолютным. Без / - считается относительным
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/mainWindow/MainWindow.fxml"));
+		int width = (int) Screen.getPrimary().getBounds().getWidth();
+		int height = (int) Screen.getPrimary().getBounds().getHeight();
 
-        try {
-            mainWndLayout = fxmlLoader.load();
-        }
-        catch ( Exception ex ) {
-            logger.error(ex.getMessage());
-        }
+		stage.setTitle("A simple database of the service center");
+		stage.setScene(new Scene(mainWndLayout, width, height));
+		stage.centerOnScreen();
+		stage.setResizable(true);
+		stage.show();
+	}
 
-        int width = (int) Screen.getPrimary().getBounds().getWidth();
-        int height = (int) Screen.getPrimary().getBounds().getHeight();
-
-        stage.setTitle("A simple database of the service center");
-        stage.setScene(new Scene(mainWndLayout, width, height));
-        stage.centerOnScreen();
-        stage.setResizable(true);
-        stage.show();
-    }
-
-    private void showLoginError(){
-        MsgBox.show("Такой комбинации логина и пароля не существует.");
-        loginField.requestFocus();
-        passwordField.setText("");
-    }
+	private void showLoginError() {
+		MsgBox.show("Такой комбинации логина и пароля не существует.");
+		loginField.requestFocus();
+		passwordField.setText("");
+	}
 }
