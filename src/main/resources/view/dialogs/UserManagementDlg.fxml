@@ -23,11 +23,11 @@
       </TableView>
       <ButtonBar layoutX="36.0" layoutY="325.0" prefHeight="26.0" prefWidth="265.0">
         <buttons>
-            <Button mnemonicParsing="false" text="Добавить" />
+            <Button fx:id="btnAddUser" mnemonicParsing="false" onAction="#OnAddBtn" text="Добавить" />
             <Button mnemonicParsing="false" text="Изменить" />
             <Button mnemonicParsing="false" text="Удалить" />
         </buttons>
       </ButtonBar>
-      <Button cancelButton="true" layoutX="598.0" layoutY="325.0" mnemonicParsing="false" onAction="#closeStage" text="Отмена" />
+      <Button cancelButton="true" layoutX="598.0" layoutY="325.0" mnemonicParsing="false" onAction="#onBtnCancelClick" text="Отмена" />
    </children>
 </AnchorPane>

@@ -3,6 +3,7 @@ package app.controllers;
 import app.RepairCenter;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
@@ -57,47 +58,8 @@ public class MainWndController {
     }
 
     @FXML
-    private void createUser() {
-        logger.trace("");
-
-
-        // Загружаем fxml-файл и создаём новую сцену
-        // для всплывающего диалогового окна.
-        FXMLLoader loader = new FXMLLoader();
-        //Sets the location used to resolve relative path attribute values.
-        //getResource - Finds a resource with a given name.
-        URL resource = getClass().getResource("/view/dialogs/UserDlg.fxml");
-        loader.setLocation(resource);
-
-        AnchorPane creareUserDlgLayout = null;
-
-        try {
-            creareUserDlgLayout = loader.load();
-        } catch (IOException e) {
-            e.printStackTrace();
-            logger.error(e);
-        }
-
-        // Создаём подмостки для диалогового окна.
-        Stage dialogStage = new Stage();
-        //подготавливаем их
-        dialogStage.setTitle("Добавить пользователя");
-        dialogStage.initModality(Modality.WINDOW_MODAL);
-        dialogStage.initOwner(new RepairCenter().getPrimaryStage());
-
-        //расставляем декорации на сцене согласно плану
-        Scene scene = new Scene(creareUserDlgLayout);
-        dialogStage.setScene(scene);
-        dialogStage.setResizable(false);
-
-        // Отображаем диалоговое окно и ждём, пока пользователь его не закроет
-        dialogStage.showAndWait();
-    }
-
-    @FXML
     private void showUserManagementDlg() {
         logger.trace("");
-
 
         // Загружаем fxml-файл и создаём новую сцену
         // для всплывающего диалогового окна.
@@ -107,24 +69,24 @@ public class MainWndController {
         URL resource = getClass().getResource("/view/dialogs/UserManagementDlg.fxml");
         loader.setLocation(resource);
 
-        AnchorPane creareUserDlgLayout = null;
+        Parent userDlgLayout = null;
 
         try {
-            creareUserDlgLayout = loader.load();
-        } catch (IOException e) {
-            e.printStackTrace();
-            logger.error(e);
+            userDlgLayout = loader.load();
+        }
+        catch (IOException e) {
+            logger.error(e.getMessage());
         }
 
         // Создаём подмостки для диалогового окна.
         Stage dialogStage = new Stage();
         //подготавливаем их
         dialogStage.setTitle("Пользователи");
-        dialogStage.initModality(Modality.WINDOW_MODAL);
+        dialogStage.initModality(Modality.APPLICATION_MODAL);
         dialogStage.initOwner(new RepairCenter().getPrimaryStage());
 
         //расставляем декорации на сцене согласно плану
-        Scene scene = new Scene(creareUserDlgLayout);
+        Scene scene = new Scene(userDlgLayout);
         dialogStage.setScene(scene);
         dialogStage.setResizable(false);
 

@@ -6,36 +6,50 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.Window;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
+import java.io.IOException;
+import java.net.URL;
 import java.util.Vector;
 
 public class UserManagementDlgController {
+    private static Logger log = LogManager.getLogger("UserManagementDlgController");
 
     @FXML
-    TableView tvUserInfo;
+    private TableView tvUserInfo;
 
     @FXML
-    TableColumn colSurname;
+    private TableColumn colSurname;
     @FXML
-    TableColumn colName;
+    private TableColumn colName;
     @FXML
-    TableColumn colPatronymic;
+    private TableColumn colPatronymic;
     @FXML
-    TableColumn colLogin;
+    private TableColumn colLogin;
     @FXML
-    TableColumn colPassword;
+    private TableColumn colPassword;
     @FXML
-    TableColumn colEmail;
+    private TableColumn colEmail;
+
+    @FXML
+    private Button btnAddUser;
 
     private ObservableList<User> tvObservableList = FXCollections.observableArrayList();
 
     @FXML
-    private void closeStage(ActionEvent event) {
+    private void onBtnCancelClick(ActionEvent event) {
         Node source = (Node)  event.getSource();
         Stage stage  = (Stage) source.getScene().getWindow();
         stage.close();
@@ -61,5 +75,43 @@ public class UserManagementDlgController {
         };
 
         tvUserInfo.setItems(tvObservableList);
+    }
+
+
+    @FXML
+    private void OnAddBtn() {
+        log.trace("");
+        // Загружаем fxml-файл и создаём новую сцену
+        // для всплывающего диалогового окна.
+        FXMLLoader loader = new FXMLLoader();
+        //Sets the location used to resolve relative path attribute values.
+        //getResource - Finds a resource with a given name.
+        URL resource = getClass().getResource("/view/dialogs/UserAddDlg.fxml");
+        loader.setLocation(resource);
+
+        Parent layout = null;
+
+        try {
+            layout = loader.load();
+        }
+        catch (IOException e) {
+            log.error(e.getMessage());
+        }
+
+        // Создаём подмостки для диалогового окна.
+        Stage dialogStage = new Stage();
+        //подготавливаем их
+        dialogStage.setTitle("Добавить пользователя");
+        dialogStage.initModality(Modality.APPLICATION_MODAL);
+        final Window window = btnAddUser.getScene().getWindow();
+        dialogStage.initOwner(window);
+
+        //расставляем декорации на сцене согласно плану
+        Scene scene = new Scene(layout);
+        dialogStage.setScene(scene);
+        dialogStage.setResizable(false);
+
+        // Отображаем диалоговое окно и ждём, пока пользователь его не закроет
+        dialogStage.showAndWait();
     }
 }
