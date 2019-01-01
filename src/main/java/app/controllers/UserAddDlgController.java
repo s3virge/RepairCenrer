@@ -2,13 +2,10 @@ package app.controllers;
 
 import app.dao.UserDao;
 import app.models.User;
-import app.utils.MsgBox;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -63,5 +60,8 @@ public class UserAddDlgController {
 //        tfSurname.requestFocus(); //did not working
         //this trick is working
         Platform.runLater(()->tfSurname.requestFocus());
+
+        //get user group
+//	    UserGroupDao/
     }
 }
