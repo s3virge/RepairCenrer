@@ -17,7 +17,7 @@
             <TextField fx:id="tfPatronymic" prefHeight="26.0" prefWidth="200.0" promptText="Отчество" />
             <TextField fx:id="tfLogin" prefHeight="26.0" prefWidth="200.0" promptText="Логин" />
             <TextField fx:id="tfPassword" prefHeight="26.0" prefWidth="200.0" promptText="Пароль" />
-            <ComboBox fx:id="cbUsetGroup" prefHeight="26.0" prefWidth="238.0" />
+            <ComboBox fx:id="cbUserGroup" prefHeight="26.0" prefWidth="238.0" />
             <TextField fx:id="tfPhoneNumber" prefHeight="26.0" prefWidth="200.0" promptText="Телефон" />
             <TextField fx:id="tfEmail" layoutX="10.0" layoutY="190.0" prefHeight="26.0" prefWidth="200.0" promptText="E-mail" />
          </children>

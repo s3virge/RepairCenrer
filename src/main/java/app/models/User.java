@@ -145,14 +145,21 @@ public class User {
         this.email.set(email);
     }
 
-    /**
-     * @return
-     * Возвращает true если пользователь пустой иначе false
-     */
+    public String toString() {
+        return String.format("surname: %s; name: %s; patromymic: %s; login: %s; password: %s " +
+                        "group: %s; phonenumber: %s; email: %s;",
+                getSurname(), getName(), getPatronymic(), getLogin(), getPassword(),
+                getGroup(), getPhoneNumber(), getEmail());
+    }
+
+/**
+      * @return
+      * Возвращает true если пользователь пустой иначе false
+      */
     public boolean isEmpty(){
-        if (id == 0 && login == null && password == null){
-            return true;
-        }
-        return false;
+                if (id == 0 && login == null && password == null){
+                        return true;
+                    }
+                return false;
     }
 }

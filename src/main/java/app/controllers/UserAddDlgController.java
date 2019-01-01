@@ -2,9 +2,11 @@ package app.controllers;
 
 import app.dao.UserDao;
 import app.models.User;
+import app.models.UserGroup;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import org.apache.logging.log4j.LogManager;
@@ -28,17 +30,20 @@ public class UserAddDlgController {
 @FXML
     TextField tfEmail;
 
-//    @FXML
-//    private VBox vBoxFields;
+    @FXML
+    private ComboBox cbUserGroup;
 
     @FXML
     private void OnClickBtnAdd() {
         log.trace("");
-        //todo add combobox with user groups
 
-        User newUser = new User(tfLogin.getText(), tfPassword.getText(), "master",
+        String userGroup = (String) cbUserGroup.getSelectionModel().getSelectedItem();
+
+        User newUser = new User(tfLogin.getText(), tfPassword.getText(), userGroup,
                 tfSurname.getText(), tfName.getText(), tfPatronymic.getText(),
                 tfEmail.getText(), tfPhoneNumber.getText());
+
+        log.debug("{}", newUser.toString());
 
         UserDao.save(newUser);
     }
@@ -61,7 +66,6 @@ public class UserAddDlgController {
         //this trick is working
         Platform.runLater(()->tfSurname.requestFocus());
 
-        //get user group
-//	    UserGroupDao/
+        cbUserGroup.getItems().addAll(UserGroup.ADMIN, UserGroup.ACCEPTOR, UserGroup.MANAGER, UserGroup.MASTER);
     }
 }

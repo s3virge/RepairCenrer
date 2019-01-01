@@ -86,6 +86,9 @@ public class LoginWndController {
 					case UserGroup.MANAGER:
 						showMainWnd();
 						break;
+
+					default:
+						logger.error("Something went wrong");
 				}
 			}
 			else {

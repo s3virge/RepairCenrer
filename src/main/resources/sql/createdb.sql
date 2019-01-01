@@ -23,8 +23,8 @@ CREATE TABLE IF NOT EXISTS `repaircenter`.`user_group` (
   `value` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE INDEX `value_UNIQUE` (`value` ASC))
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8;
+  ENGINE = InnoDB
+  DEFAULT CHARACTER SET = utf8;
 
 
 -- -----------------------------------------------------
@@ -43,11 +43,11 @@ CREATE TABLE IF NOT EXISTS `repaircenter`.`user` (
   INDEX `user_group_idx` (`user_group` ASC),
   UNIQUE INDEX `login_UNIQUE` (`login` ASC),
   CONSTRAINT `user_group`
-    FOREIGN KEY (`user_group`)
-    REFERENCES `repaircenter`.`user_group` (`id`)
+  FOREIGN KEY (`user_group`)
+  REFERENCES `repaircenter`.`user_group` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+  ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
@@ -59,9 +59,9 @@ CREATE TABLE IF NOT EXISTS `repaircenter`.`names` (
   PRIMARY KEY (`id`),
   UNIQUE INDEX `name_UNIQUE` (`value` ASC),
   UNIQUE INDEX `id_UNIQUE` (`id` ASC))
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8
-COMMENT = 'имена пользователей';
+  ENGINE = InnoDB
+  DEFAULT CHARACTER SET = utf8
+  COMMENT = 'имена пользователей';
 
 
 -- -----------------------------------------------------
@@ -72,9 +72,9 @@ CREATE TABLE IF NOT EXISTS `repaircenter`.`patronymics` (
   `value` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE INDEX `value_UNIQUE` (`value` ASC))
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8
-COMMENT = 'отчества';
+  ENGINE = InnoDB
+  DEFAULT CHARACTER SET = utf8
+  COMMENT = 'отчества';
 
 
 -- -----------------------------------------------------
@@ -85,9 +85,9 @@ CREATE TABLE IF NOT EXISTS `repaircenter`.`surnames` (
   `value` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE INDEX `value_UNIQUE` (`value` ASC))
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8
-COMMENT = 'фамилии тут';
+  ENGINE = InnoDB
+  DEFAULT CHARACTER SET = utf8
+  COMMENT = 'фамилии тут';
 
 
 -- -----------------------------------------------------
@@ -104,23 +104,23 @@ CREATE TABLE IF NOT EXISTS `repaircenter`.`owner` (
   INDEX `owner_patronymic_idx` (`patronymic_id` ASC),
   INDEX `owner_surname_idx` (`surname_id` ASC),
   CONSTRAINT `owner_name`
-    FOREIGN KEY (`name_id`)
-    REFERENCES `repaircenter`.`names` (`id`)
+  FOREIGN KEY (`name_id`)
+  REFERENCES `repaircenter`.`names` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `owner_patronymic`
-    FOREIGN KEY (`patronymic_id`)
-    REFERENCES `repaircenter`.`patronymics` (`id`)
+  FOREIGN KEY (`patronymic_id`)
+  REFERENCES `repaircenter`.`patronymics` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `owner_surname`
-    FOREIGN KEY (`surname_id`)
-    REFERENCES `repaircenter`.`surnames` (`id`)
+  FOREIGN KEY (`surname_id`)
+  REFERENCES `repaircenter`.`surnames` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8
-COMMENT = 'информация о пользователе';
+  ENGINE = InnoDB
+  DEFAULT CHARACTER SET = utf8
+  COMMENT = 'информация о пользователе';
 
 
 -- -----------------------------------------------------
@@ -131,8 +131,8 @@ CREATE TABLE IF NOT EXISTS `repaircenter`.`brand` (
   `value` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE INDEX `value_UNIQUE` (`value` ASC))
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8;
+  ENGINE = InnoDB
+  DEFAULT CHARACTER SET = utf8;
 
 
 -- -----------------------------------------------------
@@ -143,9 +143,9 @@ CREATE TABLE IF NOT EXISTS `repaircenter`.`type` (
   `value` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE INDEX `value_UNIQUE` (`value` ASC))
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8
-COMMENT = 'тип устройства';
+  ENGINE = InnoDB
+  DEFAULT CHARACTER SET = utf8
+  COMMENT = 'тип устройства';
 
 
 -- -----------------------------------------------------
@@ -156,9 +156,9 @@ CREATE TABLE IF NOT EXISTS `repaircenter`.`model` (
   `value` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE INDEX `value_UNIQUE` (`value` ASC))
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8
-COMMENT = 'таблица для хранения модели устройства';
+  ENGINE = InnoDB
+  DEFAULT CHARACTER SET = utf8
+  COMMENT = 'таблица для хранения модели устройства';
 
 
 -- -----------------------------------------------------
@@ -169,9 +169,9 @@ CREATE TABLE IF NOT EXISTS `repaircenter`.`defect` (
   `value` VARCHAR(500) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE INDEX `description_UNIQUE` (`value` ASC))
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8
-COMMENT = 'неисправности';
+  ENGINE = InnoDB
+  DEFAULT CHARACTER SET = utf8
+  COMMENT = 'неисправности';
 
 
 -- -----------------------------------------------------
@@ -182,9 +182,9 @@ CREATE TABLE IF NOT EXISTS `repaircenter`.`status` (
   `value` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE INDEX `value_UNIQUE` (`value` ASC))
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8
-COMMENT = 'этап ремонта';
+  ENGINE = InnoDB
+  DEFAULT CHARACTER SET = utf8
+  COMMENT = 'этап ремонта';
 
 
 -- -----------------------------------------------------
@@ -207,23 +207,23 @@ CREATE TABLE IF NOT EXISTS `repaircenter`.`repair` (
   INDEX `repair_acceptor_idx` (`acceptor_id` ASC),
   INDEX `repair_master_idx` (`master_id` ASC),
   CONSTRAINT `repair_status`
-    FOREIGN KEY (`status_id`)
-    REFERENCES `repaircenter`.`status` (`id`)
+  FOREIGN KEY (`status_id`)
+  REFERENCES `repaircenter`.`status` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `repair_acceptor`
-    FOREIGN KEY (`acceptor_id`)
-    REFERENCES `repaircenter`.`user` (`id`)
+  FOREIGN KEY (`acceptor_id`)
+  REFERENCES `repaircenter`.`user` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `repair_master`
-    FOREIGN KEY (`master_id`)
-    REFERENCES `repaircenter`.`user` (`id`)
+  FOREIGN KEY (`master_id`)
+  REFERENCES `repaircenter`.`user` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8
-COMMENT = 'таблица для результатов диагностики-ремонта ';
+  ENGINE = InnoDB
+  DEFAULT CHARACTER SET = utf8
+  COMMENT = 'таблица для результатов диагностики-ремонта ';
 
 
 -- -----------------------------------------------------
@@ -234,9 +234,9 @@ CREATE TABLE IF NOT EXISTS `repaircenter`.`completeness` (
   `value` VARCHAR(255) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE INDEX `value_UNIQUE` (`value` ASC))
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8
-COMMENT = 'комплектация устройства';
+  ENGINE = InnoDB
+  DEFAULT CHARACTER SET = utf8
+  COMMENT = 'комплектация устройства';
 
 
 -- -----------------------------------------------------
@@ -247,9 +247,9 @@ CREATE TABLE IF NOT EXISTS `repaircenter`.`appearance` (
   `value` VARCHAR(500) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE INDEX `value_UNIQUE` (`value` ASC))
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8
-COMMENT = 'внешний вид устройства';
+  ENGINE = InnoDB
+  DEFAULT CHARACTER SET = utf8
+  COMMENT = 'внешний вид устройства';
 
 
 -- -----------------------------------------------------
@@ -277,47 +277,47 @@ CREATE TABLE IF NOT EXISTS `repaircenter`.`device` (
   INDEX `device_completeness_idx` (`completeness_id` ASC),
   INDEX `device_appearance_idx` (`appearance_id` ASC),
   CONSTRAINT `device_owner`
-    FOREIGN KEY (`owner_id`)
-    REFERENCES `repaircenter`.`owner` (`id`)
+  FOREIGN KEY (`owner_id`)
+  REFERENCES `repaircenter`.`owner` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `device_brand`
-    FOREIGN KEY (`brand_id`)
-    REFERENCES `repaircenter`.`brand` (`id`)
+  FOREIGN KEY (`brand_id`)
+  REFERENCES `repaircenter`.`brand` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `device_type`
-    FOREIGN KEY (`type_id`)
-    REFERENCES `repaircenter`.`type` (`id`)
+  FOREIGN KEY (`type_id`)
+  REFERENCES `repaircenter`.`type` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `device_model`
-    FOREIGN KEY (`model_id`)
-    REFERENCES `repaircenter`.`model` (`id`)
+  FOREIGN KEY (`model_id`)
+  REFERENCES `repaircenter`.`model` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `device_defect`
-    FOREIGN KEY (`defect_id`)
-    REFERENCES `repaircenter`.`defect` (`id`)
+  FOREIGN KEY (`defect_id`)
+  REFERENCES `repaircenter`.`defect` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `device_repair`
-    FOREIGN KEY (`repair_id`)
-    REFERENCES `repaircenter`.`repair` (`id`)
+  FOREIGN KEY (`repair_id`)
+  REFERENCES `repaircenter`.`repair` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `device_completeness`
-    FOREIGN KEY (`completeness_id`)
-    REFERENCES `repaircenter`.`completeness` (`id`)
+  FOREIGN KEY (`completeness_id`)
+  REFERENCES `repaircenter`.`completeness` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `device_appearance`
-    FOREIGN KEY (`appearance_id`)
-    REFERENCES `repaircenter`.`appearance` (`id`)
+  FOREIGN KEY (`appearance_id`)
+  REFERENCES `repaircenter`.`appearance` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8;
+  ENGINE = InnoDB
+  DEFAULT CHARACTER SET = utf8;
 
 
 SET SQL_MODE=@OLD_SQL_MODE;
@@ -329,10 +329,10 @@ SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `repaircenter`;
-INSERT INTO `repaircenter`.`user_group` (`id`, `value`) VALUES (1, 'administrator');
-INSERT INTO `repaircenter`.`user_group` (`id`, `value`) VALUES (2, 'manager');
-INSERT INTO `repaircenter`.`user_group` (`id`, `value`) VALUES (3, 'master');
-INSERT INTO `repaircenter`.`user_group` (`id`, `value`) VALUES (4, 'acceptor');
+INSERT INTO `repaircenter`.`user_group` (`id`, `value`) VALUES (1, 'Администратор');
+INSERT INTO `repaircenter`.`user_group` (`id`, `value`) VALUES (2, 'Менеджер');
+INSERT INTO `repaircenter`.`user_group` (`id`, `value`) VALUES (3, 'Мастер');
+INSERT INTO `repaircenter`.`user_group` (`id`, `value`) VALUES (4, 'Приемщик');
 
 COMMIT;
 

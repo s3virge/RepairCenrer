@@ -49,10 +49,10 @@ public class NewRepairDialogController {
         setTestData();
         setNewDeviceNumber();
         getSuggestions();
-        getMasters();
+        fillMastersComboBox();
     }
 
-    private void getMasters() {
+    private void fillMastersComboBox() {
         logger.trace("");
         //разные мастера ремонтируют разные устройства
         //нужно знать тип устройства которое принимается

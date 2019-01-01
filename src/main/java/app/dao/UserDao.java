@@ -119,7 +119,6 @@ public class UserDao {
         return listOfMasters;
     }
 
-
     public static Vector<User> getList() {
         Vector<User> listOfUsers = new Vector<>();
 
