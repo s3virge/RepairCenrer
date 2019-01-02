@@ -162,7 +162,6 @@ public class UserDao {
     public static int save(User userToSave) {
 		int id = 0;
 
-        //todo use inner join to retrive user_group id
         final String insert_user = "insert into " + tableName + "(login, password, user_group, " +
                 "surname, name, patronymic, phone_number, email) " +
                 "values(?,?,?,?,?,?,?,?)";
