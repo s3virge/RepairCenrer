@@ -123,6 +123,7 @@ public class UserDao {
     public static Vector<User> getList() {
         Vector<User> listOfUsers = new Vector<>();
 
+        //todo select group name from related table user_group
         final String select_all = "select * from " + tableName;
 
         try (Connection con = ConnectionBuilder.getConnection();

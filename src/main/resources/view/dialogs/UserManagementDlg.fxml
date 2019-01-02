@@ -15,7 +15,9 @@
             <TableColumn fx:id="colPatronymic" prefWidth="75.0" text="Отчество" />
             <TableColumn fx:id="colLogin" prefWidth="75.0" text="Логин" />
             <TableColumn fx:id="colPassword" prefWidth="75.0" text="Пароль" />
-            <TableColumn fx:id="colEmail" prefWidth="75.0" text="E-mail" />
+            <TableColumn fx:id="colPhoneNumber" prefWidth="75.0" text="Телефон" />
+            <TableColumn fx:id="colGroup" prefWidth="75.0" text="Группа" />
+            <TableColumn fx:id="colEmail" prefWidth="88.0" text="E-mail" />
         </columns>
          <columnResizePolicy>
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />

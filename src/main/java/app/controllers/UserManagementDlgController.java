@@ -41,9 +41,11 @@ public class UserManagementDlgController {
     @FXML
     private TableColumn colPassword;
     @FXML
+    private TableColumn colGroup;
+    @FXML
+    private TableColumn colPhoneNumber;
+    @FXML
     private TableColumn colEmail;
-
-    //todo add another columns
 
     @FXML
     private Button btnAddUser;
@@ -68,6 +70,8 @@ public class UserManagementDlgController {
         colPatronymic.setCellValueFactory(new PropertyValueFactory("patronymic"));
         colLogin.setCellValueFactory(new PropertyValueFactory("login"));
         colPassword.setCellValueFactory(new PropertyValueFactory("password"));
+        colGroup.setCellValueFactory(new PropertyValueFactory<>("group"));
+        colPhoneNumber.setCellValueFactory(new PropertyValueFactory<>("phoneNumber"));
         colEmail.setCellValueFactory(new PropertyValueFactory("email"));
 
         fillTable();
