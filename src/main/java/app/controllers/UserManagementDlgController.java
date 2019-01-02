@@ -68,11 +68,16 @@ public class UserManagementDlgController {
         colPassword.setCellValueFactory(new PropertyValueFactory("password"));
         colEmail.setCellValueFactory(new PropertyValueFactory("email"));
 
+        fillTable();
+    }
+
+    private void fillTable() {
         final Vector<User> list = UserDao.getList();
+        tvObservableList.clear();
 
         for (User u : list) {
             tvObservableList.add(u);
-        };
+        }
 
         tvUserInfo.setItems(tvObservableList);
     }
@@ -113,5 +118,7 @@ public class UserManagementDlgController {
 
         // Отображаем диалоговое окно и ждём, пока пользователь его не закроет
         dialogStage.showAndWait();
+
+        fillTable();
     }
 }
