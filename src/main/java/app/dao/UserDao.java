@@ -123,8 +123,10 @@ public class UserDao {
     public static Vector<User> getList() {
         Vector<User> listOfUsers = new Vector<>();
 
-        //todo select group name from related table user_group
-        final String select_all = "select * from " + tableName;
+        final String select_all = "SELECT user.id, user.login, user.password, user_group.value, " +
+                "user.surname, user.name, user.patronymic, user.phone_number, user.email " +
+                "FROM user " +
+                "INNER JOIN user_group ON user.user_group = user_group.id;";
 
         try (Connection con = ConnectionBuilder.getConnection();
             Statement st = con.createStatement()) {
@@ -136,10 +138,11 @@ public class UserDao {
                 currentUser.setId(resultSet.getInt("id"));
                 currentUser.setLogin(resultSet.getString("login"));
                 currentUser.setPassword(resultSet.getString("password"));
-                currentUser.setGroup(resultSet.getString("user_group"));
+                currentUser.setGroup(resultSet.getString("value"));
                 currentUser.setSurname(resultSet.getString("surname"));
                 currentUser.setName(resultSet.getString("name"));
                 currentUser.setPatronymic(resultSet.getString("patronymic"));
+                currentUser.setPhoneNumber(resultSet.getString("phone_number"));
                 currentUser.setEmail(resultSet.getString("email"));
 
                 listOfUsers.add(currentUser);
