@@ -1,6 +1,7 @@
 package app.dao;
 
 import app.models.User;
+import app.models.UserGroup;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -92,20 +93,21 @@ public class UserDao {
                 "user.surname, user.name, user.patronymic " +
                 "FROM user " +
                 "INNER JOIN user_group ON user.user_group = user_group.id " +
-                "WHERE user_group.value = 'master'";
+                "WHERE user_group.value = '" + UserGroup.MASTER + "'";
 
         Vector<User> listOfMasters = new Vector<>();
-        User user = new User();
 
         try (Connection co = ConnectionBuilder.getConnection();
              Statement st = co.createStatement()) {
             ResultSet result = st.executeQuery(SELECT_МASTER);
             while (result.next()) {
-                user.setId(result.getInt("id"));
-                user.setLogin(result.getString("login"));
-                user.setPassword(result.getString("password"));
-//                user.setGroup(result.getString("user_group"));
-                user.setGroup(result.getString("value"));
+                User user = new User();
+
+//                user.setId(result.getInt("id"));
+//                user.setLogin(result.getString("login"));
+//                user.setPassword(result.getString("password"));
+////                user.setGroup(result.getString("user_group"));
+//                user.setGroup(result.getString("value"));
                 user.setSurname(result.getString("surname"));
                 user.setName(result.getString("name"));
                 user.setPatronymic(result.getString("patronymic"));
