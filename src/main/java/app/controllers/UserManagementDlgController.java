@@ -43,6 +43,8 @@ public class UserManagementDlgController {
     @FXML
     private TableColumn colEmail;
 
+    //todo add another columns
+
     @FXML
     private Button btnAddUser;
 
