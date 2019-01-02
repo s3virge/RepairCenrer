@@ -11,6 +11,7 @@ import java.sql.Statement;
 
 public class UserGroupDao {
 	private static final Logger log = LogManager.getLogger();
+	private static final String tableName = "user_group";
 
 	/**
 	 * @return list of groups names
@@ -22,7 +23,7 @@ public class UserGroupDao {
 		StringVector list = new StringVector();
 
 		try (Connection con = ConnectionBuilder.getConnection();
-		     Statement statement = con.createStatement()) {
+			 Statement statement = con.createStatement()) {
 
 			ResultSet result = statement.executeQuery(select_user_group);
 
@@ -36,5 +37,28 @@ public class UserGroupDao {
 		}
 
 		return list;
+	}
+
+	public static int getId(String group) {
+		log.trace("");
+
+		int id = 0;
+
+		final String select_id = "select id from " + tableName + " where value = '" + group + "'";
+
+		try (Connection con = ConnectionBuilder.getConnection();
+			 Statement stm = con.createStatement()) {
+
+			ResultSet res = stm.executeQuery(select_id);
+
+			while (res.next()) {
+				id = res.getInt("id");
+			}
+		}
+		catch (SQLException ex) {
+			log.error(ex.getMessage());
+		}
+
+		return id;
 	}
 }

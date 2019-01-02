@@ -34,7 +34,7 @@ public class UserAddDlgController {
     private ComboBox cbUserGroup;
 
     @FXML
-    private void OnClickBtnAdd() {
+    private void OnClickBtnAdd(ActionEvent event) {
         log.trace("");
 
         String userGroup = (String) cbUserGroup.getSelectionModel().getSelectedItem();
@@ -43,9 +43,11 @@ public class UserAddDlgController {
                 tfSurname.getText(), tfName.getText(), tfPatronymic.getText(),
                 tfEmail.getText(), tfPhoneNumber.getText());
 
-        log.debug("{}", newUser.toString());
+//        log.debug("{}", newUser.toString());
 
         UserDao.save(newUser);
+
+        closeWnd(event);
     }
 
     @FXML

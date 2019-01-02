@@ -153,21 +153,22 @@ public class UserDao {
     /**
      * save user to column user in database
      * @param userToSave
+	 * @return last inserted id
      */
-    public static void save(User userToSave) {
-        //todo save user to database
+    public static int save(User userToSave) {
+		int id = 0;
 
         //todo use inner join to retrive user_group id
         final String insert_user = "insert into " + tableName + "(login, password, user_group, " +
                 "surname, name, patronymic, phone_number, email) " +
                 "values(?,?,?,?,?,?,?,?)";
 
-        //todo get user_group id
         int userGroupId = UserGroupDao.getId(userToSave.getGroup());
 
         try (Connection conn = ConnectionBuilder.getConnection();
              PreparedStatement stmt = conn.prepareStatement(insert_user)) {
-            stmt.setString(1, userToSave.getLogin());
+
+        	stmt.setString(1, userToSave.getLogin());
             stmt.setString(2, userToSave.getPassword());
             stmt.setInt(3, userGroupId);
             stmt.setString(4, userToSave.getSurname());
@@ -176,9 +177,20 @@ public class UserDao {
             stmt.setString(7, userToSave.getPhoneNumber());
             stmt.setString(8, userToSave.getEmail());
 
+			stmt.execute();
+
+			ResultSet rs;
+
+			rs = stmt.executeQuery("SELECT LAST_INSERT_ID()");
+
+			if (rs.next()) {
+				id = rs.getInt(1);
+			}
         }
         catch (SQLException ex) {
             logger.error(ex.getMessage());
         }
+
+        return id;
     }
 }
