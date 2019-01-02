@@ -4,162 +4,161 @@ import javafx.beans.property.SimpleStringProperty;
 
 public class User {
 
-    private int id;
-    private final SimpleStringProperty login;
-    private final SimpleStringProperty password;
-    private final SimpleStringProperty group;
+	private int id;
+	private final SimpleStringProperty login;
+	private final SimpleStringProperty password;
+	private final SimpleStringProperty group;
 
-    private final SimpleStringProperty surname;
-    private final SimpleStringProperty name;
-    private final SimpleStringProperty patronymic;
+	private final SimpleStringProperty surname;
+	private final SimpleStringProperty name;
+	private final SimpleStringProperty patronymic;
 
-    private final SimpleStringProperty phoneNumber;
-    private final SimpleStringProperty email;
+	private final SimpleStringProperty phoneNumber;
+	private final SimpleStringProperty email;
 
-    public String getPhoneNumber() {
-        return phoneNumber.get();
-    }
+	public User(String login, String password, String group,
+	            String surname, String name, String patronymic, String email, String phoneNumber) {
+		this.id = 0;
+		this.login = new SimpleStringProperty(login);
+		this.password = new SimpleStringProperty(password);
+		this.group = new SimpleStringProperty(group);
+		this.surname = new SimpleStringProperty(surname);
+		this.name = new SimpleStringProperty(name);
+		this.patronymic = new SimpleStringProperty(patronymic);
+		this.phoneNumber = new SimpleStringProperty(phoneNumber);
+		this.email = new SimpleStringProperty(email);
+	}
 
-    public SimpleStringProperty phoneNumberProperty() {
-        return phoneNumber;
-    }
+	public User() {
+		this.id = 0;
+		this.login = new SimpleStringProperty();
+		this.password = new SimpleStringProperty();
+		this.group = new SimpleStringProperty();
+		this.surname = new SimpleStringProperty();
+		this.name = new SimpleStringProperty();
+		this.patronymic = new SimpleStringProperty();
+		this.phoneNumber = new SimpleStringProperty();
+		this.email = new SimpleStringProperty();
+	}
 
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber.set(phoneNumber);
-    }
+	public int getId() {
+		return id;
+	}
 
-    public User(String login, String password, String group,
-                String surname, String name, String patronymic, String email, String phoneNumber) {
-        this.id = 0;
-        this.login = new SimpleStringProperty(login);
-        this.password = new SimpleStringProperty(password);
-        this.group = new SimpleStringProperty(group);
-        this.surname = new SimpleStringProperty(surname);
-        this.name = new SimpleStringProperty(name);
-        this.patronymic = new SimpleStringProperty(patronymic);
-        this.phoneNumber = new SimpleStringProperty(phoneNumber);
-        this.email = new SimpleStringProperty(email);
-    }
+	public void setId(int id) {
+		this.id = id;
+	}
 
-    public User() {
-        this.id = 0;
-        this.login = new SimpleStringProperty();
-        this.password = new SimpleStringProperty();
-        this.group = new SimpleStringProperty();
-        this.surname = new SimpleStringProperty();
-        this.name = new SimpleStringProperty();
-        this.patronymic = new SimpleStringProperty();
-        this.phoneNumber = new SimpleStringProperty();
-        this.email = new SimpleStringProperty();
-    }
+	public String getLogin() {
+		return login.get();
+	}
 
-    public int getId() {
-        return id;
-    }
+	public SimpleStringProperty loginProperty() {
+		return login;
+	}
 
-    public void setId(int id) {
-        this.id = id;
-    }
+	public void setLogin(String login) {
+		this.login.set(login);
+	}
 
-    public String getLogin() {
-        return login.get();
-    }
+	public String getPassword() {
+		return password.get();
+	}
 
-    public SimpleStringProperty loginProperty() {
-        return login;
-    }
+	public SimpleStringProperty passwordProperty() {
+		return password;
+	}
 
-    public void setLogin(String login) {
-        this.login.set(login);
-    }
+	public void setPassword(String password) {
+		this.password.set(password);
+	}
 
-    public String getPassword() {
-        return password.get();
-    }
+	public String getGroup() {
+		return group.get();
+	}
 
-    public SimpleStringProperty passwordProperty() {
-        return password;
-    }
+	public SimpleStringProperty groupProperty() {
+		return group;
+	}
 
-    public void setPassword(String password) {
-        this.password.set(password);
-    }
+	public void setGroup(String group) {
+		this.group.set(group);
+	}
 
-    public String getGroup() {
-        return group.get();
-    }
+	public String getSurname() {
+		return surname.get();
+	}
 
-    public SimpleStringProperty groupProperty() {
-        return group;
-    }
+	public SimpleStringProperty surnameProperty() {
+		return surname;
+	}
 
-    public void setGroup(String group) {
-        this.group.set(group);
-    }
+	public void setSurname(String surname) {
+		this.surname.set(surname);
+	}
 
-    public String getSurname() {
-        return surname.get();
-    }
+	public String getName() {
+		return name.get();
+	}
 
-    public SimpleStringProperty surnameProperty() {
-        return surname;
-    }
+	public SimpleStringProperty nameProperty() {
+		return name;
+	}
 
-    public void setSurname(String surname) {
-        this.surname.set(surname);
-    }
+	public void setName(String name) {
+		this.name.set(name);
+	}
 
-    public String getName() {
-        return name.get();
-    }
+	public String getPatronymic() {
+		return patronymic.get();
+	}
 
-    public SimpleStringProperty nameProperty() {
-        return name;
-    }
+	public SimpleStringProperty patronymicProperty() {
+		return patronymic;
+	}
 
-    public void setName(String name) {
-        this.name.set(name);
-    }
+	public void setPatronymic(String patronymic) {
+		this.patronymic.set(patronymic);
+	}
 
-    public String getPatronymic() {
-        return patronymic.get();
-    }
+	public String getEmail() {
+		return email.get();
+	}
 
-    public SimpleStringProperty patronymicProperty() {
-        return patronymic;
-    }
+	public SimpleStringProperty emailProperty() {
+		return email;
+	}
 
-    public void setPatronymic(String patronymic) {
-        this.patronymic.set(patronymic);
-    }
+	public void setEmail(String email) {
+		this.email.set(email);
+	}
 
-    public String getEmail() {
-        return email.get();
-    }
+	public void setPhoneNumber(String phoneNumber) {
+		this.phoneNumber.set(phoneNumber);
+	}
 
-    public SimpleStringProperty emailProperty() {
-        return email;
-    }
+	public SimpleStringProperty phoneNumberProperty() {
+		return phoneNumber;
+	}
 
-    public void setEmail(String email) {
-        this.email.set(email);
-    }
+	public String getPhoneNumber() {
+		return phoneNumber.get();
+	}
 
-    public String toString() {
-        return String.format("surname: %s; name: %s; patromymic: %s; login: %s; password: %s " +
-                        "group: %s; phonenumber: %s; email: %s;",
-                getSurname(), getName(), getPatronymic(), getLogin(), getPassword(),
-                getGroup(), getPhoneNumber(), getEmail());
-    }
+	public String toString() {
+		return String.format("surname: %s; name: %s; patromymic: %s; login: %s; password: %s " +
+						"group: %s; phonenumber: %s; email: %s;",
+				getSurname(), getName(), getPatronymic(), getLogin(), getPassword(),
+				getGroup(), getPhoneNumber(), getEmail());
+	}
 
-/**
-      * @return
-      * Возвращает true если пользователь пустой иначе false
-      */
-    public boolean isEmpty(){
-                if (id == 0 && login == null && password == null){
-                        return true;
-                    }
-                return false;
-    }
+	/**
+	 * @return Возвращает true если пользователь пустой иначе false
+	 */
+	public boolean isEmpty() {
+		if (id == 0 && login == null && password == null) {
+			return true;
+		}
+		return false;
+	}
 }
