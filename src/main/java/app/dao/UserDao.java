@@ -12,6 +12,7 @@ import java.util.Vector;
  */
 public class UserDao {
     private static final Logger logger = LogManager.getLogger(UserDao.class);
+    private static final String tableName = "user";
 
     private Connection getConnection() throws SQLException {
         return ConnectionBuilder.getConnection();
@@ -122,7 +123,7 @@ public class UserDao {
     public static Vector<User> getList() {
         Vector<User> listOfUsers = new Vector<>();
 
-        final String select_all = "select * from user";
+        final String select_all = "select * from " + tableName;
 
         try (Connection con = ConnectionBuilder.getConnection();
             Statement st = con.createStatement()) {
@@ -154,6 +155,30 @@ public class UserDao {
      * @param userToSave
      */
     public static void save(User userToSave) {
-     //todo save user to database
+        //todo save user to database
+
+        //todo use inner join to retrive user_group id
+        final String insert_user = "insert into " + tableName + "(login, password, user_group, " +
+                "surname, name, patronymic, phone_number, email) " +
+                "values(?,?,?,?,?,?,?,?)";
+
+        //todo get user_group id
+        int userGroupId = UserGroupDao.getId(userToSave.getGroup());
+
+        try (Connection conn = ConnectionBuilder.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(insert_user)) {
+            stmt.setString(1, userToSave.getLogin());
+            stmt.setString(2, userToSave.getPassword());
+            stmt.setInt(3, userGroupId);
+            stmt.setString(4, userToSave.getSurname());
+            stmt.setString(5, userToSave.getName());
+            stmt.setString(6, userToSave.getPatronymic());
+            stmt.setString(7, userToSave.getPhoneNumber());
+            stmt.setString(8, userToSave.getEmail());
+
+        }
+        catch (SQLException ex) {
+            logger.error(ex.getMessage());
+        }
     }
 }
