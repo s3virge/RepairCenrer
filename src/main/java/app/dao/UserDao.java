@@ -23,7 +23,7 @@ public class UserDao {
      * @return
      * возвращает пустого User если в базе нет пользователя с логином strLogin
      */
-    public User getUserByLogin(String strLogin) {
+    public User selectByLogin(String strLogin) {
         logger.trace("");
 
         final String SELECT_USER = "SELECT user.id, user.login, user.password, user_group.value " +
@@ -57,7 +57,7 @@ public class UserDao {
         return user;
     }
 
-    public static int getIdByFullName(String fullName) {
+    public static int selectIdByFullName(String fullName) {
         logger.trace("");
 
         String splitFullName[] = fullName.split(" ");
@@ -85,7 +85,7 @@ public class UserDao {
     /**
      * @return list of masters
      */
-    public static Vector<User> getListOfMasters() {
+    public static Vector<User> selectMasters() {
         logger.trace("");
 
         final String SELECT_МASTER = "SELECT user.id, user.login, user.password, " +
@@ -122,7 +122,7 @@ public class UserDao {
         return listOfMasters;
     }
 
-    public static Vector<User> getList() {
+    public static Vector<User> selectAll() {
         Vector<User> listOfUsers = new Vector<>();
 
         final String select_all = "SELECT user.id, user.login, user.password, user_group.value, " +
@@ -157,18 +157,18 @@ public class UserDao {
     }
 
     /**
-     * save user to column user in database
+     * insert user to column user in database
      * @param userToSave
 	 * @return last inserted id
      */
-    public static int save(User userToSave) {
+    public static int insert(User userToSave) {
 		int id = 0;
 
         final String insert_user = "insert into " + tableName + "(login, password, user_group, " +
                 "surname, name, patronymic, phone_number, email) " +
                 "values(?,?,?,?,?,?,?,?)";
 
-        int userGroupId = UserGroupDao.getId(userToSave.getGroup());
+        int userGroupId = UserGroupDao.selectId(userToSave.getGroup());
 
         try (Connection conn = ConnectionBuilder.getConnection();
              PreparedStatement stmt = conn.prepareStatement(insert_user)) {
@@ -197,5 +197,17 @@ public class UserDao {
         }
 
         return id;
+    }
+
+    public static void delete(int id) {
+        final String delete_user = "DELETE FROM " + tableName + " WHERE id = " + id;
+
+        try (Connection dbConn = ConnectionBuilder.getConnection();
+             Statement statement = dbConn.createStatement()) {
+            statement.execute(delete_user);
+        }
+        catch (SQLException exc) {
+            logger.error(exc.getMessage());
+        }
     }
 }

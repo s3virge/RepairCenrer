@@ -77,7 +77,7 @@ public class UserManagementDlgController {
     }
 
     private void fillTable() {
-        final Vector<User> list = UserDao.getList();
+        final Vector<User> list = UserDao.selectAll();
         tvObservableList.clear();
 
         for (User u : list) {
@@ -129,15 +129,20 @@ public class UserManagementDlgController {
 
     @FXML
     private void onBtnDelete() {
-        //todo delete selected user from user table
-        //todo ask Do you want do delete selected use?
+        if (deletionApproved()) {
+            User selUser = (User) tvUserInfo.getSelectionModel().getSelectedItem();
+            UserDao.delete(selUser.getId());
+            fillTable();
+        }
+    }
+
+    private boolean deletionApproved() {
         String contentText = "Вы действительно хотите удалить выбранного пользователя?";
         Alert msgBox = new Alert(Alert.AlertType.CONFIRMATION, contentText);
         msgBox.setHeaderText(null);
         Optional<ButtonType> btnType = msgBox.showAndWait();
-        if (btnType.get() == ButtonType.OK) {
 
-        }
+        return btnType.get() == ButtonType.OK;
     }
 
     @FXML

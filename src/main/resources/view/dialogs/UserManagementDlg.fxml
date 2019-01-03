@@ -6,7 +6,7 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="442.0" prefWidth="950.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.controllers.UserManagementDlgController">
+<AnchorPane prefHeight="442.0" prefWidth="950.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.controllers.UserManagementDlgController">
    <children>
       <TableView fx:id="tvUserInfo" layoutX="25.0" layoutY="23.0" prefHeight="352.0" prefWidth="763.0" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="20.0">
         <columns>
@@ -27,6 +27,6 @@
             <Button fx:id="btnDelete" mnemonicParsing="false" onAction="#onBtnDelete" text="Удалить" />
         </buttons>
       </ButtonBar>
-      <Button cancelButton="true" layoutX="752.0" layoutY="392.0" mnemonicParsing="false" onAction="#onBtnCancelClick" text="Отмена" AnchorPane.rightAnchor="100.0" />
+      <Button cancelButton="true" layoutX="752.0" layoutY="392.0" mnemonicParsing="false" onAction="#onBtnCancelClick" text="Ok" AnchorPane.rightAnchor="100.0" />
    </children>
 </AnchorPane>

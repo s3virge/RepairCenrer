@@ -26,7 +26,7 @@ public abstract class CommonDao {
      * @param selectValue
      * @return selectValue id. If name does not exist return 0
      */
-    public int getId(String selectValue) {
+    public int selectId(String selectValue) {
 //        logger.trace("");
 
         int id = 0;
@@ -50,10 +50,10 @@ public abstract class CommonDao {
     }
 
     /**
-     * save name to database
+     * insert name to database
      * @param insertValue
      */
-    public int save(String insertValue) {
+    public int insert(String insertValue) {
 //        logger.trace("");
 
         try (Connection con = ConnectionBuilder.getConnection();
@@ -75,14 +75,14 @@ public abstract class CommonDao {
             logger.error(ex.getMessage());
         }
 
-        return getId(insertValue);
+        return selectId(insertValue);
     }
 
     /**
      * get suggestions for auto suggest text fields
      * @param asTextField - AutoSuggestTextField object
      */
-    public void getEntries (AutoSuggestTextField asTextField) {
+    public void selectEntries(AutoSuggestTextField asTextField) {
 
         ArrayList<String> alEntries = new ArrayList<>();
 

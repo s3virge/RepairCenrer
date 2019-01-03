@@ -45,7 +45,7 @@ public class UserAddDlgController {
 
 //        log.debug("{}", newUser.toString());
 
-        UserDao.save(newUser);
+        UserDao.insert(newUser);
 
         closeWnd(event);
     }

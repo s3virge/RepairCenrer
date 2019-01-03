@@ -20,21 +20,21 @@ public class DeviceDao {
     }
 
     /**
-     * save to database information about owner
+     * insert to database information about owner
      */
-    public int save() {
+    public int insert() {
         log.trace("");
 
         int id = 0;
-        int type_id     = getTypeId();
-        int brand_id    = getBrandId();
-        int model_id    = getModelId();
+        int type_id     = selectTypeId();
+        int brand_id    = selectBrandId();
+        int model_id    = selectModelId();
         String serialNumber = device.getSerialNumber();
-        int defect_id   = getDefectId();
+        int defect_id   = selectDefectId();
         int owner_id    = device.getOwnerId();
         int repair_id   = device.getRepairId();
-        int completeness_id = getComgletenessId();
-        int appearance_id   = getAppearanceId();
+        int completeness_id = selectComgletenessId();
+        int appearance_id   = selectAppearanceId();
         String note = device.getNote();
 
         String sql = "insert into " + tableName +
@@ -72,73 +72,73 @@ public class DeviceDao {
         return id;
     }
 
-    private int getModelId() {
+    private int selectModelId() {
         String devModel = device.getModel();
         ModelDao modelDao = new ModelDao();
-        int model_id = modelDao.getId(devModel);
+        int model_id = modelDao.selectId(devModel);
 
         if (model_id == 0) {
-            model_id = modelDao.save(devModel);
+            model_id = modelDao.insert(devModel);
         }
         return model_id;
     }
 
-    private int getBrandId() {
+    private int selectBrandId() {
         String devBrand = device.getBrand();
         BrandDao brandDao = new BrandDao();
-        int brand_id     = brandDao.getId(devBrand);
+        int brand_id     = brandDao.selectId(devBrand);
 
         if (brand_id == 0) {
-            brand_id = brandDao.save(devBrand);
+            brand_id = brandDao.insert(devBrand);
         }
         return brand_id;
     }
 
-    private int getTypeId() {
+    private int selectTypeId() {
         String devType = device.getType();
         TypeDao typeDao = new TypeDao();
-        int type_id  = typeDao.getId(devType);
+        int type_id  = typeDao.selectId(devType);
 
         if (type_id == 0) {
-            type_id = typeDao.save(devType);
+            type_id = typeDao.insert(devType);
         }
         return type_id;
     }
 
-    private int getDefectId() {
+    private int selectDefectId() {
         String defect = device.getDefect();
         DefectDao defectDao = new DefectDao();
-        int defect_id  = defectDao.getId(defect);
+        int defect_id  = defectDao.selectId(defect);
 
         if (defect_id == 0) {
-            defect_id = defectDao.save(defect);
+            defect_id = defectDao.insert(defect);
         }
         return defect_id;
     }
 
-    private int getComgletenessId() {
+    private int selectComgletenessId() {
         String completeness = device.getCompleteness();
         CompletenessDao completenessDao = new CompletenessDao();
-        int completness_id  = completenessDao.getId(completeness);
+        int completness_id  = completenessDao.selectId(completeness);
 
         if (completness_id == 0) {
-            completness_id = completenessDao.save(completeness);
+            completness_id = completenessDao.insert(completeness);
         }
         return completness_id;
     }
 
-    private int getAppearanceId() {
+    private int selectAppearanceId() {
         String appearance = device.getAppearance();
         AppearanceDao appearanceDao = new AppearanceDao();
-        int appearance_id  = appearanceDao.getId(appearance);
+        int appearance_id  = appearanceDao.selectId(appearance);
 
         if (appearance_id == 0) {
-            appearance_id = appearanceDao.save(appearance);
+            appearance_id = appearanceDao.insert(appearance);
         }
         return appearance_id;
     }
 
-    public static int getMaxId() {
+    public static int selectMaxId() {
         int maxId = 0;
 
         String sql = "Select max(id) as id from " + tableName;

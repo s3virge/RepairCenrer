@@ -16,7 +16,7 @@ public class UserGroupDao {
 	/**
 	 * @return list of groups names
 	 */
-	public static StringVector getList() {
+	public static StringVector selectAll() {
 		log.trace("");
 
 		final String select_user_group = "select * from user_group";
@@ -39,7 +39,7 @@ public class UserGroupDao {
 		return list;
 	}
 
-	public static int getId(String group) {
+	public static int selectId(String group) {
 		log.trace("");
 
 		int id = 0;

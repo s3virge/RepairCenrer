@@ -24,10 +24,10 @@ public class OwnerDao {
     }
 
     /**
-     * save to database information about owner
+     * insert to database information about owner
      * @return id of created owner
      */
-    public int save() {
+    public int insert() {
         log.trace("");
 
         int id = 0;
@@ -35,28 +35,28 @@ public class OwnerDao {
         String surname = owner.getSurname();
         SurnameDao surnameDao = new SurnameDao();
 
-        int surname_id = surnameDao.getId(surname);
+        int surname_id = surnameDao.selectId(surname);
 
         if (surname_id == 0) {
-            surname_id = surnameDao.save(surname);
+            surname_id = surnameDao.insert(surname);
         }
 
         String name = owner.getName();
         NameDao nameDao = new NameDao();
 
-        int name_id = nameDao.getId(name);
+        int name_id = nameDao.selectId(name);
 
         if (name_id == 0) {
-            name_id = nameDao.save(name);
+            name_id = nameDao.insert(name);
         }
 
         String patronymic = owner.getPatronymic();
         PatronymicDao patronymicDao = new PatronymicDao();
 
-        int patronymic_id = patronymicDao.getId(patronymic);
+        int patronymic_id = patronymicDao.selectId(patronymic);
 
         if (patronymic_id == 0) {
-            patronymic_id = patronymicDao.save(patronymic);
+            patronymic_id = patronymicDao.insert(patronymic);
         }
 
         String phoneNumber = owner.getPhoneNumber();
@@ -89,12 +89,12 @@ public class OwnerDao {
      * @return owner id. If owner does not exist return 0
      * id of the owner in database by phone number or 0 if owner does not exist
      */
-    public int getId() {
+    public int selectId() {
         logger.trace("");
 
-        int surname_id = new SurnameDao().getId(owner.getSurname());
-        int name_id     = new NameDao().getId(owner.getName());
-        int patronymic_id = new PatronymicDao().getId(owner.getPatronymic());
+        int surname_id = new SurnameDao().selectId(owner.getSurname());
+        int name_id     = new NameDao().selectId(owner.getName());
+        int patronymic_id = new PatronymicDao().selectId(owner.getPatronymic());
         String phone_number = owner.getPhoneNumber();
 
         String sql = "select id from " + tableName + " where surname_id = ? " +

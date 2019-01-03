@@ -65,7 +65,7 @@ public class LoginWndController {
 			}
 
 			UserDao userDao = new UserDao();
-			User user = userDao.getUserByLogin(login);
+			User user = userDao.selectByLogin(login);
 
 			//если юзера нет
 			if (user.isEmpty()) {

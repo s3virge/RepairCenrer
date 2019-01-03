@@ -57,7 +57,7 @@ public class NewRepairDialogController {
         //разные мастера ремонтируют разные устройства
         //нужно знать тип устройства которое принимается
         //получить из базы всех мастеров который ремонтируют указанные типы устройств
-        List<User> masters = UserDao.getListOfMasters();
+        List<User> masters = UserDao.selectMasters();
 
         for (User u : masters) {
             String fio = String.format("%s %s %s", u.getSurname(), u.getName(), u.getPatronymic());
@@ -69,16 +69,16 @@ public class NewRepairDialogController {
      * gets suggestions for all text fields
      */
     private void getSuggestions() {
-        new TypeDao().getEntries(tfDeviceType);
-        new BrandDao().getEntries(tfBrand);
-        new ModelDao().getEntries(tfModel);
-        new CompletenessDao().getEntries(tfCompleteness);
-        new AppearanceDao().getEntries(tfAppearance);
-        new DefectDao().getEntries(tfDefect);
+        new TypeDao().selectEntries(tfDeviceType);
+        new BrandDao().selectEntries(tfBrand);
+        new ModelDao().selectEntries(tfModel);
+        new CompletenessDao().selectEntries(tfCompleteness);
+        new AppearanceDao().selectEntries(tfAppearance);
+        new DefectDao().selectEntries(tfDefect);
 
-        new SurnameDao().getEntries(tfSurname);
-        new NameDao().getEntries(tfName);
-        new PatronymicDao().getEntries(tfPatronymic);
+        new SurnameDao().selectEntries(tfSurname);
+        new NameDao().selectEntries(tfName);
+        new PatronymicDao().selectEntries(tfPatronymic);
     }
 
     private void setTestData() {
@@ -97,7 +97,7 @@ public class NewRepairDialogController {
     }
 
     private void setNewDeviceNumber() {
-        lDeviceID.setText(String.valueOf(DeviceDao.getMaxId() + 1));
+        lDeviceID.setText(String.valueOf(DeviceDao.selectMaxId() + 1));
     }
 
     @FXML
@@ -120,10 +120,10 @@ public class NewRepairDialogController {
 
         // check if owner exist
         OwnerDao ownerDao = new OwnerDao(owner);
-        int ownerID = ownerDao.getId();
+        int ownerID = ownerDao.selectId();
 
         if (ownerID == 0) {
-            ownerID = ownerDao.save();
+            ownerID = ownerDao.insert();
         }
 
         owner.setId(ownerID);
@@ -134,7 +134,7 @@ public class NewRepairDialogController {
 //        logger.debug("owner id: {}, repair id: {}", ownerID, repairID);
 
         Device device = createDevice(ownerID, repairID);
-        new DeviceDao(device).save();
+        new DeviceDao(device).insert();
 
         closeDlg(actionEvent);
     }
@@ -144,9 +144,9 @@ public class NewRepairDialogController {
         int loggedInUserId = LoggedInUser.getLoggedInUser().getId();
         repair.setAcceptorId(loggedInUserId);
         String fullName = cbMaster.getSelectionModel().getSelectedItem().toString();
-        int masterId = UserDao.getIdByFullName(fullName);
+        int masterId = UserDao.selectIdByFullName(fullName);
         repair.setMasterId(masterId);
-        repair.setStatusId(new StatusDao().getId("Оформлен"));
+        repair.setStatusId(new StatusDao().selectId("Оформлен"));
         repair.setDateOfAccept(LocalDateTime.now().toString());
         return repair;
     }

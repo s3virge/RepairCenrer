@@ -26,7 +26,7 @@ public class RepairDao {
     }
 
     /**
-     * save information about repair to database
+     * insert information about repair to database
      * @return id of the inserted row
      */
     public int save() {
