@@ -10,9 +10,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -22,6 +20,7 @@ import org.apache.logging.log4j.Logger;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Optional;
 import java.util.Vector;
 
 public class UserManagementDlgController {
@@ -48,7 +47,7 @@ public class UserManagementDlgController {
     private TableColumn colEmail;
 
     @FXML
-    private Button btnAddUser;
+    private Button btnAdd;
 
     private ObservableList<User> tvObservableList = FXCollections.observableArrayList();
 
@@ -90,7 +89,7 @@ public class UserManagementDlgController {
 
 
     @FXML
-    private void OnAddBtn() {
+    private void onBtnAdd() {
         log.trace("");
         // Загружаем fxml-файл и создаём новую сцену
         // для всплывающего диалогового окна.
@@ -114,7 +113,7 @@ public class UserManagementDlgController {
         //подготавливаем их
         dialogStage.setTitle("Добавить пользователя");
         dialogStage.initModality(Modality.APPLICATION_MODAL);
-        final Window window = btnAddUser.getScene().getWindow();
+        final Window window = btnAdd.getScene().getWindow();
         dialogStage.initOwner(window);
 
         //расставляем декорации на сцене согласно плану
@@ -126,5 +125,23 @@ public class UserManagementDlgController {
         dialogStage.showAndWait();
 
         fillTable();
+    }
+
+    @FXML
+    private void onBtnDelete() {
+        //todo delete selected user from user table
+        //todo ask Do you want do delete selected use?
+        String contentText = "Вы действительно хотите удалить выбранного пользователя?";
+        Alert msgBox = new Alert(Alert.AlertType.CONFIRMATION, contentText);
+        msgBox.setHeaderText(null);
+        Optional<ButtonType> btnType = msgBox.showAndWait();
+        if (btnType.get() == ButtonType.OK) {
+
+        }
+    }
+
+    @FXML
+    private void onBtnEdit() {
+
     }
 }
