@@ -34,6 +34,8 @@ public class UserEditDlgController {
 	@FXML
 	private ComboBox cbUserGroup;
 
+	private int userId;
+
 	@FXML
 	private void OnClickBtnEdit(ActionEvent event) {
 		log.trace("");
@@ -42,7 +44,7 @@ public class UserEditDlgController {
 
 		//todo need to know user id
 
-		User userToChange = new User(tfLogin.getText(), tfPassword.getText(), userGroup,
+		User userToChange = new User(userId, tfLogin.getText(), tfPassword.getText(), userGroup,
 				tfSurname.getText(), tfName.getText(), tfPatronymic.getText(),
 				tfEmail.getText(), tfPhoneNumber.getText());
 
@@ -77,6 +79,8 @@ public class UserEditDlgController {
 	}
 
 	public void fillTextfields(User selectedUser) {
+
+        userId = selectedUser.getId();
 		tfSurname.setText(selectedUser.getSurname());
 		tfName.setText(selectedUser.getName());
 		tfPatronymic.setText(selectedUser.getPatronymic());

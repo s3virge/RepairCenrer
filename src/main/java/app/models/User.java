@@ -16,9 +16,10 @@ public class User {
 	private final SimpleStringProperty phoneNumber;
 	private final SimpleStringProperty email;
 
-	public User(String login, String password, String group,
+	public User(int id, String login, String password, String group,
 	            String surname, String name, String patronymic, String email, String phoneNumber) {
-		this.id = 0;
+
+		this.id = id;
 		this.login = new SimpleStringProperty(login);
 		this.password = new SimpleStringProperty(password);
 		this.group = new SimpleStringProperty(group);

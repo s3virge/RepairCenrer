@@ -39,7 +39,7 @@ public class UserAddDlgController {
 
         String userGroup = (String) cbUserGroup.getSelectionModel().getSelectedItem();
 
-        User newUser = new User(tfLogin.getText(), tfPassword.getText(), userGroup,
+        User newUser = new User(0, tfLogin.getText(), tfPassword.getText(), userGroup,
                 tfSurname.getText(), tfName.getText(), tfPatronymic.getText(),
                 tfEmail.getText(), tfPhoneNumber.getText());
 

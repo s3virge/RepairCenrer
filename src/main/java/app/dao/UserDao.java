@@ -221,7 +221,7 @@ public class UserDao {
 
         final String update_user = String.format("update %s " +
                 "set surname = '%s', name = '%s', patronymic = '%s', " +
-                "login = '%s', password = '%s', group = %d, " +
+                "login = '%s', password = '%s', user_group = %d, " +
                 "phone_number = '%s', email = '%s' " +
                 "where id = %d", tableName,
                 userToUpdate.getSurname(), userToUpdate.getName(), userToUpdate.getPatronymic(),
