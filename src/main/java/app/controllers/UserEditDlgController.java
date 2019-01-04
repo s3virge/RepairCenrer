@@ -66,11 +66,7 @@ public class UserEditDlgController {
 		//this trick is working
 		Platform.runLater(() -> tfSurname.requestFocus());
 
-		tfSurname.setText("Фамилия выбранного пользователя");
-
-		//todo set in edit field of combobox user group name
 		cbUserGroup.getItems().addAll(UserGroup.ADMIN, UserGroup.ACCEPTOR, UserGroup.MANAGER, UserGroup.MASTER);
-
 	}
 
 	public void fillTextfields(User selectedUser) {
@@ -82,6 +78,6 @@ public class UserEditDlgController {
 		tfPhoneNumber.setText(selectedUser.getPhoneNumber());
 		tfEmail.setText(selectedUser.getEmail());
 
-		//todo set user group in combobox
+		cbUserGroup.getSelectionModel().select(selectedUser.getGroup());
 	}
 }
