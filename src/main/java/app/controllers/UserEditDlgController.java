@@ -16,13 +16,20 @@ import org.apache.logging.log4j.Logger;
 public class UserEditDlgController {
 	private static Logger log = LogManager.getLogger(UserEditDlgController.class);
 
-	@FXML TextField tfSurname;
-	@FXML TextField tfName;
-	@FXML TextField tfPatronymic;
-	@FXML TextField tfLogin;
-	@FXML TextField tfPassword;
-	@FXML TextField tfPhoneNumber;
-	@FXML TextField tfEmail;
+	@FXML
+	TextField tfSurname;
+	@FXML
+	TextField tfName;
+	@FXML
+	TextField tfPatronymic;
+	@FXML
+	TextField tfLogin;
+	@FXML
+	TextField tfPassword;
+	@FXML
+	TextField tfPhoneNumber;
+	@FXML
+	TextField tfEmail;
 
 	@FXML
 	private ComboBox cbUserGroup;
@@ -31,17 +38,17 @@ public class UserEditDlgController {
 	private void OnClickBtnEdit(ActionEvent event) {
 		log.trace("");
 
-		//todo change data about user in database
-
 		String userGroup = (String) cbUserGroup.getSelectionModel().getSelectedItem();
 
-		User newUser = new User(tfLogin.getText(), tfPassword.getText(), userGroup,
+		//todo need to know user id
+
+		User userToChange = new User(tfLogin.getText(), tfPassword.getText(), userGroup,
 				tfSurname.getText(), tfName.getText(), tfPatronymic.getText(),
 				tfEmail.getText(), tfPhoneNumber.getText());
 
 //        log.debug("{}", newUser.toString());
 
-//        UserDao.insert(newUser);
+        UserDao.update(userToChange);
 
 		closeWnd(event);
 	}

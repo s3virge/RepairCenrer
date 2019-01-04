@@ -210,4 +210,30 @@ public class UserDao {
             logger.error(exc.getMessage());
         }
     }
+
+    public static void update(User userToUpdate) {
+        logger.trace("");
+        /*
+		UPDATE table_name
+		SET column1 = value1, column2 = value2, ...
+		WHERE condition;
+		*/
+
+        final String update_user = String.format("update %s " +
+                "set surname = '%s', name = '%s', patronymic = '%s', " +
+                "login = '%s', password = '%s', group = %d, " +
+                "phone_number = '%s', email = '%s' " +
+                "where id = %d", tableName,
+                userToUpdate.getSurname(), userToUpdate.getName(), userToUpdate.getPatronymic(),
+                userToUpdate.getLogin(), userToUpdate.getPassword(), UserGroupDao.selectId(userToUpdate.getGroup()),
+                userToUpdate.getPhoneNumber(), userToUpdate.getEmail(), userToUpdate.getId());
+
+        try (Connection con = ConnectionBuilder.getConnection();
+             Statement st = con.createStatement()) {
+            st.execute(update_user);
+        }
+        catch (SQLException ex) {
+            logger.error(ex.getMessage());
+        }
+    }
 }
