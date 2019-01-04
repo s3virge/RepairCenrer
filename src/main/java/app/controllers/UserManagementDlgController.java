@@ -141,12 +141,51 @@ public class UserManagementDlgController {
         Alert msgBox = new Alert(Alert.AlertType.CONFIRMATION, contentText);
         msgBox.setHeaderText(null);
         Optional<ButtonType> btnType = msgBox.showAndWait();
-
         return btnType.get() == ButtonType.OK;
     }
 
     @FXML
     private void onBtnEdit() {
+        log.trace("");
+        // Загружаем fxml-файл и создаём новую сцену
+        // для всплывающего диалогового окна.
+        FXMLLoader loader = new FXMLLoader();
+        //Sets the location used to resolve relative path attribute values.
+        //getResource - Finds a resource with a given name.
+        URL resource = getClass().getResource("/view/dialogs/UserEditDlg.fxml");
+        loader.setLocation(resource);
 
+        Parent layout = null;
+
+        try {
+            layout = loader.load();
+        }
+        catch (IOException e) {
+            log.error(e.getMessage());
+            throw new RuntimeException(e);
+        }
+
+        // Создаём подмостки для диалогового окна.
+        Stage dialogStage = new Stage();
+        //подготавливаем их
+        dialogStage.setTitle("Изменить пользователя");
+        dialogStage.initModality(Modality.APPLICATION_MODAL);
+        final Window window = btnAdd.getScene().getWindow();
+        dialogStage.initOwner(window);
+
+        //get controller and send him selected user
+        User selectedUser = (User) tvUserInfo.getSelectionModel().getSelectedItem();
+        UserEditDlgController userEditDlgController = loader.getController();
+        userEditDlgController.fillTextfields(selectedUser);
+
+        //расставляем декорации на сцене согласно плану
+        Scene scene = new Scene(layout);
+        dialogStage.setScene(scene);
+        dialogStage.setResizable(false);
+
+        // Отображаем диалоговое окно и ждём, пока пользователь его не закроет
+        dialogStage.showAndWait();
+
+        fillTable();
     }
 }
