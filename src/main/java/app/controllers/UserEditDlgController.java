@@ -8,14 +8,22 @@ import app.utils.MsgBox;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.Window;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.net.URL;
 import java.security.NoSuchAlgorithmException;
 
 import static app.utils.MsgBox.Type.MB_ERROR;
@@ -24,22 +32,24 @@ public class UserEditDlgController {
 	private static Logger log = LogManager.getLogger(UserEditDlgController.class);
 
 	@FXML
-	TextField tfSurname;
+	private TextField tfSurname;
 	@FXML
-	TextField tfName;
+	private TextField tfName;
 	@FXML
-	TextField tfPatronymic;
+	private TextField tfPatronymic;
 	@FXML
-	TextField tfLogin;
+	private TextField tfLogin;
 	@FXML
-	TextField tfPassword;
+	private TextField tfPassword;
 	@FXML
-	TextField tfPhoneNumber;
+	private TextField tfPhoneNumber;
 	@FXML
-	TextField tfEmail;
+	private TextField tfEmail;
 
 	@FXML
 	private ComboBox cbUserGroup;
+	@FXML
+	private Button btnEditPassword;
 
 	private int userId;
 
@@ -98,16 +108,45 @@ public class UserEditDlgController {
 	}
 
 	@FXML private void onClickBtnEditPassword() {
-		//todo edit password
-		MsgBox.show("Change user password");
+			log.trace("");
+			// Загружаем fxml-файл и создаём новую сцену
+			// для всплывающего диалогового окна.
+			FXMLLoader loader = new FXMLLoader();
+			//Sets the location used to resolve relative path attribute values.
+			//getResource - Finds a resource with a given name.
+			URL resource = getClass().getResource("/view/dialogs/ChangePasswordDlg.fxml");
+			loader.setLocation(resource);
 
-		String paswd = null;
+			Parent layout = null;
 
-//		try {
-//			paswd = MD5Hash.get(passwordField.getText());
-//		}
-//		catch (NoSuchAlgorithmException | UnsupportedEncodingException e) {
-//			MsgBox.show(e.getMessage(), MB_ERROR);
-//		}
+			try {
+				layout = loader.load();
+			}
+			catch (IOException e) {
+				log.error(e.getMessage());
+				throw new RuntimeException(e);
+			}
+
+			// Создаём подмостки для диалогового окна.
+			Stage dialogStage = new Stage();
+			//подготавливаем их
+			dialogStage.setTitle("Изменить пароль");
+			dialogStage.initModality(Modality.APPLICATION_MODAL);
+
+			final Window window = btnEditPassword.getScene().getWindow();
+			dialogStage.initOwner(window);
+
+			//get controller and send to him selected user
+//			User selectedUser = (User) tvUserInfo.getSelectionModel().getSelectedItem();
+//			UserEditDlgController userEditDlgController = loader.getController();
+//			userEditDlgController.fillTextfields(selectedUser);
+
+			//расставляем декорации на сцене согласно плану
+			Scene scene = new Scene(layout);
+			dialogStage.setScene(scene);
+			dialogStage.setResizable(false);
+
+			// Отображаем диалоговое окно и ждём, пока пользователь его не закроет
+			dialogStage.showAndWait();
 	}
 }
