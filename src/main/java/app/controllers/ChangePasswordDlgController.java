@@ -2,6 +2,7 @@ package app.controllers;
 
 import app.utils.MD5Hash;
 import app.utils.MsgBox;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -21,9 +22,13 @@ public class ChangePasswordDlgController {
 	@FXML
 	private TextField tfNewPassword;
 
+	private String password;
+	private boolean okPressed = false;
+
 	@FXML
 	private void initialize() {
-		tfNewPassword.requestFocus();
+		//this trick is working
+		Platform.runLater(() -> tfNewPassword.requestFocus());
 	}
 
 	@FXML
@@ -33,16 +38,15 @@ public class ChangePasswordDlgController {
 
 	@FXML
 	private void onBtnOk(ActionEvent actionEvent) {
-		//todo cript password and transfer to textField
-		String paswd = null;
 
 		try {
-			paswd = MD5Hash.get(tfNewPassword.getText());
+			password = MD5Hash.get(tfNewPassword.getText());
 		}
 		catch (NoSuchAlgorithmException | UnsupportedEncodingException e) {
 			MsgBox.show(e.getMessage(), MB_ERROR);
 		}
 
+		okPressed = true;
 		closeWnd(actionEvent);
 	}
 
@@ -51,5 +55,13 @@ public class ChangePasswordDlgController {
 		Node source = (Node) actionEvent.getSource();
 		Stage stage = (Stage) source.getScene().getWindow();
 		stage.close();
+	}
+
+	public String getNewPassword() {
+		return password;
+	}
+
+	public boolean okBtnPressed() {
+		return okPressed;
 	}
 }

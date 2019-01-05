@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane prefHeight="363.0" prefWidth="375.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.controllers.UserAddDlgController">
+<AnchorPane prefHeight="363.0" prefWidth="375.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.controllers.UserAddDlgController">
    <children>
       <VBox fx:id="vBoxFields" alignment="CENTER" layoutX="117.0" layoutY="23.0" prefHeight="200.0" prefWidth="226.0" spacing="10.0">
          <children>
@@ -34,7 +34,7 @@
             <Label layoutX="10.0" layoutY="195.0" text="E-mail" />
          </children>
       </VBox>
-      <ButtonBar layoutX="117.0" layoutY="309.0" prefHeight="40.0" prefWidth="200.0">
+      <ButtonBar layoutX="143.0" layoutY="310.0" prefHeight="40.0" prefWidth="200.0">
         <buttons>
             <Button fx:id="btnAdd" defaultButton="true" mnemonicParsing="false" onAction="#OnClickBtnAdd" text="Добавить" />
             <Button fx:id="btnCancel" cancelButton="true" mnemonicParsing="false" onAction="#OnClickBtnCancel" text="Отмена" />
