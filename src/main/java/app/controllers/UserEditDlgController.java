@@ -3,6 +3,8 @@ package app.controllers;
 import app.dao.UserDao;
 import app.models.User;
 import app.models.UserGroup;
+import app.utils.MD5Hash;
+import app.utils.MsgBox;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -12,6 +14,11 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
+import java.io.UnsupportedEncodingException;
+import java.security.NoSuchAlgorithmException;
+
+import static app.utils.MsgBox.Type.MB_ERROR;
 
 public class UserEditDlgController {
 	private static Logger log = LogManager.getLogger(UserEditDlgController.class);
@@ -41,8 +48,6 @@ public class UserEditDlgController {
 		log.trace("");
 
 		String userGroup = (String) cbUserGroup.getSelectionModel().getSelectedItem();
-
-		//todo need to know user id
 
 		User userToChange = new User(userId, tfLogin.getText(), tfPassword.getText(), userGroup,
 				tfSurname.getText(), tfName.getText(), tfPatronymic.getText(),
@@ -90,5 +95,19 @@ public class UserEditDlgController {
 		tfEmail.setText(selectedUser.getEmail());
 
 		cbUserGroup.getSelectionModel().select(selectedUser.getGroup());
+	}
+
+	@FXML private void onClickBtnEditPassword() {
+		//todo edit password
+		MsgBox.show("Change user password");
+
+		String paswd = null;
+
+//		try {
+//			paswd = MD5Hash.get(passwordField.getText());
+//		}
+//		catch (NoSuchAlgorithmException | UnsupportedEncodingException e) {
+//			MsgBox.show(e.getMessage(), MB_ERROR);
+//		}
 	}
 }

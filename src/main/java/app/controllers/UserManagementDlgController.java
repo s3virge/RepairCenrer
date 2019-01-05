@@ -137,6 +137,7 @@ public class UserManagementDlgController {
     }
 
     private boolean deletionApproved() {
+//        MsgBox.show(e.getMessage(), MB_ERROR);
         String contentText = "Вы действительно хотите удалить выбранного пользователя?";
         Alert msgBox = new Alert(Alert.AlertType.CONFIRMATION, contentText);
         msgBox.setHeaderText(null);
@@ -173,7 +174,7 @@ public class UserManagementDlgController {
         final Window window = btnAdd.getScene().getWindow();
         dialogStage.initOwner(window);
 
-        //get controller and send him selected user
+        //get controller and send to him selected user
         User selectedUser = (User) tvUserInfo.getSelectionModel().getSelectedItem();
         UserEditDlgController userEditDlgController = loader.getController();
         userEditDlgController.fillTextfields(selectedUser);

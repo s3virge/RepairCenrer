@@ -3,6 +3,8 @@ package app.controllers;
 import app.dao.UserDao;
 import app.models.User;
 import app.models.UserGroup;
+import app.utils.MD5Hash;
+import app.utils.MsgBox;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -12,6 +14,11 @@ import javafx.stage.Stage;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import javafx.event.ActionEvent;
+
+import java.io.UnsupportedEncodingException;
+import java.security.NoSuchAlgorithmException;
+
+import static app.utils.MsgBox.Type.MB_ERROR;
 
 public class UserAddDlgController {
     private static Logger log = LogManager.getLogger(UserAddDlgController.class);
@@ -39,7 +46,17 @@ public class UserAddDlgController {
 
         String userGroup = (String) cbUserGroup.getSelectionModel().getSelectedItem();
 
-        User newUser = new User(0, tfLogin.getText(), tfPassword.getText(), userGroup,
+        String paswd = null;
+
+        try {
+            paswd = MD5Hash.get(tfPassword.getText());
+        }
+        catch (NoSuchAlgorithmException | UnsupportedEncodingException e) {
+            log.error(e.getMessage());
+//            MsgBox.show(e.getMessage(), MB_ERROR);
+        }
+
+        User newUser = new User(0, tfLogin.getText(), paswd, userGroup,
                 tfSurname.getText(), tfName.getText(), tfPatronymic.getText(),
                 tfEmail.getText(), tfPhoneNumber.getText());
 
