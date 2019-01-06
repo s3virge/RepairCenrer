@@ -14,16 +14,16 @@
       <menus>
         <Menu mnemonicParsing="false" text="Устройство">
           <items>
-            <MenuItem mnemonicParsing="false" onAction="#menuItemNewRepair" text="Оформить">
+            <MenuItem mnemonicParsing="false" onAction="#showNewRepairDlg" text="Оформить">
                      <accelerator>
                         <KeyCodeCombination alt="UP" code="N" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
                      </accelerator>
             </MenuItem>
-                  <MenuItem mnemonicParsing="false" onAction="#menuItemNewRepair" text="Выдать" />
-                  <MenuItem mnemonicParsing="false" onAction="#menuItemNewRepair" text="Диагностика" />
-                  <MenuItem mnemonicParsing="false" onAction="#menuItemNewRepair" text="Согласование" />
-                  <MenuItem mnemonicParsing="false" onAction="#menuItemNewRepair" text="Ожидание" />
-                  <MenuItem mnemonicParsing="false" onAction="#menuItemNewRepair" text="Ремонт" />
+                  <MenuItem mnemonicParsing="false" onAction="#showNewRepairDlg" text="Выдать" />
+                  <MenuItem mnemonicParsing="false" onAction="#showNewRepairDlg" text="Диагностика" />
+                  <MenuItem mnemonicParsing="false" onAction="#showNewRepairDlg" text="Согласование" />
+                  <MenuItem mnemonicParsing="false" onAction="#showNewRepairDlg" text="Ожидание" />
+                  <MenuItem mnemonicParsing="false" onAction="#showNewRepairDlg" text="Ремонт" />
           </items>
         </Menu>
             <Menu mnemonicParsing="false" text="Пользователи">
@@ -33,9 +33,9 @@
             </Menu>
       </menus>
     </MenuBar>
-      <AnchorPane>
+      <AnchorPane VBox.vgrow="ALWAYS">
          <children>
-            <ListView layoutX="14.0" layoutY="14.0" prefHeight="520.0" prefWidth="100.0" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="15.0" />
+            <ListView fx:id="lstDeviceList" prefHeight="519.0" prefWidth="100.0" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="15.0" />
          </children>
       </AnchorPane>
   </children>

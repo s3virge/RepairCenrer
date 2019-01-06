@@ -2,10 +2,12 @@ package app.dao;
 
 import app.dao.handbooks.device.*;
 import app.models.Device;
+import app.models.DeviceStatus;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.sql.*;
+import java.util.Vector;
 
 //Data Access Object for device
 public class DeviceDao {
@@ -26,15 +28,15 @@ public class DeviceDao {
         log.trace("");
 
         int id = 0;
-        int type_id     = selectTypeId();
-        int brand_id    = selectBrandId();
-        int model_id    = selectModelId();
+        int type_id = selectTypeId();
+        int brand_id = selectBrandId();
+        int model_id = selectModelId();
         String serialNumber = device.getSerialNumber();
-        int defect_id   = selectDefectId();
-        int owner_id    = device.getOwnerId();
-        int repair_id   = device.getRepairId();
-        int completeness_id = selectComgletenessId();
-        int appearance_id   = selectAppearanceId();
+        int defect_id = selectDefectId();
+        int owner_id = device.getOwnerId();
+        int repair_id = device.getRepairId();
+        int completeness_id = selectCompletenessId();
+        int appearance_id = selectAppearanceId();
         String note = device.getNote();
 
         String sql = "insert into " + tableName +
@@ -60,7 +62,7 @@ public class DeviceDao {
             //Retrieves any auto-generated keys created as a result of executing this Statement object.
             ResultSet rs = stmt.getGeneratedKeys();
 
-            if(rs.next()){
+            if (rs.next()) {
                 id = rs.getInt(1);
             }
 
@@ -86,7 +88,7 @@ public class DeviceDao {
     private int selectBrandId() {
         String devBrand = device.getBrand();
         BrandDao brandDao = new BrandDao();
-        int brand_id     = brandDao.selectId(devBrand);
+        int brand_id = brandDao.selectId(devBrand);
 
         if (brand_id == 0) {
             brand_id = brandDao.insert(devBrand);
@@ -97,7 +99,7 @@ public class DeviceDao {
     private int selectTypeId() {
         String devType = device.getType();
         TypeDao typeDao = new TypeDao();
-        int type_id  = typeDao.selectId(devType);
+        int type_id = typeDao.selectId(devType);
 
         if (type_id == 0) {
             type_id = typeDao.insert(devType);
@@ -108,7 +110,7 @@ public class DeviceDao {
     private int selectDefectId() {
         String defect = device.getDefect();
         DefectDao defectDao = new DefectDao();
-        int defect_id  = defectDao.selectId(defect);
+        int defect_id = defectDao.selectId(defect);
 
         if (defect_id == 0) {
             defect_id = defectDao.insert(defect);
@@ -116,10 +118,10 @@ public class DeviceDao {
         return defect_id;
     }
 
-    private int selectComgletenessId() {
+    private int selectCompletenessId() {
         String completeness = device.getCompleteness();
         CompletenessDao completenessDao = new CompletenessDao();
-        int completness_id  = completenessDao.selectId(completeness);
+        int completness_id = completenessDao.selectId(completeness);
 
         if (completness_id == 0) {
             completness_id = completenessDao.insert(completeness);
@@ -130,7 +132,7 @@ public class DeviceDao {
     private int selectAppearanceId() {
         String appearance = device.getAppearance();
         AppearanceDao appearanceDao = new AppearanceDao();
-        int appearance_id  = appearanceDao.selectId(appearance);
+        int appearance_id = appearanceDao.selectId(appearance);
 
         if (appearance_id == 0) {
             appearance_id = appearanceDao.insert(appearance);
@@ -158,4 +160,41 @@ public class DeviceDao {
         return maxId;
     }
 
+    /**
+     * @return list of devises with given status
+     */
+    public static Vector<Device> selectByStatus(String status) {
+        log.trace("");
+
+        //todo create select query to select all devices with device status принято
+        final String SELECT_DEVICES = "SELECT * FROM " + tableName +
+                "INNER JOIN user_group ON user.user_group = user_group.id " +
+                "WHERE user_group.value = '" + status + "'";
+
+        Vector<Device> listOfDevices = new Vector<>();
+
+        try (Connection co = ConnectionBuilder.getConnection();
+             Statement st = co.createStatement()) {
+            ResultSet result = st.executeQuery(SELECT_DEVICES);
+            while (result.next()) {
+                Device device = new Device();
+
+                device.setId(result.getInt("id"));
+//                    device.setLogin(result.getString("login"));
+//                    device.setPassword(result.getString("password"));
+////                user.setGroup(result.getString("user_group"));
+//                    device.setGroup(result.getString("value"));
+//                    device.setSurname(result.getString("surname"));
+//                    device.setName(result.getString("name"));
+//                    device.setPatronymic(result.getString("patronymic"));
+
+                listOfDevices.add(device);
+            }
+        }
+        catch (SQLException sex) {
+            log.error(sex.getMessage());
+        }
+
+        return listOfDevices;
+    }
 }

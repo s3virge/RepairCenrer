@@ -1,10 +1,13 @@
 package app.controllers;
 
 import app.RepairCenter;
+import app.dao.DeviceDao;
+import app.models.DeviceStatus;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.ListView;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -17,11 +20,24 @@ import java.net.URL;
 public class MainWndController {
     private static final Logger logger = LogManager.getLogger(MainWndController.class);
 
+    @FXML
+    ListView lstDeviceList;
+
+    @FXML private void initialize() {
+        //todo fill list of devices
+
+        //todo устройства с каким статусом показывать в списке
+        //начнем со статусом Принят
+//        lstDeviceList
+        //select all devises with status Оформлен
+        DeviceDao.selectByStatus(DeviceStatus.received);
+    }
+
     /**
      * обработка нажатия на пункт меню Новый ремон
      */
     @FXML
-    private void menuItemNewRepair() {
+    private void showNewRepairDlg() {
         logger.trace("");
 
         // Загружаем fxml-файл и создаём новую сцену

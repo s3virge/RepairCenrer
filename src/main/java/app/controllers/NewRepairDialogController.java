@@ -129,7 +129,7 @@ public class NewRepairDialogController {
         owner.setId(ownerID);
 
         Repair repair = createRepair();
-        int repairID = new RepairDao(repair).save();
+        int repairID = new RepairDao(repair).insert();
 
 //        logger.debug("owner id: {}, repair id: {}", ownerID, repairID);
 
@@ -146,7 +146,7 @@ public class NewRepairDialogController {
         String fullName = cbMaster.getSelectionModel().getSelectedItem().toString();
         int masterId = UserDao.selectIdByFullName(fullName);
         repair.setMasterId(masterId);
-        repair.setStatusId(new StatusDao().selectId("Оформлен"));
+        repair.setStatusId(new StatusDao().selectId(DeviceStatus.received));
         repair.setDateOfAccept(LocalDateTime.now().toString());
         return repair;
     }

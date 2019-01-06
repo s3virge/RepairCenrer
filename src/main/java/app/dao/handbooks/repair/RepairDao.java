@@ -29,7 +29,7 @@ public class RepairDao {
      * insert information about repair to database
      * @return id of the inserted row
      */
-    public int save() {
+    public int insert() {
         log.trace("");
 
         int id = 0;

@@ -354,7 +354,7 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `repaircenter`;
-INSERT INTO `repaircenter`.`status` (`id`, `value`) VALUES (1, 'Оформлен');
+INSERT INTO `repaircenter`.`status` (`id`, `value`) VALUES (1, 'Принято');
 INSERT INTO `repaircenter`.`status` (`id`, `value`) VALUES (2, 'Диагностика');
 INSERT INTO `repaircenter`.`status` (`id`, `value`) VALUES (3, 'Ожидание комплектующих');
 INSERT INTO `repaircenter`.`status` (`id`, `value`) VALUES (4, 'Ремонт');
