@@ -167,9 +167,15 @@ public class DeviceDao {
         log.trace("");
 
         //todo create select query to select all devices with device status принято
-        final String SELECT_DEVICES = "SELECT * FROM " + tableName +
-                "INNER JOIN user_group ON user.user_group = user_group.id " +
-                "WHERE user_group.value = '" + status + "'";
+        final String SELECT_DEVICES = "select device.id, t.value, b.value, m.value, device.serial_number, " +
+                "d.value, device.owner_id, device.repair_id, c.value, a.value, device.note " +
+                "from device " +
+                "inner join type t on device.type_id = t.id " +
+                "inner join brand b on device.brand_id = b.id " +
+                "inner join model m on device.model_id = m.id " +
+                "inner join defect d on device.defect_id = d.id " +
+                "inner join completeness c on device.completeness_id = c.id " +
+                "inner join appearance a on device.appearance_id = a.id";
 
         Vector<Device> listOfDevices = new Vector<>();
 
@@ -180,13 +186,16 @@ public class DeviceDao {
                 Device device = new Device();
 
                 device.setId(result.getInt("id"));
-//                    device.setLogin(result.getString("login"));
-//                    device.setPassword(result.getString("password"));
-////                user.setGroup(result.getString("user_group"));
-//                    device.setGroup(result.getString("value"));
-//                    device.setSurname(result.getString("surname"));
-//                    device.setName(result.getString("name"));
-//                    device.setPatronymic(result.getString("patronymic"));
+                device.setType(result.getString("value"));
+                device.setBrand(result.getString("value"));
+                device.setModel(result.getString("value"));
+                device.setSerialNumber(result.getString("serial_number"));
+                device.setDefect(result.getString("value"));
+                device.setOwnerId(result.getInt("owner_id"));
+                device.setRepairId(result.getInt("repair_id"));
+                device.setCompleteness(result.getString("value"));
+                device.setAppearance(result.getString("value"));
+                device.setNote(result.getString("note"));
 
                 listOfDevices.add(device);
             }
