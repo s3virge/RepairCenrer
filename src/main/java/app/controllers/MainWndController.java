@@ -2,6 +2,7 @@ package app.controllers;
 
 import app.RepairCenter;
 import app.dao.DeviceDao;
+import app.models.Device;
 import app.models.DeviceStatus;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -16,6 +17,8 @@ import org.apache.logging.log4j.Logger;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.List;
+import java.util.Vector;
 
 public class MainWndController {
     private static final Logger logger = LogManager.getLogger(MainWndController.class);
@@ -24,13 +27,10 @@ public class MainWndController {
     ListView lstDeviceList;
 
     @FXML private void initialize() {
-        //todo fill list of devices
+        //покажем в списке устройства со статусом Принято
+        List devices = DeviceDao.selectByStatus(DeviceStatus.received);
 
-        //todo устройства с каким статусом показывать в списке
-        //начнем со статусом Принят
-//        lstDeviceList
-        //select all devises with status Оформлен
-        DeviceDao.selectByStatus(DeviceStatus.received);
+        //todo fill list of devices
     }
 
     /**

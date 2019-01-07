@@ -167,15 +167,18 @@ public class DeviceDao {
         log.trace("");
 
         //todo create select query to select all devices with device status принято
-        final String SELECT_DEVICES = "select device.id, t.value, b.value, m.value, device.serial_number, " +
-                "d.value, device.owner_id, device.repair_id, c.value, a.value, device.note " +
+        final String SELECT_DEVICES = "select device.id, type.value, brand.value, model.value, serial_number, " +
+                "defect.value, owner_id, repair_id, status.value, completeness.value, appearance.value, note " +
                 "from device " +
-                "inner join type t on device.type_id = t.id " +
-                "inner join brand b on device.brand_id = b.id " +
-                "inner join model m on device.model_id = m.id " +
-                "inner join defect d on device.defect_id = d.id " +
-                "inner join completeness c on device.completeness_id = c.id " +
-                "inner join appearance a on device.appearance_id = a.id";
+                "inner join type on device.type_id = type.id " +
+                "inner join brand on device.brand_id = brand.id " +
+                "inner join model on device.model_id = model.id " +
+                "inner join defect on device.defect_id = defect.id " +
+                "inner join completeness on device.completeness_id = completeness.id " +
+                "inner join appearance on device.appearance_id = appearance.id " +
+                "inner join repair on device.repair_id = repair.id " +
+                "inner join status on repair.status_id = status.id " +
+                "WHERE status.value = '"+ status +"'";
 
         Vector<Device> listOfDevices = new Vector<>();
 
@@ -186,15 +189,15 @@ public class DeviceDao {
                 Device device = new Device();
 
                 device.setId(result.getInt("id"));
-                device.setType(result.getString("value"));
-                device.setBrand(result.getString("value"));
-                device.setModel(result.getString("value"));
+                device.setType(result.getString("type.value"));
+                device.setBrand(result.getString("brand.value"));
+                device.setModel(result.getString("model.value"));
                 device.setSerialNumber(result.getString("serial_number"));
-                device.setDefect(result.getString("value"));
+                device.setDefect(result.getString("defect.value"));
                 device.setOwnerId(result.getInt("owner_id"));
                 device.setRepairId(result.getInt("repair_id"));
-                device.setCompleteness(result.getString("value"));
-                device.setAppearance(result.getString("value"));
+                device.setCompleteness(result.getString("completeness.value"));
+                device.setAppearance(result.getString("appearance.value"));
                 device.setNote(result.getString("note"));
 
                 listOfDevices.add(device);
