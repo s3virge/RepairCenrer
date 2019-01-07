@@ -110,4 +110,13 @@ public class Device {
         System.out.printf("%-15s - %s\n", "serialNumber", serialNumber);
         System.out.printf("%-15s - %s\n", "defect", defect);
     }
+
+    /**
+     * Нужно что-бы в ListView отображались id устройства
+     * @return device id
+     */
+    @Override
+    public String toString() {
+        return String.valueOf(id);
+    }
 }

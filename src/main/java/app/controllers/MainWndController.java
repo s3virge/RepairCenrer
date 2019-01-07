@@ -4,10 +4,15 @@ import app.RepairCenter;
 import app.dao.DeviceDao;
 import app.models.Device;
 import app.models.DeviceStatus;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
@@ -18,19 +23,67 @@ import org.apache.logging.log4j.Logger;
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
-import java.util.Vector;
 
 public class MainWndController {
     private static final Logger logger = LogManager.getLogger(MainWndController.class);
 
     @FXML
-    ListView lstDeviceList;
+    private ListView lstDeviceList;
+    @FXML
+    private Label label;
+    @FXML
+    private Label label1;
+    @FXML
+    private Label label2;
+    @FXML
+    private Label label3;
+ @FXML
+    private Label label4;
+ @FXML
+    private Label label5;
+ @FXML
+    private Label label6;
+ @FXML
+    private Label label7;
+ @FXML
+    private Label label8;
+ @FXML
+    private Label label9;
 
-    @FXML private void initialize() {
+    ObservableList<Device> observDeviceList = FXCollections.observableArrayList();
+
+
+    @FXML
+    private void initialize() {
+        initListView();
+        lstDeviceList.getSelectionModel().selectFirst();
+
+        lstDeviceList.getSelectionModel().selectedItemProperty().addListener(
+                (ChangeListener<Device>) (observable, oldValue, newValue) ->
+                {
+                    label.setText("device id: " + newValue.getId());
+                    label1.setText("type:  " + newValue.getType());
+                    label2.setText("brand:  " + newValue.getBrand());
+                    label3.setText("model:  " + newValue.getModel());
+                    label4.setText("serial number:  " + newValue.getSerialNumber());
+                    label5.setText("defect:  " + newValue.getDefect());
+                    label6.setText("owner id:  " + newValue.getOwnerId());
+                    label7.setText("repair id:  " + newValue.getRepairId());
+                    label8.setText("completeness:  " + newValue.getCompleteness());
+                    label9.setText("appearance:  " + newValue.getAppearance());
+                }
+        );
+    }
+
+    private void initListView() {
+        int selectedItem = lstDeviceList.getSelectionModel().getSelectedIndex();
+        observDeviceList.clear();
         //покажем в списке устройства со статусом Принято
         List devices = DeviceDao.selectByStatus(DeviceStatus.received);
 
-        //todo fill list of devices
+        observDeviceList.addAll(devices);
+        lstDeviceList.setItems(observDeviceList);
+        lstDeviceList.getSelectionModel().select(selectedItem);
     }
 
     /**
@@ -52,7 +105,8 @@ public class MainWndController {
 
         try {
             repairDlgLayout = loader.load();
-        } catch (IOException e) {
+        }
+        catch (IOException e) {
             e.printStackTrace();
             logger.error(e);
         }
@@ -71,6 +125,8 @@ public class MainWndController {
 
         // Отображаем диалоговое окно и ждём, пока пользователь его не закроет
         dialogStage.showAndWait();
+
+        initListView();
     }
 
     @FXML

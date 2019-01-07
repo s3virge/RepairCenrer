@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
@@ -35,7 +36,21 @@
     </MenuBar>
       <AnchorPane VBox.vgrow="ALWAYS">
          <children>
-            <ListView fx:id="lstDeviceList" prefHeight="519.0" prefWidth="100.0" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="15.0" />
+            <ListView fx:id="lstDeviceList" prefHeight="541.0" prefWidth="136.0" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="15.0" />
+            <VBox layoutX="224.0" layoutY="21.0" prefHeight="305.0" prefWidth="445.0" spacing="40.0">
+               <children>
+                  <Label fx:id="label" prefHeight="25.0" prefWidth="300.0" text="Label" />
+                  <Label fx:id="label1" prefHeight="25.0" prefWidth="300.0" text="Label" />
+                  <Label fx:id="label2" prefHeight="25.0" prefWidth="300.0" text="Label" />
+                  <Label fx:id="label3" prefHeight="25.0" prefWidth="300.0" text="Label" />
+                  <Label fx:id="label4" prefHeight="25.0" prefWidth="300.0" text="Label" />
+                  <Label fx:id="label5" prefHeight="25.0" prefWidth="300.0" text="Label" />
+                  <Label fx:id="label6" prefHeight="25.0" prefWidth="300.0" text="Label" />
+                  <Label fx:id="label7" prefHeight="25.0" prefWidth="300.0" text="Label" />
+                  <Label fx:id="label8" prefHeight="25.0" prefWidth="300.0" text="Label" />
+                  <Label fx:id="label9" layoutX="10.0" layoutY="402.0" prefHeight="25.0" prefWidth="300.0" text="Label" />
+               </children>
+            </VBox>
          </children>
       </AnchorPane>
   </children>

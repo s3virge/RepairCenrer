@@ -2,7 +2,6 @@ package app.dao;
 
 import app.dao.handbooks.device.*;
 import app.models.Device;
-import app.models.DeviceStatus;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -166,7 +165,6 @@ public class DeviceDao {
     public static Vector<Device> selectByStatus(String status) {
         log.trace("");
 
-        //todo create select query to select all devices with device status принято
         final String SELECT_DEVICES = "select device.id, type.value, brand.value, model.value, serial_number, " +
                 "defect.value, owner_id, repair_id, status.value, completeness.value, appearance.value, note " +
                 "from device " +
