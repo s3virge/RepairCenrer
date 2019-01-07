@@ -5,7 +5,6 @@ import app.dao.DeviceDao;
 import app.models.Device;
 import app.models.DeviceStatus;
 import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -25,7 +24,7 @@ import java.net.URL;
 import java.util.List;
 
 public class MainWndController {
-    private static final Logger logger = LogManager.getLogger(MainWndController.class);
+    private static final Logger log = LogManager.getLogger(MainWndController.class);
 
     @FXML
     private ListView lstDeviceList;
@@ -55,35 +54,45 @@ public class MainWndController {
 
     @FXML
     private void initialize() {
+        log.trace("");
+
         initListView();
         lstDeviceList.getSelectionModel().selectFirst();
-
-        lstDeviceList.getSelectionModel().selectedItemProperty().addListener(
-                (ChangeListener<Device>) (observable, oldValue, newValue) ->
-                {
-                    label.setText("device id: " + newValue.getId());
-                    label1.setText("type:  " + newValue.getType());
-                    label2.setText("brand:  " + newValue.getBrand());
-                    label3.setText("model:  " + newValue.getModel());
-                    label4.setText("serial number:  " + newValue.getSerialNumber());
-                    label5.setText("defect:  " + newValue.getDefect());
-                    label6.setText("owner id:  " + newValue.getOwnerId());
-                    label7.setText("repair id:  " + newValue.getRepairId());
-                    label8.setText("completeness:  " + newValue.getCompleteness());
-                    label9.setText("appearance:  " + newValue.getAppearance());
-                }
-        );
     }
 
     private void initListView() {
         int selectedItem = lstDeviceList.getSelectionModel().getSelectedIndex();
+
         observDeviceList.clear();
+
         //покажем в списке устройства со статусом Принято
         List devices = DeviceDao.selectByStatus(DeviceStatus.received);
 
         observDeviceList.addAll(devices);
         lstDeviceList.setItems(observDeviceList);
-        lstDeviceList.getSelectionModel().select(selectedItem);
+//        lstDeviceList.getSelectionModel().select(selectedItem);
+        lstDeviceList.getSelectionModel().selectLast();
+
+        try {
+            lstDeviceList.getSelectionModel().selectedItemProperty().addListener(
+                    (ChangeListener<Device>) (observable, oldValue, newValue) ->
+                    {
+                        label.setText("device id: " + newValue.getId());
+                        label1.setText("type:  " + newValue.getType());
+                        label2.setText("brand:  " + newValue.getBrand());
+                        label3.setText("model:  " + newValue.getModel());
+                        label4.setText("serial number:  " + newValue.getSerialNumber());
+                        label5.setText("defect:  " + newValue.getDefect());
+                        label6.setText("owner id:  " + newValue.getOwnerId());
+                        label7.setText("repair id:  " + newValue.getRepairId());
+                        label8.setText("completeness:  " + newValue.getCompleteness());
+                        label9.setText("appearance:  " + newValue.getAppearance());
+                    }
+            );
+        }
+        catch (NullPointerException npex) {
+            log.error(npex.getMessage());
+        }
     }
 
     /**
@@ -91,7 +100,7 @@ public class MainWndController {
      */
     @FXML
     private void showNewRepairDlg() {
-        logger.trace("");
+        log.trace("");
 
         // Загружаем fxml-файл и создаём новую сцену
         // для всплывающего диалогового окна.
@@ -108,7 +117,7 @@ public class MainWndController {
         }
         catch (IOException e) {
             e.printStackTrace();
-            logger.error(e);
+            log.error(e);
         }
 
         // Создаём подмостки для диалогового окна.
@@ -131,7 +140,7 @@ public class MainWndController {
 
     @FXML
     private void showUserManagementDlg() {
-        logger.trace("");
+        log.trace("");
 
         // Загружаем fxml-файл и создаём новую сцену
         // для всплывающего диалогового окна.
@@ -147,7 +156,7 @@ public class MainWndController {
             userDlgLayout = loader.load();
         }
         catch (IOException e) {
-            logger.error(e.getMessage());
+            log.error(e.getMessage());
         }
 
         // Создаём подмостки для диалогового окна.
