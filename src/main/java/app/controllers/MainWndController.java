@@ -24,155 +24,163 @@ import java.net.URL;
 import java.util.List;
 
 public class MainWndController {
-    private static final Logger log = LogManager.getLogger(MainWndController.class);
+	private static final Logger log = LogManager.getLogger(MainWndController.class);
 
-    @FXML
-    private ListView lstDeviceList;
-    @FXML
-    private Label label;
-    @FXML
-    private Label label1;
-    @FXML
-    private Label label2;
-    @FXML
-    private Label label3;
- @FXML
-    private Label label4;
- @FXML
-    private Label label5;
- @FXML
-    private Label label6;
- @FXML
-    private Label label7;
- @FXML
-    private Label label8;
- @FXML
-    private Label label9;
+	@FXML
+	private ListView lstDeviceList;
+	@FXML
+	private Label label;
+	@FXML
+	private Label label1;
+	@FXML
+	private Label label2;
+	@FXML
+	private Label label3;
+	@FXML
+	private Label label4;
+	@FXML
+	private Label label5;
+	@FXML
+	private Label label6;
+	@FXML
+	private Label label7;
+	@FXML
+	private Label label8;
+	@FXML
+	private Label label9;
 
-    ObservableList<Device> observDeviceList = FXCollections.observableArrayList();
+	ObservableList<Device> observDeviceList = FXCollections.observableArrayList();
 
 
-    @FXML
-    private void initialize() {
-        log.trace("");
+	@FXML
+	private void initialize() {
+		log.trace("");
 
-        initListView();
-        lstDeviceList.getSelectionModel().selectFirst();
-    }
+		initListView(false);
+		lstDeviceList.getSelectionModel().selectFirst();
+	}
 
-    private void initListView() {
-        int selectedItem = lstDeviceList.getSelectionModel().getSelectedIndex();
+	private void initListView(boolean okBtn) {
+		int selectedItem = lstDeviceList.getSelectionModel().getSelectedIndex();
 
-        observDeviceList.clear();
+		try {
+			observDeviceList.clear();
 
-        //покажем в списке устройства со статусом Принято
-        List devices = DeviceDao.selectByStatus(DeviceStatus.received);
+			//покажем в списке устройства со статусом Принято
+			List devices = DeviceDao.selectByStatus(DeviceStatus.received);
 
-        observDeviceList.addAll(devices);
-        lstDeviceList.setItems(observDeviceList);
-//        lstDeviceList.getSelectionModel().select(selectedItem);
-        lstDeviceList.getSelectionModel().selectLast();
+			observDeviceList.addAll(devices);
+			lstDeviceList.setItems(observDeviceList);
 
-        try {
-            lstDeviceList.getSelectionModel().selectedItemProperty().addListener(
-                    (ChangeListener<Device>) (observable, oldValue, newValue) ->
-                    {
-                        label.setText("device id: " + newValue.getId());
-                        label1.setText("type:  " + newValue.getType());
-                        label2.setText("brand:  " + newValue.getBrand());
-                        label3.setText("model:  " + newValue.getModel());
-                        label4.setText("serial number:  " + newValue.getSerialNumber());
-                        label5.setText("defect:  " + newValue.getDefect());
-                        label6.setText("owner id:  " + newValue.getOwnerId());
-                        label7.setText("repair id:  " + newValue.getRepairId());
-                        label8.setText("completeness:  " + newValue.getCompleteness());
-                        label9.setText("appearance:  " + newValue.getAppearance());
-                    }
-            );
-        }
-        catch (NullPointerException npex) {
-            log.error(npex.getMessage());
-        }
-    }
+			if (okBtn) {
+				lstDeviceList.getSelectionModel().selectLast();
+			}
+			else {
+				lstDeviceList.getSelectionModel().select(selectedItem);
+			}
 
-    /**
-     * обработка нажатия на пункт меню Новый ремон
-     */
-    @FXML
-    private void showNewRepairDlg() {
-        log.trace("");
 
-        // Загружаем fxml-файл и создаём новую сцену
-        // для всплывающего диалогового окна.
-        FXMLLoader loader = new FXMLLoader();
-        //Sets the location used to resolve relative path attribute values.
-        //getResource - Finds a resource with a given name.
-        URL resource = getClass().getResource("/view/dialogs/NewRepairDlg.fxml");
-        loader.setLocation(resource);
+			lstDeviceList.getSelectionModel().selectedItemProperty().addListener(
+					(ChangeListener<Device>) (observable, oldValue, newValue) ->
+					{
+						label.setText("device id: " + newValue.getId());
+						label1.setText("type:  " + newValue.getType());
+						label2.setText("brand:  " + newValue.getBrand());
+						label3.setText("model:  " + newValue.getModel());
+						label4.setText("serial number:  " + newValue.getSerialNumber());
+						label5.setText("defect:  " + newValue.getDefect());
+						label6.setText("owner id:  " + newValue.getOwnerId());
+						label7.setText("repair id:  " + newValue.getRepairId());
+						label8.setText("completeness:  " + newValue.getCompleteness());
+						label9.setText("appearance:  " + newValue.getAppearance());
+					}
+			);
+		}
+		catch (NullPointerException npex) {
+			log.error(npex.getMessage());
+		}
+	}
 
-        AnchorPane repairDlgLayout = null;
+	/**
+	 * обработка нажатия на пункт меню Новый ремон
+	 */
+	@FXML
+	private void showNewRepairDlg() {
+		log.trace("");
 
-        try {
-            repairDlgLayout = loader.load();
-        }
-        catch (IOException e) {
-            e.printStackTrace();
-            log.error(e);
-        }
+		// Загружаем fxml-файл и создаём новую сцену
+		// для всплывающего диалогового окна.
+		FXMLLoader loader = new FXMLLoader();
+		//Sets the location used to resolve relative path attribute values.
+		//getResource - Finds a resource with a given name.
+		URL resource = getClass().getResource("/view/dialogs/NewRepairDlg.fxml");
+		loader.setLocation(resource);
 
-        // Создаём подмостки для диалогового окна.
-        Stage dialogStage = new Stage();
-        //подготавливаем их
-        dialogStage.setTitle("Оформить устройство");
-        dialogStage.initModality(Modality.WINDOW_MODAL);
-        dialogStage.initOwner(new RepairCenter().getPrimaryStage());
+		AnchorPane repairDlgLayout = null;
 
-        //расставляем декорации на сцене согласно плану
-        Scene scene = new Scene(repairDlgLayout);
-        dialogStage.setScene(scene);
-        dialogStage.setResizable(false);
+		try {
+			repairDlgLayout = loader.load();
+		}
+		catch (IOException e) {
+			e.printStackTrace();
+			log.error(e);
+		}
 
-        // Отображаем диалоговое окно и ждём, пока пользователь его не закроет
-        dialogStage.showAndWait();
+		// Создаём подмостки для диалогового окна.
+		Stage dialogStage = new Stage();
+		//подготавливаем их
+		dialogStage.setTitle("Оформить устройство");
+		dialogStage.initModality(Modality.WINDOW_MODAL);
+		dialogStage.initOwner(new RepairCenter().getPrimaryStage());
 
-        //todo get controller and obtain pressed button id
-        initListView();
-    }
+		//расставляем декорации на сцене согласно плану
+		Scene scene = new Scene(repairDlgLayout);
+		dialogStage.setScene(scene);
+		dialogStage.setResizable(false);
 
-    @FXML
-    private void showUserManagementDlg() {
-        log.trace("");
+		// Отображаем диалоговое окно и ждём, пока пользователь его не закроет
+		dialogStage.showAndWait();
 
-        // Загружаем fxml-файл и создаём новую сцену
-        // для всплывающего диалогового окна.
-        FXMLLoader loader = new FXMLLoader();
-        //Sets the location used to resolve relative path attribute values.
-        //getResource - Finds a resource with a given name.
-        URL resource = getClass().getResource("/view/dialogs/UserManagementDlg.fxml");
-        loader.setLocation(resource);
+		//todo get controller and obtain pressed button id
 
-        Parent userDlgLayout = null;
+		NewRepairDialogController controller = loader.getController();
+		initListView(controller.okBtnPressed());
+	}
 
-        try {
-            userDlgLayout = loader.load();
-        }
-        catch (IOException e) {
-            log.error(e.getMessage());
-        }
+	@FXML
+	private void showUserManagementDlg() {
+		log.trace("");
 
-        // Создаём подмостки для диалогового окна.
-        Stage dialogStage = new Stage();
-        //подготавливаем их
-        dialogStage.setTitle("Пользователи");
-        dialogStage.initModality(Modality.APPLICATION_MODAL);
-        dialogStage.initOwner(new RepairCenter().getPrimaryStage());
+		// Загружаем fxml-файл и создаём новую сцену
+		// для всплывающего диалогового окна.
+		FXMLLoader loader = new FXMLLoader();
+		//Sets the location used to resolve relative path attribute values.
+		//getResource - Finds a resource with a given name.
+		URL resource = getClass().getResource("/view/dialogs/UserManagementDlg.fxml");
+		loader.setLocation(resource);
 
-        //расставляем декорации на сцене согласно плану
-        Scene scene = new Scene(userDlgLayout);
-        dialogStage.setScene(scene);
-        dialogStage.setResizable(false);
+		Parent userDlgLayout = null;
 
-        // Отображаем диалоговое окно и ждём, пока пользователь его не закроет
-        dialogStage.showAndWait();
-    }
+		try {
+			userDlgLayout = loader.load();
+		}
+		catch (IOException e) {
+			log.error(e.getMessage());
+		}
+
+		// Создаём подмостки для диалогового окна.
+		Stage dialogStage = new Stage();
+		//подготавливаем их
+		dialogStage.setTitle("Пользователи");
+		dialogStage.initModality(Modality.APPLICATION_MODAL);
+		dialogStage.initOwner(new RepairCenter().getPrimaryStage());
+
+		//расставляем декорации на сцене согласно плану
+		Scene scene = new Scene(userDlgLayout);
+		dialogStage.setScene(scene);
+		dialogStage.setResizable(false);
+
+		// Отображаем диалоговое окно и ждём, пока пользователь его не закроет
+		dialogStage.showAndWait();
+	}
 }

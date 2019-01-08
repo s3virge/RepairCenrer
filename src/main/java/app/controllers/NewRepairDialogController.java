@@ -44,6 +44,8 @@ public class NewRepairDialogController {
     @FXML private AutoSuggestTextField tfName;
     @FXML private AutoSuggestTextField tfPatronymic;
 
+    private boolean okBtnPressed = false;
+
     @FXML
     private void initialize() {
         setTestData();
@@ -137,6 +139,7 @@ public class NewRepairDialogController {
         new DeviceDao(device).insert();
 
         closeDlg(actionEvent);
+        okBtnPressed = true;
     }
 
     private Repair createRepair() {
@@ -174,5 +177,9 @@ public class NewRepairDialogController {
         owner.setName(tfName.getText());
         owner.setPhoneNumber(tfPhone.getText());
         return owner;
+    }
+
+    public boolean okBtnPressed() {
+        return okBtnPressed;
     }
 }
