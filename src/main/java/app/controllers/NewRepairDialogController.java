@@ -11,6 +11,7 @@ import app.dao.handbooks.repair.RepairDao;
 import app.dao.handbooks.repair.StatusDao;
 import app.models.*;
 import app.utils.AutoSuggestTextField;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -48,6 +49,7 @@ public class NewRepairDialogController {
 
     @FXML
     private void initialize() {
+        Platform.runLater(()->tfDeviceType.requestFocus());
         setTestData();
         setNewDeviceNumber();
         getSuggestions();
