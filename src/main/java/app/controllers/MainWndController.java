@@ -135,6 +135,7 @@ public class MainWndController {
         // Отображаем диалоговое окно и ждём, пока пользователь его не закроет
         dialogStage.showAndWait();
 
+        //todo get controller and obtain pressed button id
         initListView();
     }
 
