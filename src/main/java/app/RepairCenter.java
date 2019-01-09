@@ -64,4 +64,8 @@ public class RepairCenter extends Application {
      * @return Return the primary stage
      */
     public Stage getPrimaryStage() { return primaryStage; }
+
+    //todo добавить в меню пункт статус ремона в котором можно быдет выбрать устройства с соответствующим статусом
+
+    //todo добавить в меню кнопку логоф для смены пользователя
 }
