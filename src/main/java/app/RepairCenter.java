@@ -34,10 +34,10 @@ public class RepairCenter extends Application {
         new DataBaseThread("DB exist Thread");
 
         //показываем окно ввода логина и пароля.
-        showLoginWindow(primaryStage);
+        showLoginWindow();
     }
 
-    private void showLoginWindow(Stage loginWindow) {
+    public void showLoginWindow() {
         logger.trace("");
 
         Parent layout = null;
@@ -54,18 +54,14 @@ public class RepairCenter extends Application {
 
         //показываем окно ввода логина и пароля
         Scene scene = new Scene(layout, 360, 220);
-        loginWindow.setTitle("A simple database of the service center");
-        loginWindow.setResizable(false);
-        loginWindow.setScene(scene);
-        loginWindow.show();
+        primaryStage.setTitle("A simple database of the service center");
+        primaryStage.setResizable(false);
+        primaryStage.setScene(scene);
+        primaryStage.show();
     }
 
     /**
      * @return Return the primary stage
      */
-    public Stage getPrimaryStage() { return primaryStage; }
-
-    //todo добавить в меню пункт статус ремона в котором можно быдет выбрать устройства с соответствующим статусом
-
-    //todo добавить в меню кнопку логоф для смены пользователя
+    public static Stage getPrimaryStage() { return primaryStage; }
 }

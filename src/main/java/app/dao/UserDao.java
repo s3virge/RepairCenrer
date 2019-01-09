@@ -28,7 +28,7 @@ public class UserDao {
 
         final String SELECT_USER = "SELECT user.id, user.login, user.password, user_group.value " +
                 "FROM user INNER JOIN user_group ON user.user_group = user_group.id " +
-                "where user.login='" + strLogin + "';";
+                "where user.login='" + strLogin + "'";
 
         User user = new User();
 

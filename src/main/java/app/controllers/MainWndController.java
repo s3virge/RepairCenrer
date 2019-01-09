@@ -4,6 +4,7 @@ import app.RepairCenter;
 import app.dao.DeviceDao;
 import app.models.Device;
 import app.models.DeviceStatus;
+import app.models.LoggedInUser;
 import javafx.beans.value.ChangeListener;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -13,11 +14,13 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.control.Menu;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import sun.plugin2.message.Message;
 
 import java.io.IOException;
 import java.net.URL;
@@ -49,8 +52,10 @@ public class MainWndController {
 	@FXML
 	private Label label9;
 
-	ObservableList<Device> observDeviceList = FXCollections.observableArrayList();
+	@FXML
+	private Menu mLoggedInUser;
 
+	ObservableList<Device> observDeviceList = FXCollections.observableArrayList();
 
 	@FXML
 	private void initialize() {
@@ -58,6 +63,7 @@ public class MainWndController {
 
 		initListView(false);
 		lstDeviceList.getSelectionModel().selectFirst();
+		mLoggedInUser.setText(LoggedInUser.getLoggedInUser().getLogin());
 	}
 
 	private void initListView(boolean okBtn) {
@@ -131,7 +137,7 @@ public class MainWndController {
 		//подготавливаем их
 		dialogStage.setTitle("Оформить устройство");
 		dialogStage.initModality(Modality.WINDOW_MODAL);
-		dialogStage.initOwner(new RepairCenter().getPrimaryStage());
+		dialogStage.initOwner(RepairCenter.getPrimaryStage());
 
 		//расставляем декорации на сцене согласно плану
 		Scene scene = new Scene(repairDlgLayout);
@@ -180,5 +186,12 @@ public class MainWndController {
 
 		// Отображаем диалоговое окно и ждём, пока пользователь его не закроет
 		dialogStage.showAndWait();
+	}
+
+	@FXML
+	private void logoff() {
+		log.trace("");
+
+		new RepairCenter().showLoginWindow();
 	}
 }
