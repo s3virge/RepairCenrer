@@ -20,8 +20,6 @@ public class RepairCenter extends Application {
 
     private static final Logger logger = LogManager.getLogger(RepairCenter.class);
 
-//    private static Stage primaryStage;
-
     public static void main(String[] args) {
         launch();
     }

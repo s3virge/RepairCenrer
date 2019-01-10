@@ -15,18 +15,23 @@
       <menus>
         <Menu mnemonicParsing="false" text="Устройство">
           <items>
-            <MenuItem mnemonicParsing="false" onAction="#showNewRepairDlg" text="Оформить">
+            <MenuItem mnemonicParsing="false" onAction="#showReceiveNewDeviceDlg" text="Принять">
                      <accelerator>
                         <KeyCodeCombination alt="UP" code="N" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
                      </accelerator>
             </MenuItem>
-                  <MenuItem mnemonicParsing="false" onAction="#showNewRepairDlg" text="Выдать" />
-                  <MenuItem mnemonicParsing="false" onAction="#showNewRepairDlg" text="Диагностика" />
-                  <MenuItem mnemonicParsing="false" onAction="#showNewRepairDlg" text="Согласование" />
-                  <MenuItem mnemonicParsing="false" onAction="#showNewRepairDlg" text="Ожидание" />
-                  <MenuItem mnemonicParsing="false" onAction="#showNewRepairDlg" text="Ремонт" />
+                  <MenuItem mnemonicParsing="false" onAction="#showGiveOutDlg" text="Выдать" />
           </items>
         </Menu>
+            <Menu mnemonicParsing="false" text="Состояние">
+              <items>
+                  <MenuItem mnemonicParsing="false" onAction="#selectReceivedDevices" text="Принято" />
+                  <MenuItem mnemonicParsing="false" onAction="#selectDevicesOnDiagnostics" text="Диагностика" />
+                  <MenuItem mnemonicParsing="false" text="Согласование" />
+                  <MenuItem mnemonicParsing="false" text="Ожидание" />
+                  <MenuItem mnemonicParsing="false" onAction="#selectDevicesInRepair" text="Ремонт" />
+              </items>
+            </Menu>
             <Menu mnemonicParsing="false" text="Пользователи">
                <items>
                   <MenuItem mnemonicParsing="false" onAction="#showUserManagementDlg" text="Управление" />

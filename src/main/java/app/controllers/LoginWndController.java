@@ -1,6 +1,5 @@
 package app.controllers;
 
-import app.RepairCenter;
 import app.dao.UserDao;
 import app.models.LoggedInUser;
 import app.models.User;
