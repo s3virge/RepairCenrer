@@ -5,6 +5,7 @@ import app.dao.DeviceDao;
 import app.models.Device;
 import app.models.DeviceStatus;
 import app.models.LoggedInUser;
+import app.utils.ScreenController;
 import javafx.beans.value.ChangeListener;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -20,7 +21,6 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import sun.plugin2.message.Message;
 
 import java.io.IOException;
 import java.net.URL;
@@ -137,7 +137,7 @@ public class MainWndController {
 		//подготавливаем их
 		dialogStage.setTitle("Оформить устройство");
 		dialogStage.initModality(Modality.WINDOW_MODAL);
-		dialogStage.initOwner(RepairCenter.getPrimaryStage());
+		dialogStage.initOwner(ScreenController.getPrimaryStage());
 
 		//расставляем декорации на сцене согласно плану
 		Scene scene = new Scene(repairDlgLayout);
@@ -177,7 +177,7 @@ public class MainWndController {
 		//подготавливаем их
 		dialogStage.setTitle("Пользователи");
 		dialogStage.initModality(Modality.APPLICATION_MODAL);
-		dialogStage.initOwner(new RepairCenter().getPrimaryStage());
+		dialogStage.initOwner(ScreenController.getPrimaryStage());
 
 		//расставляем декорации на сцене согласно плану
 		Scene scene = new Scene(userDlgLayout);
@@ -192,6 +192,25 @@ public class MainWndController {
 	private void logoff() {
 		log.trace("");
 
-		new RepairCenter().showLoginWindow();
+        Parent layout = null;
+        String sceneFile = "/view/loginWindow/LoginWnd.fxml";
+        FXMLLoader fxmlLoader = new FXMLLoader();
+
+        try {
+            fxmlLoader.setLocation(getClass().getResource(sceneFile));
+            layout = fxmlLoader.load();
+        }
+        catch ( Exception ex ) {
+            log.error(ex);
+        }
+
+        //показываем окно ввода логина и пароля
+        Scene scene = new Scene(layout, 360, 220);
+
+        Stage primaryStage = ScreenController.getPrimaryStage();
+        primaryStage.setTitle("A simple database of the service center");
+        primaryStage.setResizable(false);
+        primaryStage.setScene(scene);
+        primaryStage.show();
 	}
 }

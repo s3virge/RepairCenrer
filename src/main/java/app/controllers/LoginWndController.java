@@ -7,6 +7,7 @@ import app.models.User;
 import app.models.UserGroup;
 import app.utils.MD5Hash;
 import app.utils.MsgBox;
+import app.utils.ScreenController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -119,7 +120,7 @@ public class LoginWndController {
 	private void showMainWnd() {
 		logger.trace("");
 
-		Stage stage = new RepairCenter().getPrimaryStage(); //mainApp.getPrimaryStage();
+		Stage stage = ScreenController.getPrimaryStage();
 
 		Parent mainWndLayout = null;
 		//Поскольку имя начинается с символа '/' – оно считается абсолютным. Без / - считается относительным

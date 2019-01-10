@@ -1,6 +1,7 @@
 package app;
 
 import app.threads.DataBaseThread;
+import app.utils.ScreenController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -19,7 +20,7 @@ public class RepairCenter extends Application {
 
     private static final Logger logger = LogManager.getLogger(RepairCenter.class);
 
-    private static Stage primaryStage;
+//    private static Stage primaryStage;
 
     public static void main(String[] args) {
         launch();
@@ -28,7 +29,7 @@ public class RepairCenter extends Application {
     @Override
     public void start(Stage primaryStage) {
         logger.trace("");
-        this.primaryStage = primaryStage;
+        ScreenController.setPrimaryStage(primaryStage);
 
         //check if data base is exist
         new DataBaseThread("DB exist Thread");
@@ -37,7 +38,7 @@ public class RepairCenter extends Application {
         showLoginWindow();
     }
 
-    public void showLoginWindow() {
+    private void showLoginWindow() {
         logger.trace("");
 
         Parent layout = null;
@@ -54,14 +55,11 @@ public class RepairCenter extends Application {
 
         //показываем окно ввода логина и пароля
         Scene scene = new Scene(layout, 360, 220);
+
+        Stage primaryStage = ScreenController.getPrimaryStage();
         primaryStage.setTitle("A simple database of the service center");
         primaryStage.setResizable(false);
         primaryStage.setScene(scene);
         primaryStage.show();
     }
-
-    /**
-     * @return Return the primary stage
-     */
-    public static Stage getPrimaryStage() { return primaryStage; }
 }
