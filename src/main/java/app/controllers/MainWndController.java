@@ -24,6 +24,7 @@ import org.apache.logging.log4j.Logger;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Collections;
 import java.util.List;
 
 public class MainWndController {
@@ -73,7 +74,7 @@ public class MainWndController {
             //покажем в списке устройства со статусом Принято
             List devices = DeviceDao.selectByStatus(DeviceStatus.received);
 
-            observDeviceList.clear();
+            clearFeilds();
             observDeviceList.addAll(devices);
             lstDeviceList.setItems(observDeviceList);
 
@@ -84,26 +85,7 @@ public class MainWndController {
                 lstDeviceList.getSelectionModel().select(selectedItem);
             }
 
-            lstDeviceList.getSelectionModel().selectedItemProperty().addListener(
-                    (ChangeListener<Device>) (observable, oldValue, newValue) ->
-                    {
-                        try {
-                            label.setText("device id: " + newValue.getId());
-                            label1.setText("type:  " + newValue.getType());
-                            label2.setText("brand:  " + newValue.getBrand());
-                            label3.setText("model:  " + newValue.getModel());
-                            label4.setText("serial number:  " + newValue.getSerialNumber());
-                            label5.setText("defect:  " + newValue.getDefect());
-                            label6.setText("owner id:  " + newValue.getOwnerId());
-                            label7.setText("repair id:  " + newValue.getRepairId());
-                            label8.setText("completeness:  " + newValue.getCompleteness());
-                            label9.setText("appearance:  " + newValue.getAppearance());
-                        }
-                        catch (NullPointerException npex) {
-                            log.error(npex.getMessage());
-                        }
-                    }
-            );
+            deviceListListener();
         }
         catch (NullPointerException npex) {
             log.error(npex.getMessage());
@@ -232,6 +214,16 @@ public class MainWndController {
         //покажем в списке устройства со статусом Принято
         List devices = DeviceDao.selectByStatus(DeviceStatus.diagnostics);
 
+        clearFeilds();
+
+        observDeviceList.addAll(devices);
+        lstDeviceList.setItems(observDeviceList);
+        lstDeviceList.getSelectionModel().selectFirst();
+
+        deviceListListener();
+    }
+
+    private void clearFeilds() {
         try {
             observDeviceList.clear();
             label.setText("");
@@ -248,31 +240,6 @@ public class MainWndController {
         catch (NullPointerException npex) {
             log.error(npex.getMessage());
         }
-
-        observDeviceList.addAll(devices);
-        lstDeviceList.setItems(observDeviceList);
-
-        lstDeviceList.getSelectionModel().selectFirst();
-        lstDeviceList.getSelectionModel().selectedItemProperty().addListener(
-                (ChangeListener<Device>) (observable, oldValue, newValue) ->
-                {
-                    try {
-                        label.setText("device id: " + newValue.getId());
-                        label1.setText("type:  " + newValue.getType());
-                        label2.setText("brand:  " + newValue.getBrand());
-                        label3.setText("model:  " + newValue.getModel());
-                        label4.setText("serial number:  " + newValue.getSerialNumber());
-                        label5.setText("defect:  " + newValue.getDefect());
-                        label6.setText("owner id:  " + newValue.getOwnerId());
-                        label7.setText("repair id:  " + newValue.getRepairId());
-                        label8.setText("completeness:  " + newValue.getCompleteness());
-                        label9.setText("appearance:  " + newValue.getAppearance());
-                    }
-                    catch (NullPointerException npex) {
-                        log.error(npex.getMessage());
-                    }
-                }
-        );
     }
 
     @FXML
@@ -280,27 +247,16 @@ public class MainWndController {
         //покажем в списке устройства со статусом Принято
         List devices = DeviceDao.selectByStatus(DeviceStatus.received);
 
-        try {
-            observDeviceList.clear();
-            label.setText("");
-            label1.setText("");
-            label2.setText("");
-            label3.setText("");
-            label4.setText("");
-            label5.setText("");
-            label6.setText("");
-            label7.setText("");
-            label8.setText("");
-            label9.setText("");
-        }
-        catch (NullPointerException npex) {
-            log.error(npex.getMessage());
-        }
+        clearFeilds();
 
         observDeviceList.addAll(devices);
         lstDeviceList.setItems(observDeviceList);
-
         lstDeviceList.getSelectionModel().selectFirst();
+
+        deviceListListener();
+    }
+
+    private void deviceListListener() {
         lstDeviceList.getSelectionModel().selectedItemProperty().addListener(
                 (ChangeListener<Device>) (observable, oldValue, newValue) ->
                 {
