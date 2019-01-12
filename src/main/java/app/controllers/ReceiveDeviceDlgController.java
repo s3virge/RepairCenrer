@@ -151,7 +151,9 @@ public class ReceiveDeviceDlgController {
         String fullName = cbMaster.getSelectionModel().getSelectedItem().toString();
         int masterId = UserDao.selectIdByFullName(fullName);
         repair.setMasterId(masterId);
-        repair.setStatusId(new StatusDao().selectId(DeviceStatus.received));
+//        repair.setStatusId(new StatusDao().selectId(DeviceStatus.received));
+		//сразу попадает мастеру в список диагностики
+        repair.setStatusId(new StatusDao().selectId(DeviceStatus.diagnostics));
         repair.setDateOfAccept(LocalDateTime.now().toString());
         return repair;
     }

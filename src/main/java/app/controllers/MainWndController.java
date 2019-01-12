@@ -61,6 +61,7 @@ public class MainWndController {
         log.trace("");
 
         initListView(false);
+        addDeviceListListener();
         lstDeviceList.getSelectionModel().selectFirst();
         mLoggedInUser.setText(LoggedInUser.getLoggedInUser().getLogin());
     }
@@ -82,8 +83,6 @@ public class MainWndController {
             else {
                 lstDeviceList.getSelectionModel().select(selectedItem);
             }
-
-            deviceListListener();
         }
         catch (NullPointerException npex) {
             log.error(npex.getMessage());
@@ -209,16 +208,11 @@ public class MainWndController {
 
     @FXML
     private void selectDevicesOnDiagnostics() {
-        //покажем в списке устройства со статусом Принято
         List devices = DeviceDao.selectByStatus(DeviceStatus.diagnostics);
-
         clearFields();
-
         observDeviceList.addAll(devices);
         lstDeviceList.setItems(observDeviceList);
         lstDeviceList.getSelectionModel().selectFirst();
-
-        deviceListListener();
     }
 
     private void clearFields() {
@@ -242,19 +236,15 @@ public class MainWndController {
 
     @FXML
     private void selectReceivedDevices() {
-        //покажем в списке устройства со статусом Принято
+        //todo нужно показать устройства которые приняты сегодня
         List devices = DeviceDao.selectByStatus(DeviceStatus.received);
-
         clearFields();
-
         observDeviceList.addAll(devices);
         lstDeviceList.setItems(observDeviceList);
         lstDeviceList.getSelectionModel().selectFirst();
-
-        deviceListListener();
     }
 
-    private void deviceListListener() {
+    private void addDeviceListListener() {
         lstDeviceList.getSelectionModel().selectedItemProperty().addListener(
                 (ChangeListener<Device>) (observable, oldValue, newValue) ->
                 {
