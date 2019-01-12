@@ -1,6 +1,5 @@
 package app.controllers;
 
-import app.RepairCenter;
 import app.dao.DeviceDao;
 import app.models.Device;
 import app.models.DeviceStatus;
@@ -23,7 +22,9 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.net.URL;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
@@ -74,7 +75,7 @@ public class MainWndController {
             //покажем в списке устройства со статусом Принято
             List devices = DeviceDao.selectByStatus(DeviceStatus.received);
 
-            clearFeilds();
+            clearFields();
             observDeviceList.addAll(devices);
             lstDeviceList.setItems(observDeviceList);
 
@@ -214,7 +215,7 @@ public class MainWndController {
         //покажем в списке устройства со статусом Принято
         List devices = DeviceDao.selectByStatus(DeviceStatus.diagnostics);
 
-        clearFeilds();
+        clearFields();
 
         observDeviceList.addAll(devices);
         lstDeviceList.setItems(observDeviceList);
@@ -223,7 +224,7 @@ public class MainWndController {
         deviceListListener();
     }
 
-    private void clearFeilds() {
+    private void clearFields() {
         try {
             observDeviceList.clear();
             label.setText("");
@@ -247,7 +248,7 @@ public class MainWndController {
         //покажем в списке устройства со статусом Принято
         List devices = DeviceDao.selectByStatus(DeviceStatus.received);
 
-        clearFeilds();
+        clearFields();
 
         observDeviceList.addAll(devices);
         lstDeviceList.setItems(observDeviceList);

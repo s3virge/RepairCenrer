@@ -1,6 +1,6 @@
 package app.models;
 
-public class Device {
+public class Device implements Comparable {
 
     private int id;
     private String brand;
@@ -118,5 +118,11 @@ public class Device {
     @Override
     public String toString() {
         return String.valueOf(id);
+    }
+
+    @Override
+    public int compareTo(Object o) {
+        int id = ((Device)o).getId();
+        return this.id - id;
     }
 }

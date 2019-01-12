@@ -6,6 +6,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.sql.*;
+import java.util.Collections;
 import java.util.Vector;
 
 //Data Access Object for device
@@ -205,6 +206,7 @@ public class DeviceDao {
             log.error(sex.getMessage());
         }
 
+        Collections.sort(listOfDevices);
         return listOfDevices;
     }
 }
