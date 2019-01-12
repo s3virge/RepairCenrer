@@ -22,10 +22,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.net.URL;
-import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
 
 public class MainWndController {
@@ -105,7 +102,7 @@ public class MainWndController {
         FXMLLoader loader = new FXMLLoader();
         //Sets the location used to resolve relative path attribute values.
         //getResource - Finds a resource with a given name.
-        URL resource = getClass().getResource("/view/dialogs/NewRepairDlg.fxml");
+        URL resource = getClass().getResource("/view/dialogs/ReceiveDeviceDlg.fxml");
         loader.setLocation(resource);
 
         AnchorPane repairDlgLayout = null;
@@ -133,7 +130,7 @@ public class MainWndController {
         // Отображаем диалоговое окно и ждём, пока пользователь его не закроет
         dialogStage.showAndWait();
 
-        NewRepairDialogController controller = loader.getController();
+        ReceiveDeviceDlgController controller = loader.getController();
         initListView(controller.okBtnPressed());
     }
 
