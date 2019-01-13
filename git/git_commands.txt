@@ -14,7 +14,8 @@ git checkout -b <name> # создаёт и сразу переключается
 git branch -D <name> # удаляет branch name
 $ git checkout master # Switched to branch "master"
 git branch -r #показывает удаленную ветку
-git branch -r -d <name> #удаляет удаленную ветку
+git branch -r -d <name> #удаляет удаленную ветку, наверно локально
+git push origin --delete resources #удаляет ветку resources на сервере
 ----------------------------------------------------------------
 git stash # stash - прятать. Спрятать изменения в хранилище.
 git stash pop # вынуть состояние ветки

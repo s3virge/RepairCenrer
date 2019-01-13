@@ -166,7 +166,7 @@ public class DeviceDao {
     public static Vector<Device> selectByStatus(String status) {
         log.trace("");
 
-        final String SELECT_DEVICES = "select device.id, type.value, brand.value, model.value, serial_number, " +
+        final String select_by_status = "select device.id, type.value, brand.value, model.value, serial_number, " +
                 "defect.value, owner_id, repair_id, status.value, completeness.value, appearance.value, note " +
                 "from device " +
                 "inner join type on device.type_id = type.id " +
@@ -177,13 +177,13 @@ public class DeviceDao {
                 "inner join appearance on device.appearance_id = appearance.id " +
                 "inner join repair on device.repair_id = repair.id " +
                 "inner join status on repair.status_id = status.id " +
-                "WHERE status.value = '"+ status +"'";
+                "WHERE status.value = '" + status + "'";
 
         Vector<Device> listOfDevices = new Vector<>();
 
         try (Connection co = ConnectionBuilder.getConnection();
              Statement st = co.createStatement()) {
-            ResultSet result = st.executeQuery(SELECT_DEVICES);
+            ResultSet result = st.executeQuery(select_by_status);
             while (result.next()) {
                 Device device = new Device();
 
@@ -208,5 +208,55 @@ public class DeviceDao {
 
         Collections.sort(listOfDevices);
         return listOfDevices;
+    }
+
+    /**
+     * select devices by date
+     */
+    public static Vector<Device> selectByDate(String date) {
+        log.trace("");
+        Vector<Device> devList = new Vector<>();
+
+        //
+        final String select_by_date = "select device.id, type.value, brand.value, model.value, serial_number, " +
+                "defect.value, owner_id, repair_id, status.value, completeness.value, appearance.value, note " +
+                "from device " +
+                "inner join type on device.type_id = type.id " +
+                "inner join brand on device.brand_id = brand.id " +
+                "inner join model on device.model_id = model.id " +
+                "inner join defect on device.defect_id = defect.id " +
+                "inner join completeness on device.completeness_id = completeness.id " +
+                "inner join appearance on device.appearance_id = appearance.id " +
+                "inner join repair on device.repair_id = repair.id " +
+                "inner join status on repair.status_id = status.id " +
+                "WHERE repair.date_of_receipt = '" + date + "'";
+
+        try (Connection co = ConnectionBuilder.getConnection();
+             Statement st = co.createStatement()) {
+            ResultSet result = st.executeQuery(select_by_date);
+            while (result.next()) {
+                Device device = new Device();
+
+                device.setId(result.getInt("id"));
+                device.setType(result.getString("type.value"));
+                device.setBrand(result.getString("brand.value"));
+                device.setModel(result.getString("model.value"));
+                device.setSerialNumber(result.getString("serial_number"));
+                device.setDefect(result.getString("defect.value"));
+                device.setOwnerId(result.getInt("owner_id"));
+                device.setRepairId(result.getInt("repair_id"));
+                device.setCompleteness(result.getString("completeness.value"));
+                device.setAppearance(result.getString("appearance.value"));
+                device.setNote(result.getString("note"));
+
+                devList.add(device);
+            }
+        }
+        catch (SQLException sex) {
+            log.error(sex.getMessage());
+        }
+
+        Collections.sort(devList);
+        return devList;
     }
 }

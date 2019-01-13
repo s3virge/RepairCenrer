@@ -23,6 +23,8 @@ import org.apache.logging.log4j.Logger;
 
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 public class MainWndController {
@@ -55,6 +57,7 @@ public class MainWndController {
     private Menu mLoggedInUser;
 
     private ObservableList<Device> observDeviceList = FXCollections.observableArrayList();
+    private final String today = gerCurrentDate();
 
     @FXML
     private void initialize() {
@@ -71,7 +74,7 @@ public class MainWndController {
 
         try {
             //покажем в списке устройства со статусом Принято
-            List devices = DeviceDao.selectByStatus(DeviceStatus.received);
+            List devices = DeviceDao.selectByDate(today);
 
             clearFields();
             observDeviceList.addAll(devices);
@@ -235,13 +238,19 @@ public class MainWndController {
     }
 
     @FXML
-    private void selectReceivedDevices() {
-        //todo нужно показать устройства которые приняты сегодня
-        List devices = DeviceDao.selectByStatus(DeviceStatus.received);
+    private void selectReceivedDevicesToday() {
+        List devices = DeviceDao.selectByDate(today);
         clearFields();
         observDeviceList.addAll(devices);
         lstDeviceList.setItems(observDeviceList);
         lstDeviceList.getSelectionModel().selectFirst();
+    }
+
+    private String gerCurrentDate() {
+        //Current Date
+        LocalDate localDate = LocalDate.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        return localDate.format(formatter);
     }
 
     private void addDeviceListListener() {
