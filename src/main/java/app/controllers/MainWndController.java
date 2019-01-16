@@ -211,6 +211,7 @@ public class MainWndController {
 
     @FXML
     private void selectDevicesOnDiagnostics() {
+        //todo select devices on diagnostics and for current logged in user
         List devices = DeviceDao.selectByStatus(DeviceStatus.diagnostics);
         clearFields();
         observDeviceList.addAll(devices);
