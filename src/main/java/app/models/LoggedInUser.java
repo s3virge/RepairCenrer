@@ -8,7 +8,7 @@ import org.apache.logging.log4j.Logger;
  */
 public class LoggedInUser {
     private static Logger log = LogManager.getLogger("LoggedInUser");
-    public static User loggedInUser;
+    private static User loggedInUser;
 
     public static void setLoggedInUser(User loggedInUser) {
         LoggedInUser.loggedInUser = loggedInUser;
