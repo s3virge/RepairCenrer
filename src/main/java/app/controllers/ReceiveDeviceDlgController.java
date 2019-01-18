@@ -113,7 +113,7 @@ public class ReceiveDeviceDlgController {
     }
 
     @FXML
-    private void onBtnOk(ActionEvent actionEvent) {
+    private void onClickBtnOk(ActionEvent actionEvent) {
 
         //если данные вводятся неправильно
 //        if (!isEnteredCorrectly())
@@ -183,7 +183,7 @@ public class ReceiveDeviceDlgController {
         return owner;
     }
 
-    public boolean okBtnPressed() {
+    public boolean isOkBtnPressed() {
         return okBtnPressed;
     }
 }

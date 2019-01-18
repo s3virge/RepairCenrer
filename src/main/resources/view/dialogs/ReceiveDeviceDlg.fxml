@@ -41,7 +41,7 @@
       </HBox>
         <HBox layoutX="281.0" layoutY="323.0" prefWidth="185.0" spacing="5.0" AnchorPane.bottomAnchor="22.0" AnchorPane.rightAnchor="14.0">
             <children>
-                <Button fx:id="btnOk" defaultButton="true" layoutX="197.1875" layoutY="241.0" mnemonicParsing="false" onAction="#onBtnOk" prefWidth="90.0" text="OK" />
+                <Button fx:id="btnOk" defaultButton="true" layoutX="197.1875" layoutY="241.0" mnemonicParsing="false" onAction="#onClickBtnOk" prefWidth="90.0" text="OK" />
                 <Button cancelButton="true" layoutX="249.375" layoutY="241.0" mnemonicParsing="false" onAction="#closeDlg" prefWidth="90.0" text="Отмена" />
             </children>
         </HBox>
