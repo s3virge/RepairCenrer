@@ -47,42 +47,6 @@ public class MainWndController {
 
     }
 
-    private FXMLLoader loadDlgFxml(String dlgFxmlFile, String dlgTitle) {
-        log.trace("");
-
-        // Загружаем fxml-файл и создаём новую сцену
-        // для всплывающего диалогового окна.
-        FXMLLoader loader = new FXMLLoader();
-        //Sets the location used to resolve relative path attribute values.
-        //getResource - Finds a resource with a given name.
-        URL resource = getClass().getResource(dlgFxmlFile);
-        loader.setLocation(resource);
-
-        Pane repairDlgLayout = null;
-
-        try {
-            repairDlgLayout = loader.load();
-        }
-        catch (IOException e) {
-            e.printStackTrace();
-            log.error(e);
-        }
-
-        // Создаём подмостки для диалогового окна.
-        Stage dialogStage = new Stage();
-        //подготавливаем их
-        dialogStage.setTitle(dlgTitle);
-        dialogStage.initModality(Modality.WINDOW_MODAL);
-        dialogStage.initOwner(ScreenController.getPrimaryStage());
-
-        Scene scene = new Scene(repairDlgLayout);
-        dialogStage.setScene(scene);
-        dialogStage.setResizable(false);
-
-        dialogStage.showAndWait();
-        return loader;
-    }
-
     @FXML
     private void showReceivedDevicesToday() {
         loadFxml("/view/ReceivedDevicesPane.fxml");
@@ -92,37 +56,39 @@ public class MainWndController {
     private void showUserManagementDlg() {
         log.trace("");
 
-        // Загружаем fxml-файл и создаём новую сцену
-        // для всплывающего диалогового окна.
-        FXMLLoader loader = new FXMLLoader();
-        //Sets the location used to resolve relative path attribute values.
-        //getResource - Finds a resource with a given name.
-        URL resource = getClass().getResource("/view/dialogs/UserManagementDlg.fxml");
-        loader.setLocation(resource);
+//        // Загружаем fxml-файл и создаём новую сцену
+//        // для всплывающего диалогового окна.
+//        FXMLLoader loader = new FXMLLoader();
+//        //Sets the location used to resolve relative path attribute values.
+//        //getResource - Finds a resource with a given name.
+//        URL resource = getClass().getResource("/view/dialogs/UserManagementDlg.fxml");
+//        loader.setLocation(resource);
+//
+//        Parent userDlgLayout = null;
+//
+//        try {
+//            userDlgLayout = loader.load();
+//        }
+//        catch (IOException e) {
+//            log.error(e.getMessage());
+//        }
+//
+//        // Создаём подмостки для диалогового окна.
+//        Stage dialogStage = new Stage();
+//        //подготавливаем их
+//        dialogStage.setTitle("Пользователи");
+//        dialogStage.initModality(Modality.APPLICATION_MODAL);
+//        dialogStage.initOwner(ScreenController.getPrimaryStage());
+//
+//        //расставляем декорации на сцене согласно плану
+//        Scene scene = new Scene(userDlgLayout);
+//        dialogStage.setScene(scene);
+//        dialogStage.setResizable(false);
+//
+//        // Отображаем диалоговое окно и ждём, пока пользователь его не закроет
+//        dialogStage.showAndWait();
 
-        Parent userDlgLayout = null;
-
-        try {
-            userDlgLayout = loader.load();
-        }
-        catch (IOException e) {
-            log.error(e.getMessage());
-        }
-
-        // Создаём подмостки для диалогового окна.
-        Stage dialogStage = new Stage();
-        //подготавливаем их
-        dialogStage.setTitle("Пользователи");
-        dialogStage.initModality(Modality.APPLICATION_MODAL);
-        dialogStage.initOwner(ScreenController.getPrimaryStage());
-
-        //расставляем декорации на сцене согласно плану
-        Scene scene = new Scene(userDlgLayout);
-        dialogStage.setScene(scene);
-        dialogStage.setResizable(false);
-
-        // Отображаем диалоговое окно и ждём, пока пользователь его не закроет
-        dialogStage.showAndWait();
+        loadDlgFxml("/view/dialogs/UserManagementDlg.fxml", "Пользователи");
     }
 
     @FXML
@@ -186,5 +152,41 @@ public class MainWndController {
         }
 
         mainPain.getChildren().add(newLoadedPane);
+    }
+
+    private FXMLLoader loadDlgFxml(String dlgFxmlFile, String dlgTitle) {
+        log.trace("");
+
+        // Загружаем fxml-файл и создаём новую сцену
+        // для всплывающего диалогового окна.
+        FXMLLoader loader = new FXMLLoader();
+        //Sets the location used to resolve relative path attribute values.
+        //getResource - Finds a resource with a given name.
+        URL resource = getClass().getResource(dlgFxmlFile);
+        loader.setLocation(resource);
+
+        Pane dlgLayout = null;
+
+        try {
+            dlgLayout = loader.load();
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+            log.error(e);
+        }
+
+        // Создаём подмостки для диалогового окна.
+        Stage dialogStage = new Stage();
+        //подготавливаем их
+        dialogStage.setTitle(dlgTitle);
+        dialogStage.initModality(Modality.WINDOW_MODAL);
+        dialogStage.initOwner(ScreenController.getPrimaryStage());
+
+        Scene scene = new Scene(dlgLayout);
+        dialogStage.setScene(scene);
+        dialogStage.setResizable(false);
+
+        dialogStage.showAndWait();
+        return loader;
     }
 }
