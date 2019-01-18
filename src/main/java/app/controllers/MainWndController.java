@@ -47,42 +47,6 @@ public class MainWndController {
 
     }
 
-    private FXMLLoader loadDlgFxml(String dlgFxmlFile, String dlgTitle) {
-        log.trace("");
-
-        // Загружаем fxml-файл и создаём новую сцену
-        // для всплывающего диалогового окна.
-        FXMLLoader loader = new FXMLLoader();
-        //Sets the location used to resolve relative path attribute values.
-        //getResource - Finds a resource with a given name.
-        URL resource = getClass().getResource(dlgFxmlFile);
-        loader.setLocation(resource);
-
-        Pane repairDlgLayout = null;
-
-        try {
-            repairDlgLayout = loader.load();
-        }
-        catch (IOException e) {
-            e.printStackTrace();
-            log.error(e);
-        }
-
-        // Создаём подмостки для диалогового окна.
-        Stage dialogStage = new Stage();
-        //подготавливаем их
-        dialogStage.setTitle(dlgTitle);
-        dialogStage.initModality(Modality.WINDOW_MODAL);
-        dialogStage.initOwner(ScreenController.getPrimaryStage());
-
-        Scene scene = new Scene(repairDlgLayout);
-        dialogStage.setScene(scene);
-        dialogStage.setResizable(false);
-
-        dialogStage.showAndWait();
-        return loader;
-    }
-
     @FXML
     private void showReceivedDevicesToday() {
         loadFxml("/view/ReceivedDevicesPane.fxml");
@@ -186,5 +150,41 @@ public class MainWndController {
         }
 
         mainPain.getChildren().add(newLoadedPane);
+    }
+
+    private FXMLLoader loadDlgFxml(String dlgFxmlFile, String dlgTitle) {
+        log.trace("");
+
+        // Загружаем fxml-файл и создаём новую сцену
+        // для всплывающего диалогового окна.
+        FXMLLoader loader = new FXMLLoader();
+        //Sets the location used to resolve relative path attribute values.
+        //getResource - Finds a resource with a given name.
+        URL resource = getClass().getResource(dlgFxmlFile);
+        loader.setLocation(resource);
+
+        Pane repairDlgLayout = null;
+
+        try {
+            repairDlgLayout = loader.load();
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+            log.error(e);
+        }
+
+        // Создаём подмостки для диалогового окна.
+        Stage dialogStage = new Stage();
+        //подготавливаем их
+        dialogStage.setTitle(dlgTitle);
+        dialogStage.initModality(Modality.WINDOW_MODAL);
+        dialogStage.initOwner(ScreenController.getPrimaryStage());
+
+        Scene scene = new Scene(repairDlgLayout);
+        dialogStage.setScene(scene);
+        dialogStage.setResizable(false);
+
+        dialogStage.showAndWait();
+        return loader;
     }
 }
