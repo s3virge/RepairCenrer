@@ -44,7 +44,7 @@
             </Menu>
       </menus>
     </MenuBar>
-      <AnchorPane VBox.vgrow="ALWAYS">
+      <AnchorPane fx:id="mainPain" VBox.vgrow="ALWAYS">
          <children>
             <ListView fx:id="lstDeviceList" prefHeight="541.0" prefWidth="136.0" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="15.0" />
             <VBox layoutX="224.0" layoutY="21.0" prefHeight="305.0" prefWidth="445.0" spacing="40.0">

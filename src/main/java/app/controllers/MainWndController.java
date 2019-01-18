@@ -16,6 +16,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.Menu;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import org.apache.logging.log4j.LogManager;
@@ -55,6 +56,9 @@ public class MainWndController {
 
     @FXML
     private Menu mLoggedInUser;
+
+    @FXML
+    private AnchorPane mainPain;
 
     private ObservableList<Device> observDeviceList = FXCollections.observableArrayList();
     private final String today = gerCurrentDate();
@@ -211,30 +215,13 @@ public class MainWndController {
 
     @FXML
     private void selectDevicesOnDiagnostics() {
-        List devices = DeviceDao.selectByStatusAndMaster(DeviceStatus.diagnostics, LoggedInUser.getLoggedInUser().getLogin());
-        clearFields();
-        observDeviceList.addAll(devices);
-        lstDeviceList.setItems(observDeviceList);
-        lstDeviceList.getSelectionModel().selectFirst();
-    }
+//        List devices = DeviceDao.selectByStatusAndMaster(DeviceStatus.diagnostics, LoggedInUser.getLoggedInUser().getLogin());
+//        clearFields();
+//        observDeviceList.addAll(devices);
+//        lstDeviceList.setItems(observDeviceList);
+//        lstDeviceList.getSelectionModel().selectFirst();
 
-    private void clearFields() {
-        try {
-            observDeviceList.clear();
-            label.setText("");
-            label1.setText("");
-            label2.setText("");
-            label3.setText("");
-            label4.setText("");
-            label5.setText("");
-            label6.setText("");
-            label7.setText("");
-            label8.setText("");
-            label9.setText("");
-        }
-        catch (NullPointerException npex) {
-            log.error(npex.getMessage());
-        }
+            loadFxml();
     }
 
     @FXML
@@ -245,6 +232,25 @@ public class MainWndController {
         lstDeviceList.setItems(observDeviceList);
         lstDeviceList.getSelectionModel().selectFirst();
     }
+
+	private void clearFields() {
+		try {
+			observDeviceList.clear();
+			label.setText("");
+			label1.setText("");
+			label2.setText("");
+			label3.setText("");
+			label4.setText("");
+			label5.setText("");
+			label6.setText("");
+			label7.setText("");
+			label8.setText("");
+			label9.setText("");
+		}
+		catch (NullPointerException npex) {
+			log.error(npex.getMessage());
+		}
+	}
 
     private String gerCurrentDate() {
         //Current Date
@@ -275,4 +281,25 @@ public class MainWndController {
                 }
         );
     }
+
+	private void loadFxml(/*ActionEvent event*/) {
+        log.trace("");
+
+        FXMLLoader loader = new FXMLLoader();
+        //Sets the location used to resolve relative path attribute values.
+        //getResource - Finds a resource with a given name.
+        URL resource = getClass().getResource("/view/dialogs/UserManagementDlg.fxml");
+        loader.setLocation(resource);
+
+        Pane newLoadedPane = null;
+
+        try {
+            newLoadedPane = loader.load();
+        }
+        catch (IOException e) {
+            log.error(e.getMessage());
+        }
+
+        mainPain.getChildren().add(newLoadedPane);
+	}
 }
