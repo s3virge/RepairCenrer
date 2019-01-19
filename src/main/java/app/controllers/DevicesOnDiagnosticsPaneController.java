@@ -10,6 +10,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.control.TextField;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -22,25 +23,25 @@ public class DevicesOnDiagnosticsPaneController {
     @FXML
     private ListView lstDeviceList;
     @FXML
-    private Label labelId;
+    private TextField tfId;
     @FXML
-    private Label labelType;
+    private TextField tfType;
     @FXML
-    private Label labelBrand;
+    private TextField tfBrand;
     @FXML
-    private Label labelModel;
+    private TextField tfModel;
     @FXML
-    private Label labelSerialNumber;
+    private TextField tfSerialNumber;
     @FXML
-    private Label labelDefect;
+    private TextField tfDefect;
     @FXML
-    private Label labelOwnerId;
+    private TextField tfOwnerId;
     @FXML
-    private Label labelRepairId;
+    private TextField tfRepairId;
     @FXML
-    private Label labelCompleteness;
+    private TextField tfCompleteness;
     @FXML
-    private Label labelAppearance;
+    private TextField tfAppearance;
 
     private ObservableList<Device> observDeviceList = FXCollections.observableArrayList();
 
@@ -83,16 +84,16 @@ public class DevicesOnDiagnosticsPaneController {
     private void clearFields() {
         try {
             observDeviceList.clear();
-            labelId.setText("");
-            labelType.setText("");
-            labelBrand.setText("");
-            labelModel.setText("");
-            labelSerialNumber.setText("");
-            labelDefect.setText("");
-            labelOwnerId.setText("");
-            labelRepairId.setText("");
-            labelCompleteness.setText("");
-            labelAppearance.setText("");
+            tfId.setText("");
+            tfType.setText("");
+            tfBrand.setText("");
+            tfModel.setText("");
+            tfSerialNumber.setText("");
+            tfDefect.setText("");
+            tfOwnerId.setText("");
+            tfRepairId.setText("");
+            tfCompleteness.setText("");
+            tfAppearance.setText("");
         }
         catch (NullPointerException npex) {
             log.error(npex.getMessage());
@@ -111,16 +112,16 @@ public class DevicesOnDiagnosticsPaneController {
                 (ChangeListener<Device>) (observable, oldValue, newValue) ->
                 {
                     try {
-                        labelId.setText("device id: " + newValue.getId());
-                        labelType.setText("type:  " + newValue.getType());
-                        labelBrand.setText("brand:  " + newValue.getBrand());
-                        labelModel.setText("model:  " + newValue.getModel());
-                        labelSerialNumber.setText("serial number:  " + newValue.getSerialNumber());
-                        labelDefect.setText("defect:  " + newValue.getDefect());
-                        labelOwnerId.setText("owner id:  " + newValue.getOwnerId());
-                        labelRepairId.setText("repair id:  " + newValue.getRepairId());
-                        labelCompleteness.setText("completeness:  " + newValue.getCompleteness());
-                        labelAppearance.setText("appearance:  " + newValue.getAppearance());
+                        tfId.setText("device id: " + newValue.getId());
+                        tfType.setText("type:  " + newValue.getType());
+                        tfBrand.setText("brand:  " + newValue.getBrand());
+                        tfModel.setText("model:  " + newValue.getModel());
+                        tfSerialNumber.setText("serial number:  " + newValue.getSerialNumber());
+                        tfDefect.setText("defect:  " + newValue.getDefect());
+                        tfOwnerId.setText("owner id:  " + newValue.getOwnerId());
+                        tfRepairId.setText("repair id:  " + newValue.getRepairId());
+                        tfCompleteness.setText("completeness:  " + newValue.getCompleteness());
+                        tfAppearance.setText("appearance:  " + newValue.getAppearance());
                     }
                     catch (NullPointerException npex) {
                         log.error(npex.getMessage());
