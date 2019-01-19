@@ -52,8 +52,6 @@ public class DevicesOnDiagnosticsPaneController {
     @FXML
     private void initialize() {
         log.trace("");
-
-
         updateDeviceListView(false);
         addDeviceListListener();
         lstDeviceList.getSelectionModel().selectFirst();

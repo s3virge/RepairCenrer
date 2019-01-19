@@ -11,16 +11,16 @@
         <ListView fx:id="lstDeviceList" prefHeight="541.0" prefWidth="136.0" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="15.0" />
         <VBox layoutX="224.0" layoutY="21.0" prefHeight="305.0" prefWidth="445.0" spacing="40.0">
             <children>
-                <TextField fx:id="tflId" prefHeight="25.0" prefWidth="300.0" text="id" />
+                <TextField fx:id="tfId" prefHeight="25.0" prefWidth="300.0" text="id" />
                 <TextField fx:id="tfType" prefHeight="25.0" prefWidth="300.0" text="Label" />
-                <TextField fx:id="tflBrand" prefHeight="25.0" prefWidth="300.0" text="Label" />
-                <TextField fx:id="tflModel" prefHeight="25.0" prefWidth="300.0" text="Label" />
-                <TextField fx:id="tflSerialNumber" prefHeight="25.0" prefWidth="300.0" text="Label" />
-                <TextField fx:id="tflDefect" prefHeight="25.0" prefWidth="300.0" text="Label" />
-                <TextField fx:id="tflOwnerId" prefHeight="25.0" prefWidth="300.0" text="Label" />
-                <TextField fx:id="tflRepairId" prefHeight="25.0" prefWidth="300.0" text="Label" />
-                <TextField fx:id="tflCompleteness" prefHeight="25.0" prefWidth="300.0" text="Label" />
-                <TextField fx:id="tflAppearance" layoutX="10.0" layoutY="402.0" prefHeight="25.0" prefWidth="300.0" text="Label" />
+                <TextField fx:id="tfBrand" prefHeight="25.0" prefWidth="300.0" text="Label" />
+                <TextField fx:id="tfModel" prefHeight="25.0" prefWidth="300.0" text="Label" />
+                <TextField fx:id="tfSerialNumber" prefHeight="25.0" prefWidth="300.0" text="Label" />
+                <TextField fx:id="tfDefect" prefHeight="25.0" prefWidth="300.0" text="Label" />
+                <TextField fx:id="tfOwnerId" prefHeight="25.0" prefWidth="300.0" text="Label" />
+                <TextField fx:id="tfRepairId" prefHeight="25.0" prefWidth="300.0" text="Label" />
+                <TextField fx:id="tfCompleteness" prefHeight="25.0" prefWidth="300.0" text="Label" />
+                <TextField fx:id="tfAppearance" layoutX="10.0" layoutY="402.0" prefHeight="25.0" prefWidth="300.0" text="Label" />
             </children>
         </VBox>
     </children>
