@@ -6,8 +6,11 @@ import javafx.beans.value.ChangeListener;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.Pane;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -39,6 +42,8 @@ public class ReceivedDevicesPaneController {
     private Label label8;
     @FXML
     private Label label9;
+    @FXML
+    private Pane receivedDevicesPane;
 
     private ObservableList<Device> observDeviceList = FXCollections.observableArrayList();
 
@@ -80,16 +85,17 @@ public class ReceivedDevicesPaneController {
     private void clearFields() {
         try {
             observDeviceList.clear();
-            label.setText("");
-            label1.setText("");
-            label2.setText("");
-            label3.setText("");
-            label4.setText("");
-            label5.setText("");
-            label6.setText("");
-            label7.setText("");
-            label8.setText("");
-            label9.setText("");
+
+            for (Node node : receivedDevicesPane.getChildren()) {
+                if (node instanceof TextField) {
+                    // clear
+                    ((TextField)node).setText("");
+                }
+                else if (node instanceof Label) {
+                    // clear
+                    ((Label)node).setText("");
+                }
+            }
         }
         catch (NullPointerException npex) {
             log.error(npex.getMessage());
