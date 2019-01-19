@@ -10,16 +10,16 @@
         <ListView fx:id="lstDeviceList" prefHeight="541.0" prefWidth="136.0" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="15.0" />
         <VBox layoutX="224.0" layoutY="21.0" prefHeight="305.0" prefWidth="445.0" spacing="40.0">
             <children>
-                <Label fx:id="label" prefHeight="25.0" prefWidth="300.0" text="Label" />
-                <Label fx:id="label1" prefHeight="25.0" prefWidth="300.0" text="Label" />
-                <Label fx:id="label2" prefHeight="25.0" prefWidth="300.0" text="Label" />
-                <Label fx:id="label3" prefHeight="25.0" prefWidth="300.0" text="Label" />
-                <Label fx:id="label4" prefHeight="25.0" prefWidth="300.0" text="Label" />
-                <Label fx:id="label5" prefHeight="25.0" prefWidth="300.0" text="Label" />
-                <Label fx:id="label6" prefHeight="25.0" prefWidth="300.0" text="Label" />
-                <Label fx:id="label7" prefHeight="25.0" prefWidth="300.0" text="Label" />
-                <Label fx:id="label8" prefHeight="25.0" prefWidth="300.0" text="Label" />
-                <Label fx:id="label9" layoutX="10.0" layoutY="402.0" prefHeight="25.0" prefWidth="300.0" text="Label" />
+                <Label fx:id="labelId" prefHeight="25.0" prefWidth="300.0" text="Label" />
+                <Label fx:id="labelType" prefHeight="25.0" prefWidth="300.0" text="Label" />
+                <Label fx:id="labelBrand" prefHeight="25.0" prefWidth="300.0" text="Label" />
+                <Label fx:id="labelModel" prefHeight="25.0" prefWidth="300.0" text="Label" />
+                <Label fx:id="labelSerialNumber" prefHeight="25.0" prefWidth="300.0" text="Label" />
+                <Label fx:id="labelDefect" prefHeight="25.0" prefWidth="300.0" text="Label" />
+                <Label fx:id="labelOwnerId" prefHeight="25.0" prefWidth="300.0" text="Label" />
+                <Label fx:id="labelRepairId" prefHeight="25.0" prefWidth="300.0" text="Label" />
+                <Label fx:id="labelCompleteness" prefHeight="25.0" prefWidth="300.0" text="Label" />
+                <Label fx:id="labelAppearance" layoutX="10.0" layoutY="402.0" prefHeight="25.0" prefWidth="300.0" text="Label" />
             </children>
         </VBox>
     </children>
