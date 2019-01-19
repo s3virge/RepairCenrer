@@ -2,25 +2,25 @@
 
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.TilePane?>
 
-<?import javafx.scene.control.Label?>
-<AnchorPane fx:id="diagnosticsPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.controllers.DevicesOnDiagnosticsPaneController">
+<AnchorPane fx:id="diagnosticsPane" prefHeight="478.0" prefWidth="669.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.controllers.DevicesOnDiagnosticsPaneController">
     <children>
-        <ListView fx:id="lstDeviceList" prefHeight="541.0" prefWidth="136.0" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="15.0" />
-        <VBox layoutX="224.0" layoutY="21.0" prefHeight="305.0" prefWidth="445.0" spacing="40.0">
-            <children>
-                <Label fx:id="lType" prefHeight="25.0" prefWidth="300.0" text="Label" />
-                <TextField fx:id="tfBrand" prefHeight="25.0" prefWidth="300.0" text="Label" />
-                <TextField fx:id="tfModel" prefHeight="25.0" prefWidth="300.0" text="Label" />
-                <TextField fx:id="tfSerialNumber" prefHeight="25.0" prefWidth="300.0" text="Label" />
-                <TextField fx:id="tfDefect" prefHeight="25.0" prefWidth="300.0" text="Label" />
-                <TextField fx:id="tfOwnerId" prefHeight="25.0" prefWidth="300.0" text="Label" />
-                <TextField fx:id="tfRepairId" prefHeight="25.0" prefWidth="300.0" text="Label" />
-                <TextField fx:id="tfCompleteness" prefHeight="25.0" prefWidth="300.0" text="Label" />
-                <TextField fx:id="tfAppearance" layoutX="10.0" layoutY="402.0" prefHeight="25.0" prefWidth="300.0" text="Label" />
-            </children>
-        </VBox>
+        <ListView fx:id="lstDeviceList" prefHeight="541.0" prefWidth="136.0" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="15.0">
+         <tooltip>
+            <Tooltip text="Устройства на диагностике" />
+         </tooltip></ListView>
+      <TilePane layoutX="165.0" layoutY="15.0" prefHeight="121.0" prefWidth="300.0">
+         <children>
+                <TextField fx:id="tfType" editable="false" focusTraversable="false" style="-fx-background-color: none; -fx-border-color: none;" text="type" />
+                <TextField fx:id="tfBrandModel" editable="false" prefHeight="25.0" prefWidth="300.0" text="brandModel" />
+                <TextField fx:id="tfSerialNumber" editable="false" prefHeight="25.0" prefWidth="300.0" text="serialNumber" />
+                <TextField fx:id="tfDefect" editable="false" prefHeight="25.0" prefWidth="300.0" text="defect" />
+                <TextField fx:id="tfCompleteness" editable="false" prefHeight="25.0" prefWidth="300.0" text="completeness" />
+                <TextField fx:id="tfAppearance" editable="false" prefHeight="25.0" prefWidth="300.0" text="appearance" />
+         </children>
+      </TilePane>
     </children>
 </AnchorPane>

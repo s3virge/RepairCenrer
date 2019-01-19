@@ -25,21 +25,13 @@ public class DevicesOnDiagnosticsPaneController {
     @FXML
     private ListView lstDeviceList;
     @FXML
-    private TextField tfId;
+    private TextField tfType;
     @FXML
-    private Label lType;
-    @FXML
-    private TextField tfBrand;
-    @FXML
-    private TextField tfModel;
+    private TextField tfBrandModel;
     @FXML
     private TextField tfSerialNumber;
     @FXML
     private TextField tfDefect;
-    @FXML
-    private TextField tfOwnerId;
-    @FXML
-    private TextField tfRepairId;
     @FXML
     private TextField tfCompleteness;
     @FXML
@@ -116,15 +108,12 @@ public class DevicesOnDiagnosticsPaneController {
                 {
                     try {
 //                        tfId.setText("device id: " + newValue.getId());
-                        lType.setText("type:  " + newValue.getType());
-                        tfBrand.setText("brand:  " + newValue.getBrand());
-                        tfModel.setText("model:  " + newValue.getModel());
-                        tfSerialNumber.setText("serial number:  " + newValue.getSerialNumber());
-                        tfDefect.setText("defect:  " + newValue.getDefect());
-                        tfOwnerId.setText("owner id:  " + newValue.getOwnerId());
-                        tfRepairId.setText("repair id:  " + newValue.getRepairId());
-                        tfCompleteness.setText("completeness:  " + newValue.getCompleteness());
-                        tfAppearance.setText("appearance:  " + newValue.getAppearance());
+                       tfType.setText(newValue.getType());
+                       tfBrandModel.setText(newValue.getBrand() +" "+newValue.getModel());
+                       tfSerialNumber.setText(newValue.getSerialNumber());
+                       tfDefect.setText(newValue.getDefect());
+                       tfCompleteness.setText(newValue.getCompleteness());
+                       tfAppearance.setText(newValue.getAppearance());
                     }
                     catch (NullPointerException npex) {
                         log.error(npex.getMessage());
