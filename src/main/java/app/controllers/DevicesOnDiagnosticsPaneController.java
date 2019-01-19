@@ -8,9 +8,11 @@ import javafx.beans.value.ChangeListener;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.Pane;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -25,7 +27,7 @@ public class DevicesOnDiagnosticsPaneController {
     @FXML
     private TextField tfId;
     @FXML
-    private TextField tfType;
+    private Label lType;
     @FXML
     private TextField tfBrand;
     @FXML
@@ -42,6 +44,8 @@ public class DevicesOnDiagnosticsPaneController {
     private TextField tfCompleteness;
     @FXML
     private TextField tfAppearance;
+    @FXML
+    private Pane diagnosticsPane;
 
     private ObservableList<Device> observDeviceList = FXCollections.observableArrayList();
 
@@ -82,16 +86,17 @@ public class DevicesOnDiagnosticsPaneController {
     private void clearFields() {
         try {
             observDeviceList.clear();
-            tfId.setText("");
-            tfType.setText("");
-            tfBrand.setText("");
-            tfModel.setText("");
-            tfSerialNumber.setText("");
-            tfDefect.setText("");
-            tfOwnerId.setText("");
-            tfRepairId.setText("");
-            tfCompleteness.setText("");
-            tfAppearance.setText("");
+
+            for (Node node : diagnosticsPane.getChildren()) {
+                if (node instanceof TextField) {
+                    // clear
+                    ((TextField)node).setText("");
+                }
+                else if (node instanceof Label) {
+                    // clear
+                    ((Label)node).setText("");
+                }
+            }
         }
         catch (NullPointerException npex) {
             log.error(npex.getMessage());
@@ -110,8 +115,8 @@ public class DevicesOnDiagnosticsPaneController {
                 (ChangeListener<Device>) (observable, oldValue, newValue) ->
                 {
                     try {
-                        tfId.setText("device id: " + newValue.getId());
-                        tfType.setText("type:  " + newValue.getType());
+//                        tfId.setText("device id: " + newValue.getId());
+                        lType.setText("type:  " + newValue.getType());
                         tfBrand.setText("brand:  " + newValue.getBrand());
                         tfModel.setText("model:  " + newValue.getModel());
                         tfSerialNumber.setText("serial number:  " + newValue.getSerialNumber());

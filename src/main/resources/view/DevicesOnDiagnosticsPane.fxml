@@ -1,18 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 
-<?import javafx.scene.control.TextField?>
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.controllers.DevicesOnDiagnosticsPaneController">
+<?import javafx.scene.control.Label?>
+<AnchorPane fx:id="diagnosticsPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.controllers.DevicesOnDiagnosticsPaneController">
     <children>
         <ListView fx:id="lstDeviceList" prefHeight="541.0" prefWidth="136.0" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="15.0" />
         <VBox layoutX="224.0" layoutY="21.0" prefHeight="305.0" prefWidth="445.0" spacing="40.0">
             <children>
-                <TextField fx:id="tfId" prefHeight="25.0" prefWidth="300.0" text="id" />
-                <TextField fx:id="tfType" prefHeight="25.0" prefWidth="300.0" text="Label" />
+                <Label fx:id="lType" prefHeight="25.0" prefWidth="300.0" text="Label" />
                 <TextField fx:id="tfBrand" prefHeight="25.0" prefWidth="300.0" text="Label" />
                 <TextField fx:id="tfModel" prefHeight="25.0" prefWidth="300.0" text="Label" />
                 <TextField fx:id="tfSerialNumber" prefHeight="25.0" prefWidth="300.0" text="Label" />
