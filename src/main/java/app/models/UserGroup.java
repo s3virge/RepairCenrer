@@ -5,4 +5,5 @@ public class UserGroup {
     final public static String MANAGER = "Менеджер";
     final public static String MASTER = "Мастер";
     final public static String ACCEPTOR = "Приемщик";
+    final public static String FIRED = "Уволен";
 }

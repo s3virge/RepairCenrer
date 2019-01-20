@@ -43,7 +43,9 @@ from device
        inner join appearance a on device.appearance_id = a.id
        inner join repair rep on device.repair_id = rep.id
        inner join status s on rep.status_id = s.id
-WHERE rep.date_of_receipt = '11-01-2019';
+inner join user u on rep.master_id = u.id
+WHERE rep.date_of_receipt = '16-01-2019'
+and u.login = 'hodor';
 
 SELECT device.id, t.value, rep.acceptor_id, s.value
 FROM device
@@ -54,3 +56,9 @@ WHERE s.value = 'Ожидание комплектующих';
 
 select id, date_of_receipt from repair
 where date_of_receipt = "13-01-2019";
+
+SELECT user.id, user.login, user.password, user_group.value,
+                user.surname, user.name, user.patronymic, user.phone_number, user.email
+                FROM user
+                INNER JOIN user_group ON user.user_group = user_group.id
+                where user_group.value not like 'Уволен';

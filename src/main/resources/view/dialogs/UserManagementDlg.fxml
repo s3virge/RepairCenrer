@@ -22,11 +22,11 @@
       </TableView>
       <ButtonBar layoutX="310.0" layoutY="392.0" AnchorPane.leftAnchor="310.0" AnchorPane.rightAnchor="330.0">
         <buttons>
-            <Button fx:id="btnAdd" mnemonicParsing="false" onAction="#onBtnAdd" text="Добавить" />
-            <Button fx:id="btnEdit" mnemonicParsing="false" onAction="#onBtnEdit" text="Изменить" />
-            <Button fx:id="btnDelete" mnemonicParsing="false" onAction="#onBtnDelete" text="Удалить" />
+            <Button fx:id="btnAdd" mnemonicParsing="false" onAction="#btnAddPressed" text="Добавить" />
+            <Button fx:id="btnEdit" mnemonicParsing="false" onAction="#btnEditPressed" text="Изменить" />
+            <Button fx:id="btnDelete" mnemonicParsing="false" onAction="#btnFirePressed" text="Уволить" />
         </buttons>
       </ButtonBar>
-      <Button cancelButton="true" layoutX="752.0" layoutY="392.0" mnemonicParsing="false" onAction="#onBtnCancelClick" prefHeight="26.0" prefWidth="85.0" text="Ok" AnchorPane.rightAnchor="100.0" />
+      <Button cancelButton="true" layoutX="752.0" layoutY="392.0" mnemonicParsing="false" onAction="#btnCancelPressed" prefHeight="26.0" prefWidth="85.0" text="Ok" AnchorPane.rightAnchor="100.0" />
    </children>
 </AnchorPane>

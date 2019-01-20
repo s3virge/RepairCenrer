@@ -2,6 +2,7 @@ package app.controllers;
 
 import app.dao.UserDao;
 import app.models.User;
+import app.models.UserGroup;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -52,7 +53,7 @@ public class UserManagementDlgController {
     private ObservableList<User> tvObservableList = FXCollections.observableArrayList();
 
     @FXML
-    private void onBtnCancelClick(ActionEvent event) {
+    private void btnCancelPressed(ActionEvent event) {
         Node source = (Node)  event.getSource();
         Stage stage  = (Stage) source.getScene().getWindow();
         stage.close();
@@ -77,7 +78,7 @@ public class UserManagementDlgController {
     }
 
     private void fillTable() {
-        final Vector<User> list = UserDao.selectAll();
+        final Vector<User> list = UserDao.selectEmployees();
         tvObservableList.clear();
 
         for (User u : list) {
@@ -87,9 +88,8 @@ public class UserManagementDlgController {
         tvUserInfo.setItems(tvObservableList);
     }
 
-
     @FXML
-    private void onBtnAdd() {
+    private void btnAddPressed() {
         log.trace("");
         // Загружаем fxml-файл и создаём новую сцену
         // для всплывающего диалогового окна.
@@ -128,17 +128,21 @@ public class UserManagementDlgController {
     }
 
     @FXML
-    private void onBtnDelete() {
-        if (deletionApproved()) {
-            User selUser = (User) tvUserInfo.getSelectionModel().getSelectedItem();
-            UserDao.delete(selUser.getId());
+    private void btnFirePressed() {
+        /*удалять узера нельзя потому что юзер делал записи
+        * в базе. Id юзера используется в других таблицах*/
+        if (dismissalApproved()) {
+            User selectedUser = (User) tvUserInfo.getSelectionModel().getSelectedItem();
+            selectedUser.setGroup(UserGroup.FIRED);
+            UserDao.update(selectedUser);
             fillTable();
         }
     }
 
-    private boolean deletionApproved() {
+    /*увольнение одобрено*/
+    private boolean dismissalApproved() {
 //        MsgBox.show(e.getMessage(), MB_ERROR);
-        String contentText = "Вы действительно хотите удалить выбранного пользователя?";
+        String contentText = "Вы действительно хотите уволить выбранного пользователя?";
         Alert msgBox = new Alert(Alert.AlertType.CONFIRMATION, contentText);
         msgBox.setHeaderText(null);
         Optional<ButtonType> btnType = msgBox.showAndWait();
@@ -146,7 +150,7 @@ public class UserManagementDlgController {
     }
 
     @FXML
-    private void onBtnEdit() {
+    private void btnEditPressed() {
         log.trace("");
         // Загружаем fxml-файл и создаём новую сцену
         // для всплывающего диалогового окна.

@@ -15,11 +15,11 @@
       <TilePane layoutX="165.0" layoutY="15.0" prefHeight="121.0" prefWidth="300.0">
          <children>
                 <TextField fx:id="tfType" editable="false" focusTraversable="false" style="-fx-background-color: none; -fx-border-color: none;" text="type" />
-                <TextField fx:id="tfBrandModel" editable="false" prefHeight="25.0" prefWidth="300.0" text="brandModel" />
-                <TextField fx:id="tfSerialNumber" editable="false" prefHeight="25.0" prefWidth="300.0" text="serialNumber" />
-                <TextField fx:id="tfDefect" editable="false" prefHeight="25.0" prefWidth="300.0" text="defect" />
-                <TextField fx:id="tfCompleteness" editable="false" prefHeight="25.0" prefWidth="300.0" text="completeness" />
-                <TextField fx:id="tfAppearance" editable="false" prefHeight="25.0" prefWidth="300.0" text="appearance" />
+                <TextField fx:id="tfBrandModel" editable="false" prefHeight="25.0" prefWidth="300.0" text="brandModel" style="-fx-background-color: none; -fx-border-color: none;"/>
+                <TextField fx:id="tfSerialNumber" editable="false" prefHeight="25.0" prefWidth="300.0" text="serialNumber" style="-fx-background-color: none; -fx-border-color: none;"/>
+                <TextField fx:id="tfDefect" editable="false" prefHeight="25.0" prefWidth="300.0" text="defect" style="-fx-background-color: none; -fx-border-color: none;"/>
+                <TextField fx:id="tfCompleteness" editable="false" prefHeight="25.0" prefWidth="300.0" text="completeness" style="-fx-background-color: none; -fx-border-color: none;"/>
+                <TextField fx:id="tfAppearance" editable="false" prefHeight="25.0" prefWidth="300.0" text="appearance" style="-fx-background-color: none; -fx-border-color: none;"/>
          </children>
       </TilePane>
     </children>

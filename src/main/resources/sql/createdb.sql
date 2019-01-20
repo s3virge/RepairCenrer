@@ -335,6 +335,7 @@ INSERT INTO `repaircenter`.`user_group` (`id`, `value`) VALUES (1, 'Админи
 INSERT INTO `repaircenter`.`user_group` (`id`, `value`) VALUES (2, 'Менеджер');
 INSERT INTO `repaircenter`.`user_group` (`id`, `value`) VALUES (3, 'Мастер');
 INSERT INTO `repaircenter`.`user_group` (`id`, `value`) VALUES (4, 'Приемщик');
+INSERT INTO `repaircenter`.`user_group` (`id`, `value`) VALUES (5, 'Уволен');
 
 COMMIT;
 
