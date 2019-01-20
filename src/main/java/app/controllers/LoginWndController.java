@@ -44,8 +44,11 @@ public class LoginWndController {
 	}
 
 	private void setDefaultTextFieldValue() {
-		loginField.setText("admin");
-		passwordField.setText("admin");
+//		loginField.setText("admin");
+//		passwordField.setText("admin");
+//
+		loginField.setText("s3virge");
+		passwordField.setText("IloveCPP78");
 	}
 
 	@FXML
