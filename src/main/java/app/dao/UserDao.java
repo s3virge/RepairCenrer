@@ -157,6 +157,44 @@ public class UserDao {
     }
 
     /**
+     * @return list of employees
+     */
+    public static Vector<User> selectEmployees() {
+        Vector<User> listOfUsers = new Vector<>();
+
+        final String select_employees = "SELECT user.id, user.login, user.password, user_group.value, " +
+                "user.surname, user.name, user.patronymic, user.phone_number, user.email " +
+                "FROM user " +
+                "INNER JOIN user_group ON user.user_group = user_group.id " +
+                "where user_group.value not like '" + UserGroup.FIRED + "'";
+
+        try (Connection con = ConnectionBuilder.getConnection();
+            Statement st = con.createStatement()) {
+
+            ResultSet resultSet = st.executeQuery(select_employees);
+
+            while (resultSet.next()) {
+                User currentUser = new User();
+                currentUser.setId(resultSet.getInt("id"));
+                currentUser.setLogin(resultSet.getString("login"));
+                currentUser.setPassword(resultSet.getString("password"));
+                currentUser.setGroup(resultSet.getString("value"));
+                currentUser.setSurname(resultSet.getString("surname"));
+                currentUser.setName(resultSet.getString("name"));
+                currentUser.setPatronymic(resultSet.getString("patronymic"));
+                currentUser.setPhoneNumber(resultSet.getString("phone_number"));
+                currentUser.setEmail(resultSet.getString("email"));
+
+                listOfUsers.add(currentUser);
+            }
+        }
+        catch (SQLException sq) {
+            logger.error(sq.getMessage());
+        }
+        return listOfUsers;
+    }
+
+    /**
      * insert user to column user in database
      * @param userToSave
 	 * @return last inserted id
