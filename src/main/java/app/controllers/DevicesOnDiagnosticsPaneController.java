@@ -11,6 +11,7 @@ import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import org.apache.logging.log4j.LogManager;
@@ -38,6 +39,11 @@ public class DevicesOnDiagnosticsPaneController {
     private TextField tfAppearance;
     @FXML
     private Pane diagnosticsPane;
+
+    @FXML
+	private TextArea taMasterComments;
+	@FXML
+	private TextArea taOfficialComments;
 
     private ObservableList<Device> observDeviceList = FXCollections.observableArrayList();
 
@@ -121,4 +127,6 @@ public class DevicesOnDiagnosticsPaneController {
                 }
         );
     }
+
+    //todo make record in to the repair table when textArea lose focus
 }
