@@ -43,7 +43,7 @@ public class DevicesOnDiagnosticsPaneController {
     @FXML
 	private TextArea taMasterComments;
 	@FXML
-	private TextArea taOfficialComments;
+	private TextArea taDiagnosticResult;
 
     private ObservableList<Device> observDeviceList = FXCollections.observableArrayList();
 

@@ -28,7 +28,7 @@
          </children>
       </TilePane>
       <TextArea fx:id="taMasterComments" layoutX="165.0" layoutY="189.0" prefHeight="104.0" prefWidth="485.0" promptText="Коментарии не официально" />
-      <TextArea fx:id="taOfficialComments" layoutX="165.0" layoutY="433.0" prefHeight="104.0" prefWidth="485.0" promptText="Официальный коментарий" />
+      <TextArea fx:id="taDiagnosticResult" layoutX="165.0" layoutY="433.0" prefHeight="104.0" prefWidth="485.0" promptText="Официальный коментарий" />
       <MenuButton layoutX="508.0" layoutY="129.0" mnemonicParsing="false" text="MenuButton">
         <items>
           <MenuItem mnemonicParsing="false" text="Action 1" />
