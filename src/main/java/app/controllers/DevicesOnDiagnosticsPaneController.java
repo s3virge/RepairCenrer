@@ -1,10 +1,12 @@
 package app.controllers;
 
 import app.dao.DeviceDao;
+import app.dao.handbooks.repair.RepairDao;
 import app.models.Device;
 import app.models.DeviceStatus;
 import app.models.LoggedInUser;
 import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -45,6 +47,8 @@ public class DevicesOnDiagnosticsPaneController {
 	@FXML
 	private TextArea taDiagnosticResult;
 
+	private int repairId;
+
     private ObservableList<Device> observDeviceList = FXCollections.observableArrayList();
 
 //    private final String today = gerCurrentDate();
@@ -56,6 +60,7 @@ public class DevicesOnDiagnosticsPaneController {
         log.trace("");
         updateDeviceListView(false);
         addDeviceListListener();
+        addTextAreaListener();
         lstDeviceList.getSelectionModel().selectFirst();
     }
 
@@ -114,6 +119,7 @@ public class DevicesOnDiagnosticsPaneController {
                 {
                     try {
 //                        tfId.setText("device id: " + newValue.getId());
+                        repairId = newValue.getId();
                        tfType.setText(newValue.getType());
                        tfBrandModel.setText(newValue.getBrand() +" "+newValue.getModel());
                        tfSerialNumber.setText(newValue.getSerialNumber());
@@ -128,5 +134,24 @@ public class DevicesOnDiagnosticsPaneController {
         );
     }
 
-    //todo make record in to the repair table when textArea lose focus
+    private void addTextAreaListener() {
+        taMasterComments.focusedProperty().addListener(
+                new ChangeListener<Boolean>()
+                {
+                    @Override
+                    public void changed(ObservableValue<? extends Boolean> arg0, Boolean oldPropertyValue, Boolean newPropertyValue)
+                    {
+                        if (newPropertyValue)
+                        {
+                            System.out.println("Textfield on focus");
+                        }
+                        else
+                        {
+                            System.out.println("Textfield out focus");
+                            RepairDao.updateMasterComments(repairId, taMasterComments.getText());
+                        }
+                    }
+                }
+        );
+    }
 }
