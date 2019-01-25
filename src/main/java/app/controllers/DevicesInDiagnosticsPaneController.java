@@ -3,6 +3,7 @@ package app.controllers;
 import app.dao.DeviceDao;
 import app.dao.handbooks.repair.RepairDao;
 import app.models.Device;
+import app.models.DeviceInDiagnostics;
 import app.models.DeviceStatus;
 import app.models.LoggedInUser;
 import javafx.beans.value.ChangeListener;
@@ -50,7 +51,7 @@ public class DevicesInDiagnosticsPaneController {
     private int repairId;
 
     //todo Create an object described device and repair togase
-    private ObservableList<Device> observDeviceList = FXCollections.observableArrayList();
+    private ObservableList<DeviceInDiagnostics> observDeviceList = FXCollections.observableArrayList();
 
 //    private final String today = gerCurrentDate();
 
@@ -71,7 +72,8 @@ public class DevicesInDiagnosticsPaneController {
         int selectedItem = lstDeviceList.getSelectionModel().getSelectedIndex();
 
         try {
-            List devices = DeviceDao.selectByStatusAndMaster(DeviceStatus.diagnostics, LoggedInUser.getLoggedInUser().getLogin());
+//            List devices = DeviceDao.selectByStatusAndMaster(DeviceStatus.diagnostics, LoggedInUser.getLoggedInUser().getLogin());
+            List devices = DeviceDao.select(DeviceStatus.diagnostics, LoggedInUser.getLoggedInUser().getLogin());
 
             clearFields();
             observDeviceList.addAll(devices);

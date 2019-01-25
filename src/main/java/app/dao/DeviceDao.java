@@ -2,6 +2,8 @@ package app.dao;
 
 import app.dao.handbooks.device.*;
 import app.models.Device;
+import app.models.DeviceInDiagnostics;
+import app.models.Repair;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -201,6 +203,61 @@ public class DeviceDao {
                 "and user.login = '" + masterLogin + "'";
 
         return makeRequest(select_by_status);
+    }
+
+    public static Vector<DeviceInDiagnostics> select(String status, String masterLogin) {
+        log.trace("");
+
+        //todo write sql request
+        final String select = "select device.id, type.value, brand.value, model.value, serial_number, " +
+                "defect.value, owner_id, repair_id, status.value, completeness.value, appearance.value, note " +
+                "from device " +
+                "inner join type on device.type_id = type.id " +
+                "inner join brand on device.brand_id = brand.id " +
+                "inner join model on device.model_id = model.id " +
+                "inner join defect on device.defect_id = defect.id " +
+                "inner join completeness on device.completeness_id = completeness.id " +
+                "inner join appearance on device.appearance_id = appearance.id " +
+                "inner join repair on device.repair_id = repair.id " +
+                "inner join status on repair.status_id = status.id " +
+                "inner join user on repair.master_id = user.id " +
+                "WHERE status.value = '" + status + "' " +
+                "and user.login = '" + masterLogin + "'";
+
+        Vector<DeviceInDiagnostics> listOfDevicesInDiagnostics = new Vector<>();
+
+        try (Connection co = ConnectionBuilder.getConnection();
+             Statement st = co.createStatement()) {
+            ResultSet result = st.executeQuery(select);
+            while (result.next()) {
+                Device device = new Device();
+
+                device.setId(result.getInt("id"));
+                device.setType(result.getString("type.value"));
+                device.setBrand(result.getString("brand.value"));
+                device.setModel(result.getString("model.value"));
+                device.setSerialNumber(result.getString("serial_number"));
+                device.setDefect(result.getString("defect.value"));
+                device.setOwnerId(result.getInt("owner_id"));
+                device.setRepairId(result.getInt("repair_id"));
+                device.setCompleteness(result.getString("completeness.value"));
+                device.setAppearance(result.getString("appearance.value"));
+                device.setNote(result.getString("note"));
+
+                Repair repair = new Repair();
+
+                //todo fill fields for repair
+
+                listOfDevicesInDiagnostics.add(new DeviceInDiagnostics(device, repair));
+            }
+        }
+        catch (SQLException sex) {
+            log.error(sex.getMessage());
+        }
+
+        Collections.sort(listOfDevicesInDiagnostics);
+
+        return listOfDevices;
     }
 
     private static Vector<Device> makeRequest(String select_by_status) {
