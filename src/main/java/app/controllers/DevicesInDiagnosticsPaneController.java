@@ -23,7 +23,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
-public class DevicesOnDiagnosticsPaneController {
+public class DevicesInDiagnosticsPaneController {
 
     @FXML
     private ListView lstDeviceList;
@@ -49,11 +49,12 @@ public class DevicesOnDiagnosticsPaneController {
 
     private int repairId;
 
+    //todo Create an object described device and repair togase
     private ObservableList<Device> observDeviceList = FXCollections.observableArrayList();
 
 //    private final String today = gerCurrentDate();
 
-    private static final Logger log = LogManager.getLogger(DevicesOnDiagnosticsPaneController.class);
+    private static final Logger log = LogManager.getLogger(DevicesInDiagnosticsPaneController.class);
 
     @FXML
     private void initialize() {
