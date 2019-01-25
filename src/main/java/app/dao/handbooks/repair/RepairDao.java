@@ -102,4 +102,20 @@ public class RepairDao {
             logger.error(ex.getMessage());
         }
     }
+
+    public static void updateDiagnosticResult(int repairId, String diagnosticResult) {
+
+        final String update_diagnostic_result = String.format("update %s " +
+                        "set diagnostic_result = '%s'" +
+                        "where id = %d",
+                tableName, diagnosticResult, repairId);
+
+        try (Connection con = ConnectionBuilder.getConnection();
+             Statement st = con.createStatement()) {
+            st.execute(update_diagnostic_result);
+        }
+        catch (SQLException ex) {
+            logger.error(ex.getMessage());
+        }
+    }
 }

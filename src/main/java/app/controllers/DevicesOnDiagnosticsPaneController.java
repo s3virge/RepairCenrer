@@ -43,11 +43,11 @@ public class DevicesOnDiagnosticsPaneController {
     private Pane diagnosticsPane;
 
     @FXML
-	private TextArea taMasterComments;
-	@FXML
-	private TextArea taDiagnosticResult;
+    private TextArea taMasterComments;
+    @FXML
+    private TextArea taDiagnosticResult;
 
-	private int repairId;
+    private int repairId;
 
     private ObservableList<Device> observDeviceList = FXCollections.observableArrayList();
 
@@ -60,8 +60,10 @@ public class DevicesOnDiagnosticsPaneController {
         log.trace("");
         updateDeviceListView(false);
         addDeviceListListener();
-        addTextAreaListener();
+        addTextAreaListeners();
         lstDeviceList.getSelectionModel().selectFirst();
+
+        //todo set value repairId
     }
 
     private void updateDeviceListView(boolean okBtn) {
@@ -80,6 +82,8 @@ public class DevicesOnDiagnosticsPaneController {
             else {
                 lstDeviceList.getSelectionModel().select(selectedItem);
             }
+
+            //get selected item
         }
         catch (NullPointerException npex) {
             log.error(npex.getMessage());
@@ -93,11 +97,11 @@ public class DevicesOnDiagnosticsPaneController {
             for (Node node : diagnosticsPane.getChildren()) {
                 if (node instanceof TextField) {
                     // clear
-                    ((TextField)node).setText("");
+                    ((TextField) node).setText("");
                 }
                 else if (node instanceof Label) {
                     // clear
-                    ((Label)node).setText("");
+                    ((Label) node).setText("");
                 }
             }
         }
@@ -120,12 +124,12 @@ public class DevicesOnDiagnosticsPaneController {
                     try {
 //                        tfId.setText("device id: " + newValue.getId());
                         repairId = newValue.getId();
-                       tfType.setText(newValue.getType());
-                       tfBrandModel.setText(newValue.getBrand() +" "+newValue.getModel());
-                       tfSerialNumber.setText(newValue.getSerialNumber());
-                       tfDefect.setText(newValue.getDefect());
-                       tfCompleteness.setText(newValue.getCompleteness());
-                       tfAppearance.setText(newValue.getAppearance());
+                        tfType.setText(newValue.getType());
+                        tfBrandModel.setText(newValue.getBrand() + " " + newValue.getModel());
+                        tfSerialNumber.setText(newValue.getSerialNumber());
+                        tfDefect.setText(newValue.getDefect());
+                        tfCompleteness.setText(newValue.getCompleteness());
+                        tfAppearance.setText(newValue.getAppearance());
                     }
                     catch (NullPointerException npex) {
                         log.error(npex.getMessage());
@@ -134,21 +138,32 @@ public class DevicesOnDiagnosticsPaneController {
         );
     }
 
-    private void addTextAreaListener() {
+    private void addTextAreaListeners() {
         taMasterComments.focusedProperty().addListener(
-                new ChangeListener<Boolean>()
-                {
+                new ChangeListener<Boolean>() {
                     @Override
-                    public void changed(ObservableValue<? extends Boolean> arg0, Boolean oldPropertyValue, Boolean newPropertyValue)
-                    {
-                        if (newPropertyValue)
-                        {
-                            System.out.println("Textfield on focus");
+                    public void changed(ObservableValue<? extends Boolean> arg0, Boolean oldPropertyValue, Boolean newPropertyValue) {
+                        if (newPropertyValue) {
+//                            System.out.println("Textfield on focus");
                         }
-                        else
-                        {
+                        else {
                             System.out.println("Textfield out focus");
                             RepairDao.updateMasterComments(repairId, taMasterComments.getText());
+                        }
+                    }
+                }
+        );
+
+        taDiagnosticResult.focusedProperty().addListener(
+                new ChangeListener<Boolean>() {
+                    @Override
+                    public void changed(ObservableValue<? extends Boolean> arg0, Boolean oldPropertyValue, Boolean newPropertyValue) {
+                        if (newPropertyValue) {
+//                            System.out.println("Textfield on focus");
+                        }
+                        else {
+//                            System.out.println("Textfield out focus");
+                            RepairDao.updateDiagnosticResult(repairId, taDiagnosticResult.getText());
                         }
                     }
                 }
