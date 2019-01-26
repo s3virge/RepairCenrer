@@ -25,4 +25,9 @@ public class DeviceInDiagnostics {
 		this.device = device;
 		this.repair = repair;
 	}
+
+	@Override
+	public String toString() {
+		return device.toString();
+	}
 }

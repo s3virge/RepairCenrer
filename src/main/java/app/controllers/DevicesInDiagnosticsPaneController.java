@@ -122,17 +122,19 @@ public class DevicesInDiagnosticsPaneController {
 
     private void addDeviceListListener() {
         lstDeviceList.getSelectionModel().selectedItemProperty().addListener(
-                (ChangeListener<Device>) (observable, oldValue, newValue) ->
+                (ChangeListener<DeviceInDiagnostics>) (observable, oldValue, newValue) ->
                 {
                     try {
 //                        tfId.setText("device id: " + newValue.getId());
-                        repairId = newValue.getId();
-                        tfType.setText(newValue.getType());
-                        tfBrandModel.setText(newValue.getBrand() + " " + newValue.getModel());
-                        tfSerialNumber.setText(newValue.getSerialNumber());
-                        tfDefect.setText(newValue.getDefect());
-                        tfCompleteness.setText(newValue.getCompleteness());
-                        tfAppearance.setText(newValue.getAppearance());
+                        repairId = newValue.getDevice().getId();
+                        tfType.setText(newValue.getDevice().getType());
+                        tfBrandModel.setText(newValue.getDevice().getBrand() + " " + newValue.getDevice().getModel());
+                        tfSerialNumber.setText(newValue.getDevice().getSerialNumber());
+                        tfDefect.setText(newValue.getDevice().getDefect());
+                        tfCompleteness.setText(newValue.getDevice().getCompleteness());
+                        tfAppearance.setText(newValue.getDevice().getAppearance());
+                        taMasterComments.setText(newValue.getRepair().getMasterComments());
+                        taDiagnosticResult.setText(newValue.getRepair().getDiagnosticResult());
                     }
                     catch (NullPointerException npex) {
                         log.error(npex.getMessage());
