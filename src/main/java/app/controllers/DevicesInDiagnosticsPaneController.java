@@ -2,10 +2,7 @@ package app.controllers;
 
 import app.dao.DeviceDao;
 import app.dao.handbooks.repair.RepairDao;
-import app.models.Device;
-import app.models.DeviceInDiagnostics;
-import app.models.DeviceStatus;
-import app.models.LoggedInUser;
+import app.models.*;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -49,6 +46,7 @@ public class DevicesInDiagnosticsPaneController {
     private TextArea taDiagnosticResult;
 
     private int repairId;
+    private int observListIndex = 0;
 
     //todo Create an object described device and repair togase
     private ObservableList<DeviceInDiagnostics> observDeviceList = FXCollections.observableArrayList();
@@ -133,8 +131,13 @@ public class DevicesInDiagnosticsPaneController {
                         tfDefect.setText(newValue.getDevice().getDefect());
                         tfCompleteness.setText(newValue.getDevice().getCompleteness());
                         tfAppearance.setText(newValue.getDevice().getAppearance());
+
                         taMasterComments.setText(newValue.getRepair().getMasterComments());
                         taDiagnosticResult.setText(newValue.getRepair().getDiagnosticResult());
+
+                        DeviceInDiagnostics deviceInDiagnostics = observable.getValue();
+                        observListIndex = observDeviceList.indexOf(deviceInDiagnostics);
+                        log.debug("indexOf(deviceInDiagnostics) = {}", observListIndex);
                     }
                     catch (NullPointerException npex) {
                         log.error(npex.getMessage());
@@ -148,12 +151,14 @@ public class DevicesInDiagnosticsPaneController {
                 new ChangeListener<Boolean>() {
                     @Override
                     public void changed(ObservableValue<? extends Boolean> arg0, Boolean oldPropertyValue, Boolean newPropertyValue) {
-                        if (newPropertyValue) {
-//                            System.out.println("Textfield on focus");
-                        }
-                        else {
-                            System.out.println("Textfield out focus");
+                        if (!newPropertyValue) {
+                            //writes new text to database and change value in observable list
+                            log.trace("taMasterComments lose focus");
                             RepairDao.updateMasterComments(repairId, taMasterComments.getText());
+
+                            DeviceInDiagnostics devInDiagnostics = observDeviceList.get(observListIndex);
+                            devInDiagnostics.getRepair().setMasterComments(taMasterComments.getText());
+                            observDeviceList.set(observListIndex, devInDiagnostics);
                         }
                     }
                 }
