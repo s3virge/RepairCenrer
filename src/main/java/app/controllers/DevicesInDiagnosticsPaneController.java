@@ -173,7 +173,12 @@ public class DevicesInDiagnosticsPaneController {
                         }
                         else {
 //                            System.out.println("Textfield out focus");
+                            log.trace("taDiagnosticResult lose focus");
                             RepairDao.updateDiagnosticResult(repairId, taDiagnosticResult.getText());
+
+                            DeviceInDiagnostics devInDiagnostics = observDeviceList.get(observListIndex);
+                            devInDiagnostics.getRepair().setDiagnosticResult(taDiagnosticResult.getText());
+                            observDeviceList.set(observListIndex, devInDiagnostics);
                         }
                     }
                 }
