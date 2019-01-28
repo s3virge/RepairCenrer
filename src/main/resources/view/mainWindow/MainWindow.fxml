@@ -18,6 +18,11 @@
                         <KeyCodeCombination alt="UP" code="N" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
                      </accelerator>
             </MenuItem>
+                  <MenuItem mnemonicParsing="false" text="Найти">
+                     <accelerator>
+                        <KeyCodeCombination alt="UP" code="F" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                     </accelerator>
+                  </MenuItem>
                   <MenuItem mnemonicParsing="false" onAction="#showGiveOutDlg" text="Выдать" />
           </items>
         </Menu>

@@ -1,25 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ListView?>
-<?import javafx.scene.control.MenuButton?>
-<?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.TilePane?>
 
-<AnchorPane fx:id="diagnosticsPane" prefHeight="595.0" prefWidth="669.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.controllers.DevicesInDiagnosticsPaneController">
+<AnchorPane fx:id="diagnosticsPane" prefHeight="595.0" prefWidth="918.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.controllers.DevicesInDiagnosticsPaneController">
     <children>
         <ListView fx:id="lstDeviceList" prefHeight="541.0" prefWidth="136.0" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="15.0">
          <tooltip>
             <Tooltip text="Устройства на диагностике" />
          </tooltip></ListView>
-      <TilePane layoutX="165.0" layoutY="15.0" prefHeight="121.0" prefWidth="300.0">
+      <TilePane layoutX="165.0" layoutY="15.0" prefHeight="156.0" prefWidth="198.0">
          <children>
-                <TextField fx:id="tfType" editable="false" focusTraversable="false" style="-fx-background-color: none; -fx-border-color: none;" text="type" />
+                <TextField fx:id="tfType" editable="false" focusTraversable="false" prefHeight="26.0" prefWidth="184.0" style="-fx-background-color: none; -fx-border-color: none;" text="type" />
                 <TextField fx:id="tfBrandModel" editable="false" prefHeight="25.0" prefWidth="300.0" style="-fx-background-color: none; -fx-border-color: none;" text="brandModel" />
                 <TextField fx:id="tfSerialNumber" editable="false" prefHeight="25.0" prefWidth="300.0" style="-fx-background-color: none; -fx-border-color: none;" text="serialNumber" />
                 <TextField fx:id="tfDefect" editable="false" prefHeight="25.0" prefWidth="300.0" style="-fx-background-color: none; -fx-border-color: none;" text="defect" />
@@ -28,19 +29,23 @@
          </children>
       </TilePane>
       <TextArea fx:id="taMasterComments" layoutX="165.0" layoutY="189.0" prefHeight="104.0" prefWidth="485.0" promptText="Коментарии не официально" />
-      <TextArea fx:id="taDiagnosticResult" layoutX="165.0" layoutY="433.0" prefHeight="104.0" prefWidth="485.0" promptText="Официальный коментарий" />
-      <MenuButton layoutX="508.0" layoutY="129.0" mnemonicParsing="false" text="MenuButton">
-        <items>
-          <MenuItem mnemonicParsing="false" text="Action 1" />
-          <MenuItem mnemonicParsing="false" text="Action 2" />
-        </items>
-      </MenuButton>
-      <TableView fx:id="tvDetailes" layoutX="165.0" layoutY="306.0" prefHeight="104.0" prefWidth="485.0">
+      <TextArea fx:id="taDiagnosticResult" layoutX="165.0" layoutY="310.0" prefHeight="104.0" prefWidth="485.0" promptText="Официальный коментарий" />
+      <TableView fx:id="tvDetailes" layoutX="650.0" layoutY="41.0" prefHeight="104.0" prefWidth="409.0">
         <columns>
           <TableColumn prefWidth="30.0" text="#" />
-          <TableColumn prefWidth="400.0" text="Деталь" />
-            <TableColumn prefWidth="54.0" text="шт" />
+          <TableColumn prefWidth="343.0" text="Деталь" />
+            <TableColumn prefWidth="35.0" text="шт" />
         </columns>
       </TableView>
+      <HBox layoutX="238.0" layoutY="486.0" prefHeight="46.0" prefWidth="339.0" spacing="10.0">
+         <children>
+            <Button mnemonicParsing="false" text="Согласование" />
+            <Button mnemonicParsing="false" text="Заказ деталей" />
+            <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" text="Готово" />
+         </children>
+         <padding>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </padding>
+      </HBox>
     </children>
 </AnchorPane>
