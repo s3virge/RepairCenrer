@@ -1,8 +1,6 @@
 package app.dao.handbooks.repair;
 
 import app.dao.ConnectionBuilder;
-import app.dao.DeviceDao;
-import app.dao.DeviceStatusDao;
 import app.models.Repair;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -125,7 +123,7 @@ public class RepairDao {
         final String update_status = String.format("update %s " +
                         "set status_id = '%d' " +
                         "where id = %d",
-                tableName, DeviceStatusDao.selectId(repairStatus), repairId);
+                tableName, new StatusDao().selectId(repairStatus), repairId);
 
         try (Connection con = ConnectionBuilder.getConnection();
              Statement st = con.createStatement()) {
