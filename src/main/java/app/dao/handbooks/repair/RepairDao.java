@@ -1,9 +1,8 @@
 package app.dao.handbooks.repair;
 
 import app.dao.ConnectionBuilder;
-import app.dao.handbooks.owner.NameDao;
-import app.dao.handbooks.owner.PatronymicDao;
-import app.dao.handbooks.owner.SurnameDao;
+import app.dao.DeviceDao;
+import app.dao.DeviceStatusDao;
 import app.models.Repair;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -11,8 +10,6 @@ import org.apache.logging.log4j.Logger;
 import java.sql.*;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-
-import static app.dao.DataBase.logger;
 
 public class RepairDao {
 
@@ -99,11 +96,12 @@ public class RepairDao {
             st.execute(update_master_comments);
         }
         catch (SQLException ex) {
-            logger.error(ex.getMessage());
+            log.error(ex.getMessage());
         }
     }
 
     public static void updateDiagnosticResult(int repairId, String diagnosticResult) {
+        log.trace("");
 
         final String update_diagnostic_result = String.format("update %s " +
                         "set diagnostic_result = '%s'" +
@@ -115,7 +113,26 @@ public class RepairDao {
             st.execute(update_diagnostic_result);
         }
         catch (SQLException ex) {
-            logger.error(ex.getMessage());
+            log.error(ex.getMessage());
         }
     }
+
+    /**
+     * update device status (состояние)*/
+    public static void updateStatus(int repairId, String repairStatus) {
+        log.trace("");
+
+        final String update_status = String.format("update %s " +
+                        "set status_id = '%d' " +
+                        "where id = %d",
+                tableName, DeviceStatusDao.selectId(repairStatus), repairId);
+
+        try (Connection con = ConnectionBuilder.getConnection();
+             Statement st = con.createStatement()) {
+            st.execute(update_status);
+        }
+        catch (SQLException ex) {
+            log.error(ex.getMessage());
+        }
+    };
 }

@@ -68,8 +68,7 @@ public class DevicesInDiagnosticsPaneController {
         int selectedItem = lstDeviceList.getSelectionModel().getSelectedIndex();
 
         try {
-//            List devices = DeviceDao.selectByStatusAndMaster(DeviceStatus.diagnostics, LoggedInUser.getLoggedInUser().getLogin());
-            List devices = DeviceDao.select(DeviceStatus.diagnostics, LoggedInUser.getLoggedInUser().getLogin());
+            List devices = DeviceDao.select(DeviceStatus.DIAGNOSTICS, LoggedInUser.getLoggedInUser().getLogin());
 
             clearFields();
             observDeviceList.addAll(devices);
@@ -81,8 +80,6 @@ public class DevicesInDiagnosticsPaneController {
             else {
                 lstDeviceList.getSelectionModel().select(selectedItem);
             }
-
-            //get selected item
         }
         catch (NullPointerException npex) {
             log.error(npex.getMessage());
@@ -185,6 +182,9 @@ public class DevicesInDiagnosticsPaneController {
 
     @FXML
     private void onBtnReady() {
-        JOptionPane.showMessageDialog(null, "My Goodness, this is so concise");
+//        JOptionPane.showMessageDialog(null, "change devise status to Ready");
+        RepairDao.updateStatus(repairId, DeviceStatus.READY);
+
+        //todo remove from device List
     }
 }
