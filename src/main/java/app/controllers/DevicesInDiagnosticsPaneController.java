@@ -40,7 +40,6 @@ public class DevicesInDiagnosticsPaneController {
     private TextField tfAppearance;
     @FXML
     private Pane diagnosticsPane;
-
     @FXML
     private TextArea taMasterComments;
     @FXML
@@ -64,7 +63,7 @@ public class DevicesInDiagnosticsPaneController {
         lstDeviceList.getSelectionModel().selectFirst();
     }
 
-    private void updateDeviceListView(boolean okBtn) {
+    private void updateDeviceListView(boolean selectLast) {
         int selectedItem = lstDeviceList.getSelectionModel().getSelectedIndex();
 
         try {
@@ -74,7 +73,7 @@ public class DevicesInDiagnosticsPaneController {
             observDeviceList.addAll(devices);
             lstDeviceList.setItems(observDeviceList);
 
-            if (okBtn) {
+            if (selectLast) {
                 lstDeviceList.getSelectionModel().selectLast();
             }
             else {
@@ -185,6 +184,8 @@ public class DevicesInDiagnosticsPaneController {
 //        JOptionPane.showMessageDialog(null, "change devise status to Ready");
         RepairDao.updateStatus(repairId, DeviceStatus.READY);
 
-        //todo remove from device List
+        updateDeviceListView(false);
+
+        //todo clear textFields when last was deleted
     }
 }
