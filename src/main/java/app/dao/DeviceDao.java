@@ -269,8 +269,7 @@ public class DeviceDao {
 			log.error(sex.getMessage());
 		}
 
-//        Collections.sort(listOfDevicesInDiagnostics);
-
+        Collections.sort(listOfDevicesInDiagnostics);
 		return listOfDevicesInDiagnostics;
 	}
 

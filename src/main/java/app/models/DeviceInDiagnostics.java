@@ -1,9 +1,11 @@
 package app.models;
 
-public class DeviceInDiagnostics {
+public class DeviceInDiagnostics implements Comparable {
 	//contains information about device and hes repair
 	private Device device;
 	private Repair repair;
+
+	private int comparableId;
 
 	public Device getDevice() {
 		return device;
@@ -29,5 +31,12 @@ public class DeviceInDiagnostics {
 	@Override
 	public String toString() {
 		return device.toString();
+	}
+
+	//todo implements sortable
+	@Override
+	public int compareTo(Object o) {
+		int id = ((DeviceInDiagnostics)o).getDevice().getId();
+		return this.comparableId - id;
 	}
 }
