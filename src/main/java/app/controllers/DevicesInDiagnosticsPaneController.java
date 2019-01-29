@@ -41,6 +41,8 @@ public class DevicesInDiagnosticsPaneController {
     @FXML
     private Pane diagnosticsPane;
     @FXML
+    private Pane tilePane;
+    @FXML
     private TextArea taMasterComments;
     @FXML
     private TextArea taDiagnosticResult;
@@ -69,7 +71,9 @@ public class DevicesInDiagnosticsPaneController {
         try {
             List devices = DeviceDao.select(DeviceStatus.DIAGNOSTICS, LoggedInUser.getLoggedInUser().getLogin());
 
-            clearFields();
+			observDeviceList.clear();
+            clearFields(diagnosticsPane);
+            clearFields(tilePane);
             observDeviceList.addAll(devices);
             lstDeviceList.setItems(observDeviceList);
 
@@ -85,18 +89,17 @@ public class DevicesInDiagnosticsPaneController {
         }
     }
 
-    private void clearFields() {
+    private void clearFields(Pane pane) {
         try {
-            observDeviceList.clear();
-
-            for (Node node : diagnosticsPane.getChildren()) {
+            for (Node node : pane.getChildren()) {
                 if (node instanceof TextField) {
-                    // clear
                     ((TextField) node).setText("");
                 }
                 else if (node instanceof Label) {
-                    // clear
                     ((Label) node).setText("");
+                }
+                else if (node instanceof TextArea) {
+                    ((TextArea) node).setText("");
                 }
             }
         }
@@ -185,7 +188,5 @@ public class DevicesInDiagnosticsPaneController {
         RepairDao.updateStatus(repairId, DeviceStatus.READY);
 
         updateDeviceListView(false);
-
-        //todo clear textFields when last was deleted
     }
 }

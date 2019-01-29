@@ -18,7 +18,7 @@
          <tooltip>
             <Tooltip text="Устройства на диагностике" />
          </tooltip></ListView>
-      <TilePane layoutX="165.0" layoutY="15.0" prefHeight="156.0" prefWidth="198.0">
+      <TilePane fx:id="tilePane" layoutX="165.0" layoutY="15.0" prefHeight="156.0" prefWidth="198.0">
          <children>
                 <TextField fx:id="tfType" editable="false" focusTraversable="false" prefHeight="26.0" prefWidth="184.0" style="-fx-background-color: none; -fx-border-color: none;" text="type" />
                 <TextField fx:id="tfBrandModel" editable="false" prefHeight="25.0" prefWidth="300.0" style="-fx-background-color: none; -fx-border-color: none;" text="brandModel" />
