@@ -17,6 +17,7 @@ import javafx.scene.layout.Pane;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import javax.swing.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
@@ -48,7 +49,6 @@ public class DevicesInDiagnosticsPaneController {
     private int repairId;
     private int observListIndex = 0;
 
-    //todo Create an object described device and repair togase
     private ObservableList<DeviceInDiagnostics> observDeviceList = FXCollections.observableArrayList();
 
 //    private final String today = gerCurrentDate();
@@ -62,8 +62,6 @@ public class DevicesInDiagnosticsPaneController {
         addDeviceListListener();
         addTextAreaListeners();
         lstDeviceList.getSelectionModel().selectFirst();
-
-        //todo set value repairId
     }
 
     private void updateDeviceListView(boolean okBtn) {
@@ -183,5 +181,10 @@ public class DevicesInDiagnosticsPaneController {
                     }
                 }
         );
+    }
+
+    @FXML
+    private void onBtnReady() {
+        JOptionPane.showMessageDialog(null, "My Goodness, this is so concise");
     }
 }
