@@ -4,6 +4,7 @@ import javafx.beans.property.SimpleStringProperty;
 
 public class User {
 
+	/*Property can inform value changed event handler to respond when a property changes.*/
 	private int id;
 	private final SimpleStringProperty login;
 	private final SimpleStringProperty password;
@@ -157,7 +158,7 @@ public class User {
 	 * @return Возвращает true если пользователь пустой иначе false
 	 */
 	public boolean isEmpty() {
-		if (id == 0 && login == null && password == null) {
+		if (id == 0 && login.get() == null && password.get() == null) {
 			return true;
 		}
 		return false;

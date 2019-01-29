@@ -134,7 +134,8 @@ public class DevicesInDiagnosticsPaneController {
 
                         DeviceInDiagnostics deviceInDiagnostics = observable.getValue();
                         observListIndex = observDeviceList.indexOf(deviceInDiagnostics);
-                        log.debug("indexOf(deviceInDiagnostics) = {}", observListIndex);
+
+//                        log.debug("indexOf(deviceInDiagnostics) = {}", observListIndex);
                     }
                     catch (NullPointerException npex) {
                         log.error(npex.getMessage());

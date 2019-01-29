@@ -5,8 +5,6 @@ public class DeviceInDiagnostics implements Comparable {
 	private Device device;
 	private Repair repair;
 
-	private int comparableId;
-
 	public Device getDevice() {
 		return device;
 	}
@@ -33,10 +31,10 @@ public class DeviceInDiagnostics implements Comparable {
 		return device.toString();
 	}
 
-	//todo implements sortable
 	@Override
 	public int compareTo(Object o) {
 		int id = ((DeviceInDiagnostics)o).getDevice().getId();
-		return this.comparableId - id;
+//		return device.getId() + id;
+		return device.getId() - id;
 	}
 }

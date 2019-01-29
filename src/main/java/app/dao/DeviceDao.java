@@ -165,7 +165,7 @@ public class DeviceDao {
 	/**
 	 * @return list of devises with given status
 	 */
-	public static Vector<Device> selectByStatus(String status) {
+	public static Vector<Device> select(String status) {
 		log.trace("");
 
 		final String select_by_status = "select device.id, type.value, brand.value, model.value, serial_number, " +
