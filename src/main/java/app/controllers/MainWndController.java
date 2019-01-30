@@ -51,38 +51,6 @@ public class MainWndController {
     @FXML
     private void showUserManagementDlg() {
         log.trace("");
-//
-//        // Загружаем fxml-файл и создаём новую сцену
-//        // для всплывающего диалогового окна.
-//        FXMLLoader loader = new FXMLLoader();
-//        //Sets the location used to resolve relative path attribute values.
-//        //getResource - Finds a resource with a given name.
-//        URL resource = getClass().getResource("/view/dialogs/UserManagementDlg.fxml");
-//        loader.setLocation(resource);
-//
-//        Parent userDlgLayout = null;
-//
-//        try {
-//            userDlgLayout = loader.load();
-//        }
-//        catch (IOException e) {
-//            log.error(e.getMessage());
-//        }
-//
-//        // Создаём подмостки для диалогового окна.
-//        Stage dialogStage = new Stage();
-//        //подготавливаем их
-//        dialogStage.setTitle("Пользователи");
-//        dialogStage.initModality(Modality.APPLICATION_MODAL);
-//        dialogStage.initOwner(ScreenController.getPrimaryStage());
-//
-//        //расставляем декорации на сцене согласно плану
-//        Scene scene = new Scene(userDlgLayout);
-//        dialogStage.setScene(scene);
-//        dialogStage.setResizable(false);
-//
-//        // Отображаем диалоговое окно и ждём, пока пользователь его не закроет
-//        dialogStage.showAndWait();
 		screen.loadDlgFxml("/view/dialogs/UserManagementDlg.fxml", "Пользователи");
     }
 

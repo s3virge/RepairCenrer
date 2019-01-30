@@ -8,7 +8,7 @@
 <AnchorPane fx:id="receivedDevicesPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.controllers.ReceivedDevicesPaneController">
     <children>
         <ListView fx:id="lstDeviceList" prefHeight="541.0" prefWidth="136.0" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="15.0" />
-        <VBox layoutX="224.0" layoutY="21.0" prefHeight="305.0" prefWidth="445.0" spacing="40.0">
+        <VBox fx:id="labelsPane" layoutX="224.0" layoutY="21.0" prefHeight="305.0" prefWidth="445.0" spacing="40.0">
             <children>
                 <Label fx:id="label" prefHeight="25.0" prefWidth="300.0" text="Label" />
                 <Label fx:id="label1" prefHeight="25.0" prefWidth="300.0" text="Label" />

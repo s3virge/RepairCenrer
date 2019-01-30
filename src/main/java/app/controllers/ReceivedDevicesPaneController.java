@@ -44,6 +44,8 @@ public class ReceivedDevicesPaneController {
     private Label label9;
     @FXML
     private Pane receivedDevicesPane;
+    @FXML
+    private Pane labelsPane;
 
     private ObservableList<Device> observDeviceList = FXCollections.observableArrayList();
 
@@ -61,12 +63,20 @@ public class ReceivedDevicesPaneController {
     }
 
     private void updateDeviceListView(boolean okBtn) {
+        log.trace("");
+
         int selectedItem = lstDeviceList.getSelectionModel().getSelectedIndex();
 
         try {
             List devices = DeviceDao.selectByDate(today);
+            observDeviceList.clear();
+            clearFields(labelsPane);
 
-            clearFields();
+            if (devices.isEmpty()) {
+                log.trace("devices list is empty");
+                return;
+            }
+
             observDeviceList.addAll(devices);
             lstDeviceList.setItems(observDeviceList);
 
@@ -82,11 +92,9 @@ public class ReceivedDevicesPaneController {
         }
     }
 
-    private void clearFields() {
+    private void clearFields(Pane pane) {
         try {
-            observDeviceList.clear();
-
-            for (Node node : receivedDevicesPane.getChildren()) {
+            for (Node node : pane.getChildren()) {
                 if (node instanceof TextField) {
                     // clear
                     ((TextField)node).setText("");
