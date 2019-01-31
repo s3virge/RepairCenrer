@@ -34,13 +34,10 @@ public class MainWndController {
      */
     @FXML
     private void showReceiveNewDeviceDlg() {
-        FXMLLoader loader = screen.loadDlgFxml("/view/dialogs/ReceiveDeviceDlg.fxml", "Оформить устройство");
-//
-        ReceiveDeviceDlgController controller = loader.getController();
-//        initListView(controller.isOkBtnPressed());
-
-        //todo get ReceivedDevicesPane controller and update listView
-
+        log.trace("");
+        screen.loadDlgFxml("/view/dialogs/ReceiveDeviceDlg.fxml", "Оформить устройство");
+        mainPain.getChildren().clear();
+        showReceivedDevicesToday();
     }
 
     @FXML
@@ -62,6 +59,11 @@ public class MainWndController {
     @FXML
     private void showDevicesInRepair() {
 
+    }
+
+    @FXML
+    private void showDevicesOnDiagnostics() {
+        screen.loadFxml("/view/DevicesInDiagnosticsPane.fxml", mainPain);
     }
 
     @FXML
@@ -89,11 +91,4 @@ public class MainWndController {
         primaryStage.setScene(scene);
         primaryStage.show();
     }
-
-    @FXML
-    private void showDevicesOnDiagnostics() {
-		screen.loadFxml("/view/DevicesInDiagnosticsPane.fxml", mainPain);
-    }
-
-
 }

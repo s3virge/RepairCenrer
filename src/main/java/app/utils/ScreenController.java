@@ -51,7 +51,7 @@ public class ScreenController {
     }
 
     public void loadFxml(String fxmlFile, Pane pane) {
-        log.trace("");
+        log.trace(fxmlFile);
         pane.getChildren().clear();
 
         FXMLLoader loader = new FXMLLoader();
@@ -73,7 +73,7 @@ public class ScreenController {
     }
 
     public FXMLLoader loadDlgFxml(String dlgFxmlFile, String dlgTitle) {
-        log.trace("");
+        log.trace(dlgFxmlFile);
 
         // Загружаем fxml-файл и создаём новую сцену
         // для всплывающего диалогового окна.
