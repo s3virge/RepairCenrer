@@ -64,6 +64,7 @@ public class DataBase {
 //            throw new RuntimeException();
 //            MsgBox.show(ex.getMessage(), MsgBox.Type.MB_ERROR);
             //FX not loaded yet
+            //todo what to do if mysql does not installed
             JOptionPane.showMessageDialog(null, "Облом с созданием базы данных.", "Сильный облом", JOptionPane.ERROR_MESSAGE);
             //todo stop main process when error
             System.exit(0);
