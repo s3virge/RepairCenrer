@@ -14,6 +14,9 @@
 
     <Text x="40" y="10">На этой панеле будем выдавать устройство</Text>
 
+<<<<<<< HEAD
     <!--todo create gui for this pane -->
 
+=======
+>>>>>>> 4891fbe6c113830cecf0e60cd6dd4adca285db8a
 </AnchorPane>
