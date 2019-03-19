@@ -1,10 +1,12 @@
 package app.dao;
 
 import app.dao.config.Config;
+import app.utils.MsgBox;
 import app.utils.ScriptRunner;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import javax.swing.*;
 import java.io.*;
 import java.net.URISyntaxException;
 import java.net.URL;
@@ -60,6 +62,9 @@ public class DataBase {
         catch (SQLException | IOException | URISyntaxException ex) {
             logger.error(ex.getMessage());
 //            throw new RuntimeException();
+//            MsgBox.show(ex.getMessage(), MsgBox.Type.MB_ERROR);
+            //FX not loaded yet
+            JOptionPane.showMessageDialog(null, "Облом с созданием базы данных.", "Сильный облом", JOptionPane.ERROR_MESSAGE);
             //todo stop main process when error
             System.exit(0);
         }
