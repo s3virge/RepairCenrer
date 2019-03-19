@@ -21,7 +21,7 @@ public class DataBaseThread implements Runnable {
         thread.start();
     }
 
-    @Override
+    @Override //переопределение
     public void run() {
         DataBase db = new DataBase();
 

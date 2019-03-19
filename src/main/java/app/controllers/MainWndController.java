@@ -91,4 +91,6 @@ public class MainWndController {
         primaryStage.setScene(scene);
         primaryStage.show();
     }
+
+    //todo create give out device possibility
 }

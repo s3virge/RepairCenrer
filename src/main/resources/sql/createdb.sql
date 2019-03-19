@@ -346,6 +346,8 @@ COMMIT;
 START TRANSACTION;
 USE `repaircenter`;
 INSERT INTO `repaircenter`.`user` (`id`, `login`, `password`, `user_group`, `surname`, `name`, `patronymic`, `phone_number`, `email`) VALUES (1, 'admin', md5('admin'), 1, 'Administrator', 'Admin', 'Adminovich', NULL, NULL);
+INSERT INTO `repaircenter`.`user` (`id`, `login`, `password`, `user_group`, `surname`, `name`, `patronymic`, `phone_number`, `email`) VALUES (2, 's3virge', md5('IloveCPP78'), 1, 'Кобзарь', 'Виталий', 'Владимирович', NULL, NULL);
+INSERT INTO `repaircenter`.`user` (`id`, `login`, `password`, `user_group`, `surname`, `name`, `patronymic`, `phone_number`, `email`) VALUES (3, 'khodor', md5(' '), 3, 'Ходорковский', 'Александр', 'Юрьевич', NULL, NULL);
 
 COMMIT;
 
