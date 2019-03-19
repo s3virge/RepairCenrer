@@ -28,7 +28,6 @@ public class DataBaseThread implements Runnable {
         DataBase db = new DataBase();
 
         if (!db.isExists()) {
-            //todo what to do if mysql does not installed
             db.create();
         }
     }

@@ -53,7 +53,8 @@ public class MainWndController {
 
     @FXML
     private void showGiveOutDlg() {
-
+        log.trace("");
+        screen.loadFxml("/view/GiveOutDevicePane.fxml", mainPain);
     }
 
     @FXML
