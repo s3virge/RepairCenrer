@@ -1,22 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
 
-<?import javafx.scene.text.Text?>
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="app.controllers.GiveOutDevicePaneController"
-            prefHeight="400.0" prefWidth="600.0">
+<AnchorPane style="-fx-background-color: #ff8882;"
+            AnchorPane.topAnchor="0.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
+            xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="app.controllers.GiveOutDevicePaneController">
+   <VBox layoutX="24.0" layoutY="15.0" prefHeight="361.0" prefWidth="100.0" style="-fx-background-color: #ff5555;" AnchorPane.bottomAnchor="15.0" AnchorPane.topAnchor="15.0" />
 
-    <Text x="40" y="10">На этой панеле будем выдавать устройство</Text>
-
-<<<<<<< HEAD
     <!--todo create gui for this pane -->
 
-=======
->>>>>>> 4891fbe6c113830cecf0e60cd6dd4adca285db8a
 </AnchorPane>

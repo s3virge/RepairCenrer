@@ -47,7 +47,7 @@
             </Menu>
       </menus>
     </MenuBar>
-      <AnchorPane fx:id="mainPain" VBox.vgrow="ALWAYS">
+      <AnchorPane fx:id="mainPain" style="-fx-background-color: #0022ff;" VBox.vgrow="ALWAYS">
 
       </AnchorPane>
   </children>
