@@ -1,7 +1,7 @@
 package app.models;
 
-public class DeviceInDiagnostics implements Comparable {
-	//contains information about device and hes repair
+public class DeviceAndHisRepair implements Comparable {
+	//contains information about device and his repair
 	private Device device;
 	private Repair repair;
 
@@ -21,7 +21,7 @@ public class DeviceInDiagnostics implements Comparable {
 		this.repair = repair;
 	}
 
-	public DeviceInDiagnostics(Device device, Repair repair) {
+	public DeviceAndHisRepair(Device device, Repair repair) {
 		this.device = device;
 		this.repair = repair;
 	}
@@ -33,7 +33,7 @@ public class DeviceInDiagnostics implements Comparable {
 
 	@Override
 	public int compareTo(Object o) {
-		int id = ((DeviceInDiagnostics)o).getDevice().getId();
+		int id = ((DeviceAndHisRepair)o).getDevice().getId();
 //		return device.getId() + id;
 		return device.getId() - id;
 	}

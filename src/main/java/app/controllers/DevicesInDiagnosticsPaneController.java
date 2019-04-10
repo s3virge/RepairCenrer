@@ -17,7 +17,6 @@ import javafx.scene.layout.Pane;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import javax.swing.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
@@ -50,7 +49,7 @@ public class DevicesInDiagnosticsPaneController {
     private int repairId;
     private int observListIndex = 0;
 
-    private ObservableList<DeviceInDiagnostics> observDeviceList = FXCollections.observableArrayList();
+    private ObservableList<DeviceAndHisRepair> observDeviceList = FXCollections.observableArrayList();
 
 //    private final String today = gerCurrentDate();
 
@@ -117,7 +116,7 @@ public class DevicesInDiagnosticsPaneController {
 
     private void addDeviceListListener() {
         lstDeviceList.getSelectionModel().selectedItemProperty().addListener(
-                (ChangeListener<DeviceInDiagnostics>) (observable, oldValue, newValue) ->
+                (ChangeListener<DeviceAndHisRepair>) (observable, oldValue, newValue) ->
                 {
                     try {
 //                        tfId.setText("device id: " + newValue.getId());
@@ -132,10 +131,10 @@ public class DevicesInDiagnosticsPaneController {
                         taMasterComments.setText(newValue.getRepair().getMasterComments());
                         taDiagnosticResult.setText(newValue.getRepair().getDiagnosticResult());
 
-                        DeviceInDiagnostics deviceInDiagnostics = observable.getValue();
-                        observListIndex = observDeviceList.indexOf(deviceInDiagnostics);
+                        DeviceAndHisRepair deviceAndHisRepair = observable.getValue();
+                        observListIndex = observDeviceList.indexOf(deviceAndHisRepair);
 
-//                        log.debug("indexOf(deviceInDiagnostics) = {}", observListIndex);
+//                        log.debug("indexOf(deviceAndHisRepair) = {}", observListIndex);
                     }
                     catch (NullPointerException npex) {
                         log.error(npex.getMessage());
@@ -154,7 +153,7 @@ public class DevicesInDiagnosticsPaneController {
                             log.trace("taMasterComments lose focus");
                             RepairDao.updateMasterComments(repairId, taMasterComments.getText());
 
-                            DeviceInDiagnostics devInDiagnostics = observDeviceList.get(observListIndex);
+                            DeviceAndHisRepair devInDiagnostics = observDeviceList.get(observListIndex);
                             devInDiagnostics.getRepair().setMasterComments(taMasterComments.getText());
                             observDeviceList.set(observListIndex, devInDiagnostics);
                         }
@@ -174,7 +173,7 @@ public class DevicesInDiagnosticsPaneController {
                             log.trace("taDiagnosticResult lose focus");
                             RepairDao.updateDiagnosticResult(repairId, taDiagnosticResult.getText());
 
-                            DeviceInDiagnostics devInDiagnostics = observDeviceList.get(observListIndex);
+                            DeviceAndHisRepair devInDiagnostics = observDeviceList.get(observListIndex);
                             devInDiagnostics.getRepair().setDiagnosticResult(taDiagnosticResult.getText());
                             observDeviceList.set(observListIndex, devInDiagnostics);
                         }

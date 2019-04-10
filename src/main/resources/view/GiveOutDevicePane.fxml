@@ -3,7 +3,6 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 
-<?import javafx.scene.text.Text?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.Label?>
 <AnchorPane style="-fx-background-color: #ff8882;"
@@ -24,6 +23,9 @@
                 <Label fx:id="label7" prefHeight="25.0" prefWidth="300.0" text="Label" />
                 <Label fx:id="label8" prefHeight="25.0" prefWidth="300.0" text="Label" />
                 <Label fx:id="label9" layoutX="10.0" layoutY="402.0" prefHeight="25.0" prefWidth="300.0" text="Label" />
+                <Label fx:id="diagnosticsResult" layoutX="10.0" layoutY="402.0" prefHeight="25.0" prefWidth="300.0" text="Label" />
+                <Label fx:id="repairResult" layoutX="10.0" layoutY="402.0" prefHeight="25.0" prefWidth="300.0" text="Label" />
+
             </children>
         </VBox>
     </children>
