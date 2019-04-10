@@ -7,5 +7,4 @@ public class DeviceStatus {
     public static final String RECEIVED = "Принято";
     public static final String REPAIR = "Ремонт";
     public static final String READY = "Готово";
-
 }
