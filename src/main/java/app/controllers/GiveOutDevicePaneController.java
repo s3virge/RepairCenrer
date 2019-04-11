@@ -1,7 +1,8 @@
 package app.controllers;
 
 import app.dao.DeviceDao;
-import app.models.Device;
+import app.dao.handbooks.repair.RepairDao;
+import app.dao.handbooks.repair.StatusDao;
 import app.models.DeviceAndHisRepair;
 import app.models.DeviceStatus;
 import javafx.beans.value.ChangeListener;
@@ -17,7 +18,6 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.util.Collection;
-import java.util.List;
 
 public class GiveOutDevicePaneController {
 
@@ -110,7 +110,7 @@ public class GiveOutDevicePaneController {
                         label4.setText("serial number:  " + newValue.getDevice().getSerialNumber());
                         label5.setText("defect:  " + newValue.getDevice().getDefect());
                         label6.setText("owner id:  " + newValue.getDevice().getOwnerId());
-                        label7.setText("repair id:  " + newValue.getDevice().getRepairId());
+                        label7.setText("repair id:  " + newValue.getRepair().getId());
                         label8.setText("completeness:  " + newValue.getDevice().getCompleteness());
                         label9.setText("appearance:  " + newValue.getDevice().getAppearance());
 
@@ -122,5 +122,14 @@ public class GiveOutDevicePaneController {
                     }
                 }
         );
+    }
+
+    @FXML
+    public void onBtnClickGiveOut() {
+        DeviceAndHisRepair selectedItem = (DeviceAndHisRepair) lstDeviceList.getSelectionModel().getSelectedItem();
+
+        log.debug("in lstDeviceList was selected item {}", selectedItem.getRepair().getId());
+        RepairDao.updateDeviceStatus(selectedItem.getRepair().getId(), DeviceStatus.GIVEN_BACK);
+        updateDeviceListView(true);
     }
 }

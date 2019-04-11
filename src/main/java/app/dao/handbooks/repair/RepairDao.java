@@ -117,7 +117,7 @@ public class RepairDao {
 
     /**
      * update device status (состояние)*/
-    public static void updateStatus(int repairId, String repairStatus) {
+    public static void updateDeviceStatus(int repairId, String repairStatus) {
         log.trace("");
 
         final String update_status = String.format("update %s " +

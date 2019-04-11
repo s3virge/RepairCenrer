@@ -185,7 +185,7 @@ public class DevicesInDiagnosticsPaneController {
     @FXML
     private void onBtnReady() {
 //        JOptionPane.showMessageDialog(null, "change devise status to Ready");
-        RepairDao.updateStatus(repairId, DeviceStatus.READY);
+        RepairDao.updateDeviceStatus(repairId, DeviceStatus.READY);
 
         updateDeviceListView(false);
     }
