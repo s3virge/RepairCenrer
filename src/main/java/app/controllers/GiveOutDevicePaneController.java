@@ -116,9 +116,6 @@ public class GiveOutDevicePaneController {
 
                         diagnosticsResult.setText(newValue.getRepair().getDiagnosticResult());
                         repairResult.setText(newValue.getRepair().getRepairResult());
-
-                        //todo получить результат диагностики
-                        //todo получить разультат ремонта
                     }
                     catch (NullPointerException npex) {
                         log.error(npex.getMessage());

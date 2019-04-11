@@ -292,7 +292,8 @@ public class DeviceDao {
 				"repair.id, " +
 				"repair.date_of_receipt, " +
 				"repair.master_comments, " +
-				"repair.diagnostic_result " +
+                "repair.diagnostic_result, " +
+                "repair.repair_result " +
 				"from device " +
 				"inner join type on device.type_id = type.id  " +
 				"inner join brand on device.brand_id = brand.id " +
@@ -302,7 +303,7 @@ public class DeviceDao {
 				"inner join appearance on device.appearance_id = appearance.id " +
 				"inner join repair on device.repair_id = repair.id " +
 				"inner join status on repair.status_id = status.id " +
-				"inner join user on repair.master_id = user.id " +
+//				"inner join user on repair.master_id = user.id " +
 				"WHERE status.value = '" + status + "' ";
 
 		Vector<DeviceAndHisRepair> listOfDevices = new Vector<>();
@@ -330,6 +331,8 @@ public class DeviceDao {
 				repair.setMasterComments(result.getString("repair.master_comments"));
 				repair.setDiagnosticResult(result.getString("repair.diagnostic_result"));
 				repair.setRepairResult(result.getString("repair.repair_result"));
+
+				//todo do not select correct repair id
 
 				listOfDevices.add(new DeviceAndHisRepair(device, repair));
 			}
