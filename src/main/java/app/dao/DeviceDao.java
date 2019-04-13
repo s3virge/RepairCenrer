@@ -184,6 +184,35 @@ public class DeviceDao {
 		return makeRequest(select_by_status);
 	}
 
+	/**
+	 * @return list of ids of devises with given status
+	 */
+	public static Vector<Integer> selectIdsOfDevices(String status) {
+		log.trace("");
+
+        final String select_by_status = "select device.id, repair_id, status.value " +
+                "from device " +
+                "inner join repair on device.repair_id = repair.id " +
+                "inner join status on repair.status_id = status.id " +
+                "WHERE status.value = '" + status + "' ";
+
+        Vector<Integer> listOfDevicesIds = new Vector<>();
+
+        try (Connection co = ConnectionBuilder.getConnection();
+             Statement st = co.createStatement()) {
+            ResultSet result = st.executeQuery(select_by_status);
+            while (result.next()) {
+                listOfDevicesIds.add(result.getInt("id"));
+            }
+        }
+        catch (SQLException sex) {
+            log.error(sex.getMessage());
+        }
+
+        Collections.sort(listOfDevicesIds );
+        return listOfDevicesIds ;
+	}
+
 	public static Vector<Device> selectByStatusAndMaster(String status, String masterLogin) {
 		log.trace("");
 
