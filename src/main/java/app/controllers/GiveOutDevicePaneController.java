@@ -1,6 +1,7 @@
 package app.controllers;
 
 import app.dao.DeviceDao;
+import app.dao.OwnerDao;
 import app.dao.handbooks.repair.RepairDao;
 import app.dao.handbooks.repair.StatusDao;
 import app.models.DeviceAndHisRepair;
@@ -110,12 +111,20 @@ public class GiveOutDevicePaneController {
                         label4.setText("serial number:  " + newValue.getDevice().getSerialNumber());
                         label5.setText("defect:  " + newValue.getDevice().getDefect());
                         label6.setText("owner id:  " + newValue.getDevice().getOwnerId());
+                        //label7.setText("repair id:  " + newValue.getRepair().getId());
+                        //todo get data about device owner
                         label7.setText("repair id:  " + newValue.getRepair().getId());
                         label8.setText("completeness:  " + newValue.getDevice().getCompleteness());
                         label9.setText("appearance:  " + newValue.getDevice().getAppearance());
 
                         diagnosticsResult.setText(newValue.getRepair().getDiagnosticResult());
                         repairResult.setText(newValue.getRepair().getRepairResult());
+
+                        //todo нужне клас для устройства с одним полем deviceID
+                        //которое будет отображаться в списке устройств
+                        //todo когда пользователь выбирает какойто пункт в списке,
+                        //то получать из базы данных соответствующие значения и
+                        //отображать их в GUI
                     }
                     catch (NullPointerException npex) {
                         log.error(npex.getMessage());
