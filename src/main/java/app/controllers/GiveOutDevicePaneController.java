@@ -38,7 +38,8 @@ public class GiveOutDevicePaneController {
 
     @FXML private Pane labelsPane; //нужна что-бы перебирать все дочерние окна
 
-    private ObservableList<DeviceAndHisRepair> observDeviceList = FXCollections.observableArrayList();
+    //list will contains device id
+    private ObservableList<Integer> observDeviceList = FXCollections.observableArrayList();
 
     private static final Logger log = LogManager.getLogger(ReceivedDevicesPaneController.class);
 
@@ -57,16 +58,16 @@ public class GiveOutDevicePaneController {
         int selectedItem = lstDeviceList.getSelectionModel().getSelectedIndex();
 
         try {
-            Collection<DeviceAndHisRepair> devices = DeviceDao.selectDeviceAndHisRepair(DeviceStatus.READY);
+            Collection<Integer> devicesIds = DeviceDao.selectIdsOfDevices(DeviceStatus.READY);
             observDeviceList.clear();
             clearFields(labelsPane);
 
-            if (devices.isEmpty()) {
-                log.trace("devices list is empty");
+            if (devicesIds.isEmpty()) {
+                log.trace("list of devices ids is empty");
                 return;
             }
 
-            observDeviceList.addAll(devices);
+            observDeviceList.addAll(devicesIds);
             lstDeviceList.setItems(observDeviceList);
 
             if (okBtn) {
@@ -101,24 +102,26 @@ public class GiveOutDevicePaneController {
 
     private void addDeviceListListener() {
         lstDeviceList.getSelectionModel().selectedItemProperty().addListener(
-                (ChangeListener<DeviceAndHisRepair>) (observable, oldValue, newValue) ->
+                (ChangeListener<Integer>) (observable, oldValue, newValue) ->
                 {
                     try {
-                        label.setText("device id: " + newValue.getDevice().getId());
-                        label1.setText("type:  " + newValue.getDevice().getType());
-                        label2.setText("brand:  " + newValue.getDevice().getBrand());
-                        label3.setText("model:  " + newValue.getDevice().getModel());
-                        label4.setText("serial number:  " + newValue.getDevice().getSerialNumber());
-                        label5.setText("defect:  " + newValue.getDevice().getDefect());
-                        label6.setText("owner id:  " + newValue.getDevice().getOwnerId());
-                        //label7.setText("repair id:  " + newValue.getRepair().getId());
-                        //todo get data about device owner
-                        label7.setText("repair id:  " + newValue.getRepair().getId());
-                        label8.setText("completeness:  " + newValue.getDevice().getCompleteness());
-                        label9.setText("appearance:  " + newValue.getDevice().getAppearance());
+//                        label.setText("device id: " + newValue.getDevice().getId());
+//                        label1.setText("type:  " + newValue.getDevice().getType());
+//                        label2.setText("brand:  " + newValue.getDevice().getBrand());
+//                        label3.setText("model:  " + newValue.getDevice().getModel());
+//                        label4.setText("serial number:  " + newValue.getDevice().getSerialNumber());
+//                        label5.setText("defect:  " + newValue.getDevice().getDefect());
+//                        label6.setText("owner id:  " + newValue.getDevice().getOwnerId());
+//                        //label7.setText("repair id:  " + newValue.getRepair().getId());
+//                        //todo get data about device owner
+//                        label7.setText("repair id:  " + newValue.getRepair().getId());
+//                        label8.setText("completeness:  " + newValue.getDevice().getCompleteness());
+//                        label9.setText("appearance:  " + newValue.getDevice().getAppearance());
+//
+//                        diagnosticsResult.setText(newValue.getRepair().getDiagnosticResult());
+//                        repairResult.setText(newValue.getRepair().getRepairResult());
 
-                        diagnosticsResult.setText(newValue.getRepair().getDiagnosticResult());
-                        repairResult.setText(newValue.getRepair().getRepairResult());
+                        log.debug("list listener newValue -> {}", newValue.intValue());
 
                         //todo нужне клас для устройства с одним полем deviceID
                         //которое будет отображаться в списке устройств
