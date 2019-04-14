@@ -1,9 +1,8 @@
 package app.controllers;
 
 import app.dao.DeviceDao;
-import app.dao.OwnerDao;
 import app.dao.handbooks.repair.RepairDao;
-import app.dao.handbooks.repair.StatusDao;
+import app.exceptions.DeviceDaoException;
 import app.models.DeviceAndHisRepair;
 import app.models.DeviceStatus;
 import javafx.beans.value.ChangeListener;
@@ -40,6 +39,7 @@ public class GiveOutDevicePaneController {
 
     //list will contains device id
     private ObservableList<Integer> observDeviceList = FXCollections.observableArrayList();
+    private DeviceAndHisRepair currentDeviceAndHisRepair = null;
 
     private static final Logger log = LogManager.getLogger(ReceivedDevicesPaneController.class);
 
@@ -58,7 +58,7 @@ public class GiveOutDevicePaneController {
         int selectedItem = lstDeviceList.getSelectionModel().getSelectedIndex();
 
         try {
-            Collection<Integer> devicesIds = DeviceDao.selectIdsOfDevices(DeviceStatus.READY);
+            Collection<Integer> devicesIds = DeviceDao.selectIdsByStatus(DeviceStatus.READY);
             observDeviceList.clear();
             clearFields(labelsPane);
 
@@ -105,32 +105,26 @@ public class GiveOutDevicePaneController {
                 (ChangeListener<Integer>) (observable, oldValue, newValue) ->
                 {
                     try {
-//                        label.setText("device id: " + newValue.getDevice().getId());
-//                        label1.setText("type:  " + newValue.getDevice().getType());
-//                        label2.setText("brand:  " + newValue.getDevice().getBrand());
-//                        label3.setText("model:  " + newValue.getDevice().getModel());
-//                        label4.setText("serial number:  " + newValue.getDevice().getSerialNumber());
-//                        label5.setText("defect:  " + newValue.getDevice().getDefect());
-//                        label6.setText("owner id:  " + newValue.getDevice().getOwnerId());
-//                        //label7.setText("repair id:  " + newValue.getRepair().getId());
-//                        //todo get data about device owner
-//                        label7.setText("repair id:  " + newValue.getRepair().getId());
-//                        label8.setText("completeness:  " + newValue.getDevice().getCompleteness());
-//                        label9.setText("appearance:  " + newValue.getDevice().getAppearance());
-//
-//                        diagnosticsResult.setText(newValue.getRepair().getDiagnosticResult());
-//                        repairResult.setText(newValue.getRepair().getRepairResult());
+                        currentDeviceAndHisRepair = DeviceDao.selectById(newValue);
 
-                        log.debug("list listener newValue -> {}", newValue.intValue());
+                        label.setText("device id: " + currentDeviceAndHisRepair.getDevice().getId());
+                        label1.setText("type:  " + currentDeviceAndHisRepair.getDevice().getType());
+                        label2.setText("brand:  " + currentDeviceAndHisRepair.getDevice().getBrand());
+                        label3.setText("model:  " + currentDeviceAndHisRepair.getDevice().getModel());
+                        label4.setText("serial number:  " + currentDeviceAndHisRepair.getDevice().getSerialNumber());
+                        label5.setText("defect:  " + currentDeviceAndHisRepair.getDevice().getDefect());
+                        label6.setText("owner id:  " + currentDeviceAndHisRepair.getDevice().getOwnerId());
+                        label7.setText("repair id:  " + currentDeviceAndHisRepair.getRepair().getId());
+                        label8.setText("completeness:  " + currentDeviceAndHisRepair.getDevice().getCompleteness());
+                        label9.setText("appearance:  " + currentDeviceAndHisRepair.getDevice().getAppearance());
 
-                        //todo нужне клас для устройства с одним полем deviceID
-                        //которое будет отображаться в списке устройств
-                        //todo когда пользователь выбирает какойто пункт в списке,
-                        //то получать из базы данных соответствующие значения и
-                        //отображать их в GUI
+                        diagnosticsResult.setText(currentDeviceAndHisRepair.getRepair().getDiagnosticResult());
+                        repairResult.setText(currentDeviceAndHisRepair.getRepair().getRepairResult());
+
+                        log.debug("list listener newValue -> {}", newValue);
                     }
-                    catch (NullPointerException npex) {
-                        log.error(npex.getMessage());
+                    catch (NullPointerException | DeviceDaoException ex) {
+                        log.error(ex.getMessage());
                     }
                 }
         );
@@ -138,10 +132,7 @@ public class GiveOutDevicePaneController {
 
     @FXML
     public void onBtnClickGiveOut() {
-        DeviceAndHisRepair selectedItem = (DeviceAndHisRepair) lstDeviceList.getSelectionModel().getSelectedItem();
-
-        log.debug("in lstDeviceList was selected item {}", selectedItem.getRepair().getId());
-        RepairDao.updateDeviceStatus(selectedItem.getRepair().getId(), DeviceStatus.GIVEN_BACK);
+        RepairDao.updateDeviceStatus(currentDeviceAndHisRepair.getRepair().getId(), DeviceStatus.GIVEN_BACK);
         updateDeviceListView(true);
     }
 }

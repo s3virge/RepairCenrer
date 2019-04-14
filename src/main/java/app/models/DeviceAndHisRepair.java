@@ -26,6 +26,11 @@ public class DeviceAndHisRepair implements Comparable {
 		this.repair = repair;
 	}
 
+	public DeviceAndHisRepair() {
+		this.device = new Device();
+		this.repair = new Repair();
+	}
+
 	@Override
 	public String toString() {
 		return device.toString();
