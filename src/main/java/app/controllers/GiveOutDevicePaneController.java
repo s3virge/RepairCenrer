@@ -21,27 +21,41 @@ import java.util.Collection;
 
 public class GiveOutDevicePaneController {
 
-    @FXML private ListView lstDeviceList;
-    @FXML private Label label;
-    @FXML private Label label1;
-    @FXML private Label label2;
-    @FXML private Label label3;
-    @FXML private Label label4;
-    @FXML private Label label5;
-    @FXML private Label label6;
-    @FXML private Label label7;
-    @FXML private Label label8;
-    @FXML private Label label9;
-    @FXML private Label diagnosticsResult;
-    @FXML private Label repairResult;
+    @FXML
+    private ListView lstDeviceList;
+    @FXML
+    private Label label;
+    @FXML
+    private Label label1;
+    @FXML
+    private Label label2;
+    @FXML
+    private Label label3;
+    @FXML
+    private Label label4;
+    @FXML
+    private Label label5;
+    @FXML
+    private Label label6;
+    @FXML
+    private Label label7;
+    @FXML
+    private Label label8;
+    @FXML
+    private Label label9;
+    @FXML
+    private Label diagnosticsResult;
+    @FXML
+    private Label repairResult;
 
-    @FXML private Pane labelsPane; //нужна что-бы перебирать все дочерние окна
+    @FXML
+    private Pane labelsPane; //нужна что-бы перебирать все дочерние окна
 
     //list will contains device id
     private ObservableList<Integer> observDeviceList = FXCollections.observableArrayList();
     private DeviceAndHisRepair currentDeviceAndHisRepair = null;
 
-    private static final Logger log = LogManager.getLogger(ReceivedDevicesPaneController.class);
+    private static final Logger log = LogManager.getLogger(GiveOutDevicePaneController.class);
 
     @FXML
     private void initialize() {
@@ -87,11 +101,11 @@ public class GiveOutDevicePaneController {
             for (Node node : pane.getChildren()) {
                 if (node instanceof TextField) {
                     // clear
-                    ((TextField)node).setText("");
+                    ((TextField) node).setText("");
                 }
                 else if (node instanceof Label) {
                     // clear
-                    ((Label)node).setText("");
+                    ((Label) node).setText("");
                 }
             }
         }
@@ -104,27 +118,29 @@ public class GiveOutDevicePaneController {
         lstDeviceList.getSelectionModel().selectedItemProperty().addListener(
                 (ChangeListener<Integer>) (observable, oldValue, newValue) ->
                 {
-                    try {
-                        currentDeviceAndHisRepair = DeviceDao.selectById(newValue);
+                    if (newValue != null) {
+                        try {
+                            currentDeviceAndHisRepair = DeviceDao.selectById(newValue);
 
-                        label.setText("device id: " + currentDeviceAndHisRepair.getDevice().getId());
-                        label1.setText("type:  " + currentDeviceAndHisRepair.getDevice().getType());
-                        label2.setText("brand:  " + currentDeviceAndHisRepair.getDevice().getBrand());
-                        label3.setText("model:  " + currentDeviceAndHisRepair.getDevice().getModel());
-                        label4.setText("serial number:  " + currentDeviceAndHisRepair.getDevice().getSerialNumber());
-                        label5.setText("defect:  " + currentDeviceAndHisRepair.getDevice().getDefect());
-                        label6.setText("owner id:  " + currentDeviceAndHisRepair.getDevice().getOwnerId());
-                        label7.setText("repair id:  " + currentDeviceAndHisRepair.getRepair().getId());
-                        label8.setText("completeness:  " + currentDeviceAndHisRepair.getDevice().getCompleteness());
-                        label9.setText("appearance:  " + currentDeviceAndHisRepair.getDevice().getAppearance());
+                            label.setText("device id: " + currentDeviceAndHisRepair.getDevice().getId());
+                            label1.setText("type:  " + currentDeviceAndHisRepair.getDevice().getType());
+                            label2.setText("brand:  " + currentDeviceAndHisRepair.getDevice().getBrand());
+                            label3.setText("model:  " + currentDeviceAndHisRepair.getDevice().getModel());
+                            label4.setText("serial number:  " + currentDeviceAndHisRepair.getDevice().getSerialNumber());
+                            label5.setText("defect:  " + currentDeviceAndHisRepair.getDevice().getDefect());
+                            label6.setText("owner id:  " + currentDeviceAndHisRepair.getDevice().getOwnerId());
+                            label7.setText("repair id:  " + currentDeviceAndHisRepair.getRepair().getId());
+                            label8.setText("completeness:  " + currentDeviceAndHisRepair.getDevice().getCompleteness());
+                            label9.setText("appearance:  " + currentDeviceAndHisRepair.getDevice().getAppearance());
 
-                        diagnosticsResult.setText(currentDeviceAndHisRepair.getRepair().getDiagnosticResult());
-                        repairResult.setText(currentDeviceAndHisRepair.getRepair().getRepairResult());
+                            diagnosticsResult.setText(currentDeviceAndHisRepair.getRepair().getDiagnosticResult());
+                            repairResult.setText(currentDeviceAndHisRepair.getRepair().getRepairResult());
 
-                        log.debug("list listener newValue -> {}", newValue);
-                    }
-                    catch (NullPointerException | DeviceDaoException ex) {
-                        log.error(ex.getMessage());
+                            log.debug("list listener newValue -> {}", newValue);
+                        }
+                        catch (NullPointerException | DeviceDaoException ex) {
+                            log.error(ex.getMessage());
+                        }
                     }
                 }
         );

@@ -118,26 +118,28 @@ public class DevicesInDiagnosticsPaneController {
         lstDeviceList.getSelectionModel().selectedItemProperty().addListener(
                 (ChangeListener<DeviceAndHisRepair>) (observable, oldValue, newValue) ->
                 {
-                    try {
+                    if (newValue != null) {
+                        try {
 //                        tfId.setText("device id: " + newValue.getId());
-                        repairId = newValue.getDevice().getId();
-                        tfType.setText(newValue.getDevice().getType());
-                        tfBrandModel.setText(newValue.getDevice().getBrand() + " " + newValue.getDevice().getModel());
-                        tfSerialNumber.setText(newValue.getDevice().getSerialNumber());
-                        tfDefect.setText(newValue.getDevice().getDefect());
-                        tfCompleteness.setText(newValue.getDevice().getCompleteness());
-                        tfAppearance.setText(newValue.getDevice().getAppearance());
+                            repairId = newValue.getDevice().getId();
+                            tfType.setText(newValue.getDevice().getType());
+                            tfBrandModel.setText(newValue.getDevice().getBrand() + " " + newValue.getDevice().getModel());
+                            tfSerialNumber.setText(newValue.getDevice().getSerialNumber());
+                            tfDefect.setText(newValue.getDevice().getDefect());
+                            tfCompleteness.setText(newValue.getDevice().getCompleteness());
+                            tfAppearance.setText(newValue.getDevice().getAppearance());
 
-                        taMasterComments.setText(newValue.getRepair().getMasterComments());
-                        taDiagnosticResult.setText(newValue.getRepair().getDiagnosticResult());
+                            taMasterComments.setText(newValue.getRepair().getMasterComments());
+                            taDiagnosticResult.setText(newValue.getRepair().getDiagnosticResult());
 
-                        DeviceAndHisRepair deviceAndHisRepair = observable.getValue();
-                        observListIndex = observDeviceList.indexOf(deviceAndHisRepair);
+                            DeviceAndHisRepair deviceAndHisRepair = observable.getValue();
+                            observListIndex = observDeviceList.indexOf(deviceAndHisRepair);
 
 //                        log.debug("indexOf(deviceAndHisRepair) = {}", observListIndex);
-                    }
-                    catch (NullPointerException npex) {
-                        log.error(npex.getMessage());
+                        }
+                        catch (NullPointerException npex) {
+                            log.error(npex.getMessage());
+                        }
                     }
                 }
         );
