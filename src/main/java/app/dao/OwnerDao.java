@@ -124,4 +124,40 @@ public class OwnerDao {
 
         return id;
     }
+
+    /**
+     * @return Owner object
+     */
+    static public Owner selectById(int id) {
+
+        //todo make query
+
+        final String query = "select surname_id, name_id, patronymic_id, phone_number " +
+                "from " + tableName + " " +
+                "inner join surnames on owner.surname_id = surnames.id " +
+                "inner join names on owner.name_id = names.id " +
+                "inner join patronymics on owner.patronymic_id = patronymics.id " +
+                "where owner.id = '" + id + "'";
+
+        Owner owner = new Owner();
+
+        try (Connection con = ConnectionBuilder.getConnection();
+             Statement st = con.createStatement()) {
+
+            ResultSet resultSet = st.executeQuery(query);
+
+            while (resultSet.next()) {
+                owner.setSurname(resultSet.getString("surnames.value"));
+                owner.setName(resultSet.getString("names.value"));
+                owner.setPatronymic(resultSet.getString("patronymics.value"));
+                owner.setPhoneNumber(resultSet.getString("phone_number"));
+            }
+
+        }
+        catch (SQLException exception) {
+            log.error(exception.getMessage());
+        }
+
+        return owner;
+    }
 }

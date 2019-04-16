@@ -24,10 +24,6 @@ public class DeviceDao {
 		this.device = device;
 	}
 
-	public DeviceDao() {
-		this.device = new Device();
-	}
-
 	/**
 	 * insert to database information about owner
 	 */
@@ -196,7 +192,7 @@ public class DeviceDao {
 		log.trace("");
 
         final String select_by_status = "select device.id, repair_id, status.value " +
-                "from device " +
+                "from  " + tableName + " " +
                 "inner join repair on device.repair_id = repair.id " +
                 "inner join status on repair.status_id = status.id " +
                 "WHERE status.value = '" + status + "' ";
@@ -223,7 +219,7 @@ public class DeviceDao {
 
 		final String select_by_status = "select device.id, type.value, brand.value, model.value, serial_number, " +
 				"defect.value, owner_id, repair_id, status.value, completeness.value, appearance.value, note " +
-				"from device " +
+				"from " + tableName + " " +
 				"inner join type on device.type_id = type.id " +
 				"inner join brand on device.brand_id = brand.id " +
 				"inner join model on device.model_id = model.id " +
@@ -259,7 +255,7 @@ public class DeviceDao {
 				"repair.master_comments, " +
 				"repair.diagnostic_result, " +
 				"repair.repair_result " +
-				"from device " +
+				"from " + tableName + " " +
 				"inner join type on device.type_id = type.id  " +
 				"inner join brand on device.brand_id = brand.id " +
 				"inner join model on device.model_id = model.id " +
@@ -330,7 +326,7 @@ public class DeviceDao {
 				"repair.master_comments, " +
                 "repair.diagnostic_result, " +
                 "repair.repair_result " +
-				"from device " +
+				"from " + tableName + " " +
 				"inner join type on device.type_id = type.id  " +
 				"inner join brand on device.brand_id = brand.id " +
 				"inner join model on device.model_id = model.id " +
@@ -339,17 +335,17 @@ public class DeviceDao {
 				"inner join appearance on device.appearance_id = appearance.id " +
 				"inner join repair on device.repair_id = repair.id " +
 				"inner join status on repair.status_id = status.id " +
-//				"inner join user on repair.master_id = user.id " +
 				"WHERE status.value = '" + status + "' ";
 
 		Vector<DeviceAndHisRepair> listOfDevices = new Vector<>();
 
 		try (Connection co = ConnectionBuilder.getConnection();
 			 Statement st = co.createStatement()) {
+
 			ResultSet result = st.executeQuery(select);
+
 			while (result.next()) {
 				Device device = new Device();
-
 				device.setId(result.getInt("id"));
 				device.setType(result.getString("type.value"));
 				device.setBrand(result.getString("brand.value"));
@@ -368,8 +364,6 @@ public class DeviceDao {
 				repair.setDiagnosticResult(result.getString("repair.diagnostic_result"));
 				repair.setRepairResult(result.getString("repair.repair_result"));
 
-				//todo do not select correct repair id
-
 				listOfDevices.add(new DeviceAndHisRepair(device, repair));
 			}
 		}
@@ -386,7 +380,9 @@ public class DeviceDao {
 
 		try (Connection co = ConnectionBuilder.getConnection();
 			 Statement st = co.createStatement()) {
+
 			ResultSet result = st.executeQuery(select_by_status);
+
 			while (result.next()) {
 				Device device = new Device();
 
@@ -458,7 +454,7 @@ public class DeviceDao {
 				"repair.master_comments, " +
 				"repair.diagnostic_result, " +
 				"repair.repair_result " +
-				"from device " +
+				"from " + tableName + " " +
 				"inner join type on device.type_id = type.id  " +
 				"inner join brand on device.brand_id = brand.id " +
 				"inner join model on device.model_id = model.id " +

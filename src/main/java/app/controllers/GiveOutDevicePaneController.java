@@ -1,10 +1,12 @@
 package app.controllers;
 
 import app.dao.DeviceDao;
+import app.dao.OwnerDao;
 import app.dao.handbooks.repair.RepairDao;
 import app.exceptions.DeviceDaoException;
 import app.models.DeviceAndHisRepair;
 import app.models.DeviceStatus;
+import app.models.Owner;
 import javafx.beans.value.ChangeListener;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -66,7 +68,7 @@ public class GiveOutDevicePaneController {
         lstDeviceList.getSelectionModel().selectFirst();
     }
 
-    private void updateDeviceListView(boolean okBtn) {
+    private void updateDeviceListView(boolean selecrLast) {
         log.trace("");
 
         int selectedItem = lstDeviceList.getSelectionModel().getSelectedIndex();
@@ -84,7 +86,7 @@ public class GiveOutDevicePaneController {
             observDeviceList.addAll(devicesIds);
             lstDeviceList.setItems(observDeviceList);
 
-            if (okBtn) {
+            if (selecrLast) {
                 lstDeviceList.getSelectionModel().selectLast();
             }
             else {
@@ -128,7 +130,11 @@ public class GiveOutDevicePaneController {
                             label3.setText("model:  " + currentDeviceAndHisRepair.getDevice().getModel());
                             label4.setText("serial number:  " + currentDeviceAndHisRepair.getDevice().getSerialNumber());
                             label5.setText("defect:  " + currentDeviceAndHisRepair.getDevice().getDefect());
-                            label6.setText("owner id:  " + currentDeviceAndHisRepair.getDevice().getOwnerId());
+
+                            Owner owner = OwnerDao.selectById(currentDeviceAndHisRepair.getDevice().getOwnerId());
+                            String ownerInfo = String.format("%s %s %s %s", owner.getName(), owner.getSurname(), owner.getPatronymic(), owner.getPhoneNumber() );
+                            label6.setText(ownerInfo);
+
                             label7.setText("repair id:  " + currentDeviceAndHisRepair.getRepair().getId());
                             label8.setText("completeness:  " + currentDeviceAndHisRepair.getDevice().getCompleteness());
                             label9.setText("appearance:  " + currentDeviceAndHisRepair.getDevice().getAppearance());
