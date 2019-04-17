@@ -131,10 +131,12 @@ public class GiveOutDevicePaneController {
                             label4.setText("serial number:  " + currentDeviceAndHisRepair.getDevice().getSerialNumber());
                             label5.setText("defect:  " + currentDeviceAndHisRepair.getDevice().getDefect());
 
-                            //todo change place fo name and surname
                             Owner owner = OwnerDao.selectById(currentDeviceAndHisRepair.getDevice().getOwnerId());
-                            String ownerInfo = String.format("%s %s %s %s %s", owner.getName(), owner.getSurname(), owner.getPatronymic(), owner.getPhoneNumber(),
+
+                            String ownerInfo = String.format("%s %s %s %s %s", owner.getSurname(), owner.getName(), owner.getPatronymic(),
+                                    owner.getPhoneNumber(),
                                     owner.getEmail());
+
                             label6.setText(ownerInfo);
 
                             label7.setText("repair id:  " + currentDeviceAndHisRepair.getRepair().getId());

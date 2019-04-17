@@ -15,15 +15,6 @@ public class Owner {
     public Owner() {
     }
 
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
     public Owner(int id, String surname, String name, String patronymic, String phoneNumber, String email) {
         this.id = id;
         this.surname = surname;
@@ -73,11 +64,20 @@ public class Owner {
         this.phoneNumber = phoneNumber;
     }
 
-    public void print() {
-        System.out.printf("%-15s - %s\n", "surname", surname);
-        System.out.printf("%-15s - %s\n", "name", name);
-        System.out.printf("%-15s - %s\n", "patronymic", patronymic);
-        System.out.printf("%-15s - %s\n", "phoneNumber", phoneNumber);
-        System.out.printf("%-15s - %s\n", "email", email);
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String toString() {
+        String str = "surname: " + surname + "\n" +
+                "name: " + name + "\n" +
+                "patronymic: " + patronymic + "\n" +
+                "phoneNumber" + phoneNumber + "\n" +
+                "email: " + email;
+        return str;
     }
 }

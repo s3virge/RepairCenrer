@@ -149,9 +149,8 @@ public class OwnerDao {
                 owner.setName(resultSet.getString("names.value"));
                 owner.setPatronymic(resultSet.getString("patronymics.value"));
                 owner.setPhoneNumber(resultSet.getString("phone_number"));
-                owner.setPhoneNumber(resultSet.getString("email"));
+                owner.setEmail(resultSet.getString("email"));
             }
-
         }
         catch (SQLException exception) {
             log.error(exception.getMessage());
