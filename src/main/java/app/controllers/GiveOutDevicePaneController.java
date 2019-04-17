@@ -143,8 +143,9 @@ public class GiveOutDevicePaneController {
                             label8.setText("completeness:  " + currentDeviceAndHisRepair.getDevice().getCompleteness());
                             label9.setText("appearance:  " + currentDeviceAndHisRepair.getDevice().getAppearance());
 
-                            diagnosticsResult.setText(currentDeviceAndHisRepair.getRepair().getDiagnosticResult());
-                            repairResult.setText(currentDeviceAndHisRepair.getRepair().getRepairResult());
+                            //todo repair result does not shows
+                            diagnosticsResult.setText("diagnostics res: " + currentDeviceAndHisRepair.getRepair().getDiagnosticResult());
+                            repairResult.setText("repair res: " + currentDeviceAndHisRepair.getRepair().getRepairResult());
 
                             log.debug("list listener newValue -> {}", newValue);
                         }

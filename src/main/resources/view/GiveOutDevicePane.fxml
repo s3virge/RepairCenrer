@@ -22,12 +22,12 @@
                 <Label fx:id="label7" prefHeight="25.0" prefWidth="300.0" text="Label" />
                 <Label fx:id="label8" prefHeight="25.0" prefWidth="300.0" text="Label" />
                 <Label fx:id="label9" layoutX="10.0" layoutY="402.0" prefHeight="25.0" prefWidth="300.0" text="Label" />
-                <Label fx:id="diagnosticsResult" layoutX="10.0" layoutY="402.0" prefHeight="25.0" prefWidth="300.0" text="Label" />
+                <Label fx:id="diagnosticsResult" layoutX="10.0" layoutY="402.0" prefHeight="25.0" prefWidth="300.0" style="-fx-background-color: #ff00dd;" text="Label" />
                 <Label fx:id="repairResult" layoutX="10.0" layoutY="402.0" prefHeight="25.0" prefWidth="300.0" text="Label" />
 
             </children>
         </VBox>
-      <ButtonBar layoutX="259.0" layoutY="492.0" prefHeight="40.0" prefWidth="200.0">
+      <ButtonBar layoutX="267.0" layoutY="509.0" prefHeight="40.0" prefWidth="200.0">
         <buttons>
           <Button fx:id="btnGiveOut" mnemonicParsing="false" onAction="#onBtnClickGiveOut" text="Выдать" />
         </buttons>

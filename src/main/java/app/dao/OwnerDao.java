@@ -9,6 +9,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.sql.*;
+import java.text.MessageFormat;
 
 import static app.dao.DataBase.logger;
 
@@ -130,12 +131,19 @@ public class OwnerDao {
      */
     static public Owner selectById(int id) {
 
-        final String query = "select surnames.value, names.value, patronymics.value, phone_number, email  " +
-        "from " + tableName + " " +
-        "inner join surnames on owner.surname_id = surnames.id  " +
-        "inner join names on owner.name_id = names.id " +
-        "inner join patronymics on owner.patronymic_id = patronymics.id " +
-        "where owner.id = '" + id + "'";
+//        final String query = "select surnames.value, names.value, patronymics.value, phone_number, email  " +
+//        "from " + tableName + " " +
+//        "inner join surnames on owner.surname_id = surnames.id  " +
+//        "inner join names on owner.name_id = names.id " +
+//        "inner join patronymics on owner.patronymic_id = patronymics.id " +
+//        "where owner.id = '" + id + "'";
+
+        final String query = MessageFormat.format("select surnames.value, names.value, patronymics.value, phone_number, email " +
+                "from {0} " +
+                        "inner join surnames on {0}.surname_id = surnames.id " +
+                        "inner join names on {0}.name_id = names.id " +
+                        "inner join patronymics on {0}.patronymic_id = patronymics.id " +
+                        "where {0}.id = {1}", tableName, id);
 
         Owner owner = new Owner();
 
