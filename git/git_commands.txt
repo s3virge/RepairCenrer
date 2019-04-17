@@ -23,7 +23,7 @@ git push origin --delete resources #удаляет ветку resources на с�
 git stash # stash - прятать. Спрятать изменения в хранилище.
 git stash pop # вынуть состояние ветки
 ----------------------------------------------------------------
-git push --set-upstream origin <name> # толкнуть ветку name на удалённый сервер.
+git branch --set-upstream-to=origin/develop # отслеживать ветку origin/develop на удаленном сервере
 -------------------------------------------------------------------
 git branch -r | grep -v '\->' | while read remote; do git branch --track "${remote#origin/}" "$remote"; done
 git fetch --all
