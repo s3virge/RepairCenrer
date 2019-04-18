@@ -46,10 +46,11 @@ public class GiveOutDevicePaneController {
     @FXML
     private Label label9;
     @FXML
+    private Label masterComments;
+    @FXML
     private Label diagnosticsResult;
     @FXML
     private Label repairResult;
-
     @FXML
     private Pane labelsPane; //нужна что-бы перебирать все дочерние окна
 
@@ -144,6 +145,7 @@ public class GiveOutDevicePaneController {
                             label9.setText("appearance:  " + currentDeviceAndHisRepair.getDevice().getAppearance());
 
                             //todo repair result does not shows
+                            masterComments.setText("master comments: " + currentDeviceAndHisRepair.getRepair().getMasterComments());
                             diagnosticsResult.setText("diagnostics res: " + currentDeviceAndHisRepair.getRepair().getDiagnosticResult());
                             repairResult.setText("repair res: " + currentDeviceAndHisRepair.getRepair().getRepairResult());
 

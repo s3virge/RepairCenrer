@@ -73,11 +73,7 @@ public class Owner {
     }
 
     public String toString() {
-        String str = "surname: " + surname + "\n" +
-                "name: " + name + "\n" +
-                "patronymic: " + patronymic + "\n" +
-                "phoneNumber" + phoneNumber + "\n" +
-                "email: " + email;
+        String str = surname + " " + name + " " +  patronymic + " " +  phoneNumber + " " +  email;
         return str;
     }
 }

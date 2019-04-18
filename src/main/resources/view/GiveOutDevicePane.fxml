@@ -22,6 +22,7 @@
                 <Label fx:id="label7" prefHeight="25.0" prefWidth="300.0" text="Label" />
                 <Label fx:id="label8" prefHeight="25.0" prefWidth="300.0" text="Label" />
                 <Label fx:id="label9" layoutX="10.0" layoutY="402.0" prefHeight="25.0" prefWidth="300.0" text="Label" />
+                <Label fx:id="masterComments" layoutX="10.0" layoutY="402.0" prefHeight="25.0" prefWidth="300.0" style="-fx-background-color: #cdd456;" text="Label" />
                 <Label fx:id="diagnosticsResult" layoutX="10.0" layoutY="402.0" prefHeight="25.0" prefWidth="300.0" style="-fx-background-color: #ff00dd;" text="Label" />
                 <Label fx:id="repairResult" layoutX="10.0" layoutY="402.0" prefHeight="25.0" prefWidth="300.0" text="Label" />
 
