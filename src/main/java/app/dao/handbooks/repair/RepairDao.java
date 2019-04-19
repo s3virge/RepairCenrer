@@ -115,6 +115,23 @@ public class RepairDao {
         }
     }
 
+    static public void updateRepairResult(int repairId, String repairResult) {
+        log.trace("");
+
+        final String update_repair_result = String.format("update %s " +
+                        "set repair_result = '%s'" +
+                        "where id = %d",
+                tableName, repairResult, repairId);
+
+        try (Connection con = ConnectionBuilder.getConnection();
+             Statement st = con.createStatement()) {
+            st.execute(update_repair_result);
+        }
+        catch (SQLException ex) {
+            log.error(ex.getMessage());
+        }
+    }
+
     /**
      * update device status (состояние)*/
     public static void updateDeviceStatus(int repairId, String repairStatus) {

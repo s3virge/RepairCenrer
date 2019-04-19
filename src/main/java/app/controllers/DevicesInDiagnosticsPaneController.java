@@ -45,6 +45,8 @@ public class DevicesInDiagnosticsPaneController {
     private TextArea taMasterComments;
     @FXML
     private TextArea taDiagnosticResult;
+@FXML
+    private TextArea taRepairResult;
 
     private int repairId;
     private int observListIndex = 0;
@@ -182,10 +184,30 @@ public class DevicesInDiagnosticsPaneController {
                     }
                 }
         );
+
+        taRepairResult.focusedProperty().addListener(
+                new ChangeListener<Boolean>() {
+                    @Override
+                    public void changed(ObservableValue<? extends Boolean> arg0, Boolean oldPropertyValue, Boolean newPropertyValue) {
+                        if (newPropertyValue) {
+//                            System.out.println("Textfield on focus");
+                        }
+                        else {
+//                            System.out.println("Textfield out focus");
+                            log.trace("taDiagnosticResult lose focus");
+                            RepairDao.updateRepairResult(repairId, taRepairResult.getText());
+
+                            DeviceAndHisRepair devInDiagnostics = observDeviceList.get(observListIndex);
+                            devInDiagnostics.getRepair().setDiagnosticResult(taRepairResult.getText());
+                            observDeviceList.set(observListIndex, devInDiagnostics);
+                        }
+                    }
+                }
+        );
     }
 
     @FXML
-    private void onBtnReady() {
+    private void onClickBtnReady() {
 //        JOptionPane.showMessageDialog(null, "change devise status to Ready");
         RepairDao.updateDeviceStatus(repairId, DeviceStatus.READY);
 
