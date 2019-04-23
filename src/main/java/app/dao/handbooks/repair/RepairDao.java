@@ -149,5 +149,5 @@ public class RepairDao {
         catch (SQLException ex) {
             log.error(ex.getMessage());
         }
-    };
+    }
 }
