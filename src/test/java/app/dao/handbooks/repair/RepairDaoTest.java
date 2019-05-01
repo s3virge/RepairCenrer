@@ -38,6 +38,7 @@ public class RepairDaoTest {
 
     @Test
     public void updateDiagnosticResult() {
+        Assert.assertTrue("12 < 6 = false", 12 < 6);
     }
 
     @Test
@@ -46,5 +47,7 @@ public class RepairDaoTest {
 
     @Test
     public void updateDeviceStatus() {
+        System.out.println("updateDeviceStatus");
+        throw new RuntimeException();
     }
 }

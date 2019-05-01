@@ -18,7 +18,6 @@ import javafx.stage.Screen;
 import javafx.stage.Stage;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.junit.Assert;
 
 import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;

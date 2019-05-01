@@ -1,6 +1,5 @@
 package app.dao;
 
-import com.sun.org.apache.xml.internal.utils.StringVector;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -8,6 +7,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Vector;
 
 public class UserGroupDao {
 	private static final Logger log = LogManager.getLogger();
@@ -16,11 +16,11 @@ public class UserGroupDao {
 	/**
 	 * @return list of groups names
 	 */
-	public static StringVector selectAll() {
+	public static Vector<String> selectAll() {
 		log.trace("");
 
 		final String select_user_group = "select * from user_group";
-		StringVector list = new StringVector();
+        Vector<String> list = new Vector<>();
 
 		try (Connection con = ConnectionBuilder.getConnection();
 			 Statement statement = con.createStatement()) {
@@ -29,7 +29,7 @@ public class UserGroupDao {
 
 			while (result.next()) {
 				String groupName = result.getString("value");
-				list.push(groupName);
+				list.add(groupName);
 			}
 		}
 		catch (SQLException sqlException) {

@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.mycompany.app</groupId>
+    <groupId>com.s3virge.app</groupId>
     <artifactId>RapairCenter</artifactId>
     <version>1.0.0</version>
 
@@ -12,7 +12,7 @@
         <!--Simple Logging Facade for Java (SLF4J)-->
         <!--<slf4j.version>1.7.25</slf4j.version>-->
         <log4j.version>2.11.1</log4j.version>
-        <jdk.version>8</jdk.version>
+        <jdk.version>12</jdk.version>
         <mysql_connector.version>5.1.39</mysql_connector.version>
         <!--<postgres_connector.version>42.2.5</postgres_connector.version>-->
         <jar.mainClass>app.RepairCenter</jar.mainClass>
@@ -27,8 +27,9 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.8.0</version>
                 <configuration>
-                    <source>${jdk.version}</source>
-                    <target>${jdk.version}</target>
+                    <!--<source>${jdk.version}</source>-->
+                    <!--<target>${jdk.version}</target>-->
+                    <release>12</release>
                 </configuration>
             </plugin>
 
@@ -53,7 +54,7 @@
                 </executions>
             </plugin>
 
-            <!--нужнен что-бы создать исполняемый jar-->
+            <!--&lt;!&ndash;нужнен что-бы создать исполняемый jar&ndash;&gt;-->
             <plugin>
                 <!-- Build an executable JAR -->
                 <groupId>org.apache.maven.plugins</groupId>
@@ -70,8 +71,8 @@
                 </configuration>
             </plugin>
 
-            <!--что-бы добавить в jar необходимые зависимости
-            launch from Plugins-assembly-assembly:single -->
+            <!--&lt;!&ndash;что-бы добавить в jar необходимые зависимости-->
+            <!--launch from Plugins-assembly-assembly:single &ndash;&gt;-->
             <plugin>
                 <artifactId>maven-assembly-plugin</artifactId>
                 <configuration>
@@ -83,6 +84,15 @@
                     <descriptorRefs>
                         <descriptorRef>jar-with-dependencies</descriptorRef>
                     </descriptorRefs>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.openjfx</groupId>
+                <artifactId>javafx-maven-plugin</artifactId>
+                <version>0.0.2</version>
+                <configuration>
+                    <mainClass>${jar.mainClass}</mainClass>
                 </configuration>
             </plugin>
 
@@ -130,7 +140,14 @@
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <version>4.12</version>
-            <scope>test, compile</scope>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.openjfx/javafx-fxml -->
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-fxml</artifactId>
+            <version>13-ea+6</version>
         </dependency>
 
     </dependencies>
