@@ -54,7 +54,7 @@
                 </executions>
             </plugin>
 
-            <!--&lt;!&ndash;нужнен что-бы создать исполняемый jar&ndash;&gt;-->
+            <!-- нужнен что-бы создать исполняемый jar-->
             <plugin>
                 <!-- Build an executable JAR -->
                 <groupId>org.apache.maven.plugins</groupId>
@@ -71,8 +71,8 @@
                 </configuration>
             </plugin>
 
-            <!--&lt;!&ndash;что-бы добавить в jar необходимые зависимости-->
-            <!--launch from Plugins-assembly-assembly:single &ndash;&gt;-->
+            <!--что-бы добавить в jar необходимые зависимости-->
+            <!--launch from Plugins-assembly-assembly:single -->
             <plugin>
                 <artifactId>maven-assembly-plugin</artifactId>
                 <configuration>
