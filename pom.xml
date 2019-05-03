@@ -7,7 +7,7 @@
 
     <groupId>com.s3virge.app</groupId>
     <artifactId>RapairCenter</artifactId>
-    <version>1.0.0</version>
+    <version>0.0.1</version>
 
     <properties>
         <!--Simple Logging Facade for Java (SLF4J)-->
@@ -163,6 +163,22 @@
             <version>${jfx.version}</version>
             <classifier>linux</classifier>
         </dependency>
+
+        <!--for creating multiplatform fat jar-->
+
+        <!--<dependency>-->
+        <!--<groupId>org.openjfx</groupId>-->
+        <!--<artifactId>javafx-graphics </artifactId>-->
+        <!--<version>${jfx.version}</version>-->
+        <!--<classifier>win</classifier>-->
+        <!--</dependency>-->
+
+        <!--<dependency>-->
+        <!--<groupId>org.openjfx</groupId>-->
+        <!--<artifactId>javafx-graphics </artifactId>-->
+        <!--<version>${jfx.version}</version>-->
+        <!--<classifier>mac</classifier>-->
+        <!--</dependency>-->
 
     </dependencies>
 
